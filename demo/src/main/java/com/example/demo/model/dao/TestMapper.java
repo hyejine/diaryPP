@@ -10,7 +10,7 @@ import com.example.demo.model.dto.testDto;
 @Repository
 @Mapper
 public interface TestMapper {
-    testDto write(testDto value);
+    public void write(testDto value);
 
     List<testDto> getDB();
 
