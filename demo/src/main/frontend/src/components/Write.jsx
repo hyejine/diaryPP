@@ -3,7 +3,7 @@ import { useState, useEffect } from "react";
 import axios from "axios";
 
 const Write = () => {
-  const [title, setTitle] = useState("");
+  const [data, setData] = useState("");
   const [content, setContent] = useState("");
 
   const onSend = (value) => {
@@ -31,14 +31,16 @@ const Write = () => {
   // .catch(error => console.log(error))
   // }
 
+  // Read
   useEffect(() => {
         axios.get('getDB')
-        .then(response => setTitle(response.data))
+        .then(response => setData(response.data))
         .catch(error => console.log(error))
   }, []);
+
   return (
     <div>
-        {title && title[1].title}
+        {data && data[1].title}
       <form onSubmit={onSend}>
         <input name="title" />
         <textarea name="content" />
