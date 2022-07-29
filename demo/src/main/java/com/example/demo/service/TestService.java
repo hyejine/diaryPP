@@ -15,9 +15,6 @@ public class TestService {
     public TestMapper testMapper;
 
     public void write(testDto value){
-        System.out.println(value.getTitle());
-        System.out.println(value.getContent());
-
         testMapper.write(value); 
     }
 
