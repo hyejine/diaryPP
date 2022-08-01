@@ -2,24 +2,25 @@ import React, { useState } from 'react';
 
 import CalendarCom from './components/calendar/CalendarCom';
 import Header from "./components/common/Header";
+import Graph from './components/graph/Graph';
 
 const Main = ()=> {
-    const [tap, setTap] = useState('');
+    const [tap, setTap] = useState('캘린더');
 
-    const onCalendar =()=>{
-        setTap('calendar');
+    const onChange =(value)=>{
+        setTap(value.target.innerText);
     }
-    const onGrap =()=>{
-        setTap('grap');
-    }
+
         return (
-            <div className="main">
-            <Header></Header>
-            <div onClick={onCalendar}>캘린더</div>
-              <div onClick={onGrap}>기분 그래프</div>
-            <CalendarCom></CalendarCom>
+          <div className="main">
+            <Header />
+            <div onClick={onChange} className="tab">
+              <span key="1" className='calendarTab'>캘린더</span>
+              <span key="2" className='graphTab'>기분 그래프</span>
             </div>
-        )
+            <div className='test'>{tap === "캘린더" ? <CalendarCom/> : <Graph/>}</div>
+          </div>
+        );
    
 }
 
