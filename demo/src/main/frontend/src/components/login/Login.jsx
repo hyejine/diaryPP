@@ -23,7 +23,6 @@ const Login = () => {
       console.log(status);
       if (status) {
         setUserId(naverLogin.user);
-        setTestToken(naverLogin.user);
       }
     });
     // })
@@ -31,25 +30,25 @@ const Login = () => {
   console.log(userid);
 
   const userAccessToken = () => {
-    window.location.href.includes("access_token") && getToken();
+    // window.location.href.includes("access_token") && getToken();
   };
 
   const getToken = () => {
     const token = window.location.href.split("=")[1].split("&")[0];
-    axios.post(`https://openapi.naver.com/v1/nid/me`, {
-      token
-  }, {
-      withCredentials: true
-  })
-  .then((res)=> {
-      window.location.replace('/')
-    //서버측에서 로직이 완료되면 홈으로 보내준다
-  })
+  //   axios.post(`https://openapi.naver.com/v1/nid/me`, {
+  //     token
+  // }, {
+  //     withCredentials: true
+  // })
+  // .then((res)=> {
+  //     window.location.replace('/')
+  //   //서버측에서 로직이 완료되면 홈으로 보내준다
+  // })
    
    
-    // console.log(token);
+    console.log(token);
     // 이후 로컬 스토리지 또는 state에 저장하여 사용하자!
-    // localStorage.setItem("access_token", token);
+    localStorage.setItem("access_token", token);
     // setGetToken(token)
   };
 
@@ -57,6 +56,11 @@ const Login = () => {
     onNaverLogin();
     userAccessToken();
   }, []);
+
+  const KAKAO_AUTH_URL = 'https://kauth.kakao.com/oauth/authorize?response_type=code&client_id=380089a4f363b679b2dbe89f5bed98ae&redirect_uri=http://localhost:3000/login'
+  const onKaKao =()=>{
+    window.location.href = KAKAO_AUTH_URL;
+  };
 
   return (
     <div className="login_wrap">
@@ -77,7 +81,8 @@ const Login = () => {
           <div>
             <div className="line">Or Login With</div>
           </div>
-          <Naver id="naverIdLogin" />
+          <div id="naverIdLogin" />
+          <button style ={{backgroundImage:'../../resources/image/kakao_login_medium_narrow.png', width:222}} onClick={onKaKao}><img width={222} alt="카카오 로그인 버튼" src="../../resources/image/kakao_login_medium_narrow.png"></img></button>
         </div>
       </div>
     </div>
