@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./login.scss";
 import Naver from "./Naver";
 import axios from "axios";
+import { GoogleLogin } from 'react-google-login';
+import {useCallback} from "react";
 
 const Login = () => {
   const { naver } = window;
@@ -96,12 +98,25 @@ console.log(accessToken);
 
     useEffect(() => {
       // if(!location.search) return;
-      getToken();
+      // getToken();
       // userInfo();
     }, []);
     useEffect(() => {
-      userInfo();
+      // userInfo();
     }, [userInfo]);
+
+    const clientId ="270461635573-fl6q2o8bo9v5idsd0khkb60phf4cmq0l.apps.googleusercontent.com";
+    const [userObj,setUserObj] = useState([]);
+    const onSuccess = (response) => {
+      
+console.log(response);
+    }
+
+    // console.log(userObj);
+    const onFailure = (res) => {
+      alert("구글 로그인에 실패하였습니다");
+      console.log("err", res);
+    };
 
   return (
     <div className="login_wrap">
@@ -124,6 +139,14 @@ console.log(accessToken);
           </div>
           <div id="naverIdLogin" />
           <button onClick={onKaKao}><img width={222} alt="카카오 로그인 버튼" src="../../../build/static/resources/image/kakao_login_medium_narrow.png"></img></button>
+          <GoogleLogin
+        className="google-button"
+        clientId={clientId}
+        buttonText="Login with Google" // 버튼에 뜨는 텍스트
+        onSuccess={onSuccess}
+        onFailure={onFailure}
+        cookiePolicy={"single_host_origin"}
+      />
         </div>
       </div>
     </div>
