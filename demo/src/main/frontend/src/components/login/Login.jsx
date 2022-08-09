@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import "./login.scss";
 import Naver from "./Naver";
 import axios from "axios";
-import { GoogleLogin } from 'react-google-login';
-import {useCallback} from "react";
+import { GoogleLogin } from "react-google-login";
+import { useCallback } from "react";
 
 const Login = () => {
   const { naver } = window;
@@ -46,8 +46,7 @@ const Login = () => {
   // //     window.location.replace('/')
   // //   //서버측에서 로직이 완료되면 홈으로 보내준다
   // // })
-   
-   
+
   //   console.log(token);
   //   // 이후 로컬 스토리지 또는 state에 저장하여 사용하자!
   //   localStorage.setItem("access_token", token);
@@ -62,61 +61,56 @@ const Login = () => {
   const REST_API_KEY = "380089a4f363b679b2dbe89f5bed98ae";
   const REDIRECT_URI = "http://localhost:3000/login";
   const REST_SECRET = "Cwg68s5c1ZyfKbI0LZaReu6WCXxwazgD";
-  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&client_secret=${REST_SECRET}`
-  const onKaKao =()=>{
+  const KAKAO_AUTH_URL = `https://kauth.kakao.com/oauth/authorize?client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&response_type=code&client_secret=${REST_SECRET}`;
+  const onKaKao = () => {
     // 회원정보 수집 확인 url로 이동
     window.location.href = KAKAO_AUTH_URL;
   };
 
   const AUTHORIZE_CODE = new URL(window.location.href).searchParams.get("code");
-const [accessToken, setAccessToken] =useState('');
-    const getToken = () => {
-     axios({
+  const [accessToken, setAccessToken] = useState("");
+  const getToken = () => {
+    axios({
       method: "post",
-      url:`https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${AUTHORIZE_CODE}&client_secret=${REST_SECRET}`,
-      headers: {'Content-Type': 'application/x-www-form-urlencoded'},
+      url: `https://kauth.kakao.com/oauth/token?grant_type=authorization_code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${AUTHORIZE_CODE}&client_secret=${REST_SECRET}`,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
       // body: `grant_type=authorization_code&client_id=${REST_API_KEY}&redirect_uri=${REDIRECT_URI}&code=${AUTHORIZE_CODE}&client_secret=${REST_SECRET}`
-     })
-     .then(res=>{
+    }).then((res) => {
       setAccessToken(res.data.access_token);
       console.log(res.data.access_token);
-     })
-    };
-console.log(accessToken);
-    const userInfo =()=>{
-      axios({
-        method:"post",
-        url:"https://kapi.kakao.com/v2/user/me",
-        headers: {'Authorization' :`Bearer ${accessToken}`}
-      })
-      .then(res=>{
-        console.log(res.data.properties.nickname);
-        console.log(res.data.properties.profile_image);
-        console.log(res.data.properties.thumbnail_image);
-      })
-    };
+    });
+  };
+  // console.log(accessToken);
+  const userInfo = () => {
+    axios({
+      method: "post",
+      url: "https://kapi.kakao.com/v2/user/me",
+      headers: { Authorization: `Bearer ${accessToken}` },
+    }).then((res) => {
+      console.log(res.data.properties.nickname);
+      console.log(res.data.properties.profile_image);
+      console.log(res.data.properties.thumbnail_image);
+    });
+  };
 
-    useEffect(() => {
-      // if(!location.search) return;
-      // getToken();
-      // userInfo();
-    }, []);
-    useEffect(() => {
-      // userInfo();
-    }, [userInfo]);
+  useEffect(() => {
+    // if(!location.search) return;
+    // getToken();
+    // userInfo();
+  }, []);
+  // useEffect(() => {
+  // userInfo();
+  // }, [userInfo]);
 
-    const clientId ="270461635573-fl6q2o8bo9v5idsd0khkb60phf4cmq0l.apps.googleusercontent.com";
-    const [userObj,setUserObj] = useState([]);
-    const onSuccess = (response) => {
-      
-console.log(response);
-    }
+  const clientId ="270461635573-fl6q2o8bo9v5idsd0khkb60phf4cmq0l.apps.googleusercontent.com";
 
-    // console.log(userObj);
-    const onFailure = (res) => {
-      alert("구글 로그인에 실패하였습니다");
-      console.log("err", res);
-    };
+  const onSuccess = (response) => {
+    console.log(response);
+  };
+
+  const onFailure = (res) => {
+    console.log("err", res);
+  };
 
   return (
     <div className="login_wrap">
@@ -138,15 +132,22 @@ console.log(response);
             <div className="line">Or Login With</div>
           </div>
           <div id="naverIdLogin" />
-          <button onClick={onKaKao}><img width={222} alt="카카오 로그인 버튼" src="../../../build/static/resources/image/kakao_login_medium_narrow.png"></img></button>
+          <button onClick={onKaKao}>
+            <img
+              width={222}
+              alt="카카오 로그인 버튼"
+              src="../../../build/static/resources/image/kakao_login_medium_narrow.png"
+            ></img>
+          </button>
           <GoogleLogin
-        className="google-button"
-        clientId={clientId}
-        buttonText="Login with Google" // 버튼에 뜨는 텍스트
-        onSuccess={onSuccess}
-        onFailure={onFailure}
-        cookiePolicy={"single_host_origin"}
-      />
+            // className="google-button"
+            clientId="385866404278-vjjtkrdekth0ah60nap789n5kugf0ujj.apps.googleusercontent.com"
+            buttonText="Login with Google" // 버튼에 뜨는 텍스트
+            onSuccess={onSuccess}
+            onFailure={onFailure}
+            cookiePolicy={'single_host_origin'}
+            redirectUri="http://localhost:3000/login"
+          />
         </div>
       </div>
     </div>
