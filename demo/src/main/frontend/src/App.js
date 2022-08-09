@@ -8,8 +8,6 @@ function App() {
     
   return (
     <div>
-<GoogleButton></GoogleButton>
-    
     <BrowserRouter>
       <Routes>
         <Route Route path="" element={<Main />}/>
