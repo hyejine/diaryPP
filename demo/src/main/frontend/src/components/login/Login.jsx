@@ -102,18 +102,6 @@ const Login = () => {
   // userInfo();
   // }, [userInfo]);
 
-  const clientId ="270461635573-fl6q2o8bo9v5idsd0khkb60phf4cmq0l.apps.googleusercontent.com";
-
-  const onSuccess = (response) => {
-    console.log(response);
-  };
-
-  const onFailure = (res) => {
-    console.log("err", res);
-  };
-const onGoogle=()=>{
-  window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&response_type=token&redirect_uri=http://localhost:3000/redirect&scope=https://www.googleapis.com/auth/userinfo.email`;
-}
   return (
     <div className="login_wrap">
       <div className="login_inner">

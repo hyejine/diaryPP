@@ -12,42 +12,48 @@ const GoogleButton= ()=>{
   const AUTHORIZE_CODE = new URL(window.location.href).searchParams.get("code");
   console.log(AUTHORIZE_CODE);
   const [accessToken, setAccessToken] = useState("");
-  // const getToken = () => {
-  //   axios({
-  //     method: "post",
-  //     url: `oauth2.googleapis.com`,
-  //     headers: { "Content-Type": "application/x-www-form-urlencoded" },
-  //     // body: `code=${AUTHORIZE_CODE}&client_id=${clientId}&client_secret=your_client_secret&redirect_uri=http://localhost:3000/&grant_type=authorization_code`
-  //   }).then((res) => {
-  //     setAccessToken(res.data.access_token);
-  //     console.log(res.data.access_token);
-  //   });
+  const getToken = () => {
+    axios({
+      method: "post",
+      url: `https://oauth2.googleapis.com/token?code=${AUTHORIZE_CODE}&client_id=${clientId}&client_secret=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&redirect_uri=http://localhost:3000/&grant_type=authorization_code`,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      // body: `code=${AUTHORIZE_CODE}&client_id=${clientId}&client_secret=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&redirect_uri=http://localhost:3000/&grant_type=authorization_code`
+    }).then((res) => {
+      setAccessToken(res.data.access_token);
+      localStorage.setItem("access_token", accessToken);
+      console.log(res.data.access_token);
+    })
+    .catch((error)=>{
+      console.log(error);
+    });
+    // CheckAuth();
+  };
+  // const userAccessToken = () => {
+  //   window.location.href.includes("access_token") && userInfo();
   // };
 
-  // const CheckAuth =  () => {
-  //   axios({
-  //     method: "post",
-  //     url: "https://www.googleapis.com/oauth2/v2/userinfo",
-  //     // headers: { Authorization: `Bearer ${accessToken}` },
-  //   }) 
-  //   .then((res) => {
-  //     alert(res.data.email);
-  //   })
-  //   .catch((err) => {
-  //     alert("oAuth token expired");
-  //     window.location.assign("http://localhost:3000");
-  //   });
-    
-  // }
+  const userInfo = () => {
+    axios({
+      method: "get",
+      url: `https://www.googleapis.com/drive/v2/files`,
+      headers: { Authorization: `Bearer ${accessToken}` },
+      
+    }).then((res) => {
+      console.log(res);
+    })
+    .catch((error)=>{
+      console.log(error);
+    });
+  };
 
   useEffect(() => {
     // if(!location.search) return;
-    // getToken();
-    // userInfo();
+    getToken();
+   
   }, []);
-  // useEffect(() => {
-  // userInfo();
-  // }, [userInfo]);
+  useEffect(() => {
+    userInfo();
+  }, [userInfo]);
     return (
         <div>
            <div className="g-signin2" onClick={onGoogle} data-theme="dark">efef</div>
