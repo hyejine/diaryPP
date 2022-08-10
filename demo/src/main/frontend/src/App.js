@@ -8,11 +8,14 @@ function App() {
     
   return (
     <div>
+      {/* <GoogleButton></GoogleButton> */}
     <BrowserRouter>
       <Routes>
-        <Route Route path="" element={<Main />}/>
+        {/* <Route Route path="" element={<Main />}/>
         <Route path="/login" element={<Login />}/>
-        <Route path="/naver" element={<Naver />}/>
+        <Route path="/naver" element={<Naver />}/> */}
+        <Route path="/" element={<GoogleButton />}/>
+
       </Routes>
     </BrowserRouter>
     </div>

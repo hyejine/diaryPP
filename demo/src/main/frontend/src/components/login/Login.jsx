@@ -111,7 +111,9 @@ const Login = () => {
   const onFailure = (res) => {
     console.log("err", res);
   };
-
+const onGoogle=()=>{
+  window.location.href = `https://accounts.google.com/o/oauth2/v2/auth?client_id=${clientId}&response_type=token&redirect_uri=http://localhost:3000/redirect&scope=https://www.googleapis.com/auth/userinfo.email`;
+}
   return (
     <div className="login_wrap">
       <div className="login_inner">
@@ -139,12 +141,7 @@ const Login = () => {
               src="../../../build/static/resources/image/kakao_login_medium_narrow.png"
             ></img>
           </button>
-          <div id="g_id_onload"
-         data-client_id="385866404278-vjjtkrdekth0ah60nap789n5kugf0ujj.apps.googleusercontent.com"
-         data-callback="handleCredentialResponse">
-    </div>
-    <div class="g_id_signin" data-type="standard"></div>
-    dfaef
+          <div className="g-signin2" onClick={onGoogle} data-theme="dark">efef</div>
            {/* <GoogleLogin
             clientId={"385866404278-vjjtkrdekth0ah60nap789n5kugf0ujj.apps.googleusercontent.com"}
             buttonText="Login with Google" 
