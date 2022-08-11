@@ -129,7 +129,7 @@ const Login = () => {
               src="../../../build/static/resources/image/kakao_login_medium_narrow.png"
             ></img>
           </button>
-          <div className="g-signin2" onClick={onGoogle} data-theme="dark">efef</div>
+          {/* <div className="g-signin2" onClick={onGoogle} data-theme="dark">efef</div> */}
            {/* <GoogleLogin
             clientId={"385866404278-vjjtkrdekth0ah60nap789n5kugf0ujj.apps.googleusercontent.com"}
             buttonText="Login with Google" 
