@@ -3,7 +3,7 @@ import "./login.scss";
 import Naver from "./Naver";
 import axios from "axios";
 import { useCallback } from "react";
-// import  GoogleLogin  from "react-google-login";
+import  GoogleLogin  from "./GoogleLogin";
 
 const Login = () => {
   const { naver } = window;
@@ -121,24 +121,15 @@ const Login = () => {
           <div>
             <div className="line">Or Login With</div>
           </div>
-          <div id="naverIdLogin" />
-          <button onClick={onKaKao}>
+          {/* <div id="naverIdLogin" /> */}
+          {/* <button onClick={onKaKao}>
             <img
               width={222}
               alt="카카오 로그인 버튼"
               src="../../../build/static/resources/image/kakao_login_medium_narrow.png"
             ></img>
-          </button>
-          {/* <div className="g-signin2" onClick={onGoogle} data-theme="dark">efef</div> */}
-           {/* <GoogleLogin
-            clientId={"385866404278-vjjtkrdekth0ah60nap789n5kugf0ujj.apps.googleusercontent.com"}
-            buttonText="Login with Google" 
-            onSuccess={onSuccess}
-            onFailure={onFailure}
-            responseType="id_token"
-            cookiePolicy={'single_host_origin'}
-            uxMode= 'redirect'
-          /> */}
+          </button> */}
+          <GoogleLogin/>
         </div>
       </div>
     </div>

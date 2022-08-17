@@ -14,7 +14,9 @@ function App() {
         {/* <Route Route path="" element={<Main />}/>
         <Route path="/login" element={<Login />}/>
         <Route path="/naver" element={<Naver />}/> */}
-        <Route path="/" element={<GoogleButton />}/>
+        {/* <Route path="/" element={<GoogleButton />}/> */}
+        <Route Route path="/" element={<Main />}/>
+        <Route path="/login" element={<Login />}/>
 
       </Routes>
     </BrowserRouter>
