@@ -5,7 +5,8 @@ import Main from "./Main";
 import './main.scss';
 import GoogleButton from "./components/GoogleButton";
 function App() {
-    
+  const AUTHORIZE_CODE = new URL(window.location.href).searchParams.get("code");
+  console.log(AUTHORIZE_CODE);
   return (
     <div>
       {/* <GoogleButton></GoogleButton> */}
@@ -16,7 +17,7 @@ function App() {
         <Route path="/naver" element={<Naver />}/> */}
         {/* <Route path="/" element={<GoogleButton />}/> */}
         <Route Route path="/" element={<Main />}/>
-        <Route path="/login" element={<Login />}/>
+        <Route path="/login" element={<Login authorizeCode={AUTHORIZE_CODE}/>}/>
 
       </Routes>
     </BrowserRouter>

@@ -4,12 +4,13 @@ import Naver from "./Naver";
 import axios from "axios";
 import { useCallback } from "react";
 import  GoogleLogin  from "./GoogleLogin";
-
-const Login = () => {
+import { Link } from "react-router-dom";
+const Login = (props) => {
   const { naver } = window;
   const [userid, setUserId] = useState();
   const [testToken, setTestToken] = useState();
-
+  const {authorizeCode} = props;
+console.log(authorizeCode);
   // const onNaverLogin = () => {
   //   const naverLogin = new naver.LoginWithNaverId({
   //     clientId: "o1yjLGVlc1wfFxCIIGHG",
@@ -129,7 +130,9 @@ const Login = () => {
               src="../../../build/static/resources/image/kakao_login_medium_narrow.png"
             ></img>
           </button> */}
-          <GoogleLogin/>
+          <Link to ="/login/googleLogin">
+          <GoogleLogin authorizeCode={authorizeCode}/>
+          </Link>
         </div>
       </div>
     </div>
