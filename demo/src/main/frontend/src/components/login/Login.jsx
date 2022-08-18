@@ -5,12 +5,13 @@ import axios from "axios";
 import { useCallback } from "react";
 import  GoogleLogin  from "./GoogleLogin";
 import { Link } from "react-router-dom";
-const Login = (props) => {
+import GoogleButton from "../GoogleButton";
+const Login = () => {
   const { naver } = window;
   const [userid, setUserId] = useState();
   const [testToken, setTestToken] = useState();
-  const {authorizeCode} = props;
-console.log(authorizeCode);
+  
+console.log("authorizeCode");
   // const onNaverLogin = () => {
   //   const naverLogin = new naver.LoginWithNaverId({
   //     clientId: "o1yjLGVlc1wfFxCIIGHG",
@@ -70,6 +71,7 @@ console.log(authorizeCode);
 
   const AUTHORIZE_CODE = new URL(window.location.href).searchParams.get("code");
   const [accessToken, setAccessToken] = useState("");
+  const [clickLogin, setClickLogin] =useState(false);
   const getToken = () => {
     axios({
       method: "post",
@@ -130,9 +132,13 @@ console.log(authorizeCode);
               src="../../../build/static/resources/image/kakao_login_medium_narrow.png"
             ></img>
           </button> */}
-          <Link to ="/login/googleLogin">
-          <GoogleLogin authorizeCode={authorizeCode}/>
-          </Link>
+         
+          <GoogleLogin>
+          {/* <button onClick={()=>setClickLogin(true)} clickLogin={clickLogin}>로그인</button>  */}
+          <div>edfe</div>
+          </GoogleLogin>
+          {/* <GoogleButton>efe</GoogleButton> */}
+          
         </div>
       </div>
     </div>

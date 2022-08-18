@@ -1,4 +1,4 @@
-export const GOOGLE_OAUTH_REDIRECT_URI = "http://localhost:3000/login/googleLogin"
+export const GOOGLE_OAUTH_REDIRECT_URI = "http://localhost:3000/login"
 
 // 구글 로그인
 export const GOOGLE_CLIENT_ID = "385866404278-vjjtkrdekth0ah60nap789n5kugf0ujj.apps.googleusercontent.com";
