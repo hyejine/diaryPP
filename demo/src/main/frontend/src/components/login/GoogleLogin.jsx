@@ -1,11 +1,13 @@
 import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useState } from 'react';
+import Main from '../../Main';
 import {GOOGLE_AUTH_URL, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_OAUTH_REDIRECT_URI }from './authentication/Authentication';
 
 const GoogleLogin =()=> {
 
     const [accessToken, setAccessToken] = useState();
+    const [userInfo, setUserInfo] = useState();
 
     const onGoogle=()=>{
         window.location.href = GOOGLE_AUTH_URL;
@@ -35,6 +37,8 @@ const GoogleLogin =()=> {
         })
         .then((response) => {
             console.log(response);
+            setUserInfo(response);
+            console.log(userInfo);
           })
           .catch((error)=>{
             console.log(error);
@@ -54,6 +58,12 @@ const GoogleLogin =()=> {
           console.log("e");
         }  
         }, [accessToken]);
+
+        useEffect(()=>{
+            if(userInfo){
+return <Main></Main>
+            }
+        })
         return (
             <>
             <button onClick={onGoogle}>drfe로그인</button> 
