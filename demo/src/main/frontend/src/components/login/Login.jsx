@@ -133,10 +133,7 @@ console.log("authorizeCode");
             ></img>
           </button> */}
          
-          <GoogleLogin>
-          {/* <button onClick={()=>setClickLogin(true)} clickLogin={clickLogin}>로그인</button>  */}
-          <div>edfe</div>
-          </GoogleLogin>
+          <GoogleLogin/>
           {/* <GoogleButton>efe</GoogleButton> */}
           
         </div>
