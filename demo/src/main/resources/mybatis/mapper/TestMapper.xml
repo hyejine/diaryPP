@@ -10,5 +10,4 @@
   <select id="getDB" resultType="testDto">
 	SELECT * FROM test
   </select>
-
 </mapper>

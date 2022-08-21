@@ -7,7 +7,6 @@ import {GOOGLE_AUTH_URL, GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, OAUTH_REDIRECT_
 const GoogleLogin =()=> {
 
     const [accessToken, setAccessToken] = useState();
-    // const [userInfo, setUserInfo] = useState({email:"", name:"", picture:""});
     const [userInfo, setUserInfo] = useState([]);
 
     const onGoogle=()=>{
@@ -24,6 +23,7 @@ const GoogleLogin =()=> {
         })
         .then((response)=>{
             setAccessToken(response.data.access_token);
+            // localStorage.setItem("access_token", accessToken);
             console.log("성공",response.data.access_token);
         })
         .catch((error)=>{
@@ -38,13 +38,22 @@ const GoogleLogin =()=> {
         })
         .then((response) => {
             setUserInfo(response.data);
-            // setUserInfo({email:response.data.email, name:response.data.name, picture:response.data.picture});
+            console.log(response.data);
           })
           .catch((error)=>{
             console.log(error);
           });
     }
 
+    
+  const userAccessToken = () => {
+    if(window.location.href.includes(accessToken)){
+console.log("accessToken");
+    }else{
+    console.log("No accessToken");
+    }
+  };
+  userAccessToken();
     useEffect(() => {
         if(AUTHORIZE_CODE){
             getCode();
@@ -59,7 +68,7 @@ const GoogleLogin =()=> {
 
     useEffect(()=>{
         if(userInfo){
-            axios.post('/userInfo',{
+            axios.post('/user/safeUser',{
                 user_email: userInfo.email,
                 user_name: userInfo.name,
                 user_image: userInfo.picture,
