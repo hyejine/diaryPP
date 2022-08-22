@@ -6,12 +6,13 @@ import { useCallback } from "react";
 import  GoogleLogin  from "./GoogleLogin";
 import { Link } from "react-router-dom";
 import GoogleButton from "../GoogleButton";
+import Regist from "./regist/Regist";
 const Login = () => {
   const { naver } = window;
   const [userid, setUserId] = useState();
   const [testToken, setTestToken] = useState();
-  
-console.log("authorizeCode");
+
+
   // const onNaverLogin = () => {
   //   const naverLogin = new naver.LoginWithNaverId({
   //     clientId: "o1yjLGVlc1wfFxCIIGHG",
@@ -134,7 +135,10 @@ console.log("authorizeCode");
           </button> */}
          
           <GoogleLogin/>
-          {/* <GoogleButton>efe</GoogleButton> */}
+          <GoogleButton>efe</GoogleButton>
+          <Link to="/login/regist">
+            <button className="login_b login_diary">Sign Up With Site</button>
+          </Link>
           
         </div>
       </div>

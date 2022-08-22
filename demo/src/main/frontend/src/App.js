@@ -5,23 +5,15 @@ import Main from "./Main";
 import './main.scss';
 import GoogleButton from "./components/GoogleButton";
 import GoogleLogin from "./components/login/GoogleLogin";
+import Regist from "./components/login/regist/Regist";
 function App() {
-  const AUTHORIZE_CODE = new URL(window.location.href).searchParams.get("code");
-  console.log(AUTHORIZE_CODE);
   return (
     <div>
-      {/* <GoogleButton></GoogleButton> */}
     <BrowserRouter>
       <Routes>
-        {/* <Route Route path="" element={<Main />}/>
-        <Route path="/login" element={<Login />}/>
-        <Route path="/naver" element={<Naver />}/> */}
-        {/* <Route path="/" element={<GoogleButton />}/> */}
         <Route Route path="/" element={<Main />}/>
         <Route path="/login" element={<Login/>}/>
-        {/* <Route path="/login/googleLogin" element={<GoogleLogin/>}/> */}
-
-
+        <Route path="/login/regist" element={<Regist/>}/>
       </Routes>
     </BrowserRouter>
     </div>
