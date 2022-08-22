@@ -1,60 +1,68 @@
-import React from 'react';
-// import { Form } from 'react-bootstrap';
+import React from "react";
+import { Form, Button } from "react-bootstrap";
 
-const Regist =()=>  {
-  // const bcrypt = require('bcryptjs');   
+const Regist = () => {
+  const bcrypt = require('bcryptjs');
 
   // const PW = 'er';
   // const salt = 12;
-   
+
   // // 비동기 콜백
   // bcrypt.hash(PW , salt, (err, encryptedPW) => {
   //   console.log(encryptedPW);  //=> true
   //   console.log(err);
   // })
   // const hash = bcrypt.hashSync(PW, 12);
- 
+
   // // 비동기 콜백
   // bcrypt.compare(PW , hash, (err, same) => {
   //   console.log(same);  //=> true
   //   console.log(err);
   // })
+  const handleSubmit = (event) => {
+    const request = {
+      user_email: event.target.email.value,
+      user_name: event.target.name.value,
+      user_password: event.target.password.value,
+      sns_type: "diary"
+    }
+    console.log(request);
+    event.preventDefault();
+  };
 
-  const handleSubmit=(value)=>{
-    console.log("ef");
-    console.log(value.target);
-    value.preventDefault();
-  }
-        return (
-          <div className="login_wrap">
-          {/* <Form onSubmit={handleSubmit}>
-             <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control type="email" placeholder="Enter email" />
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
-      </Form.Group> */}
-          <div className="login_inner">
-            <p className="title1 text_center">Sign Up!</p>
-            <p className="title2 text_center">Please enter your details to sign up</p>
-            <div className="login_input">
-              <p className="name" value="name">Name</p>
-              <input />
-              <p className="email" value="email">Email</p>
-              <input />
-              <p className="password" value="password">Password</p>
-              <input />
-              <p className="email" value="rePassword">Re-Enter Password</p>
-              <input />
-            </div>
-            <div className="login_button">
-              <button className="login_b" type="submit">Sing up</button>
-            </div>
-          </div>
-          {/* </Form> */}
-        </div>
-        );
-}
+  return (
+    <div className="login_wrap">
+      <div className="login_inner">
+        <p className="title1 text_center">Welcome!</p>
+        <p className="title2 text_center">Please login to continue</p>
+        <div className="login_input">
+        <Form onSubmit={handleSubmit}> 
+        <Form.Group controlId="name">
+        <Form.Label>name</Form.Label>
+        <Form.Control type="text"/>
+      </Form.Group>
+      <Form.Group controlId="email">
+        <Form.Label>Email </Form.Label>
+        <Form.Control type="email" />
+      </Form.Group>
+      <Form.Group controlId="password">
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" />
+      </Form.Group>
+      <Form.Group  controlId="rePassword">
+      <Form.Label>Re-Enter Password</Form.Label>
+        <Form.Control type="password" />
+      </Form.Group>
+      <div className="login_button">
+      <Button className="login_b" type="submit">
+        Submit
+      </Button>
+      </div>
+    </Form>
+    </div>
+      </div>
+    </div>
+  );
+};
 
 export default Regist;
