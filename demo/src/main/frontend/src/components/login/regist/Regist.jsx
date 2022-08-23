@@ -1,8 +1,9 @@
 import React from "react";
 import { Form, Button } from "react-bootstrap";
+import axios from "axios";
 
 const Regist = () => {
-  const bcrypt = require('bcryptjs');
+  // const bcrypt = require('bcryptjs');
 
   // const PW = 'er';
   // const salt = 12;
@@ -23,11 +24,15 @@ const Regist = () => {
     const request = {
       user_email: event.target.email.value,
       user_name: event.target.name.value,
-      user_password: event.target.password.value,
+      user_password: event.target.rePassword.value,
       sns_type: "diary"
     }
     console.log(request);
     event.preventDefault();
+
+    axios.post('/user/regist',{...request})
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
   };
 
   return (

@@ -9,6 +9,7 @@ import com.example.demo.model.dto.userDto;
 import com.example.demo.service.UserService;
 
 @RestController
+
 public class UserController {
     
     @Autowired
@@ -19,4 +20,8 @@ public class UserController {
         userService.safeUser(value);
     }
 
+    @PostMapping("user/regist")
+    public void registUser(@RequestBody userDto value){
+        userService.registUser(value);
+    }
 }

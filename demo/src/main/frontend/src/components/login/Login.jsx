@@ -134,8 +134,8 @@ const Login = () => {
             ></img>
           </button> */}
          
-          <GoogleLogin/>
-          <GoogleButton>efe</GoogleButton>
+          {/* <GoogleLogin/>
+          <GoogleButton>efe</GoogleButton> */}
           <Link to="/login/regist">
             <button className="login_b login_diary">Sign Up With Site</button>
           </Link>
