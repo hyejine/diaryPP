@@ -8,6 +8,6 @@
   </insert>
 
 <insert id="registUser">
-  INSERT INTO userinfo (user_email, user_name, user_image, sns_type, user_create) VALUES (#{user_email}, #{user_name}, #{user_image}, #{sns_type}, #{user_create})
+  INSERT INTO userinfo (user_email, user_name, user_image, user_password ,sns_type, user_create) VALUES (#{user_email}, #{user_name}, #{user_image}, #{user_password}, #{sns_type}, #{user_create})
   </insert>
   </mapper>

@@ -1,38 +1,32 @@
-import React from "react";
+import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 
+const { Formik } = Formik;
+
 const Regist = () => {
-  // const bcrypt = require('bcryptjs');
 
-  // const PW = 'er';
-  // const salt = 12;
-
-  // // 비동기 콜백
-  // bcrypt.hash(PW , salt, (err, encryptedPW) => {
-  //   console.log(encryptedPW);  //=> true
-  //   console.log(err);
-  // })
-  // const hash = bcrypt.hashSync(PW, 12);
-
-  // // 비동기 콜백
-  // bcrypt.compare(PW , hash, (err, same) => {
-  //   console.log(same);  //=> true
-  //   console.log(err);
-  // })
   const handleSubmit = (event) => {
-    const request = {
-      user_email: event.target.email.value,
-      user_name: event.target.name.value,
-      user_password: event.target.rePassword.value,
-      sns_type: "diary"
+   const form = event.currentTarget;
+   if (form.checkValidity() === false) {
+     event.preventDefault();
+     event.stopPropagation();
+   console.log("b");
     }
-    console.log(request);
-    event.preventDefault();
+console.log("a");
+   setValidated(true);
+    // const request = {
+    //   user_email: event.target.email.value,
+    //   user_name: event.target.name.value,
+    //   user_password: event.target.rePassword.value,
+    //   sns_type: "diary"
+    // }
+    // console.log(request);
+    // event.preventDefault();
 
-    axios.post('/user/regist',{...request})
-    .then(response => console.log(response))
-    .catch(error => console.log(error))
+    // axios.post('/user/regist',{...request})
+    // .then(response => console.log(response))
+    // .catch(error => console.log(error))
   };
 
   return (
@@ -41,22 +35,26 @@ const Regist = () => {
         <p className="title1 text_center">Welcome!</p>
         <p className="title2 text_center">Please login to continue</p>
         <div className="login_input">
-        <Form onSubmit={handleSubmit}> 
+        <Formik></Formik>
+        <Form onSubmit={handleSubmit} noValidate validated={validated}> 
         <Form.Group controlId="name">
         <Form.Label>name</Form.Label>
-        <Form.Control type="text"/>
+        <Form.Control type="text" required />
+        <Form.Control.Feedback type="invalid">
+              Please choose a username.
+            </Form.Control.Feedback>
       </Form.Group>
       <Form.Group controlId="email">
         <Form.Label>Email </Form.Label>
-        <Form.Control type="email" />
+        <Form.Control type="email" required/>
       </Form.Group>
       <Form.Group controlId="password">
         <Form.Label>Password</Form.Label>
-        <Form.Control type="password" />
+        <Form.Control type="password" required/>
       </Form.Group>
       <Form.Group  controlId="rePassword">
       <Form.Label>Re-Enter Password</Form.Label>
-        <Form.Control type="password" />
+        <Form.Control type="password" required/>
       </Form.Group>
       <div className="login_button">
       <Button className="login_b" type="submit">
