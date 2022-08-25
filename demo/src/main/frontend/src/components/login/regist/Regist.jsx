@@ -5,8 +5,9 @@ import axios from "axios";
 
 const Regist = () => {
   const [userId, setUserId] = useState();
-  const handleSubmit = (event) => {
+  const [vaild, setVaild] = useState(false);
 
+  const handleSubmit = (event) => {
     // const request = {
     //   user_email: event.target.email.value,
     //   user_name: event.target.name.value,
@@ -27,10 +28,9 @@ const Regist = () => {
   
   const checkId = ()=>{
     axios.get(`/user/getId/${userId}`)
-    .then(response => {if(response.data.length>0){
-      setUserId("false");
-    } return "d";
-    )}
+    .then(response => { if(response.data.length < 1){
+      setVaild(!vaild);
+     }})
     .catch(error => console.log(error))
   }
 
@@ -52,6 +52,7 @@ const Regist = () => {
         <Form.Label>Email </Form.Label>
         <Form.Control type="email" required onChange={onChangeValue}/>
         <Button onClick={checkId}>중복확인</Button>
+        {vaild ? <p>이미 가입된 아이디 입니다. </p> : <p> 가입이 가능한 아이디 입니다. </p>}
       </Form.Group>
       <Form.Group controlId="password">
         <Form.Label>Password</Form.Label>

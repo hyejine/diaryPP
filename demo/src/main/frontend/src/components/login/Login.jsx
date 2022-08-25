@@ -7,6 +7,8 @@ import  GoogleLogin  from "./GoogleLogin";
 import { Link } from "react-router-dom";
 import GoogleButton from "../GoogleButton";
 import Regist from "./regist/Regist";
+import { Form, Button } from "react-bootstrap";
+
 const Login = () => {
   const { naver } = window;
   const [userid, setUserId] = useState();
@@ -106,22 +108,41 @@ const Login = () => {
   // userInfo();
   // }, [userInfo]);
 
+
+  const handleSubmit = (value)=>{
+       const request = {
+      email: value.target.email.value,
+      password: value.target.password.value,
+    }
+    value.preventDefault();
+    // axios.get(`/user/login/${request.email}/${request.password}`)
+    //   .then(response => console.log(response))
+    //   .catch(error => console.log(error))
+  }
+
   return (
     <div className="login_wrap">
       <div className="login_inner">
         <p className="title1 text_center">Welcome!</p>
         <p className="title2 text_center">Please login to continue</p>
         <div className="login_input">
-          <p className="email">Email</p>
-          <input />
-          <p className="password">Password</p>
-          <input />
-        </div>
+        <Form onSubmit={handleSubmit} noValidate > 
+        <Form.Group controlId="email">
+        <Form.Label>Email</Form.Label>
+        <Form.Control type="text" required />
+      </Form.Group>
+      <Form.Group controlId="password">
+        <Form.Label>Password</Form.Label>
+        <Form.Control type="password" required />
+      </Form.Group>
+       
         <p className="forget text_center">
           혹시 아이디 혹은 비밀번호를 잊어버리셨나요?
         </p>
+          <Button className="login_b" type="submit">Login</Button>
+          </Form>
+          </div>
         <div className="login_button">
-          <button className="login_b">Login</button>
           <div>
             <div className="line">Or Login With</div>
           </div>
