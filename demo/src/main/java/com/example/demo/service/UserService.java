@@ -1,6 +1,7 @@
 package com.example.demo.service;
 
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -37,6 +38,11 @@ public class UserService implements UserMapper{
         value.setUser_password(passwordEncoder.encode(value.getUser_password()));
         value.setUser_create(date);
         userMapper.registUser(value);
+    }
+
+    @Override
+    public String getUserId(String id){
+        return userMapper.getUserId(id);
     }
     
 }

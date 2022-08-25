@@ -2,19 +2,11 @@ import { useState } from "react";
 import { Form, Button } from "react-bootstrap";
 import axios from "axios";
 
-const { Formik } = Formik;
 
 const Regist = () => {
-
+  const [userId, setUserId] = useState();
   const handleSubmit = (event) => {
-   const form = event.currentTarget;
-   if (form.checkValidity() === false) {
-     event.preventDefault();
-     event.stopPropagation();
-   console.log("b");
-    }
-console.log("a");
-   setValidated(true);
+
     // const request = {
     //   user_email: event.target.email.value,
     //   user_name: event.target.name.value,
@@ -29,14 +21,23 @@ console.log("a");
     // .catch(error => console.log(error))
   };
 
+  const onChangeValue = (event)=>{
+    setUserId(event.target.value);
+  }
+  
+  const checkId = ()=>{
+    axios.get(`/user/getId/${userId}`)
+    .then(response => console.log(response.data))
+    .catch(error => console.log(error))
+  }
+
   return (
     <div className="login_wrap">
       <div className="login_inner">
         <p className="title1 text_center">Welcome!</p>
         <p className="title2 text_center">Please login to continue</p>
         <div className="login_input">
-        <Formik></Formik>
-        <Form onSubmit={handleSubmit} noValidate validated={validated}> 
+        <Form onSubmit={handleSubmit} noValidate > 
         <Form.Group controlId="name">
         <Form.Label>name</Form.Label>
         <Form.Control type="text" required />
@@ -46,7 +47,8 @@ console.log("a");
       </Form.Group>
       <Form.Group controlId="email">
         <Form.Label>Email </Form.Label>
-        <Form.Control type="email" required/>
+        <Form.Control type="email" required onChange={onChangeValue}/>
+        <Button onClick={checkId}>중복확인</Button>
       </Form.Group>
       <Form.Group controlId="password">
         <Form.Label>Password</Form.Label>

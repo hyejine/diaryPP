@@ -1,5 +1,7 @@
 package com.example.demo.model.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +13,7 @@ public interface UserMapper {
     public void safeUser(userDto value);
 
     public void registUser(userDto value);
+
+    public String getUserId(String id);
 
 }
