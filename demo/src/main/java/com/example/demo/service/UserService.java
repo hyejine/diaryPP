@@ -41,7 +41,7 @@ public class UserService implements UserMapper{
     }
 
     @Override
-    public String getUserId(String id){
+    public List<userDto> getUserId(String id){
         return userMapper.getUserId(id);
     }
     

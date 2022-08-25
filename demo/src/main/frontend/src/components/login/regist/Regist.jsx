@@ -27,7 +27,10 @@ const Regist = () => {
   
   const checkId = ()=>{
     axios.get(`/user/getId/${userId}`)
-    .then(response => console.log(response.data))
+    .then(response => {if(response.data.length>0){
+      setUserId("false");
+    } return "d";
+    )}
     .catch(error => console.log(error))
   }
 

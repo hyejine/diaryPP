@@ -33,7 +33,7 @@ public class UserController {
     }
 
     @GetMapping("/getId/{userId}")
-    public String getUserId (@PathVariable("userId") String id){
+    public List<userDto> getUserId (@PathVariable("userId") String id){
         return userService.getUserId(id);
     }
 }

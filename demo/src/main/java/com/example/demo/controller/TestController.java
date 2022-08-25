@@ -23,7 +23,7 @@ public class TestController {
     }
 
     @GetMapping("/api/getDB")
-    public List<testDto> getDB() {
+    public String getDB() {
         return testService.getDB();
     }
 }

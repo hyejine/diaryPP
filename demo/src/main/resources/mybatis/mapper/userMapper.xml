@@ -11,7 +11,7 @@
   INSERT INTO userinfo (user_email, user_name, user_image, user_password ,sns_type, user_create) VALUES (#{user_email}, #{user_name}, #{user_image}, #{user_password}, #{sns_type}, #{user_create})
   </insert>
 
-  <select id="getUserId" resultType="userDto" parameterType="String">
+  <select id="getUserId" resultType="userDto" >
   SELECT * FROM userinfo WHERE user_email=#{user_email}
   </select>
   </mapper>
