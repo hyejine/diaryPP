@@ -8,18 +8,18 @@ const Regist = () => {
   const [vaild, setVaild] = useState(false);
 
   const handleSubmit = (event) => {
-    // const request = {
-    //   user_email: event.target.email.value,
-    //   user_name: event.target.name.value,
-    //   user_password: event.target.rePassword.value,
-    //   sns_type: "diary"
-    // }
-    // console.log(request);
-    // event.preventDefault();
+    const request = {
+      user_email: event.target.email.value,
+      user_name: event.target.name.value,
+      user_password: event.target.rePassword.value,
+      sns_type: "diary"
+    }
+    console.log(request);
+    event.preventDefault();
 
-    // axios.post('/user/regist',{...request})
-    // .then(response => console.log(response))
-    // .catch(error => console.log(error))
+    axios.post('/user/regist',{...request})
+    .then(response => console.log(response))
+    .catch(error => console.log(error))
   };
 
   const onChangeValue = (event)=>{

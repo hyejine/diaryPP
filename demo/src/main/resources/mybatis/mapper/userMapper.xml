@@ -8,7 +8,7 @@
   </insert>
 
 <insert id="registUser">
-  INSERT INTO userinfo (user_email, user_name, user_image, user_password ,sns_type, user_create) VALUES (#{user_email}, #{user_name}, #{user_image}, #{user_password}, #{sns_type}, #{user_create})
+  INSERT INTO userinfo (user_email, user_name, user_image, user_password ,sns_type, user_create, user_type) VALUES (#{user_email}, #{user_name}, #{user_image}, #{user_password}, #{sns_type}, #{user_create}, #{user_type})
   </insert>
 
   <select id="getUserId" resultType="userDto" >

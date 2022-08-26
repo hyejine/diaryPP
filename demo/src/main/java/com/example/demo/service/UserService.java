@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.model.dao.UserMapper;
+import com.example.demo.model.dto.UserType;
 import com.example.demo.model.dto.userDto;
 
 @Service
@@ -37,6 +38,7 @@ public class UserService implements UserMapper{
         Date date = new Date();
         value.setUser_password(passwordEncoder.encode(value.getUser_password()));
         value.setUser_create(date);
+        value.setUser_type(UserType.USER);
         userMapper.registUser(value);
     }
 

@@ -5,7 +5,7 @@ import java.util.Date;
 import lombok.Data;
 
 @Data
-public class userDto {
+public class userDto{
     
     public Integer id;
 
@@ -26,4 +26,6 @@ public class userDto {
     public String sns_id;
 
     public String sns_type;
+
+    public UserType user_type;
 }

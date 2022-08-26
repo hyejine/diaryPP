@@ -115,7 +115,7 @@ const Login = () => {
       password: value.target.password.value,
     }
     value.preventDefault();
-    // axios.get(`/user/login/${request.email}/${request.password}`)
+    // axios.post(`/user/login`, {...request})
     //   .then(response => console.log(response))
     //   .catch(error => console.log(error))
   }
