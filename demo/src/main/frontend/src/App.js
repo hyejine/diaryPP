@@ -3,8 +3,7 @@ import Login from './components/login/Login';
 import Main from "./Main";
 import './main.scss';
 import Regist from "./components/login/regist/Regist";
-import { useEffect } from "react";
-import axios from "axios";
+
 function App() {
 
   return (

@@ -27,5 +27,5 @@ public class userDto{
 
     public String sns_type;
 
-    public UserType user_type;
+    public String user_type;
 }

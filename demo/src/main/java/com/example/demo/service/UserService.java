@@ -38,7 +38,7 @@ public class UserService implements UserMapper{
         Date date = new Date();
         value.setUser_password(passwordEncoder.encode(value.getUser_password()));
         value.setUser_create(date);
-        value.setUser_type(UserType.USER);
+        value.setUser_type("User");
         userMapper.registUser(value);
     }
 
@@ -46,5 +46,11 @@ public class UserService implements UserMapper{
     public List<userDto> getUserId(String id){
         return userMapper.getUserId(id);
     }
+
+    // @Override
+    // public userDto getId(String email) {
+    //     // TODO Auto-generated method stub
+    //     return null;
+    // }
     
 }

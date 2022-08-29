@@ -114,10 +114,11 @@ const Login = () => {
       email: value.target.email.value,
       password: value.target.password.value,
     }
+    console.log(request);
     value.preventDefault();
-    // axios.post(`/user/login`, {...request})
-    //   .then(response => console.log(response))
-    //   .catch(error => console.log(error))
+    axios.post(`http://localhost:8080/login`, {...request})
+      .then(response => console.log(response))
+      .catch(error => console.log(error))
   }
 
   return (
