@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 import GoogleButton from "../GoogleButton";
 import Regist from "./regist/Regist";
 import { Form, Button } from "react-bootstrap";
-
+import qs from 'qs';
 const Login = () => {
   const { naver } = window;
   const [userid, setUserId] = useState();
@@ -107,7 +107,11 @@ const Login = () => {
   // useEffect(() => {
   // userInfo();
   // }, [userInfo]);
-
+  const axiosConfig = {
+    headers:{
+        "Content-Type": "application/x-www-form-urlencoded"
+    }
+}
 
   const handleSubmit = (value)=>{
        const request = {
@@ -116,7 +120,7 @@ const Login = () => {
     }
     console.log(request);
     value.preventDefault();
-    axios.post(`http://localhost:8080/login`, {...request})
+    axios.post(`http://localhost/user/login`, {...request})
       .then(response => console.log(response))
       .catch(error => console.log(error))
   }

@@ -2,12 +2,8 @@ package com.example.demo.service.auth;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.demo.model.dto.userDto;
@@ -23,12 +19,16 @@ public class AuthDetails implements UserDetails{
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
     
-        Set<GrantedAuthority> roles = new HashSet<>();
-        for (String role : user.getUser_type().split(",")) {
-         roles.add(new SimpleGrantedAuthority(role));
-    }
-    return roles;
-  }
+		Collection<GrantedAuthority> collect = new ArrayList<>();
+		collect.add(new GrantedAuthority() {
+			
+			@Override
+			public String getAuthority() {
+				return user.getUser_type();
+			}
+		});
+		return collect;
+	}
 
     @Override
     public String getPassword() {

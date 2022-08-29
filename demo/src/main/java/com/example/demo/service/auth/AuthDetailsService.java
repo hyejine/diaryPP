@@ -17,11 +17,19 @@ public class AuthDetailsService implements UserDetailsService{
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        if(email == null || email.equals("")) {
+			throw new UsernameNotFoundException(email);
+		}
         userDto userEntity = authMapper.getId(email);
-        if(userEntity != null){
-            return new AuthDetails(userEntity);
-        }
-        return (UserDetails) new UsernameNotFoundException(email);
+        if(userEntity == null) {
+			throw new UsernameNotFoundException(email);
+		}
+        return new AuthDetails(userEntity);
+        // userDto userEntity = authMapper.getId(email);
+        // if(userEntity != null){
+        //     return new AuthDetails(userEntity);
+        // }
+        // return (UserDetails) new UsernameNotFoundException(email);
     }
     
 }
