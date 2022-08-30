@@ -16,13 +16,13 @@ public class AuthDetailsService implements UserDetailsService{
     private AuthMapper authMapper;
 
     @Override
-    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        if(email == null || email.equals("")) {
-			throw new UsernameNotFoundException(email);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        if(username == null || username.equals("")) {
+			throw new UsernameNotFoundException(username);
 		}
-        userDto userEntity = authMapper.getId(email);
+        userDto userEntity = authMapper.getId(username);
         if(userEntity == null) {
-			throw new UsernameNotFoundException(email);
+			throw new UsernameNotFoundException(username);
 		}
         return new AuthDetails(userEntity);
         // userDto userEntity = authMapper.getId(email);

@@ -10,6 +10,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.cors.CorsConfigurationSource;
+import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.example.demo.service.auth.AuthDetailsService;
 
@@ -31,29 +34,25 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter{
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http 
-                // .cors().disable()		//cors 방지
+                .cors()
+                .configurationSource(corsConfigurationSource())
+                // .disable()		//cors 방지
+            .and()
                 .csrf().disable()   	//csrf 공격방지
-                // .headers().frameOptions().disable()
-            // .and()
+                .headers().frameOptions().disable()
+            .and()
                 .authorizeRequests() 
-                .antMatchers("/user/**").authenticated()
-                .antMatchers("/admin/**").access("hasRole('admin')")
+                // .antMatchers("/user/**").authenticated()
+                // .antMatchers("/admin/**").access("hasRole('admin')")
                 .anyRequest().permitAll()
-             .and()
-                .formLogin()
-                .loginPage("/user/login")
-                .usernameParameter("email")
-                // .loginProcessingUrl("/login")
-                .defaultSuccessUrl("/");
-            //     .authorizeRequests() 
             //     .antMatchers("/").permitAll()  //누구나 접근 가능한 페이지 
-            //     .anyRequest().permitAll()
-            //  .and()
-            //     .formLogin() // 로그인에 대한 설정 	
-            //     .loginPage("/user/login")
-            //     .usernameParameter("email")
-            //     .loginProcessingUrl("/dologin") // login 주소가 호출 되면 시큐리티가 대신 로그인 진행 
-            //     .defaultSuccessUrl("/") 
+             .and()
+                .formLogin().disable() // 로그인에 대한 설정 
+                .httpBasic().disable()	;
+                // .loginPage("/user/login")
+                // .usernameParameter("email")
+                // .loginProcessingUrl("/login") // login 주소가 호출 되면 시큐리티가 대신 로그인 진행 
+                // .defaultSuccessUrl("/") 
             //  .and()
             //     .logout()
             //     .logoutSuccessUrl("/")
@@ -71,6 +70,19 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter{
     public void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(authDetailsService)
         .passwordEncoder(new BCryptPasswordEncoder());
+    }
+
+    @Bean
+    public CorsConfigurationSource corsConfigurationSource(){
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowCredentials(true);
+        configuration.addAllowedOrigin("*");
+        configuration.addAllowedMethod("*");
+        configuration.addAllowedHeader("*");
+        configuration.setMaxAge(7200L);
+        UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
+        source.registerCorsConfiguration("/**", configuration);
+        return source;
     }
 
     // @Override

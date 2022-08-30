@@ -1,18 +1,20 @@
 package com.example.demo.model.dto;
 
 
-public enum  UserType { 
-    ADMIN("00"),
-    USER("01") ;
+public enum  UserType {
+    ROLE_USER,
+    ROLE_ADMIN 
+    // ADMIN("00"),
+    // USER("01") ;
     
-    private String code;
+    // private String code;
 
-    UserType(String code){
-        this.code = code;
-    }
+    // UserType(String code){
+    //     this.code = code;
+    // }
 
-    public String getCode(){
-        return code;
-    }
+    // public String getCode(){
+    //     return code;
+    // }
 
 }
