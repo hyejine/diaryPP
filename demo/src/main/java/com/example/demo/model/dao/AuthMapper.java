@@ -14,7 +14,7 @@ public interface AuthMapper {
     
     Optional<AuthUserDto> getId(String email);
 
-    Optional<AuthUserDto> findById(Integer id);
+    Optional<AuthUserDto> findById(String email);
 
 
 }

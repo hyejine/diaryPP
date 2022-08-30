@@ -2,6 +2,7 @@ package com.example.demo.config;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,7 +15,9 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
+import com.example.demo.common.JwtUtil;
 import com.example.demo.service.auth.AuthDetailsService;
+
 
 // import com.example.demo.service.auth.AuthDetailsService;
 
@@ -24,6 +27,9 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter{
 
     @Autowired 
     AuthDetailsService authDetailsService;
+
+    // @Value("${jwt.secret}")
+    // private String secret;
 
     // @Override
 	// public void configure(WebSecurity web) throws Exception
@@ -84,7 +90,10 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter{
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
-
+    // @Bean
+    // public JwtUtil jwtUtil(){
+    //     return new JwtUtil(secret);
+    // }
     // @Override
     // public void configure(WebSecurity web) throws Exception {
     //     web.ignoring()

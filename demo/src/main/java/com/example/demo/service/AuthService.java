@@ -23,8 +23,8 @@ public class AuthService {
 
     // 현재 SecurityContext 에 있는 유저 정보 가져오기
     @Transactional(readOnly = true)
-    public UserResponseDto getMyInfo() {
-        return authMapper.findById(SecurityUtil.getCurrentMemberId())
+    public UserResponseDto getMyInfo(String email) {
+        return authMapper.findById(email)
                 .map(UserResponseDto::of)
                 .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다."));
     }
