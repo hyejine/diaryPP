@@ -15,5 +15,7 @@ public interface UserMapper {
     public void registUser(userDto value);
 
     public List<userDto> getUserId(String id);
+    public userDto findById(String email);
+
 
 }
