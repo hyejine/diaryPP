@@ -14,32 +14,31 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
 import com.example.demo.service.auth.AuthDetailsService;
 
+import lombok.RequiredArgsConstructor;
+
 
 // import com.example.demo.service.auth.AuthDetailsService;
 
 @Configuration         // Bean 관리 
 @EnableWebSecurity     // Spirng Security 설정 활성화 (사이트 전체가 잠김 상태)
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityJavaConfig extends WebSecurityConfigurerAdapter{
+// @EnableGlobalMethodSecurity(prePostEnabled = true)
+@Component
+@RequiredArgsConstructor
 
-    @Autowired
-    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+public class SecurityJavaConfig {
 
-    // @Autowired
-    // private JwtAccessDeniedHandler jwtAccessDeniedHandler;
-
-    @Autowired
-    private JwtRequestFilter jwtRequestFilter;
-
-    @Autowired
-    private UserDetailsService jwtUserDetailsService;
+    private final JwtTokenUtil tokenProvider;
+    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder(){
@@ -47,35 +46,56 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter{
     }
 
     // 로그인 시 필요한 정보 가져다 줌 
-    @Override
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.userDetailsService(jwtUserDetailsService)
-        .passwordEncoder(new BCryptPasswordEncoder());
-    }
+    // @Override
+    // public void configure(AuthenticationManagerBuilder auth) throws Exception {
+    //     auth.userDetailsService(jwtUserDetailsService)
+    //     .passwordEncoder(new BCryptPasswordEncoder());
+    // }
+
+    // @Bean
+    // @Override
+    // public AuthenticationManager authenticationManagerBean() throws Exception {
+    //     return super.authenticationManagerBean();
+    // }
 
     @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+    protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        http
+        .httpBasic().disable()
+        .csrf().disable()
+        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
-    @Override
-    protected void configure(HttpSecurity httpSecurity) throws Exception {
-        httpSecurity.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
-        httpSecurity.csrf().disable()
-                // 특정 API는 토큰이 없는 상태에서 요청이 들어오기 때문에 permitAll 설정.
-                .authorizeRequests().antMatchers("/member/*").permitAll()
-                .antMatchers("/**").permitAll()
-                .anyRequest().authenticated()
-            .and()
-                // exception handling 할 때 우리가 만든 클래스를 추가
-                .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
-                .accessDeniedHandler(jwtAccessDeniedHandler)
-                // 시큐리티는 기본적으로 세션을 사용하지만, 여기서는 세션을 사용하지 않기 때문에 세션 설정을 Stateless 로 설정.
-            .and()
-                 .sessionManagement()
-                 .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
-        httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        .and()
+        .exceptionHandling()
+        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+        .accessDeniedHandler(jwtAccessDeniedHandler)
+
+        .and()
+        .authorizeRequests()
+        .antMatchers("/auth/**").permitAll()
+        .anyRequest().authenticated()
+
+        .and()
+        .apply(new JwtSecurityConfig(tokenProvider));
+        return http.build();
+
+// return http.build();
+
+        // httpSecurity.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
+        // httpSecurity.csrf().disable()
+        //         // 특정 API는 토큰이 없는 상태에서 요청이 들어오기 때문에 permitAll 설정.
+        //         .authorizeRequests().antMatchers("/member/*").permitAll()
+        //         .antMatchers("/**").permitAll()
+        //         .anyRequest().authenticated()
+        //     .and()
+        //         // exception handling 할 때 우리가 만든 클래스를 추가
+        //         .exceptionHandling().authenticationEntryPoint(jwtAuthenticationEntryPoint)
+        //         .accessDeniedHandler(jwtAccessDeniedHandler)
+        //         // 시큐리티는 기본적으로 세션을 사용하지만, 여기서는 세션을 사용하지 않기 때문에 세션 설정을 Stateless 로 설정.
+        //     .and()
+        //          .sessionManagement()
+        //          .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+        // httpSecurity.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
         
         // http 
         //         .cors()

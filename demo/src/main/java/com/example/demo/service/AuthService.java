@@ -1,31 +1,48 @@
 package com.example.demo.service;
 
 import org.apache.catalina.security.SecurityUtil;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.demo.config.JwtTokenUtil;
 import com.example.demo.model.dao.AuthMapper;
+import com.example.demo.model.dao.UserMapper;
+import com.example.demo.model.dto.MemberRequestDto;
+import com.example.demo.model.dto.MemberResponseDto;
+import com.example.demo.model.dto.TokenDto;
 import com.example.demo.model.dto.UserResponseDto;
+import com.example.demo.model.dto.userDto;
 
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class AuthService {
-    private final AuthMapper authMapper;
+    private final AuthenticationManagerBuilder managerBuilder;
+    private final AuthMapper memberRepository;
+    private final PasswordEncoder passwordEncoder;
+    private final JwtTokenUtil tokenProvider;
 
-    @Transactional(readOnly = true)
-    public UserResponseDto getMemberInfo(String email){
-        return authMapper.getId(email)
-                .map(UserResponseDto::of)
-                .orElseThrow(()->new RuntimeException("유저정보가 없습니다"));
+    public MemberResponseDto signup(MemberRequestDto requestDto) {
+        if (memberRepository.existsByEmail(requestDto.getEmail())) {
+            throw new RuntimeException("이미 가입되어 있는 유저입니다");
+        }
+
+        userDto member = requestDto.toMember(passwordEncoder);
+        return MemberResponseDto.of(memberRepository.save(member));
     }
 
-    // 현재 SecurityContext 에 있는 유저 정보 가져오기
-    @Transactional(readOnly = true)
-    public UserResponseDto getMyInfo(String email) {
-        return authMapper.findById(email)
-                .map(UserResponseDto::of)
-                .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다."));
+    public TokenDto login(MemberRequestDto requestDto) {
+        UsernamePasswordAuthenticationToken authenticationToken = requestDto.toAuthentication();
+
+        Authentication authentication = managerBuilder.getObject().authenticate(authenticationToken);
+
+        return tokenProvider.generateTokenDto(authentication);
     }
+
 }
