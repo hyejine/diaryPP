@@ -16,11 +16,14 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
 import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
+import org.springframework.web.filter.CorsFilter;
 
+import com.example.demo.config.jwt.JwtAuthenticationFilter;
 import com.example.demo.service.auth.AuthDetailsService;
 
 import lombok.RequiredArgsConstructor;
@@ -30,21 +33,39 @@ import lombok.RequiredArgsConstructor;
 
 @Configuration         // Bean 관리 
 @EnableWebSecurity     // Spirng Security 설정 활성화 (사이트 전체가 잠김 상태)
-// @EnableGlobalMethodSecurity(prePostEnabled = true)
-@Component
 @RequiredArgsConstructor
+// @EnableGlobalMethodSecurity(prePostEnabled = true)
+// @Component
 
-public class SecurityJavaConfig {
+public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
 
-    private final JwtTokenUtil tokenProvider;
-    private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-    private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+    private final CorsFilter corsFilter; 
+    // private final JwtTokenUtil tokenProvider;
+    // private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+    // private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
     @Bean
     public PasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        // http.addFilterBefore(jwtRequestFilter, UsernamePasswordAuthenticationFilter.class);
+        http.csrf().disable();
+        http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // session을 사용하지 않음
+        .and()
+        .addFilter(corsFilter)  // 모든 요청은 이 필터를 거침 => 내 서버는 cors정책에서 벗어날 수 있음 
+        .formLogin().disable()  // security에서 제공하는 formLogin사용 안함
+        .httpBasic().disable()  // Bearer방식의 토큰으로 ID/PW 전달 하기 위해 사용 안함 
+        .addFilter(new JwtAuthenticationFilter(authenticationManager()))
+        .authorizeRequests()
+        .antMatchers("/api/vi/user/**")  // 이쪽으로 주소가 들어오면 
+        .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")  // access를 ROLE_USE라고 해줌 
+        .antMatchers("/api/vi/admin/**")  
+        .access("hasRole('ROLE_ADMIN')")
+        .anyRequest().permitAll(); // 다른 요청은 거부 없이 들어갈 수 있다. 
+    } 
     // 로그인 시 필요한 정보 가져다 줌 
     // @Override
     // public void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -58,26 +79,26 @@ public class SecurityJavaConfig {
     //     return super.authenticationManagerBean();
     // }
 
-    @Bean
-    protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http
-        .httpBasic().disable()
-        .csrf().disable()
-        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+    // @Bean
+    // protected SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    //     http
+    //     .httpBasic().disable()
+    //     .csrf().disable()
+    //     .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)
 
-        .and()
-        .exceptionHandling()
-        .authenticationEntryPoint(jwtAuthenticationEntryPoint)
-        .accessDeniedHandler(jwtAccessDeniedHandler)
+    //     .and()
+    //     .exceptionHandling()
+    //     .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+    //     // .accessDeniedHandler(jwtAccessDeniedHandler)
 
-        .and()
-        .authorizeRequests()
-        .antMatchers("/auth/**").permitAll()
-        .anyRequest().authenticated()
+    //     .and()
+    //     .authorizeRequests()
+    //     .antMatchers("/auth/**").permitAll()
+    //     .anyRequest().authenticated()
 
-        .and()
-        .apply(new JwtSecurityConfig(tokenProvider));
-        return http.build();
+    //     .and()
+    //     .apply(new JwtSecurityConfig(tokenProvider));
+    //     return http.build();
 
 // return http.build();
 
@@ -122,18 +143,5 @@ public class SecurityJavaConfig {
             //     .logoutSuccessUrl("/")
             //     .invalidateHttpSession(true); // 로그아웃시 저장해 둔 세션 날리기 
                 
-    }
-    
-    // @Bean
-    // public CorsConfigurationSource corsConfigurationSource(){
-    //     CorsConfiguration configuration = new CorsConfiguration();
-    //     configuration.setAllowCredentials(true);
-    //     configuration.addAllowedOrigin("*");
-    //     configuration.addAllowedMethod("*");
-    //     configuration.addAllowedHeader("*");
-    //     configuration.setMaxAge(7200L);
-    //     UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-    //     source.registerCorsConfiguration("/**", configuration);
-    //     return source;
     // }
 }

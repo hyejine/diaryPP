@@ -12,7 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.model.dao.UserMapper;
 import com.example.demo.model.dto.UserType;
-import com.example.demo.model.dto.userDto;
+import com.example.demo.model.dto.Member;
 
 @Service
 @Transactional
@@ -27,23 +27,23 @@ public class UserService implements UserMapper{
     }
 
     @Override
-    public void safeUser(userDto value){
+    public void safeUser(Member value){
         userMapper.safeUser(value);
     }
 
     @Override
     @Transactional
-    public void registUser(userDto value){
+    public void registUser(Member value){
     
         Date date = new Date();
         value.setUser_password(passwordEncoder.encode(value.getUser_password()));
         value.setUser_create(date);
-        value.setUser_type("User");
+        value.setUser_type("ROLE_USER");
         userMapper.registUser(value);
     }
 
     @Override
-    public List<userDto> getUserId(String id){
+    public List<Member> getUserId(String id){
         return userMapper.getUserId(id);
     }
 

@@ -1,4 +1,4 @@
-package com.example.demo.service.auth;
+package com.example.demo.config.auth;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,29 +6,25 @@ import java.util.Collection;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import com.example.demo.model.dto.userDto;
+import com.example.demo.model.dto.User;
 
-public class AuthDetails implements UserDetails{
+public class PrincipalDetails implements UserDetails{
 
-    private userDto user;
+    private User user;
 
-    public AuthDetails(userDto user){
+    public PrincipalDetails(User user){
         this.user = user;
     }
 
+    // 해당 user의 권한을 리턴한는 곳
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-    
-		Collection<GrantedAuthority> collect = new ArrayList<>();
-		collect.add(new GrantedAuthority() {
-			
-			@Override
-			public String getAuthority() {
-				return user.getUser_type();
-			}
-		});
-		return collect;
-	}
+        Collection<GrantedAuthority> authorities = new ArrayList<>();
+        user.getRoleList().forEach(r->{
+            authorities.add(()->r);
+        });
+        return authorities;
+    }
 
     @Override
     public String getPassword() {

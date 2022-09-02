@@ -6,21 +6,21 @@ import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.model.dao.AuthMapper;
-import com.example.demo.model.dto.userDto;
+import com.example.demo.model.dao.MemberRepository;
+import com.example.demo.model.dto.Member;
 
 @Service
 public class AuthDetailsService implements UserDetailsService{
 
     @Autowired
-    private AuthMapper authMapper;
+    private MemberRepository authMapper;
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         if(username == null || username.equals("")) {
 			throw new UsernameNotFoundException(username);
 		}
-        userDto userEntity = authMapper.getId(username);
+        Member userEntity = authMapper.getId(username);
         if(userEntity == null) {
 			throw new UsernameNotFoundException(username);
 		}

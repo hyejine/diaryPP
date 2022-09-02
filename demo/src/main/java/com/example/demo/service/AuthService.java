@@ -9,13 +9,13 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.config.JwtTokenUtil;
-import com.example.demo.model.dao.AuthMapper;
+import com.example.demo.model.dao.MemberRepository;
 import com.example.demo.model.dao.UserMapper;
 import com.example.demo.model.dto.MemberRequestDto;
 import com.example.demo.model.dto.MemberResponseDto;
 import com.example.demo.model.dto.TokenDto;
 import com.example.demo.model.dto.UserResponseDto;
-import com.example.demo.model.dto.userDto;
+import com.example.demo.model.dto.Member;
 
 import lombok.RequiredArgsConstructor;
 
@@ -24,7 +24,7 @@ import lombok.RequiredArgsConstructor;
 @Transactional
 public class AuthService {
     private final AuthenticationManagerBuilder managerBuilder;
-    private final AuthMapper memberRepository;
+    private final MemberRepository memberRepository;
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenUtil tokenProvider;
 
@@ -33,7 +33,7 @@ public class AuthService {
             throw new RuntimeException("이미 가입되어 있는 유저입니다");
         }
 
-        userDto member = requestDto.toMember(passwordEncoder);
+        Member member = requestDto.toMember(passwordEncoder);
         return MemberResponseDto.of(memberRepository.save(member));
     }
 

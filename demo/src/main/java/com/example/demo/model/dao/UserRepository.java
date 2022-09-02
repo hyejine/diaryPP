@@ -6,16 +6,16 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.dto.TokenDto;
-import com.example.demo.model.dto.userDto;
+import com.example.demo.model.dto.User;
 
 @Repository
 @Mapper
-public interface AuthMapper {
+public interface UserRepository {
     // findById
-    Optional<userDto> findByEmail(String email);
+    public User findByEmail(String username);
     boolean existsByEmail(String email);
-    userDto save(userDto memberuserDto);
-    Optional<userDto> findById(Long currentMemberId);
+    User save(User memberuserDto);
+    Optional<User> findById(Long currentMemberId);
 
 
 }

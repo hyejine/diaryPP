@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.dto.userDto;
+import com.example.demo.model.dto.Member;
 import com.example.demo.service.UserService;
 
 @RestController
@@ -23,17 +23,17 @@ public class UserController {
     public UserService userService;
 
     @PostMapping("/safeUser")
-    public void safeUser(@RequestBody userDto value){
+    public void safeUser(@RequestBody Member value){
         userService.safeUser(value);
     }
 
     @PostMapping("/regist")
-    public void registUser(@RequestBody userDto value){
+    public void registUser(@RequestBody Member value){
         userService.registUser(value);
     }
 
     @GetMapping("/getId/{userId}")
-    public List<userDto> getUserId (@PathVariable("userId") String id){
+    public List<Member> getUserId (@PathVariable("userId") String id){
         return userService.getUserId(id);
     }
 }
