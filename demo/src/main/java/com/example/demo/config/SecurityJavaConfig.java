@@ -24,6 +24,8 @@ import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
 import com.example.demo.config.jwt.JwtAuthenticationFilter;
+import com.example.demo.config.jwt.JwtAuthorizationFilter;
+import com.example.demo.model.dao.UserRepository;
 import com.example.demo.service.auth.AuthDetailsService;
 
 import lombok.RequiredArgsConstructor;
@@ -40,6 +42,7 @@ import lombok.RequiredArgsConstructor;
 public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
 
     private final CorsFilter corsFilter; 
+    private final UserRepository userRepository;
     // private final JwtTokenUtil tokenProvider;
     // private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     // private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
@@ -58,7 +61,8 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
         .addFilter(corsFilter)  // 모든 요청은 이 필터를 거침 => 내 서버는 cors정책에서 벗어날 수 있음 
         .formLogin().disable()  // security에서 제공하는 formLogin사용 안함
         .httpBasic().disable()  // Bearer방식의 토큰으로 ID/PW 전달 하기 위해 사용 안함 
-        .addFilter(new JwtAuthenticationFilter(authenticationManager()))
+        .addFilter(new JwtAuthenticationFilter(authenticationManager(), null))
+        .addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository))
         .authorizeRequests()
         .antMatchers("/api/vi/user/**")  // 이쪽으로 주소가 들어오면 
         .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")  // access를 ROLE_USE라고 해줌 

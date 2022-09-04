@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class UserResponseDto {
     private String email;
 
-    public static UserResponseDto of(AuthUserDto user) {
+    public static UserResponseDto of(TokenDto user) {
         return new UserResponseDto(user.getUser_email());
     }
 }
