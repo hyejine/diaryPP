@@ -3,11 +3,11 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.example.demo.model.dao.TestMapper">
 
-  <insert id="write">
+  <!-- <insert id="write">
    INSERT INTO test(title, content) VALUES (#{title}, #{content})
   </insert>
 
   <select id="getDB" resultType="testDto">
 	SELECT * FROM test
-  </select>
+  </select> -->
 </mapper>

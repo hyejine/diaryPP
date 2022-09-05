@@ -10,14 +10,18 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.demo.model.dto.User;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class PrincipalDetails implements UserDetails{
 
-    private final String email;
-    private final String password;
-    private final Collection<? extends GrantedAuthority> authorities;
+    private String email;
+    private String password;
+    private Collection<? extends GrantedAuthority> authorities;
 
     // 해당 user의 권한을 리턴한는 곳
     @Override
@@ -62,5 +66,9 @@ public class PrincipalDetails implements UserDetails{
     public boolean isEnabled() {
         return true;
     }
+
+    // public static UserDetails build(User user) {
+    //     return null;
+    // }
     
 }

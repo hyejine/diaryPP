@@ -115,7 +115,7 @@ const Login = () => {
 
   const handleSubmit = (value)=>{
       const request = {
-      username: value.target.email.value,
+      email: value.target.email.value,
       password: value.target.password.value,
     }
     console.log(request);

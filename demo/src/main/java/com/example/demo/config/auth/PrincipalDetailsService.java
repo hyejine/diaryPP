@@ -1,33 +1,35 @@
-// package com.example.demo.config.auth;
+package com.example.demo.config.auth;
 
-// import java.util.Collections;
+import java.util.Collections;
 
-// import org.springframework.security.core.authority.SimpleGrantedAuthority;
-// import org.springframework.security.core.userdetails.UserDetails;
-// import org.springframework.security.core.userdetails.UserDetailsService;
-// import org.springframework.security.core.userdetails.UsernameNotFoundException;
-// import org.springframework.stereotype.Service;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
 
-// import com.example.demo.model.dao.UserRepository;
-// import com.example.demo.model.dto.User;
+import com.example.demo.model.dao.UserRepository;
+import com.example.demo.model.dto.User;
 
-// import lombok.RequiredArgsConstructor;
+import lombok.RequiredArgsConstructor;
 
-// @Service
-// @RequiredArgsConstructor
-// public class PrincipalDetailsService implements UserDetailsService {
+@Service
+@RequiredArgsConstructor
+//DB에서 UserDetail를 얻어와 AuthenticationManager에게 제공하는 역할
+public class PrincipalDetailsService implements UserDetailsService {
 
-//     // private final UserRepository userRepository;
+    private final UserRepository userRepository;
 
-//     @Override
-//     public UserDetails loadUserByUsername(String username) {
-//         System.out.println("UserDetailsService");
-//         User user = userRepository.findByEmail(username).orElseThrow(() -> new RuntimeException("Not Found User"));
-//         return new PrincipalDetails(
-//             user.getUser_password(),
-//             user.getUser_email(),
-//             Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
-//     );
-//     }
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        System.out.println("UserDetailsService: 아이디 확인중");
+        User user = userRepository.findByEmail(username).orElseThrow(() -> new UsernameNotFoundException("User not found with username: " + username));
+        // return PrincipalDetails.build(user);
+        return new PrincipalDetails(
+            user.getUser_password(),
+            user.getUser_email(),
+            Collections.singleton(new SimpleGrantedAuthority("ROLE_USER"))
+    );
+    }
     
-// }
+}
