@@ -114,14 +114,20 @@ const Login = () => {
 }
 
   const handleSubmit = (value)=>{
-       const request = {
+      const request = {
       username: value.target.email.value,
       password: value.target.password.value,
     }
     console.log(request);
     value.preventDefault();
-    axios.post(`/user/login`, {...request})
-      .then(response => console.log(response))
+    axios.post(`/auth/login`, {...request})
+      .then(response => {
+        if(response.data.accessToken){
+          localStorage.setItem("user", JSON.stringify(response.data))
+          console.log(response);
+        }
+        return response.data;
+      })
       .catch(error => console.log(error))
   }
 

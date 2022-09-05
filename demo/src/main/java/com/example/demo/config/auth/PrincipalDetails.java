@@ -2,8 +2,10 @@ package com.example.demo.config.auth;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Set;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import com.example.demo.model.dto.User;
@@ -13,30 +15,28 @@ import lombok.Data;
 @Data
 public class PrincipalDetails implements UserDetails{
 
-    private User user;
-
-    public PrincipalDetails(User user){
-        this.user = user;
-    }
+    private final String email;
+    private final String password;
+    private final Collection<? extends GrantedAuthority> authorities;
 
     // 해당 user의 권한을 리턴한는 곳
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        Collection<GrantedAuthority> authorities = new ArrayList<>();
-        user.getRoleList().forEach(r->{
-            authorities.add(()->r);
-        });
+        // Collection<GrantedAuthority> authorities = new ArrayList<>();
+        // user.getRoleList().forEach(r->{
+        //     authorities.add(()-> r);
+        // });
         return authorities;
     }
 
     @Override
     public String getPassword() {
-        return user.getUser_password();
+        return password;
     }
 
     @Override
     public String getUsername() {
-        return user.getUser_email();
+        return email;
     }
 
     // 계정 만료 여부 

@@ -5,16 +5,14 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.model.dto.TokenDto;
 import com.example.demo.model.dto.User;
 
 @Repository
 @Mapper
 public interface UserRepository {
-    // findById
-    public User findByEmail(String username);
+    Optional<User> findByEmail(String username);
     boolean existsByEmail(String email);
-    User save(User memberuserDto);
+    // User save(User memberuserDto);
     Optional<User> findById(Long currentMemberId);
 
 

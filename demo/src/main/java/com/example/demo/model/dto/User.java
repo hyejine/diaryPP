@@ -34,12 +34,12 @@ public class User{
 
     public String user_type;
 
-    public List<String> getRoleList(){
-        if(this.user_type.length()>0){
-            return Arrays.asList(this.user_type.split(","));
-        }
-        return new ArrayList<>();
-    }
+    // public List<String> getRoleList(){
+    //     if(this.user_type.length()>0){
+    //         return Arrays.asList(this.user_type.split(","));
+    //     }
+    //     return new ArrayList<>();
+    // }
 
     // @Builder
     // public userDto(Integer id, String user_email, String user_name, String user_password, String user_hashPassword, String user_phone, String user_image,  Date user_create
