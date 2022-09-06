@@ -125,8 +125,7 @@ const Login = () => {
       .then(response => {
         if(response.data.jwttoken){
           axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.jwttoken}`;
-          // axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.jwttoken}`;
-          // localStorage.setItem("user", JSON.stringify(response.data))
+          localStorage.setItem("user", JSON.stringify(response.data))
           console.log(response.data.jwttoken);
         }
         else{

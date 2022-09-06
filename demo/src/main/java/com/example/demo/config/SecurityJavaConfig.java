@@ -1,9 +1,11 @@
 package com.example.demo.config;
 
+import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -42,6 +44,12 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
+public void configure(WebSecurity web) throws Exception {
+    web.ignoring()
+            .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+}
+
+    @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // session을 사용하지 않음
@@ -51,17 +59,19 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
         // .addFilter(new JwtAuthenticationFilter(authenticationManager(), null))
         // .addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository))
         .and().authorizeRequests()
-        .antMatchers("/auth/vi/user/**")  // 이쪽으로 주소가 들어오면 
-        .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")  // access를 ROLE_USE라고 해줌 
-        // .antMatchers("/api/vi/admin/**")  
-        // .access("hasRole('ROLE_ADMIN')")
-        .anyRequest().permitAll() // 다른 요청은 거부 없이 들어갈 수 있다. 
+        .antMatchers(
+            "/auth/**"
+            // "/home**"
+            ).permitAll()  // 이쪽으로 주소가 들어오면 
+        // .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")  // access를 ROLE_USE라고 해줌 
+        // .anyRequest().permitAll() // 다른 요청은 거부 없이 들어갈 수 있다. 
+        .anyRequest().authenticated() 
+        .and()
+        .exceptionHandling()
         .and()
         .addFilter(corsFilter)  // 모든 요청은 이 필터를 거침 => 내 서버는 cors정책에서 벗어날 수 있음 
         .formLogin().disable()  // security에서 제공하는 formLogin사용 안함
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-        // .addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class)
-        // .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)
         .httpBasic().disable();  // Bearer방식의 토큰으로 ID/PW 전달 하기 위해 사용 안함 
     } 
 
