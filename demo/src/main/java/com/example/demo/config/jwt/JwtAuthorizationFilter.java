@@ -1,34 +1,81 @@
-// package com.example.demo.config.jwt;
+package com.example.demo.config.jwt;
 
-// import java.io.IOException;
+import java.io.IOException;
 
-// import javax.servlet.FilterChain;
-// import javax.servlet.ServletException;
-// import javax.servlet.http.HttpServletRequest;
-// import javax.servlet.http.HttpServletResponse;
+import javax.servlet.FilterChain;
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-// import org.springframework.security.authentication.AuthenticationManager;
-// import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-// import org.springframework.security.core.Authentication;
-// import org.springframework.security.core.context.SecurityContextHolder;
-// import org.springframework.security.web.authentication.www.BasicAuthenticationFilter;
-// import org.springframework.util.StringUtils;
-// import org.springframework.web.filter.OncePerRequestFilter;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.stereotype.Component;
+import org.springframework.web.filter.OncePerRequestFilter;
 
-// import com.example.demo.config.auth.PrincipalDetails;
-// import com.example.demo.model.dao.UserRepository;
-// import com.example.demo.model.dto.User;
+import com.example.demo.config.auth.PrincipalDetailsService;
 
-// import io.jsonwebtoken.Jwts;
-// import io.jsonwebtoken.SignatureAlgorithm;
-// import lombok.RequiredArgsConstructor;
+import io.jsonwebtoken.ExpiredJwtException;
+import lombok.RequiredArgsConstructor;
 
+// Header를 통해 JWT의 인증 요청이 왔을때 처리하는 Filter 생성
+// JWT 토큰이 유효한지 검증 
+// 권한이나 인증이 필요한 특정 주소 요청 => BasicAuthenticationFilter 필터 거침
+@Component
+@RequiredArgsConstructor
+public class JwtAuthorizationFilter extends OncePerRequestFilter{
 
-// // Header를 통해 JWT의 인증 요청이 왔을때 처리하는 Filter 생성
-// // JWT 토큰이 유효한지 검증 
-// // 권한이나 인증이 필요한 특정 주소 요청 => BasicAuthenticationFilter 필터 거침
-// @RequiredArgsConstructor
-// public class JwtAuthorizationFilter extends OncePerRequestFilter{
+    private final JwtTokenUtil jwtTokenUtil;
+    private final PrincipalDetailsService principalDetailsService;
+
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
+            throws ServletException, IOException {
+            
+            final String requestTokenHeader = request.getHeader("Authorization");
+            
+            System.out.println("====requestTokenHeader===="+requestTokenHeader);
+
+            String username = null;
+            String jwtToken = null;
+
+            if (requestTokenHeader != null && requestTokenHeader.startsWith("Bearer ")) {
+                jwtToken = requestTokenHeader.substring(7);
+                try {
+                    username = jwtTokenUtil.getUsernameFromToken(jwtToken);
+                } catch (IllegalArgumentException e) {
+                    System.out.println("Unable to get JWT Token");
+                } catch (ExpiredJwtException e) {
+                    System.out.println("JWT Token has expired");
+                }
+            } else {
+                logger.warn("JWT Token does not begin with Bearer String");
+            }
+
+            if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+                System.out.println("?????????username>>>>>>>>"+username);
+                UserDetails userDetails = this.principalDetailsService.loadUserByUsername(username);
+    
+                // if token is valid configure Spring Security to manually set
+                // authentication
+                if (jwtTokenUtil.validateToken(jwtToken, userDetails)) {
+    
+                    UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(
+                        userDetails, null, userDetails.getAuthorities());
+                    usernamePasswordAuthenticationToken
+                        .setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                    // After setting the Authentication in the context, we specify
+                    // that the current user is authenticated. So it passes the
+                    // Spring Security Configurations successfully.
+                    SecurityContextHolder.getContext().setAuthentication(usernamePasswordAuthenticationToken);
+                    System.out.println("usernamePasswordAuthenticationToken??"+usernamePasswordAuthenticationToken);
+                }
+            }
+            filterChain.doFilter(request, response);
+        }
+
+    
 
 //     public static final String AUTHORIZATION_HEADER = "Authorization";
 //     public static final String BEARER_PREFIX = "Bearer ";
@@ -101,4 +148,4 @@
 //     // System.out.println("JwtAuthorizationFilter 실행");
 //     // }
     
-// }
+}

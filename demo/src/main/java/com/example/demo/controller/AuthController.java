@@ -25,12 +25,10 @@ import lombok.RequiredArgsConstructor;
 public class AuthController {
 
     private final PrincipalDetailsService principalDetailsService;
-    // private final AuthenticationManager authenticationManager;
     private final JwtTokenUtil jwtTokenUtil;
 
     @Autowired
     private AuthenticationManager authenticationManager;
-    // private final AuthService authService;
 
     // @PostMapping("/signup")
     // public ResponseEntity<MemberResponseDto> signup(@RequestBody MemberRequestDto requestDto) {
@@ -44,23 +42,29 @@ public class AuthController {
 
     @PostMapping("/login")
     public ResponseEntity<?> authenticateUser(@RequestBody PrincipalDetails principalDetails) throws Exception {
+       
         // user 객체 나옴 
-        // 사용자 요청 정보로 UserPasswordAuthenticationToken 객체 발급
         authenticate(principalDetails.getUsername(), principalDetails.getPassword());
-        // 토큰 생성
+        // // username, password 추출
         final UserDetails userDetails = principalDetailsService.loadUserByUsername(principalDetails.getUsername());
+        System.out.println("===userDetails====="+userDetails);
+        // // 토큰 생성
+        // // 사용자 요청 정보로 UserPasswordAuthenticationToken 객체 발급
         final String token = jwtTokenUtil.generateToken(userDetails);
+        System.out.println("token"+token);
 
-        System.out.println(principalDetails);
         return ResponseEntity.ok(new JwtResponse(token));
     }
 
     private void authenticate(String username, String password) throws Exception {
         try {
+            
             authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
         } catch (DisabledException e) {
+            System.out.println(e);
             throw new Exception("USER_DISABLED", e);
         } catch (BadCredentialsException e) {
+            System.out.println(e);
             throw new Exception("INVALID_CREDENTIALS", e);
         }
     }

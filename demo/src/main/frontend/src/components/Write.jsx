@@ -17,9 +17,9 @@ const Write = () => {
 
   // Read
   useEffect(() => {
-        axios.get('/api/getDB')
-        .then(response => setData(response.data))
-        .catch(error => console.log(error))
+        // axios.get('/api/getDB')
+        // .then(response => setData(response.data))
+        // .catch(error => console.log(error))
   }, []);
 
   return (

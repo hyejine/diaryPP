@@ -9,6 +9,7 @@ import GoogleButton from "../GoogleButton";
 import Regist from "./regist/Regist";
 import { Form, Button } from "react-bootstrap";
 import qs from 'qs';
+import Write from "../Write";
 const Login = () => {
   const { naver } = window;
   const [userid, setUserId] = useState();
@@ -122,13 +123,21 @@ const Login = () => {
     value.preventDefault();
     axios.post(`/auth/login`, {...request})
       .then(response => {
-        if(response.data.accessToken){
-          localStorage.setItem("user", JSON.stringify(response.data))
-          console.log(response);
+        if(response.data.jwttoken){
+          axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.jwttoken}`;
+          // axios.defaults.headers.common["Authorization"] = `Bearer ${response.data.jwttoken}`;
+          // localStorage.setItem("user", JSON.stringify(response.data))
+          console.log(response.data.jwttoken);
+        }
+        else{
+          console.log("jwtToken 존재X");
         }
         return response.data;
       })
-      .catch(error => console.log(error))
+      .catch(error => {
+        console.log(error)
+        return "이메일 혹은 비밀번호를 확인하세요.";
+      });
   }
 
   return (
@@ -171,6 +180,7 @@ const Login = () => {
           <Link to="/login/regist">
             <button className="login_b login_diary">Sign Up With Site</button>
           </Link>
+          <Link to="/auth/vi/user/check">확인</Link>
           
         </div>
       </div>

@@ -2,14 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.example.demo.model.dao.UserMapper">
+    <insert id="registUser">
+      INSERT INTO userinfo (user_email, user_name, user_image, user_password ,sns_type, user_create, user_type) VALUES (#{user_email}, #{user_name}, #{user_image}, #{user_password}, #{sns_type}, #{user_create}, #{user_type})
+      </insert>
 <!-- 
   <insert id="safeUser">
   INSERT INTO userinfo (user_email, user_name, user_image, sns_type) VALUES (#{user_email}, #{user_name}, #{user_image}, #{sns_type})
   </insert>
 
-<insert id="registUser">
-  INSERT INTO userinfo (user_email, user_name, user_image, user_password ,sns_type, user_create, user_type) VALUES (#{user_email}, #{user_name}, #{user_image}, #{user_password}, #{sns_type}, #{user_create}, #{user_type})
-  </insert>
 
   <select id="getUserId" resultType="userDto" >
   SELECT * FROM userinfo WHERE user_email=#{user_email}

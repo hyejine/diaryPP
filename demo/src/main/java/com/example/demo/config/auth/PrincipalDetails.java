@@ -35,11 +35,13 @@ public class PrincipalDetails implements UserDetails{
 
     @Override
     public String getPassword() {
+        // System.out.println(password);
         return password;
     }
 
     @Override
     public String getUsername() {
+        // System.out.println(email);
         return email;
     }
 

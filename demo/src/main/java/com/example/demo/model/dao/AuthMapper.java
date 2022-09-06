@@ -9,11 +9,11 @@ import com.example.demo.model.dto.User;
 
 @Repository
 @Mapper
-public interface UserRepository {
+public interface AuthMapper {
     Optional<User> findByEmail(String username);
-    boolean existsByEmail(String email);
+    // boolean existsByEmail(String email);
     // User save(User memberuserDto);
-    Optional<User> findById(Long currentMemberId);
+    // Optional<User> findById(Long currentMemberId);
 
 
 }

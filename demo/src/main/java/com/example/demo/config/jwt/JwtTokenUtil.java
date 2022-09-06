@@ -12,6 +12,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import javax.annotation.PostConstruct;
+import javax.crypto.SecretKey;
 import javax.xml.bind.DatatypeConverter;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -39,23 +40,31 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class JwtTokenUtil implements Serializable{
-    private final UserDetailsService userDetailsService;
-    private final long JWT_TOKEN_VALIDITY  = 2 * 60 * 60 * 1000L;
-    private final long refreshTokenValidTime = 2 * 7 * 24 * 60 * 60 * 1000L;
+    // private final UserDetailsService userDetailsService;
+    // private final long JWT_TOKEN_VALIDITY  = 2 * 60 * 60 * 1000L;
+    // private final long refreshTokenValidTime = 2 * 7 * 24 * 60 * 60 * 1000L;
     // private static final String AUTHORITIES_KEY = "auth";
     // private static final String BEARER_TYPE = "bearer";
     // private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30;
-    private Key key;
+    // private Key key;
 
+    // private final Key key;
     
     @Value("${jwt.secret}")
     private String secret;
+    // Key key = Keys.hmacShaKeyFor(keyBytes);
+    // public JwtTokenProvider(String secret) {
+    //     this.key = Keys.hmacShaKeyFor(keyBytes);
+    // }
+    // byte[] keyBytes = Decoders.BASE64.decode(secret);
+    // SecretKey secretKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
 
-    public Key TokenProvider(String secret) {
-        byte[] keyBytes = Decoders.BASE64.decode(secret);
-        return this.key = Keys.hmacShaKeyFor(keyBytes);
-    }
-
+    // @Override
+    // public void afterPropertiesSet() {
+    //     byte[] keyBytes = Decoders.BASE64.decode(secret);
+    //     this.key = Keys.hmacShaKeyFor(keyBytes);
+    // }
+    
     // jwt 토큰에서 사용자 이름 검색
     public String getUsernameFromToken(String token) {
         return getClaimFromToken(token, Claims::getSubject);
@@ -84,7 +93,9 @@ public class JwtTokenUtil implements Serializable{
 
     // 사용자에 대한 토큰 생성
     public String generateToken(UserDetails userDetails) {
+        System.out.println("=======generateToken=======" +userDetails.getUsername());
         Map<String, Object> claims = new HashMap<>();
+        System.out.println("==========claims========"+claims);
         return doGenerateToken(claims, userDetails.getUsername());
     }
 
@@ -92,12 +103,13 @@ public class JwtTokenUtil implements Serializable{
     // 2. HS512 알고리즘 및 비밀 키를 사용하여 JWT에 서명
     // 3. JWT를 URL 안전 문자열로 압축
     private String doGenerateToken(Map<String, Object> claims, String subject) {
+        System.out.println(secret+"??????????");
         return Jwts.builder()
             .setClaims(claims)
             .setSubject(subject)
             .setIssuedAt(new Date(System.currentTimeMillis()))
             .setExpiration(new Date(System.currentTimeMillis() + 5 * 1000))
-            .signWith(key, SignatureAlgorithm.HS512).compact();
+            .signWith(SignatureAlgorithm.HS512, secret).compact();
     }
 
     // 토큰 유효성 검사

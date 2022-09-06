@@ -19,6 +19,7 @@ import com.example.demo.config.jwt.JwtAuthenticationEntryPoint;
 import com.example.demo.config.jwt.JwtAuthenticationFilter;
 // import com.example.demo.config.jwt.JwtAuthorizationFilter;
 // import com.example.demo.config.jwt.JwtTokenUtil;
+import com.example.demo.config.jwt.JwtAuthorizationFilter;
 
 import lombok.RequiredArgsConstructor;
 
@@ -33,9 +34,10 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
     // private final AuthSuccessHandler authSuccessHandler; // 인증 성공 핸들러
     private final AuthFailureHandler authFailureHandler; // 인증 실패 핸들러
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler; // 인가 실패 핸들러
+    private final JwtAuthorizationFilter jwtAuthenticationFilter;
 
     @Bean
-    public PasswordEncoder passwordEncoder(){
+    public BCryptPasswordEncoder passwordEncoder(){
         return new BCryptPasswordEncoder();
     }
 
@@ -44,19 +46,20 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // session을 사용하지 않음
         .and().exceptionHandling()
-        // .authenticationEntryPoint(jwtAuthenticationEntryPoint)  // 인증 실패 
+        .authenticationEntryPoint(jwtAuthenticationEntryPoint)  // 인증 실패 
         // .accessDeniedHandler(jwtAccessDeniedHandler)  //인가 실패 
         // .addFilter(new JwtAuthenticationFilter(authenticationManager(), null))
         // .addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository))
         .and().authorizeRequests()
-        // .antMatchers("/api/vi/user/**")  // 이쪽으로 주소가 들어오면 
-        // .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")  // access를 ROLE_USE라고 해줌 
+        .antMatchers("/auth/vi/user/**")  // 이쪽으로 주소가 들어오면 
+        .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")  // access를 ROLE_USE라고 해줌 
         // .antMatchers("/api/vi/admin/**")  
         // .access("hasRole('ROLE_ADMIN')")
         .anyRequest().permitAll() // 다른 요청은 거부 없이 들어갈 수 있다. 
         .and()
         .addFilter(corsFilter)  // 모든 요청은 이 필터를 거침 => 내 서버는 cors정책에서 벗어날 수 있음 
         .formLogin().disable()  // security에서 제공하는 formLogin사용 안함
+        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
         // .addFilterBefore(authenticationFilter(), UsernamePasswordAuthenticationFilter.class)
         // .addFilterBefore(jwtFilter(), UsernamePasswordAuthenticationFilter.class)
         .httpBasic().disable();  // Bearer방식의 토큰으로 ID/PW 전달 하기 위해 사용 안함 

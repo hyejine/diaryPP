@@ -11,12 +11,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.model.dto.User;
+import com.example.demo.service.UserService;
+
 
 @RestController
 @RequestMapping("/user")
 
 public class UserController {
-    
+    @Autowired
+    public UserService userService;
 
 
     // @PostMapping("/safeUser")
@@ -24,10 +28,10 @@ public class UserController {
     //     userService.safeUser(value);
     // }
 
-    // @PostMapping("/regist")
-    // public void registUser(@RequestBody Member value){
-    //     userService.registUser(value);
-    // }
+    @PostMapping("/regist")
+    public void registUser(@RequestBody User value){
+        userService.registUser(value);
+    }
 
     // @GetMapping("/getId/{userId}")
     // public List<Member> getUserId (@PathVariable("userId") String id){
