@@ -12,6 +12,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.filter.CorsFilter;
 
 import com.example.demo.config.auth.AuthFailureHandler;
@@ -22,6 +23,7 @@ import com.example.demo.config.jwt.JwtAuthenticationFilter;
 // import com.example.demo.config.jwt.JwtAuthorizationFilter;
 // import com.example.demo.config.jwt.JwtTokenUtil;
 import com.example.demo.config.jwt.JwtAuthorizationFilter;
+import com.example.demo.config.jwt.JwtTokenUtil;
 
 import lombok.RequiredArgsConstructor;
 
@@ -43,6 +45,13 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
         return new BCryptPasswordEncoder();
     }
 
+    // JWT의 인증 및 권한을 확인하는 필터
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
     @Override
 public void configure(WebSecurity web) throws Exception {
     web.ignoring()
@@ -52,6 +61,7 @@ public void configure(WebSecurity web) throws Exception {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
+        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
         http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // session을 사용하지 않음
         .and().exceptionHandling()
         .authenticationEntryPoint(jwtAuthenticationEntryPoint)  // 인증 실패 
@@ -60,16 +70,16 @@ public void configure(WebSecurity web) throws Exception {
         // .addFilter(new JwtAuthorizationFilter(authenticationManager(), userRepository))
         .and().authorizeRequests()
         .antMatchers(
-            "/auth/**"
+            "/auth/login**"
             // "/home**"
             ).permitAll()  // 이쪽으로 주소가 들어오면 
         // .access("hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')")  // access를 ROLE_USE라고 해줌 
         // .anyRequest().permitAll() // 다른 요청은 거부 없이 들어갈 수 있다. 
         .anyRequest().authenticated() 
+        // .and()
+        // .exceptionHandling()
         .and()
-        .exceptionHandling()
-        .and()
-        .addFilter(corsFilter)  // 모든 요청은 이 필터를 거침 => 내 서버는 cors정책에서 벗어날 수 있음 
+        // .addFilter(corsFilter)  // 모든 요청은 이 필터를 거침 => 내 서버는 cors정책에서 벗어날 수 있음 
         .formLogin().disable()  // security에서 제공하는 formLogin사용 안함
         .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
         .httpBasic().disable();  // Bearer방식의 토큰으로 ID/PW 전달 하기 위해 사용 안함 
@@ -92,14 +102,14 @@ public void configure(WebSecurity web) throws Exception {
 
 
     // JWT의 인증 및 권한을 확인하는 필터
-    @Override
-    @Bean
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
+    // @Override
+    // @Bean
+    // public AuthenticationManager authenticationManagerBean() throws Exception {
+    //     return super.authenticationManagerBean();
+    // }
     // @Bean
     // public JwtAuthorizationFilter jwtFilter() {
-    //     return new JwtAuthorizationFilter(jwtTokenUtil);
+    //     return new JwtAuthorizationFilter(jwtTokenUtil, null);
     // }
     // 로그인 시 필요한 정보 가져다 줌 
     // @Override

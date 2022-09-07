@@ -6,7 +6,7 @@ const Header =()=>{
         return (
           <div className="header">
             <Link to="/"><span className="logo">LOGO</span></Link>
-            <Link to="/user/login"><span className="login">login</span></Link>
+            <Link to="/auth/login"><span className="login">login</span></Link>
           </div>
         );
 }

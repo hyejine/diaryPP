@@ -8,9 +8,11 @@ import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
-@NoArgsConstructor
 //사용자에게서 받은 id, pw를 저장
 public class JwtRequest implements Serializable {
+    private static final long serialVersionUID = -8091879091924046844L;
+
     private String username;
     private String password;
+
 }

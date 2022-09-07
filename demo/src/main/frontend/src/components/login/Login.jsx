@@ -10,6 +10,8 @@ import Regist from "./regist/Regist";
 import { Form, Button } from "react-bootstrap";
 import qs from 'qs';
 import Write from "../Write";
+import AuthenticationService from "./AuthenticationService";
+
 const Login = () => {
   const { naver } = window;
   const [userid, setUserId] = useState();
@@ -121,22 +123,33 @@ const Login = () => {
     }
     console.log(request);
     value.preventDefault();
-    axios.post(`/auth/login`, {...request})
-      .then(response => {
-        if(response.data.jwttoken){
-          axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.jwttoken}`;
-          localStorage.setItem("user", JSON.stringify(response.data))
-          console.log(response.data.jwttoken);
-        }
-        else{
-          console.log("jwtToken 존재X");
-        }
-        return response.data;
-      })
-      .catch(error => {
-        console.log(error)
-        return "이메일 혹은 비밀번호를 확인하세요.";
-      });
+    AuthenticationService
+        .executeJwtAuthenticationService(request.email, request.password)
+        .then((response) => {
+          console.log(response);
+        AuthenticationService.registerSuccessfulLoginForJwt(request.email,response.data.token)
+        // this.props.history.push(`/welcome/${this.state.username}`)
+    }).catch( () =>{
+        this.setState({showSuccessMessage:false})
+        this.setState({hasLoginFailed:true})
+    })
+    // axios.post(`/auth/login`, {...request})
+    //   .then(response => {
+    //     if(response.data.jwttoken){
+    //       axios.defaults.headers.common['Authorization'] = `Bearer ${response.data.jwttoken}`;
+    //       // localStorage.setItem("user", JSON.stringify(response.data))
+    //       console.log(response.headers);
+    //     }
+    //     else{
+    //       delete axios.defaults.headers.common['Authorization'];
+    //       console.log("jwtToken 존재X");
+    //     }
+    //     return response.data;
+    //   })
+    //   .catch(error => {
+    //     console.log(error)
+    //     return "이메일 혹은 비밀번호를 확인하세요.";
+    //   });
   }
 
   return (

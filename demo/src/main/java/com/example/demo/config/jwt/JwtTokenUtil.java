@@ -40,6 +40,8 @@ import lombok.RequiredArgsConstructor;
 @Component
 @RequiredArgsConstructor
 public class JwtTokenUtil implements Serializable{
+    private static final long serialVersionUID = -2550185165626007488L;
+    public static final long JWT_TOKEN_VALIDITY = 5 * 60 * 60;
     // private final UserDetailsService userDetailsService;
     // private final long JWT_TOKEN_VALIDITY  = 2 * 60 * 60 * 1000L;
     // private final long refreshTokenValidTime = 2 * 7 * 24 * 60 * 60 * 1000L;
@@ -47,26 +49,22 @@ public class JwtTokenUtil implements Serializable{
     // private static final String BEARER_TYPE = "bearer";
     // private static final long ACCESS_TOKEN_EXPIRE_TIME = 1000 * 60 * 30;
     // private Key key;
+    private SecretKey key;
+    // private Key key;
+    @Value("${jwt.secret}") 
+    public String secret;
+    // Keys key = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
 
     // private final Key key;
-    
-    @Value("${jwt.secret}")
-    private String secret;
-    // Key key = Keys.hmacShaKeyFor(keyBytes);
-    // public JwtTokenProvider(String secret) {
-    //     this.key = Keys.hmacShaKeyFor(keyBytes);
-    // }
-    // byte[] keyBytes = Decoders.BASE64.decode(secret);
-    // SecretKey secretKey = Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret));
 
-    // @Override
-    // public void afterPropertiesSet() {
+    // public void TokenProvider( String secret) {
     //     byte[] keyBytes = Decoders.BASE64.decode(secret);
     //     this.key = Keys.hmacShaKeyFor(keyBytes);
     // }
     
     // jwt 토큰에서 사용자 이름 검색
     public String getUsernameFromToken(String token) {
+        System.out.println("===getUsernameFromToken==="+token);
         return getClaimFromToken(token, Claims::getSubject);
     }
 
@@ -76,12 +74,19 @@ public class JwtTokenUtil implements Serializable{
     }
 
      public <T> T getClaimFromToken(String token, Function<Claims, T> claimsResolver) {
+        System.out.println("==getClaimFromToken=="+token);
         final Claims claims = getAllClaimsFromToken(token);
+        System.out.println(claimsResolver.apply(claims));
+
         return claimsResolver.apply(claims);
+        
     }
 
     // 토큰에서 정보를 검색하기 위해 비밀키 이용
     private Claims getAllClaimsFromToken(String token) {
+        System.out.println("==getAllClaimsFromToken=="+token);
+        System.out.println(Jwts.parserBuilder().setSigningKey(secret).build().parseClaimsJws(token).getBody());
+
         return Jwts.parserBuilder().setSigningKey(secret).build().parseClaimsJws(token).getBody();
     }
 
@@ -102,15 +107,18 @@ public class JwtTokenUtil implements Serializable{
     // 1. 발급자, 만료, 제목 및 ID와 같은 토큰의 클레임을 정의
     // 2. HS512 알고리즘 및 비밀 키를 사용하여 JWT에 서명
     // 3. JWT를 URL 안전 문자열로 압축
+    // byte[] keyBytes = Decoders.BASE64.decode(secret);
+
     private String doGenerateToken(Map<String, Object> claims, String subject) {
         System.out.println(secret+"??????????");
-        return Jwts.builder()
+            return Jwts.builder()
             .setClaims(claims)
             .setSubject(subject)
             .setIssuedAt(new Date(System.currentTimeMillis()))
             .setExpiration(new Date(System.currentTimeMillis() + 5 * 1000))
-            .signWith(SignatureAlgorithm.HS512, secret).compact();
+            .signWith( Keys.hmacShaKeyFor(Decoders.BASE64.decode(secret)), SignatureAlgorithm.HS512 ).compact(); 
     }
+
 
     // 토큰 유효성 검사
     public Boolean validateToken(String token, UserDetails userDetails) {
