@@ -13,7 +13,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
-    private static final long serialVersionUID = -7858869558953243875L;
+    
     @Override
     public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException{
         // 유효한 자격증명을 제공하지 않고 접근하려 할때 401
