@@ -2,14 +2,12 @@ package com.example.demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.SecurityFilterChain;
 
 import com.example.demo.config.jwt.JwtAccessDeniedHandler;
 import com.example.demo.config.jwt.JwtAuthenticationEntryPoint;
@@ -18,8 +16,8 @@ import com.example.demo.config.jwt.JwtSecurityConfig;
 
 @Configuration         // Bean 관리 
 @EnableWebSecurity     // Spirng Security 보안 설정 활성화 (사이트 전체가 잠김 상태)
-@EnableGlobalMethodSecurity(prePostEnabled = true)
-public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
+// @EnableGlobalMethodSecurity(prePostEnabled = true)
+public class SecurityJavaConfig {
 
     private final JwtProvier jwtProvier;
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
@@ -36,19 +34,19 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
+    public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    @Override
-    public void configure(WebSecurity web) throws Exception {
-    web .ignoring()
-        .antMatchers("favicon.ico");
-            // .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
-    }
+    // @Override
+    // public void configure(WebSecurity web) throws Exception {
+    // web .ignoring()
+    //     .antMatchers("favicon.ico");
+    //         // .requestMatchers(PathRequest.toStaticResources().atCommonLocations());
+    // }
 
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
+    @Bean
+    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
             .exceptionHandling()
             .authenticationEntryPoint(jwtAuthenticationEntryPoint)  // 인증 실패 
@@ -61,13 +59,14 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
             .authorizeRequests()   // 접근 제한 설정 
             .antMatchers(
             "/auth/login**",
-                            "/auth/signUp**",
-                            "/auth/hello**"
+                            "/auth/signUp**"
+                            // "/auth/hello**"
             ).permitAll()  // 인증없이 접근 허용 
         .anyRequest().authenticated() // 나머지는 인증 받아야 함
 
         .and()
         .apply(new JwtSecurityConfig(jwtProvier));
+        return http.build();
 
         // http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
         // .addFilter(corsFilter)  // 모든 요청은 이 필터를 거침 => 내 서버는 cors정책에서 벗어날 수 있음 

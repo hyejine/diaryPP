@@ -117,39 +117,37 @@ const Login = () => {
 }
 
 const hello = ()=>{
-  axios.get('/auth/hello')
+  axios.get(`/account/${AuthenticationService.getLoggedInUserName()}`)
   .then((response) => {
     console.log(response);} )
     .catch((error)=>{
       console.log(error);
     })
 }
+console.log(AuthenticationService.getLoggedInUserName());
 
   const handleSubmit = (value)=>{
-      const request = {
-      username: value.target.email.value,
+    setUserId ({
+      email: value.target.email.value,
       password: value.target.password.value,
-    }
-    console.log(request);
+    })  
     value.preventDefault();
-    // AuthenticationService
-    //     .executeJwtAuthenticationService(request.email, request.password)
-    //     .then((response) => {
-    //       console.log(response);
-    //     AuthenticationService.registerSuccessfulLoginForJwt(request.email,response.data.token)
-    //     // this.props.history.push(`/welcome/${this.state.username}`)
-    // }).catch( () =>{
-    //     this.setState({showSuccessMessage:false})
-    //     this.setState({hasLoginFailed:true})
-    // })
-    axios.post(`/auth/login`, {...request})
-      .then(response => {
-      console.log(response);
-      })
-      .catch(error => {
-        console.log(error)
-        return "이메일 혹은 비밀번호를 확인하세요.";
-      });
+    AuthenticationService
+        .executeJwtAuthenticationService(userid.email, userid.password)
+        .then((response) => {
+          console.log(response);
+        AuthenticationService.registerSuccessfulLoginForJwt(userid.email,response.data.accessToken)
+    }).catch( (error) =>{
+      console.log(error);
+    })
+    // axios.post(`/auth/login`, {...request})
+    //   .then(response => {
+    //   console.log(response);
+    //   })
+    //   .catch(error => {
+    //     console.log(error)
+    //     return "이메일 혹은 비밀번호를 확인하세요.";
+    //   });
   }
 
   return (

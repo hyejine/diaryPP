@@ -1,7 +1,6 @@
 package com.example.demo.config.jwt;
 
 import java.io.IOException;
-import java.io.Serializable;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;

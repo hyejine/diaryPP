@@ -5,13 +5,11 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
-// import org.springframework.security.crypto.bcrypt.BCrypt;
-// import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.model.dao.UserMapper;
-import com.example.demo.model.dto.User;
+import com.example.demo.model.dto.UserDto;
 import com.example.demo.model.dto.UserType;
 
 @Service
@@ -33,7 +31,7 @@ public class UserService implements UserMapper{
 
     @Override
     @Transactional
-    public void registUser(User value){
+    public void registUser(UserDto value){
     
         Date date = new Date();
         value.setUser_password(passwordEncoder.encode(value.getUser_password()));
