@@ -8,8 +8,8 @@ import { Link } from "react-router-dom";
 import GoogleButton from "../GoogleButton";
 import Regist from "./regist/Regist";
 import { Form, Button } from "react-bootstrap";
-import qs from 'qs';
-import Write from "../Write";
+import { useDispatch } from "react-redux";
+import { loginUser } from "../../reducer/userSlice";
 import AuthenticationService from "./AuthenticationService";
 
 const Login = () => {
@@ -125,7 +125,7 @@ const hello = ()=>{
     })
 }
 console.log(AuthenticationService.getLoggedInUserName());
-
+const dispatch = useDispatch();
   const handleSubmit = (value)=>{
     setUserId ({
       email: value.target.email.value,
@@ -136,7 +136,16 @@ console.log(AuthenticationService.getLoggedInUserName());
         .executeJwtAuthenticationService(userid.email, userid.password)
         .then((response) => {
           console.log(response);
-        AuthenticationService.registerSuccessfulLoginForJwt(userid.email,response.data.accessToken)
+        AuthenticationService.registerSuccessfulLoginForJwt(userid.email,response.data.accessToken);
+        axios.get(`/account/${AuthenticationService.getLoggedInUserName()}`)
+        .then((response) => {
+          console.log(response);
+          dispatch(loginUser(response.data));
+        } )
+          .catch((error)=>{
+            console.log(error);
+          })
+        
     }).catch( (error) =>{
       console.log(error);
     })

@@ -8,6 +8,7 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.web.cors.CorsConfiguration;
 
 import com.example.demo.config.jwt.JwtAccessDeniedHandler;
 import com.example.demo.config.jwt.JwtAuthenticationEntryPoint;
@@ -47,7 +48,10 @@ public class SecurityJavaConfig {
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.csrf().disable()
+        http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
+            
+            .and()
+            .csrf().disable()
             .exceptionHandling()
             .authenticationEntryPoint(jwtAuthenticationEntryPoint)  // 인증 실패 
             .accessDeniedHandler(jwtAccessDeniedHandler)  //인가 실패 
