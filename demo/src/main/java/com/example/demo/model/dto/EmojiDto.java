@@ -13,5 +13,5 @@ public class EmojiDto {
 
     public Integer emoji_price;
 
-    public List<EmojiImageDto> emoji_type;
+    public List<EmojiImageDto> emoji_type;  //fk
 }

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <mapper namespace="com.example.demo.model.dao.EmojiMapper">
+  
+  <resultMap id="EmojiResult" type="EmojiDto">
+    <result property="id" column="id"/>
+    <result property="emoji_name" column="emoji_name"/>
+    <result property="emoji_price" column="emoji_price"/>
+    <collection property="emoji_type" column="emoji_type" javaType="java.util.ArrayList" ofType="EmojiImageDto" select="getEmojiImage"/>
+</resultMap>
+
+  <select id="getEmojiList" resultMap="EmojiResult">
+	SELECT * FROM emoji_table
+  </select> 
+
+  <select id="getEmojiImage" resultType="EmojiImageDto">
+    SELECT * FROM emoji_image_table where emoji_type=#{emoji_type}
+</select>
+  </mapper>

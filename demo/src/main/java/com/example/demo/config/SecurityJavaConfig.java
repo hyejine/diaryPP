@@ -63,7 +63,8 @@ public class SecurityJavaConfig {
             .authorizeRequests()   // 접근 제한 설정 
             .antMatchers(
             "/auth/login**",
-                            "/auth/signUp**"
+                            "/auth/signUp**",
+                            "/emoji/getEmojiList**"
                             // "/auth/hello**"
             ).permitAll()  // 인증없이 접근 허용 
         .anyRequest().authenticated() // 나머지는 인증 받아야 함
