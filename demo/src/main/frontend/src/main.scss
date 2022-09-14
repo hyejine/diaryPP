@@ -53,4 +53,14 @@ table {
   margin: 0 auto;
   padding: 50px 0;
   
+  .mainContent{
+	margin: 100px 0;
+	border: none;
+	background-color: white;
+	border-radius: 20px;
+	height: 700px;
+  }
+  .mainInner{
+	padding: 30px 30px;
+  }
 }

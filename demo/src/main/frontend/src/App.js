@@ -5,6 +5,9 @@ import './main.scss';
 import Regist from "./components/login/regist/Regist";
 import Write from "./components/Write";
 import { useSelector } from "react-redux";
+import EmojiPurchase from "./components/emoji/EmojiPurchase";
+import MainLayout from "./components/layout/MainLayout";
+
 
 function App(props) {
   const currnetUser = useSelector(state => state.user);
@@ -14,12 +17,13 @@ function App(props) {
     <div>
     <BrowserRouter>
       <Routes>
-      {/* {user.id !== "" ? <Main /> : <Login />} */}
-        <Route Route path="/" element={<Main />} currentUser={props?.currnetUser}/>
-        <Route path="/auth/login" element={<Login/>}/>
-        <Route path="/login/regist" element={<Regist/>}/>  
-        <Route path="/auth/vi/user/check" element={<Write/>}/>
-     
+      <Route element={<MainLayout />}>
+      <Route path="/" element={<Main />} currentUser={props?.currnetUser}/>
+      <Route path="/auth/login" element={<Login/>}/>
+      <Route path="/login/regist" element={<Regist/>}/>  
+      <Route path="/auth/vi/user/check" element={<Write/>}/>
+      <Route path="/emoji" element={<EmojiPurchase/>}/> 
+     </Route>
       </Routes>
     </BrowserRouter>
     </div>

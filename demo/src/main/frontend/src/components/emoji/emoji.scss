@@ -1,0 +1,23 @@
+.emojiPage {
+  padding-top: 15px;
+  position: relative;
+
+  .title {
+    font-weight: 600;
+    font-size: 20px;
+    color: #ffc700;
+    text-align: center;
+  }
+  .emojiListWrap{
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  .emojiList {
+    width: 936px;
+    height: 133px;
+    background: rgba(249, 240, 210, 0.84);
+    border-radius: 20px;
+    margin-top: 50px;
+  }
+}
