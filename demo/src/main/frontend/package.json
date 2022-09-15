@@ -5,6 +5,7 @@
   "dependencies": {
     "@emotion/react": "^11.10.4",
     "@fullcalendar/daygrid": "^5.11.2",
+    "@fullcalendar/interaction": "^5.11.3",
     "@fullcalendar/react": "^5.11.2",
     "@mui/icons-material": "^5.10.3",
     "@mui/material": "^5.10.5",

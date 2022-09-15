@@ -19,5 +19,19 @@
     background: rgba(249, 240, 210, 0.84);
     border-radius: 20px;
     margin-top: 50px;
+    text-align: center;
+  }
+  .emojiList img{
+    margin-top: 15px;
+    width: 100px;
+  }
+  .emojiPrice{
+    cursor: pointer;
+    margin-bottom: -30px;
+    color: white;
+    padding: 7px 50px;
+    background-color: #ffc700;
+    border: none;
+    border-radius: 20px;
   }
 }

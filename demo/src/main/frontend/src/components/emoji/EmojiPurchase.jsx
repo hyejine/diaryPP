@@ -5,23 +5,29 @@ import axios from "axios";
 
 const EmojiPurchase = () => {
     const [ emojiList, setEmojiList] =useState();
+    
+    const onEmojiBuy = ()=>{
+      
+    }
+
     useEffect(()=>{
         axios.get('/emoji/getEmojiList')
         .then(response => setEmojiList(response.data))
         .catch(error => console.log(error))
     },[])
-    console.log(emojiList);
+    
   return (
     <div className="emojiPage">
       <h1 className="title">프리미엄 이모지💸💸💸</h1>
       <div className="emojiListWrap">
         {emojiList?.map((value)=>(
             <div className="emojiList">
-                {console.log(value.emoji_type)}
+              <div className="listWrap">
                 {value.emoji_type?.map((list)=>(
-                    list.emoji_image
+                   <img src ={list.emoji_image} /> 
                 ))}
-                {value.emoji_price}
+                <button className="emojiPrice" onClick={onEmojiBuy}>{value.emoji_price.toLocaleString('ko-KR')}원</button>
+            </div>
             </div>
             
         ))}

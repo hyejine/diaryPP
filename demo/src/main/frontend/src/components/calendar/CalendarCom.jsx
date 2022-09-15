@@ -1,16 +1,45 @@
 import React, { useState } from "react";
-
 import FullCalendar from "@fullcalendar/react"; // must go before plugins
+import interactionPlugin from "@fullcalendar/interaction"; // for selectable
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import "./calendar.scss";
+import SelectEmojiModal from "./SelectEmojiModal";
 
 const CalendarCom = () => {
+  const [modalOpen, setModalOpen] = useState(false);
+
+  const onDateClick = (info) => {
+    console.log(info);
+    setModalOpen(true);
+  };
+
   return (
-    <div className="calendar_css">
+    <div className="calendarPage">
       <FullCalendar
-        plugins={[dayGridPlugin]}
+        className="calendar"
+        // selectable = {true}
+        plugins={[dayGridPlugin, interactionPlugin]}
         initialView="dayGridMonth"
         height={700}
+        dateClick={onDateClick}
+        // eventClick={handleEventClick}
+        // select={handleDateSelect}
+        // weekends={true}
+        // events={sch_list}
+      />
+      {/* <Modal
+        size="lg"
+        open={modalOpen}
+        onClose={() => setModalOpen(false)}
+        centered
+      >
+
+          <p className="selectEmoji">dfdf</p>
+
+      </Modal> */}
+      <SelectEmojiModal
+      show={modalOpen}
+      onHide={() => setModalOpen(false)}
       />
     </div>
   );

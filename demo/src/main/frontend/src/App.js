@@ -1,18 +1,17 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Login from './components/login/Login';
 import Main from "./Main";
-import './main.scss';
 import Regist from "./components/login/regist/Regist";
-import Write from "./components/Write";
+import Write from "./components/board/Write";
 import { useSelector } from "react-redux";
 import EmojiPurchase from "./components/emoji/EmojiPurchase";
 import MainLayout from "./components/layout/MainLayout";
-
+import './main.scss';
+// import './App.scss';
 
 function App(props) {
   const currnetUser = useSelector(state => state.user);
-  console.log(props);
-  console.log(currnetUser);
+
   return (
     <div>
     <BrowserRouter>

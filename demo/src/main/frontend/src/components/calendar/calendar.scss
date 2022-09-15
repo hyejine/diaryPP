@@ -1,7 +1,13 @@
-.calendar_css{
+@import "~bootstrap/scss/bootstrap";
+
+.calendarPage{
     margin: 100px 0;
     border-radius: 20px;
     border: none;
-// background-color: aliceblue;
-// height: 700;
+
+    .selectEmoji{
+        color: red;
+        // width: 400px;
+        // background-color:white;
+    }
 }

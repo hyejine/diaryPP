@@ -35,6 +35,7 @@ const Write = () => {
       <form onSubmit={onSend}>
         <input name="title" />
         <textarea name="content" />
+        
         <button type="submit">send</button>
       </form>
     </div>
