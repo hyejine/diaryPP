@@ -64,6 +64,7 @@ public class SecurityJavaConfig {
             .antMatchers(
             "/auth/login**",
                             "/auth/signUp**",
+                            "/emoji/**",
                             "/emoji/getEmojiList**"
                             // "/auth/hello**"
             ).permitAll()  // 인증없이 접근 허용 

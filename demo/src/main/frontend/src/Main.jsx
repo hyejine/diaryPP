@@ -20,10 +20,8 @@ const Main = (props)=> {
     const LogoutFunc = () => {
         dispatch(clearUser(user));
     }
-    console.log(currnetUser);
     useEffect(() => {
       // LogoutFunc()
-      console.log(user);
     //   axios.get(`/account/${AuthenticationService.getLoggedInUserName()}`)
     //   .then((response) => {
     //     console.log(response);} )

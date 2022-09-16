@@ -1,13 +1,35 @@
-@import "~bootstrap/scss/bootstrap";
+// @import "~bootstrap/scss/bootstrap";
 
-.calendarPage{
-    margin: 100px 0;
-    border-radius: 20px;
+#calendarPage {
+  margin: 100px 0;
+  border-radius: 20px;
+  border: none;
+}
+
+// 이모지 선택 모달
+#selectEmojiModal {
+  text-align: center;
+  .title {
+    margin : 35px 0;
+    font-weight: 600;
+    font-size: 24px;
+    color: #555;
+  }
+  .emojiWrap{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .emojiWrap img{
+    cursor: pointer;
+    width: 100px;
+  }
+  .closeButton{
+    margin-top: 35px;
     border: none;
-
-    .selectEmoji{
-        color: red;
-        // width: 400px;
-        // background-color:white;
-    }
+    padding: 7px 70px;
+    color: white;
+    border-radius: 20px;
+    background-color: #ffc700;
+  }
 }

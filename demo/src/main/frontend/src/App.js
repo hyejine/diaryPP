@@ -6,8 +6,8 @@ import Write from "./components/board/Write";
 import { useSelector } from "react-redux";
 import EmojiPurchase from "./components/emoji/EmojiPurchase";
 import MainLayout from "./components/layout/MainLayout";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import './main.scss';
-// import './App.scss';
 
 function App(props) {
   const currnetUser = useSelector(state => state.user);
@@ -20,7 +20,7 @@ function App(props) {
       <Route path="/" element={<Main />} currentUser={props?.currnetUser}/>
       <Route path="/auth/login" element={<Login/>}/>
       <Route path="/login/regist" element={<Regist/>}/>  
-      <Route path="/auth/vi/user/check" element={<Write/>}/>
+      <Route path="/board/write" element={<Write/>}/>
       <Route path="/emoji" element={<EmojiPurchase/>}/> 
      </Route>
       </Routes>

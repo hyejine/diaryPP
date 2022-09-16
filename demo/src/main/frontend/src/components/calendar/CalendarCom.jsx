@@ -9,12 +9,11 @@ const CalendarCom = () => {
   const [modalOpen, setModalOpen] = useState(false);
 
   const onDateClick = (info) => {
-    console.log(info);
     setModalOpen(true);
   };
 
   return (
-    <div className="calendarPage">
+    <div id="calendarPage">
       <FullCalendar
         className="calendar"
         // selectable = {true}

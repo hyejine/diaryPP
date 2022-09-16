@@ -3,6 +3,7 @@ package com.example.demo.controller;
 import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -24,6 +25,11 @@ public class EmojiController {
     @GetMapping("/getEmojiList")
     public List<EmojiDto> getEmojiList() {
         return emojiMapper.getEmojiList();
+    }
+
+    @GetMapping("/{emojiType}")
+    public List<EmojiDto> getEmojiType(@PathVariable("emojiType") String emojiType) {
+        return emojiMapper.getEmojiImage(emojiType);
     }
     
 }

@@ -11,4 +11,7 @@ import com.example.demo.model.dto.EmojiDto;
 @Mapper
 public interface EmojiMapper {
     public List<EmojiDto> getEmojiList();
+
+    public List<EmojiDto> getEmojiImage(String emojiType);
+
 }
