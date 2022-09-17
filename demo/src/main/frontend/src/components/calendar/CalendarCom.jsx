@@ -7,8 +7,11 @@ import SelectEmojiModal from "./SelectEmojiModal";
 
 const CalendarCom = () => {
   const [modalOpen, setModalOpen] = useState(false);
+  const [selectDate, setSelectDate] = useState();
+
 
   const onDateClick = (info) => {
+    setSelectDate(info.date);
     setModalOpen(true);
   };
 
@@ -38,6 +41,7 @@ const CalendarCom = () => {
       </Modal> */}
       <SelectEmojiModal
       show={modalOpen}
+      selectDate = {selectDate}
       onHide={() => setModalOpen(false)}
       />
     </div>
