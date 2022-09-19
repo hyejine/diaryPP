@@ -38,6 +38,25 @@ const Write = () => {
       .catch(err => console.log(err))
     }, []);
 
+    const formats = [
+      "font",
+      "size",
+      "header",
+      "bold",
+      "italic",
+      "underline",
+      "align",
+      "strike",
+      "blockquote",
+      "list",
+      "bullet",
+      "indent",
+      "color",
+      "background",
+      "image",
+      "video"
+    ];
+
   return (
     <div className="writePage">
       <Form onSubmit={onSubmit}>
@@ -68,9 +87,9 @@ const Write = () => {
           <ReactQuill
             style={{ height: "441px" }}
             theme="snow"
+            formats={formats}
             modules={toolbarOptions}
             placeholder="내용을 입력해주세요.🍀"
-            // formats={this.formats}
             // value={value || ''}
             // onChange={(content, delta, source, editor) => onChange(editor.getHTML())}
           />
