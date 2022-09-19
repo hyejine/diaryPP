@@ -14,8 +14,6 @@ const SelectEmojiModal = (props) => {
   const onSelectEmoji = (id)=>{
     console.log(id);
     setEmojiId(id);
-    // setWrite(true);
-    // console.log(write);
   }
 
   useEffect(()=>{
@@ -24,7 +22,6 @@ const SelectEmojiModal = (props) => {
     .catch(err => console.log(err))
   },[])
 
-  console.log();
   return (
     <div>
       <Modal {...props} size="lg" centered id="selectEmojiModal">

@@ -15,6 +15,11 @@
   </select> 
 
   <select id="getEmojiImage" resultType="EmojiImageDto">
-    SELECT * FROM emoji_image_table where emoji_type=#{emoji_type}
-</select>
-  </mapper>
+  SELECT * FROM emoji_image_table where emoji_type=#{emoji_type}
+  </select>
+
+  <select id="getEmoji" resultType="EmojiImageDto">
+  SELECT * FROM emoji_image_table where id=#{id}
+  </select>
+
+</mapper>
