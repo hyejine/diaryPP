@@ -21,22 +21,10 @@ const Write = () => {
       .then(res => {console.log(res); setEmojiImage(res.data.emoji_image)})
       .catch(err => console.log(err))
     }, []);
-    function imageUrlHandler() {
 
-      const range = this.quill.getSelection();
-      const url = prompt('please copy paste the image url here.');
   
-      if (url) {
-        // 커서위치에 imageUrl 삽입
-        this.quill.insertEmbed(range.index, 'image', url);
-      }
-    }
-  
-    /**
-     * image 제어
-     */
-    function imageHandler() {
-  
+
+   const imageHandler=() =>{
       // // input file tag 생성
       const input = document.createElement('input');
       input.setAttribute('type', 'file');
@@ -47,40 +35,30 @@ const Write = () => {
         const formData = new FormData();
             const file = input.files[0];
             formData.append('uploadFile', file); 
-            axios({
-              url: '/board/register/imageUpload',
-              method: 'post',
-              enctype: 'multipart/form-data',
-              data: formData,
-              processData: false,
-              contentType: false,
-              dataType: 'json'
+            // axios({
+            //   url: '/board/register/imageUpload',
+            //   method: 'post',
+            //   enctype: 'multipart/form-data',
+            //   data: formData,
+            //   processData: false,
+            //   contentType: false,
+            //   dataType: 'json',
+              
+            // })
+            console.log(formData);
+            axios.post('/board/register/imageUpload',formData, {
+              'headers': {
+                'Content-Type': "multipart/form-data"
+             }
             })
-            // axios.post('/board/register/imageUpload',formData)
             .then(res => {console.log(res);  
-              console.log(res.uploadPath);
-              res.uploadPath = res.uploadPath.replace(/\\/g, '/');
+              // const range = ReactQuill.UnprivilegedEditor; 
+              console.log(res);
+              // res.uploadPath = res.uploadPath.replace(/\\/g, '/');
             })
             .catch(err => console.log(err))
           });
-      // // input change
-      // input.onchange = (e) => {
-  
-      //   const files = e.target.files;
-      //   const formData = new FormData();
-      //   formData.append('files', files[0]);
-  
-      //   // file 등록
-      //   const tempFile = api.file.postTempFileUpload(formData);
-      //   tempFile.then(response => {
-  
-      //     // 커서위치 및 fileSrno 얻기
-      //     const fileSrno = response.fileSrno;
-      //     const range = this.quill.getSelection();
-  
-      //     this.quill.insertEmbed(range.index, 'image', 'http://localhost:8002/master/api/v1/upload/img/' + fileSrno);
-      //   });
-      // }
+    
     }
   //  const imageHandler =()=>{
   //   const input = document.createElement("input");
