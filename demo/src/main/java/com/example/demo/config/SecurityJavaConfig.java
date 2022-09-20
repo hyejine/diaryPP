@@ -9,6 +9,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.web.cors.CorsConfiguration;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import com.example.demo.config.jwt.JwtAccessDeniedHandler;
 import com.example.demo.config.jwt.JwtAuthenticationEntryPoint;
@@ -65,7 +66,8 @@ public class SecurityJavaConfig {
             "/auth/login**",
                             "/auth/signUp**",
                             "/emoji/**",
-                            "/emoji/getEmojiList**"
+                            "/emoji/getEmojiList**",
+                            "/board/**"
                             // "/auth/hello**"
             ).permitAll()  // 인증없이 접근 허용 
         .anyRequest().authenticated() // 나머지는 인증 받아야 함
@@ -79,6 +81,13 @@ public class SecurityJavaConfig {
         // .formLogin().disable()  // security에서 제공하는 formLogin사용 안함
         // .httpBasic().disable();  // Bearer방식의 토큰으로 ID/PW 전달 하기 위해 사용 안함 
     } 
+    @Bean
+public CommonsMultipartResolver multipartResolver() {
+    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+    multipartResolver.setDefaultEncoding("UTF-8"); // 파일 인코딩 설정
+    multipartResolver.setMaxUploadSizePerFile(5 * 1024 * 1024); // 파일당 업로드 크기 제한 (5MB)
+    return multipartResolver;
+}
 
     // 사용자 요청 정보로 UserPasswordAuthenticationToken 발급하는 필터
     // @Bean
