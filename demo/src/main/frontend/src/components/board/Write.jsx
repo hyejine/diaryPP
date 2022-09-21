@@ -15,7 +15,7 @@ const Write = () => {
   const selectDate = location.state.date;
 
   const [emojiImage, setEmojiImage] = useState();
-
+const [url, setUrl] = useState();
     useEffect(() => {
       axios.get(`/emoji/getEmojiId/${emojiId}`)
       .then(res => {console.log(res); setEmojiImage(res.data.emoji_image)})
@@ -23,66 +23,50 @@ const Write = () => {
     }, []);
 
   
+    const quillRef = useRef();
+    const [quillText, setQuillText] = useState("");
+    console.log(url);
 
    const imageHandler=() =>{
       // // input file tag 생성
       const input = document.createElement('input');
+      const formData = new FormData();
       input.setAttribute('type', 'file');
-      input.setAttribute('accept', '.png,.jpg,.jpeg');
+      input.setAttribute('accept', 'image/*');
       input.click();
-    console.log(input);
-      input.addEventListener('change', async () => {
-        const formData = new FormData();
-            const file = input.files[0];
+      
+      // 파일이 input 태그에 담기면 실행 될 함수 
+        input.onchange = async () => {
+        const file = input.files[0];
             formData.append('uploadFile', file); 
-            // axios({
-            //   url: '/board/register/imageUpload',
-            //   method: 'post',
-            //   enctype: 'multipart/form-data',
-            //   data: formData,
-            //   processData: false,
-            //   contentType: false,
-            //   dataType: 'json',
-              
-            // })
-            console.log(formData);
             axios.post('/board/register/imageUpload',formData, {
               'headers': {
                 'Content-Type': "multipart/form-data"
              }
             })
-            .then(res => {console.log(res);  
-              // const range = ReactQuill.UnprivilegedEditor; 
-              console.log(res);
-              // res.uploadPath = res.uploadPath.replace(/\\/g, '/');
+            .then(res => {
+              console.log(res.data);
+              const result = res.data.replace(/\\/g, '/');
+              setUrl(result);
+              
+              const range = quillRef.current?.getEditor().getSelection()?.index;
+              if (range !== null && range !== undefined) {
+                let quill = quillRef.current?.getEditor();
+    
+                quill?.setSelection(range, 1);
+    
+                quill?.clipboard.dangerouslyPasteHTML(
+                  range,
+                  `<p>efefe
+                  <img src={url}  alt="이미지 태그가 삽입됩니다."/></p>`
+                );
+              }
             })
             .catch(err => console.log(err))
-          });
+          };
     
     }
-  //  const imageHandler =()=>{
-  //   const input = document.createElement("input");
-  //   input.setAttribute('type', 'file');
-  //   input.setAttribute('accept', 'image/*');
-  //   input.click();
-
-  //    input.addEventListener('change', async () => {
-  //     console.log('온체인지');
-  //     const file = input.files[0];
-  //     const formData = new FormData();
-  //     formData.append('img', file); 
-  //     try {
-  //       const result = await axios.post('http://localhost:4050/img', formData);
-  //       console.log('성공 시, 백엔드가 보내주는 데이터', result.data.url);
-  //       const IMG_URL = result.data.url;
-  //       const editor = quillRef.current.getEditor(); // 에디터 객체 가져오기
-  //       const range = editor.getSelection();
-  //       editor.insertEmbed(range.index, 'image', IMG_URL);
-  //     } catch (error) {
-  //       console.log('실패했어요ㅠ');
-  //     }
-  //   });
-  // };
+    console.log(url);
   
    const modules = useMemo(() => {
     return {
@@ -102,7 +86,6 @@ const Write = () => {
           ["clean", "code-block"]
         ],
         handlers: {
-          // imageUrl: imageUrlHandler,
           image: imageHandler
         },
       },
@@ -127,8 +110,7 @@ const Write = () => {
       'clean',
       'code-block'
     ];
-    const quillRef = useRef();
-    const [quillText, setQuillText] = useState("");
+
 
     const onHandleText = (value) => {
       setQuillText(value);
@@ -146,7 +128,10 @@ const Write = () => {
     console.log(data);
   };
 
+
   return (
+
+  
     <div className="writePage">
       <Form onSubmit={onSubmit}>
         <div className="dateDiv">
@@ -178,7 +163,6 @@ const Write = () => {
         </div>
       </Form>
     </div>
-    
   );
 };
 
