@@ -5,6 +5,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 
 import org.springframework.http.HttpStatus;
@@ -12,13 +13,23 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.example.demo.model.dao.DiaryMapper;
+import com.example.demo.model.dto.DiaryDto;
+
 @RestController
 @RequestMapping("/board")
 public class BoardController {
+
+	private DiaryMapper dariyMapper;
+
+	public BoardController(DiaryMapper dariyMapper){
+        this.dariyMapper = dariyMapper;
+    }
 
     String UPLOAD_PATH = "C:\\dairyData";
 
@@ -72,7 +83,18 @@ public class BoardController {
 			return new ResponseEntity<Object>(null, HttpStatus.CONFLICT);
 		}
 	}
+	
+		@PostMapping("/saveQuill")
+		public void saveQuill(@RequestBody DiaryDto data){
+			System.out.println("data"+data);
+			 dariyMapper.saveQuill(data);
+			//return ResponseEntity.ok(response);
+		}
 
+		@GetMapping("/getBoard")
+		public List<DiaryDto> getBoard() {
+			return dariyMapper.getBoard();
+		}
     }
 //     public ResponseEntity<Object> uploadTestPOST(MultipartFile[] uploadFile) {
 

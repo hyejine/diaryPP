@@ -43,34 +43,31 @@ const Write = () => {
       const file = input.files;
       const formData = new FormData();
 
-      console.log(file[0].name); 
-      const imageUrl = URL.createObjectURL(file[0]);
-      console.log(imageUrl);
-  //     if(file) { // 파일이 있다면 폼 데이터에 추가 
-  //       formData.append("multipartFiles", file[0]);
-  //   }
+      if(file) { // 파일이 있다면 폼 데이터에 추가 
+        formData.append("multipartFiles", file[0]);
+    }
 
-  //    // file 데이터 담아서 서버에 전달하여 이미지 업로드
-  //    const res = await axios.post('/board/register/imageUpload', formData);
-  //    console.log(res);
+     // file 데이터 담아서 서버에 전달하여 이미지 업로드
+     const res = await axios.post('/board/register/imageUpload', formData);
+     console.log(res);
 
-  //    if(quillRef.current) {
-  //     // 현재 Editor 커서 위치에 서버로부터 전달받은 이미지 불러오는 url을 이용하여 이미지 태그 추가
-  //     const index = (quillRef.current.getEditor().getSelection()).index;
+     if(quillRef.current) {
+      // 현재 Editor 커서 위치에 서버로부터 전달받은 이미지 불러오는 url을 이용하여 이미지 태그 추가
+      const index = (quillRef.current.getEditor().getSelection()).index;
 
-  //     console.log(quillRef.current.getEditor().getSelection());
-  //     console.log(index);
+      console.log(quillRef.current.getEditor().getSelection());
+      console.log(index);
 
-  //     const quillEditor = quillRef.current.getEditor();
-  //     console.log(quillEditor);
+      const quillEditor = quillRef.current.getEditor();
+      console.log(quillEditor);
 
-  //     quillEditor.setSelection(index, 1);
+      quillEditor.setSelection(index, 1);
 
-  //     quillEditor.clipboard.dangerouslyPasteHTML(
-  //         index,
-  //         `<img src=${res.data} alt=${'alt text'} />`
-  //     );
-  // }
+      quillEditor.clipboard.dangerouslyPasteHTML(
+          index,
+          `<img src=${res.data} alt=${'alt text'} />`
+      );
+  }
       // axios
       //   .post("/board/register/imageUpload", formData, {
       //     headers: {
@@ -149,13 +146,17 @@ const Write = () => {
   const onSubmit = (value) => {
     value.preventDefault();
     const data = {
-      email: "",
+      email: "f",
       title: value.target.title.value,
       content: quillText,
-      dairyDate: selectDate,
-      emoji: emojiImage,
+      diaryDate: selectDate,
+      emojiImageId: emojiId,
+      diaryCreateWrite:"efe"
     };
     console.log(data);
+    axios.post("/board/saveQuill",data)
+    .then((res)=> console.log(res))
+    .catch((err)=>console.log(err))
   };
 
   return (

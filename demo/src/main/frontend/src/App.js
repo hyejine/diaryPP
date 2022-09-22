@@ -8,6 +8,7 @@ import EmojiPurchase from "./components/emoji/EmojiPurchase";
 import MainLayout from "./components/layout/MainLayout";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './main.scss';
+import Edit from "./components/board/Edit";
 
 function App(props) {
   const currnetUser = useSelector(state => state.user);
@@ -22,6 +23,8 @@ function App(props) {
       <Route path="/login/regist" element={<Regist/>}/>  
       <Route path="/board/write" element={<Write/>}/>
       <Route path="/emoji" element={<EmojiPurchase/>}/> 
+      <Route path="/board/edit" element={<Edit/>}/> 
+
      </Route>
       </Routes>
     </BrowserRouter>
