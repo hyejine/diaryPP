@@ -25,7 +25,7 @@ import com.example.demo.model.dto.DiaryDto;
 @RequestMapping("/board")
 public class BoardController {
 
-	private DiaryMapper dariyMapper;
+	private final DiaryMapper dariyMapper;
 
 	public BoardController(DiaryMapper dariyMapper){
         this.dariyMapper = dariyMapper;
@@ -93,6 +93,8 @@ public class BoardController {
 
 		@GetMapping("/getBoard")
 		public List<DiaryDto> getBoard() {
+			System.out.println(dariyMapper.getBoard().toString());
+
 			return dariyMapper.getBoard();
 		}
     }

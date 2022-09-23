@@ -10,15 +10,16 @@ public class DiaryDto {
 
     public Integer id;
 
-    public String diaryCreateWrite;
+    public String diary_create_write;
 
-    public String diaryDate;
+    public String diary_date;
 
-    public String email;
+    public String user_email;
 
-    public String title;
+    public String diary_title;
 
-    public String content;
+    public String diary_content;
 
-    public String emojiImageId;
+    public String emoji_image_id;
+    
 }

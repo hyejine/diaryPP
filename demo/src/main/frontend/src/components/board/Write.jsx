@@ -9,6 +9,7 @@ import { localDateRenderer } from "../../utils/index";
 import "./write.scss";
 import { Form, Button } from "react-bootstrap";
 import CustomToolbar from "../../utils/CustomToolbar";
+import CommonModal from "../common/CommonModal";
 
 const Write = () => {
   const location = useLocation();
@@ -143,22 +144,25 @@ const Write = () => {
     setQuillText(value);
   };
 
+  const [modalActive, setModalActive] = useState(false);
   const onSubmit = (value) => {
     value.preventDefault();
     const data = {
-      email: "f",
-      title: value.target.title.value,
-      content: quillText,
-      diaryDate: selectDate,
-      emojiImageId: emojiId,
-      diaryCreateWrite:"efe"
+      user_email: "f",
+      diary_title: value.target.title.value,
+      diary_content: quillText,
+      diary_date: selectDate,
+      emoji_image_id: emojiId,
+      diary_create_write:"efe"
     };
     console.log(data);
     axios.post("/board/saveQuill",data)
     .then((res)=> console.log(res))
     .catch((err)=>console.log(err))
-  };
 
+    setModalActive(true);
+  };
+console.log(modalActive);
   return (
     <div className="writePage">
       <Form onSubmit={onSubmit}>
@@ -195,6 +199,12 @@ const Write = () => {
           </Button>
         </div>
       </Form>
+
+      <CommonModal 
+      modalActive={modalActive} 
+      setModalActive={setModalActive}
+      />
+      
     </div>
   );
 };

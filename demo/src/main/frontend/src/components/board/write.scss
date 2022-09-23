@@ -29,4 +29,7 @@
     border-radius: 20px;
     background-color: #ffc700;
     }
+    .btn-primary {
+        --bs-btn-hover-bg: rgba(240, 188, 0, 0.939);
+    }
 }
