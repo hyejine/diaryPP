@@ -6,15 +6,16 @@ import Write from "./components/board/Write";
 import { useSelector } from "react-redux";
 import EmojiPurchase from "./components/emoji/EmojiPurchase";
 import MainLayout from "./components/layout/MainLayout";
+import BoardLayout from "./components/layout/BoardLayout";
+import Edit from "./components/board/Edit";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './main.scss';
-import Edit from "./components/board/Edit";
 
 function App(props) {
   const currnetUser = useSelector(state => state.user);
 
   return (
-    <div>
+    <div className="allPage">
     <BrowserRouter>
       <Routes>
       <Route element={<MainLayout />}>
@@ -23,9 +24,10 @@ function App(props) {
       <Route path="/login/regist" element={<Regist/>}/>  
       <Route path="/board/write" element={<Write/>}/>
       <Route path="/emoji" element={<EmojiPurchase/>}/> 
-      <Route path="/board/edit" element={<Edit/>}/> 
-
      </Route>
+     <Route element={<BoardLayout />}>
+      <Route path="/board/edit" element={<Edit/>}/> 
+      </Route>
       </Routes>
     </BrowserRouter>
     </div>

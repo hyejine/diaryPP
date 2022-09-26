@@ -164,7 +164,7 @@ const Write = () => {
   };
 console.log(modalActive);
   return (
-    <div className="writePage">
+    <div className="boardPage">
       <Form onSubmit={onSubmit}>
         <div className="dateDiv">
           <span className="date">{localDateRenderer(selectDate)}</span>

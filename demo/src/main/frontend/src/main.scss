@@ -29,7 +29,7 @@ footer, header, hgroup, menu, nav, section {
 	display: block;
 }
 body {
-	line-height: 1;
+  line-height: 1;
   background-color: #FFE99D;
 }
 ol, ul {
@@ -46,6 +46,20 @@ q:before, q:after {
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
+}
+.allPage{
+	background-color: #FFE99D;
+}
+.boardScroll::-webkit-scrollbar {
+    width: 12px;  /* 스크롤바의 너비 */
+}
+.boardScroll::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	background: #f8c20f; /* 스크롤바의 색상 */
+}
+.boardScroll::-webkit-scrollbar-track {
+	border-radius: 10px;
+    background: rgba(131, 95, 3, 0.1); /*스크롤바 뒷 배경 색상*/
 }
 
 .main{
