@@ -2,6 +2,7 @@ package com.example.demo.model.dto;
 
 import java.sql.Blob;
 import java.util.Date;
+import java.util.List;
 
 import lombok.Data;
 
@@ -20,6 +21,6 @@ public class DiaryDto {
 
     public String diary_content;
 
-    public String emoji_image_id;
+    public List<EmojiImageDto> emoji_image_id;
     
 }
