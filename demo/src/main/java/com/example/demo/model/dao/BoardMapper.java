@@ -10,7 +10,7 @@ import com.example.demo.model.dto.DiaryDto;
 @Repository
 @Mapper
 public interface BoardMapper {
-    public DiaryDto saveQuill(DiaryDto data);
+    public int saveQuill(DiaryDto data);
 
     public List<DiaryDto> getBoard();
 

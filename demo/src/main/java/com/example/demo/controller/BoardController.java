@@ -86,9 +86,11 @@ public class BoardController {
 	}
 	
 		@PostMapping("/saveQuill")
-		public DiaryDto saveQuill(@RequestBody DiaryDto data){
+		public Integer saveQuill(@RequestBody DiaryDto data){
 			System.out.println("data is ... " + data);
-			return boardMapper.saveQuill(data);
+			int success = boardMapper.saveQuill(data);
+			// return boardMapper.saveQuill(data);
+			return success;
 		}
 
 		@GetMapping("/getBoard")
