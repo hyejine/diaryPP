@@ -9,9 +9,10 @@ import com.example.demo.model.dto.DiaryDto;
 
 @Repository
 @Mapper
-public interface DiaryMapper {
-    public void saveQuill(DiaryDto data);
+public interface BoardMapper {
+    public DiaryDto saveQuill(DiaryDto data);
 
     public List<DiaryDto> getBoard();
 
+    public DiaryDto deleteBoard(Long id);
 }

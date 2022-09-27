@@ -9,18 +9,20 @@ import lombok.Data;
 @Data
 public class DiaryDto {
 
-    public Integer id;
+    private Integer id;
 
-    public String diary_create_write;
+    private String diary_create_write;
 
-    public String diary_date;
+    private String diary_date;
 
-    public String user_email;
+    private String user_email;
 
-    public String diary_title;
+    private String diary_title;
 
-    public String diary_content;
+    private String diary_content;
 
-    public List<EmojiImageDto> emoji_image_id;
+    private String emoji_image_id;
+    
+    // private List<EmojiImageDto> emoji_image_id;
     
 }

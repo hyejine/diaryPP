@@ -2,6 +2,8 @@ import React from "react";
 import { useState, useEffect, useMemo, useRef } from "react";
 import { Modal, Button } from "react-bootstrap";
 import { localDateRenderer } from "../../utils/index";
+import domtoimage from 'dom-to-image';
+import { saveAs } from 'file-saver';
 import axios from "axios";
 import "./write.scss";
 
@@ -18,17 +20,23 @@ const Edit = () => {
       .catch((err) => console.log(err));
   }, []);
 
-  const onDelete =(value)=>{
-    console.log(value);
-    axios
-      .get(`/board/deleteBoard`)
+  const onDelete =(id)=>{
+    console.log(id);
+    axios.delete(`/board/deleteBoard/${id}`)
       .then((res) => {
         console.log(res.data);
-        setBoard(res.data);
       })
       .catch((err) => console.log(err));
   }
 
+  const onDownload = () =>{
+    domtoimage
+    .toBlob(document.querySelector('.boardPage'), 
+    )
+    .then((blob) => {
+      saveAs(blob, 'diary.png');
+    });
+  }
   return (
     <div className="boardPage">
       <div className="boardScroll">
@@ -48,7 +56,7 @@ const Edit = () => {
           <div className="sendButtonWrap2">
           <Button className="sendButton" >수정</Button>
           <Button className="sendButton" onClick={()=>onDelete(value.id)}>삭제</Button>
-          <Button className="sendButton">내보내기</Button>
+          <Button className="sendButton" onClick={onDownload}>캡쳐하기</Button>
           </div>
 
         </div>

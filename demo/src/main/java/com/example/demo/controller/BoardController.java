@@ -10,6 +10,7 @@ import java.util.Random;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,17 +19,17 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.example.demo.model.dao.DiaryMapper;
+import com.example.demo.model.dao.BoardMapper;
 import com.example.demo.model.dto.DiaryDto;
 
 @RestController
 @RequestMapping("/board")
 public class BoardController {
 
-	private final DiaryMapper dariyMapper;
+	private final BoardMapper boardMapper;
 
-	public BoardController(DiaryMapper dariyMapper){
-        this.dariyMapper = dariyMapper;
+	public BoardController(BoardMapper boardMapper){
+        this.boardMapper = boardMapper;
     }
 
     String UPLOAD_PATH = "C:\\dairyData";
@@ -85,17 +86,21 @@ public class BoardController {
 	}
 	
 		@PostMapping("/saveQuill")
-		public void saveQuill(@RequestBody DiaryDto data){
-			System.out.println("data"+data);
-			 dariyMapper.saveQuill(data);
-			//return ResponseEntity.ok(response);
+		public DiaryDto saveQuill(@RequestBody DiaryDto data){
+			System.out.println("data is ... " + data);
+			return boardMapper.saveQuill(data);
 		}
 
 		@GetMapping("/getBoard")
 		public List<DiaryDto> getBoard() {
-			System.out.println(dariyMapper.getBoard().toString());
+			// System.out.println(boardMapper.getBoard().toString());
 
-			return dariyMapper.getBoard();
+			return boardMapper.getBoard();
+		}
+
+		@DeleteMapping("/deleteBoard/{id}")
+		public DiaryDto deleteBoard(@PathVariable("id") Long id){
+			return boardMapper.deleteBoard(id);
 		}
     }
 //     public ResponseEntity<Object> uploadTestPOST(MultipartFile[] uploadFile) {

@@ -148,7 +148,7 @@ const Write = () => {
   const onSubmit = (value) => {
     value.preventDefault();
     const data = {
-      user_email: "f",
+      user_email: "e",
       diary_title: value.target.title.value,
       diary_content: quillText,
       diary_date: selectDate,
@@ -162,7 +162,7 @@ const Write = () => {
 
     setModalActive(true);
   };
-console.log(modalActive);
+
   return (
     <div className="boardPage">
       <Form onSubmit={onSubmit}>
