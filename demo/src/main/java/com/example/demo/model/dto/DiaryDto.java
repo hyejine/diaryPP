@@ -11,7 +11,7 @@ public class DiaryDto {
 
     private Integer id;
 
-    private String diary_create_write;
+    private Date diary_create_write;
 
     private String diary_date;
 
@@ -22,7 +22,5 @@ public class DiaryDto {
     private String diary_content;
 
     private String emoji_image_id;
-    
     // private List<EmojiImageDto> emoji_image_id;
-    
 }

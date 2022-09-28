@@ -153,7 +153,6 @@ const Write = () => {
       diary_content: quillText,
       diary_date: selectDate,
       emoji_image_id: emojiId,
-      diary_create_write:"efe"
     };
     console.log(data);
     axios.post("/board/saveQuill",data)

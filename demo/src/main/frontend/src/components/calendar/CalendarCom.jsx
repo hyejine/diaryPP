@@ -4,6 +4,8 @@ import interactionPlugin from "@fullcalendar/interaction"; // for selectable
 import dayGridPlugin from "@fullcalendar/daygrid"; // a plugin!
 import "./calendar.scss";
 import SelectEmojiModal from "./SelectEmojiModal";
+import { useEffect } from "react";
+import axios from "axios";
 
 const CalendarCom = () => {
   const [modalOpen, setModalOpen] = useState(false);
@@ -15,6 +17,14 @@ const CalendarCom = () => {
     setModalOpen(true);
   };
 
+  const [test, setTest] = useState();
+
+  useEffect(()=>{
+    axios.get("board/getBoard")
+    .then((res) => {console.log(res.data)
+      setTest(res.data);})
+    .catch((err) => console.log(err));
+},[])
   return (
     <div id="calendarPage">
       <FullCalendar
@@ -24,6 +34,12 @@ const CalendarCom = () => {
         initialView="dayGridMonth"
         height={700}
         dateClick={onDateClick}
+        events ={test?.map((value)=>(
+          {
+            title : value.diary_title +value.id,
+            start : value.diary_date
+          }
+        ))}
         // eventClick={handleEventClick}
         // select={handleDateSelect}
         // weekends={true}

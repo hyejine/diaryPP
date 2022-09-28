@@ -21,15 +21,19 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.model.dao.BoardMapper;
 import com.example.demo.model.dto.DiaryDto;
+import com.example.demo.service.BoardService;
 
 @RestController
 @RequestMapping("/board")
 public class BoardController {
 
 	private final BoardMapper boardMapper;
+	private final BoardService boardService;
 
-	public BoardController(BoardMapper boardMapper){
+	public BoardController(BoardMapper boardMapper, BoardService boardService){
         this.boardMapper = boardMapper;
+        this.boardService = boardService;
+
     }
 
     String UPLOAD_PATH = "C:\\dairyData";
@@ -88,8 +92,7 @@ public class BoardController {
 		@PostMapping("/saveQuill")
 		public Integer saveQuill(@RequestBody DiaryDto data){
 			System.out.println("data is ... " + data);
-			int success = boardMapper.saveQuill(data);
-			// return boardMapper.saveQuill(data);
+			int success = boardService.saveQuill(data);
 			return success;
 		}
 
@@ -97,7 +100,7 @@ public class BoardController {
 		public List<DiaryDto> getBoard() {
 			// System.out.println(boardMapper.getBoard().toString());
 
-			return boardMapper.getBoard();
+			return boardService.getBoard();
 		}
 
 		@DeleteMapping("/deleteBoard/{id}")

@@ -3,27 +3,33 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.example.demo.model.dao.BoardMapper">
   
-  <insert id="saveQuill" >
-    INSERT INTO diary_table(diary_title, user_email, diary_content, diary_date, emoji_image_id, diary_create_write) VALUES ( #{diary_title}, #{user_email}, #{diary_content}, #{diary_date}, #{emoji_image_id}, #{diary_create_write})
+    <!-- <resultMap id="DiaryResult" type="DiaryDto">
+      <result property="id" column="id"/>
+      <result property="diary_create_write" column="diary_create_write"/>
+      <result property="diary_date" column="diary_date"/>
+      <result property="user_email" column="user_email"/>
+      <result property="diary_title" column="diary_title"/>
+      <result property="diary_content" column="diary_content"/>
+      <collection property="emoji_image_id" column="emoji_image_id" javaType="java.util.ArrayList" ofType="EmojiImageDto" select="getEmojiImage"/>
+    </resultMap> -->
+
+  <insert id="saveQuill"  parameterType="DiaryDto" useGeneratedKeys="true" keyProperty="id">
+    INSERT 
+    INTO diary_table(diary_title, user_email, diary_content, diary_date, emoji_image_id, diary_create_write) 
+    VALUES (#{diary_title}, #{user_email}, #{diary_content}, #{diary_date}, #{emoji_image_id}, NOW())
   </insert>
 
-  <resultMap id="DiaryResult" type="DiaryDto">
-    <result property="id" column="id"/>
-    <result property="diary_create_write" column="diary_create_write"/>
-    <result property="diary_date" column="diary_date"/>
-    <result property="user_email" column="user_email"/>
-    <result property="diary_title" column="diary_title"/>
-    <result property="diary_content" column="diary_content"/>
-    <collection property="emoji_image_id" column="emoji_image_id" javaType="java.util.ArrayList" ofType="EmojiImageDto" select="getEmojiImage"/>
-</resultMap>
+  <select id="getBoard" resultType="DiaryDto">
+	  SELECT * FROM diary_table
+  </select> 
 
-  <select id="getBoard" resultMap="DiaryResult">
-	SELECT * FROM diary_table
+  <!-- <select id="getBoard" resultMap="DiaryResult">
+	  SELECT * FROM diary_table
   </select> 
 
   <select id="getEmojiImage" resultType="EmojiImageDto">
   SELECT * FROM emoji_image_table where id=#{emoji_image_id}
-  </select>
+  </select> -->
 
   <delete id="deleteBoard">
     DELETE FROM diary_table WHERE id = #{id};
