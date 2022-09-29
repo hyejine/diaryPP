@@ -29,7 +29,7 @@ const CalendarCom = () => {
   }
 
   const onDateClick = (info) => {
-    console.log(info);
+    console.log(isDate);
     setSelectDate(info.date);
     setModalOpen(true);
   };
@@ -37,6 +37,7 @@ const CalendarCom = () => {
   useEffect(()=>{
     axios.get("board/getBoard")
     .then((res) => {console.log(res.data)
+      setIsDate(res.data.diary_date);
       setCalerdarData(res.data);})
     .catch((err) => console.log(err));
 },[])
