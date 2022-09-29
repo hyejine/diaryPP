@@ -3,21 +3,22 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.example.demo.model.dao.BoardMapper">
   
-  <resultMap type="EmojiImageDto" id="EmojiImageDto">
-		<result column="id" property="id" />
-		<result column="emoji_type" property="emoji_type" />
-		<result column="emoji_image" property="emoji_image" />
-	</resultMap>
-
-    <resultMap type="DiaryDto" id="DiaryDto">
+    <resultMap type="DiaryDto" id="diaryJoin">
       <result property="id" column="id"/>
       <result property="diary_create_write" column="diary_create_write"/>
       <result property="diary_date" column="diary_date"/>
       <result property="user_email" column="user_email"/>
       <result property="diary_title" column="diary_title"/>
       <result property="diary_content" column="diary_content"/>
-      <collection property="emoji_image_id" column="emoji_image_id" resultMap="EmojiImageDto"/>
+      <result property="emoji_image_id" column="emoji_image_id"/>
+      <collection property="emojiImageDto" resultMap="emojiImageJoin"/>
     </resultMap>
+    
+    <resultMap type="EmojiImageDto" id="emojiImageJoin">
+		  <result column="id" property="id" />
+		  <result column="emoji_type" property="emoji_type" />
+		  <result column="emoji_image" property="emoji_image" />
+	  </resultMap>
 
   <insert id="saveQuill"  parameterType="DiaryDto" useGeneratedKeys="true" keyProperty="id">
     INSERT 
@@ -25,15 +26,16 @@
     VALUES (#{diary_title}, #{user_email}, #{diary_content}, #{diary_date}, #{emoji_image_id}, NOW())
   </insert>
 
-  <!-- <select id="getBoard" resultMap="DiaryDto" parameterType="DiaryDto">
-	  SELECT e.id, e.emoji_type, e.emoji_image, d.id, d.diary_create_write, d.diary_date, d.user_email,
-    d.diary_title, d.diary_content, d.emoji_image_id FROM diary_table d INNER JOIN emoji_image_table e ON d.emoji_image_id = e.id WHERE d.emoji_image_id = #{id}
-  </select>  -->
-
-  <!-- <select id="getBoard" resultMap="DiaryResult">
-	  SELECT * FROM diary_table
+  <select id="getBoard" resultMap="diaryJoin" parameterType="DiaryDto">
+	  SELECT e.id, e.emoji_type, e.emoji_image, 
+    d.id, d.diary_create_write, d.diary_date, d.user_email, d.diary_title, d.diary_content, d.emoji_image_id 
+    FROM diary_table d, emoji_image_table e WHERE d.emoji_image_id = e.id
   </select> 
-
+  
+ <!-- <select id="getBoard" resultType="DiaryDto">
+	  SELECT * FROM diary_table
+  </select>  -->
+  <!--
   <select id="getEmojiImage" resultType="EmojiImageDto">
   SELECT * FROM emoji_image_table where id=#{emoji_image_id}
   </select> -->

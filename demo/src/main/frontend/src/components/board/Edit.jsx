@@ -58,7 +58,6 @@ const Edit = () => {
           <Button className="sendButton" onClick={()=>onDelete(value.id)}>삭제</Button>
           <Button className="sendButton" onClick={onDownload}>캡쳐하기</Button>
           </div>
-
         </div>
       ))}
       </div>

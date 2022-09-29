@@ -21,6 +21,7 @@ public class DiaryDto {
 
     private String diary_content;
 
-    private EmojiImageDto emoji_image_id;
-    // private List<EmojiImageDto> emoji_image_id;
+    private String emoji_image_id;
+
+    private EmojiImageDto emojiImageDto;
 }
