@@ -15,9 +15,12 @@ const CalendarCom = () => {
   const [calerdarData, setCalerdarData] = useState();
   const [isDate, setIsDate] = useState([]);
 
-  const onLink = () =>{
-
+  const onLink = (calendarId) =>{
+console.log(calendarId.target);
   }
+
+  // input hidden으로 ??? 값 받아오기 
+  //eventInfo. publicId값 한번 받아와 보기 
   const renderEventContent = (eventInfo) =>{
     console.log(selectDate);
     isDate.push(eventInfo.event.startStr);
