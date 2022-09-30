@@ -1,15 +1,12 @@
 package com.example.demo.model.dto;
 
-import java.sql.Blob;
 import java.util.Date;
-import java.util.List;
-
 import lombok.Data;
 
 @Data
 public class DiaryDto {
 
-    private Integer id;
+    private Integer diary_id;
 
     private Date diary_create_write;
 

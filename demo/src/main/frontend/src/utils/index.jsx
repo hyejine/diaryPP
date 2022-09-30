@@ -5,6 +5,11 @@ import 'dayjs/locale/ko'; // 한국어 가져오기
 // dayjs.locale('ko');
 
 export const DateFormat = 'YYYY년 MM월 DD일 ddd요일';
+export const DiaryDateFormat = 'YYYY-MM-DDT00:00:00+09:00'
 export const localDateRenderer = (v) => {
     return dayjs(v).locale('ko').format(DateFormat);
+};
+
+export const diaryDateRenderer = (v) => {
+    return dayjs(v).locale('ko').format(DiaryDateFormat);
 };

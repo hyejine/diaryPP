@@ -20,7 +20,7 @@ public class BoardService implements BoardMapper{
     @Override
     public int saveQuill(DiaryDto data) {
         boardMapper.saveQuill(data);
-        return data.getId();
+        return data.getDiary_id();
     }
 
     @Override

@@ -6,6 +6,7 @@ import "./calendar.scss";
 import { Link } from "react-router-dom";
 import SelectEmojiModal from "./SelectEmojiModal";
 import { useEffect } from "react";
+import { diaryDateRenderer } from "../../utils/index";
 import axios from "axios";
 
 const CalendarCom = () => {
@@ -14,31 +15,46 @@ const CalendarCom = () => {
   const [calerdarData, setCalerdarData] = useState();
   const [isDate, setIsDate] = useState([]);
 
+  const onLink = () =>{
+
+  }
   const renderEventContent = (eventInfo) =>{
+    console.log(selectDate);
+    isDate.push(eventInfo.event.startStr);
     const result = eventInfo.event.title.length < 8 ? eventInfo.event.title : eventInfo.event.title.substr(0,8)+'...';
     return(
-      <div id="calendarPage">
-      <Link to="/board/edit">
-      <div className="calendarInner" >
+      <div id="calendarPage" onClick={onLink}>
+        {/* state={{date:}} */}
+      {/* <Link to="/board/edit" > */}
+      <span className="calendarInner" >
       <img className="calendarEmoji" src ={eventInfo.event.groupId} alt=""/>
       <span className="calendarTitle">{result}</span>
-      </div>
-      </Link>
+      </span>
+      {/* </Link> */}
       </div>
     )
   }
 
+  const set = new Set(isDate);
+  const uniqueArr = [...set];
+
   const onDateClick = (info) => {
-    console.log(isDate);
-    setSelectDate(info.date);
-    setModalOpen(true);
+    const test = diaryDateRenderer(info.date);
+
+    if (uniqueArr.includes(test)){
+      setModalOpen(false);
+    }else {
+      setSelectDate(info.date);
+      setModalOpen(true); 
+    }
   };
 
   useEffect(()=>{
     axios.get("board/getBoard")
-    .then((res) => {console.log(res.data)
-      setIsDate(res.data.diary_date);
-      setCalerdarData(res.data);})
+    .then((res) => {
+      console.log(res.data);
+      setCalerdarData(res.data);
+    })
     .catch((err) => console.log(err));
 },[])
 
@@ -56,6 +72,7 @@ const CalendarCom = () => {
             title : value.diary_title,
             start : value.diary_date,
             groupId : value.emojiImageDto.emoji_image,
+            publicId : value.diary_id
           }
         ))}
         // eventClick={handleEventClick}

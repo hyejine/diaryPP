@@ -4,9 +4,8 @@
   padding: 0px ;
   border-radius: 20px;
   border: none;
-}
-// 캘린더 내용 
 
+  // 캘린더 내용 
 .fc-daygrid-event-harness{
   text-decoration-line: none;
   cursor: pointer;
@@ -19,6 +18,7 @@
 }
 .calendarTitle{
   text-decoration-line: none;
+}
 }
 // 이모지 선택 모달
 #selectEmojiModal {
