@@ -14,23 +14,24 @@ const Edit = () => {
   const [board, setBoard] = useState();
 
   console.log(calendarId);
-  // const element = useRef<HTMLDivElement>(null);
-  const element=useRef([]);
-  console.log(element);
-
-  const addToRefs=(el)=>{
-    console.log(el);
-  }
-
+  const observed = useRef(null);
+  
   useEffect(() => {
     axios
-      .get(`/board/getBoard`)
-      .then((res) => {
-        setBoard(res.data);
-      })
-      .catch((err) => console.log(err));
+    .get(`/board/getBoard`)
+    .then((res) => {
+      setBoard(res.data);
+    })
+    .catch((err) => console.log(err));
   }, []);
 
+  // useEffect(() => { 
+  //   if(myRef.current != null){
+  //     console.log("test");
+  //     myRef?.current?.scrollIntoView({ behavior: "smooth" });
+  //   }
+  // },[calendarId]);
+  
   const onDelete =(id)=>{
     console.log(id);
     axios.delete(`/board/deleteBoard/${id}`)
@@ -48,13 +49,26 @@ const Edit = () => {
       saveAs(blob, 'diary.png');
     });
   }
+// const onTest = ()=>{
+//   console.log(myRef.current);
+//   myRef.current.scrollIntoView({ behavior: 'smooth' });
+// }
+
+useEffect(() => {
+  if(observed.current){
+    console.log(observed.current);
+
+  }
+}, []);
+
+console.log(observed.current);
 
   return (
     <div className="boardPage">
       <div className="boardScroll">
       <div >
       {board?.map((value) => (
-        <div className="editPage"  key ={value.diary_id} ref={addToRefs(value.diary_id)}>
+        <div className="editPage"  key ={value.diary_id} ref={observed}>
           <div className="dateDiv">
             <span className="date"> {localDateRenderer(value.diary_date)}</span>
             <span>
