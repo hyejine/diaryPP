@@ -15,25 +15,18 @@ const CalendarCom = () => {
   const [calerdarData, setCalerdarData] = useState();
   const [isDate, setIsDate] = useState([]);
 
-  const onLink = (calendarId) =>{
-console.log(calendarId.target);
-  }
 
-  // input hidden으로 ??? 값 받아오기 
-  //eventInfo. publicId값 한번 받아와 보기 
   const renderEventContent = (eventInfo) =>{
-    console.log(selectDate);
     isDate.push(eventInfo.event.startStr);
     const result = eventInfo.event.title.length < 8 ? eventInfo.event.title : eventInfo.event.title.substr(0,8)+'...';
     return(
-      <div id="calendarPage" onClick={onLink}>
-        {/* state={{date:}} */}
-      {/* <Link to="/board/edit" > */}
+      <div id="calendarPage" className="test">
+      <Link to="/board/edit" state={{calendarId: eventInfo.event._def.extendedProps.publicId}} >
       <span className="calendarInner" >
       <img className="calendarEmoji" src ={eventInfo.event.groupId} alt=""/>
       <span className="calendarTitle">{result}</span>
       </span>
-      {/* </Link> */}
+      </Link>
       </div>
     )
   }
@@ -55,7 +48,6 @@ console.log(calendarId.target);
   useEffect(()=>{
     axios.get("board/getBoard")
     .then((res) => {
-      console.log(res.data);
       setCalerdarData(res.data);
     })
     .catch((err) => console.log(err));

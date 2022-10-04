@@ -1,14 +1,12 @@
 import React from "react";
 import { useState, useEffect, useMemo, useRef } from "react";
 import axios from "axios";
-import { RangeStatic } from "quill";
 import ReactQuill from "react-quill";
 import { useLocation } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
 import { localDateRenderer } from "../../utils/index";
 import "./write.scss";
 import { Form, Button } from "react-bootstrap";
-import CustomToolbar from "../../utils/CustomToolbar";
 import CommonModal from "../common/CommonModal";
 
 const Write = () => {

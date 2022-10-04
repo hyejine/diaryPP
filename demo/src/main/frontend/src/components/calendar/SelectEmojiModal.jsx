@@ -18,7 +18,7 @@ const SelectEmojiModal = (props) => {
 
   useEffect(()=>{
     axios.get(`/emoji/${test}`)
-    .then(res => {console.log(res); setSelectEmoji(res.data)})
+    .then(res => {setSelectEmoji(res.data)})
     .catch(err => console.log(err))
   },[])
 
