@@ -1,6 +1,6 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { localDateRenderer } from "../../utils/index";
 import domtoimage from 'dom-to-image';
@@ -12,7 +12,7 @@ const Edit = () => {
   const location = useLocation();
   const calendarId = location.state.calendarId;
   const [board, setBoard] = useState();
-
+  const navigate = useNavigate();
   const refs = useRef([]);
 
   useEffect(() => {
@@ -64,7 +64,7 @@ const Edit = () => {
           </div>
           <div className="editContent" dangerouslySetInnerHTML={{ __html: value.diary_content }} />
           <div className="sendButtonWrap2">
-          <Button className="sendButton" onClick={()=>onEdit(value.diary_id)}>수정</Button>
+          <Button className="sendButton" onClick={()=> navigate(`/border/edit/${value.diary_id}`)}>수정</Button>
           <Button className="sendButton" onClick={()=>onDelete(value.diary_id)}>삭제</Button>
           <Button className="sendButton" onClick={onDownload}>캡쳐하기</Button>
           </div>
