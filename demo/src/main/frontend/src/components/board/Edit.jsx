@@ -1,7 +1,7 @@
 import React from "react";
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
-import { Modal, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { localDateRenderer } from "../../utils/index";
 import domtoimage from 'dom-to-image';
 import { saveAs } from 'file-saver';
@@ -13,24 +13,17 @@ const Edit = () => {
   const calendarId = location.state.calendarId;
   const [board, setBoard] = useState();
 
-  console.log(calendarId);
-  const observed = useRef(null);
-  
+  const refs = useRef([]);
+
   useEffect(() => {
     axios
-    .get(`/board/getBoard`)
+    .get(`/board/getMonthBoard`)
     .then((res) => {
       setBoard(res.data);
+      refs.current[calendarId].scrollIntoView({ block: 'center' });
     })
     .catch((err) => console.log(err));
   }, []);
-
-  // useEffect(() => { 
-  //   if(myRef.current != null){
-  //     console.log("test");
-  //     myRef?.current?.scrollIntoView({ behavior: "smooth" });
-  //   }
-  // },[calendarId]);
   
   const onDelete =(id)=>{
     console.log(id);
@@ -41,6 +34,10 @@ const Edit = () => {
       .catch((err) => console.log(err));
   }
 
+  const onEdit =(id)=>{
+    console.log(id);
+  }
+
   const onDownload = () =>{
     domtoimage
     .toBlob(document.querySelector('.boardPage'), 
@@ -49,26 +46,13 @@ const Edit = () => {
       saveAs(blob, 'diary.png');
     });
   }
-// const onTest = ()=>{
-//   console.log(myRef.current);
-//   myRef.current.scrollIntoView({ behavior: 'smooth' });
-// }
-
-useEffect(() => {
-  if(observed.current){
-    console.log(observed.current);
-
-  }
-}, []);
-
-console.log(observed.current);
 
   return (
     <div className="boardPage">
       <div className="boardScroll">
-      <div >
+      <div>
       {board?.map((value) => (
-        <div className="editPage"  key ={value.diary_id} ref={observed}>
+        <div className="editPage"  key ={value.diary_id} ref={(el) => (refs.current[value.diary_id] = el) }>
           <div className="dateDiv">
             <span className="date"> {localDateRenderer(value.diary_date)}</span>
             <span>
@@ -80,8 +64,8 @@ console.log(observed.current);
           </div>
           <div className="editContent" dangerouslySetInnerHTML={{ __html: value.diary_content }} />
           <div className="sendButtonWrap2">
-          <Button className="sendButton" >수정</Button>
-          <Button className="sendButton" onClick={()=>onDelete(value.id)}>삭제</Button>
+          <Button className="sendButton" onClick={()=>onEdit(value.diary_id)}>수정</Button>
+          <Button className="sendButton" onClick={()=>onDelete(value.diary_id)}>삭제</Button>
           <Button className="sendButton" onClick={onDownload}>캡쳐하기</Button>
           </div>
         </div>

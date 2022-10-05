@@ -101,6 +101,13 @@ public class BoardController {
 			// System.out.println(boardMapper.getBoard().toString());
 
 			return boardService.getBoard();
+		} 
+
+		@GetMapping("/getMonthBoard")
+		public List<DiaryDto> getMonthBoard() {
+			// System.out.println(boardMapper.getBoard().toString());
+
+			return boardService.getMonthBoard();
 		}
 
 		@DeleteMapping("/deleteBoard/{id}")

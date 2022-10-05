@@ -25,8 +25,14 @@ public class BoardService implements BoardMapper{
 
     @Override
     public List<DiaryDto> getBoard() {
-        // pk 
+        
         return boardMapper.getBoard();
+    } 
+
+    @Override
+    public List<DiaryDto> getMonthBoard() {
+        
+        return boardMapper.getMonthBoard();
     }
 
     @Override
