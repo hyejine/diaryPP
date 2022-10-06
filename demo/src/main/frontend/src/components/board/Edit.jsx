@@ -4,12 +4,15 @@ import { useParams } from "react-router-dom";
 import ReactQuill from "react-quill";
 import { Form, Button } from "react-bootstrap";
 import { localDateRenderer } from "../../utils/index";
+import SelectEmojiModal from "../calendar/SelectEmojiModal"
 import axios from "axios";
 
 const Edit = () => {
   const { diary_id } = useParams();
   const [diaryData, setDiaryData] = useState();
-
+  const [modalOpen, setModalOpen] = useState(); 
+  const [selectEmoji, setSelectEmoji] = useState();
+  
   useEffect(() => {
       axios
       .get(`/board/getBoard/${diary_id}`)
@@ -116,8 +119,10 @@ console.log(diaryData);
   };
 
   const onChangeEmoji = () =>{
+    setModalOpen(true);
 
   }
+  console.log(selectEmoji);
   // const placeholder = dangerouslySetInnerHTML={{ __html: diaryData.diary_content }};
   return (
     <div className="boardPage">
@@ -127,7 +132,7 @@ console.log(diaryData);
         <div className="dateDiv">
           <span className="date">{localDateRenderer(diaryData?.diary_date)}</span>
           <span>
-            <img src={diaryData?.emojiImageDto.emoji_image} className="emojiImage" alt="" onClick={onChangeEmoji}/>
+            <img src={diaryData?.emojiImageDto.emoji_image} className="emojiImage clickEmoji" alt="" onClick={onChangeEmoji}/>
           </span>
         </div>
         <div className="title">
@@ -160,6 +165,12 @@ console.log(diaryData);
       </Form>
       </div>
       </div>
+      <SelectEmojiModal
+      show={modalOpen}
+      clickEmoji = {selectEmoji}
+      setClickEmoji = {setSelectEmoji}
+      onHide={setModalOpen}
+      />
     </div>
   );
 };
