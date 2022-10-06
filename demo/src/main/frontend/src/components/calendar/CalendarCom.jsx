@@ -21,7 +21,7 @@ const CalendarCom = () => {
     const result = eventInfo.event.title.length < 8 ? eventInfo.event.title : eventInfo.event.title.substr(0,8)+'...';
     return(
       <div id="calendarPage" className="test">
-      <Link to="/board/edit" state={{calendarId: eventInfo.event._def.extendedProps.publicId}} >
+      <Link to="/board/read" state={{calendarId: eventInfo.event._def.extendedProps.publicId}} >
       <span className="calendarInner" >
       <img className="calendarEmoji" src ={eventInfo.event.groupId} alt=""/>
       <span className="calendarTitle">{result}</span>
@@ -45,8 +45,10 @@ const CalendarCom = () => {
     }
   };
 
+  const diary_id = -1;
+
   useEffect(()=>{
-    axios.get("board/getBoard")
+    axios.get(`board/getBoard/${diary_id}`)
     .then((res) => {
       setCalerdarData(res.data);
     })

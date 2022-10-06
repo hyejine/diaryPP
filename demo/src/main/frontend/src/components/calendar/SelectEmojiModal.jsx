@@ -30,7 +30,7 @@ const SelectEmojiModal = (props) => {
           <div className="emojiWrap">
           {selectEmoji?.map((value)=>(
             <Link to='/board/write' state={{data: value.id, date: selectDate}}>
-              <img src={value.emoji_image} onClick={()=>onSelectEmoji(value.id)}/>
+              <img src={value.emoji_image} onClick={()=>onSelectEmoji(value.id)} alt="" key ={value.id}/>
             </Link>
           ))}
           </div>

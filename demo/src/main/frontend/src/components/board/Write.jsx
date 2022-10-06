@@ -186,7 +186,6 @@ const Write = () => {
             formats={formats}
             modules={modules}
             placeholder="내용을 입력해주세요.🍀"
-            value={quillText}
             onChange={onHandleText}
           />
         </div>

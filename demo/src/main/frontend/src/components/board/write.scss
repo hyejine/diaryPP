@@ -43,11 +43,12 @@
   .boardScroll {
     margin: 100px 0;
     height: 700px;
-    overflow: auto;
     border-radius: 20px;
     padding-right: 10px;
   }
-
+.autoScroll{
+  overflow: auto;
+}
   .editPage {
     background-color: white;
     border-radius: 20px;

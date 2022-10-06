@@ -23,11 +23,11 @@ public class BoardService implements BoardMapper{
         return data.getDiary_id();
     }
 
-    @Override
-    public List<DiaryDto> getBoard() {
+    // @Override
+    // public List<DiaryDto> getBoard() {
         
-        return boardMapper.getBoard();
-    } 
+    //     return boardMapper.getBoard();
+    // } 
 
     @Override
     public List<DiaryDto> getMonthBoard() {
@@ -40,4 +40,15 @@ public class BoardService implements BoardMapper{
         // TODO Auto-generated method stub
         return null;
     }
+
+    @Override
+    public List<DiaryDto> getBoard(Long id) {
+        return  boardMapper.getBoard(id);
+    }
+
+    // @Override
+    // public List<DiaryDto> getOneDiary(Long id) {
+    //     // TODO Auto-generated method stub
+    //     return null;
+    // }
 }

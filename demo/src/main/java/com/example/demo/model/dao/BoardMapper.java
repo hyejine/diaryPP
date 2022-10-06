@@ -12,9 +12,11 @@ import com.example.demo.model.dto.DiaryDto;
 public interface BoardMapper {
     public int saveQuill(DiaryDto data);
 
-    public List<DiaryDto> getBoard(); 
+    public List<DiaryDto> getBoard(Long id); 
 
     public List<DiaryDto> getMonthBoard();
 
-    public DiaryDto deleteBoard(Long id);
+    public DiaryDto deleteBoard(Long id); 
+
+    // public List<DiaryDto> getOneDiary(Long id);
 }

@@ -3,11 +3,12 @@ import Login from './components/login/Login';
 import Main from "./Main";
 import Regist from "./components/login/regist/Regist";
 import Write from "./components/board/Write";
+import Edit from "./components/board/Edit";
 import { useSelector } from "react-redux";
 import EmojiPurchase from "./components/emoji/EmojiPurchase";
 import MainLayout from "./components/layout/MainLayout";
 import BoardLayout from "./components/layout/BoardLayout";
-import Edit from "./components/board/Edit";
+import Read from "./components/board/Read";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './main.scss';
 
@@ -26,7 +27,8 @@ function App(props) {
       <Route path="/emoji" element={<EmojiPurchase/>}/> 
      </Route>
      <Route element={<BoardLayout />}>
-      <Route path="/board/edit" element={<Edit/>}/> 
+      <Route path="/board/read" element={<Read/>}/> 
+      <Route path="/board/edit/:diary_id" element={<Edit/>}/> 
       </Route>
       </Routes>
     </BrowserRouter>
