@@ -26,6 +26,14 @@
     VALUES (#{diary_title}, #{user_email}, #{diary_content}, #{diary_date}, #{emoji_image_id}, NOW())
   </insert>
 
+  <insert id="updateQuill"  parameterType="DiaryDto">
+    <!-- <selectKey keyColumn="diary_id" keyProperty="DiaryDto" resultType="java.lang.Long" order="AFTER">
+      select * from diary_table where diary_id = #{diary_id}
+    </selectKey> -->
+    UPDATE diary_table
+    SET diary_title = #{diary_title}, diary_content = #{diary_content}, emoji_image_id = #{emoji_image_id} WHERE diary_id = #{diary_id}
+  </insert>
+
   <select id="getBoard" resultMap="diaryJoin" parameterType="DiaryDto">
 	  SELECT e.id, e.emoji_type, e.emoji_image, 
     d.diary_id, d.diary_create_write, d.diary_date, d.user_email, d.diary_title, d.diary_content, d.emoji_image_id 

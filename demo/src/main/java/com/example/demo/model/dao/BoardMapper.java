@@ -12,6 +12,8 @@ import com.example.demo.model.dto.DiaryDto;
 public interface BoardMapper {
     public int saveQuill(DiaryDto data);
 
+    public int updateQuill(DiaryDto data);
+
     public List<DiaryDto> getBoard(Long id); 
 
     public List<DiaryDto> getMonthBoard();

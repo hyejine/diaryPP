@@ -97,9 +97,16 @@ public class BoardController {
 		return success;
 	}
 
+	@PostMapping("/updateQuill")
+	public Integer updateQuill(@RequestBody DiaryDto data) {
+		System.out.println("data is ... " + data);
+		int success = boardService.updateQuill(data);
+		return success;
+	}
+
 	@GetMapping("/getBoard/{diary_id}")
 	public List<DiaryDto> getBoard(@PathVariable("diary_id") Long diaryId) {
-		System.out.println(diaryId);
+		
 		return boardService.getBoard(diaryId);
 	} 
 	// AND diary_id=#{diary_id}

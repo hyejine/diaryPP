@@ -23,6 +23,12 @@ public class BoardService implements BoardMapper{
         return data.getDiary_id();
     }
 
+    @Override
+    public int updateQuill(DiaryDto data) {
+        boardMapper.updateQuill(data);
+        return data.getDiary_id();
+    }
+
     // @Override
     // public List<DiaryDto> getBoard() {
         

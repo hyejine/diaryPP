@@ -7,7 +7,7 @@ import "react-quill/dist/quill.snow.css";
 import { localDateRenderer } from "../../utils/index";
 import "./write.scss";
 import { Form, Button } from "react-bootstrap";
-import CommonModal from "../common/CommonModal";
+import CompletModal from "../common/CommonModal";
 
 const Write = () => {
   const location = useLocation();
@@ -196,9 +196,10 @@ const Write = () => {
         </div>
       </Form>
 
-      <CommonModal 
-      modalActive={modalActive} 
-      setModalActive={setModalActive}
+      <CompletModal 
+      show={modalActive} 
+      hide={()=>setModalActive(false)}
+      contents = "작성하신 글이 등록 되었습니다."
       />
       
     </div>

@@ -4,26 +4,19 @@ import { useParams } from "react-router-dom";
 import ReactQuill from "react-quill";
 import { Form, Button } from "react-bootstrap";
 import { localDateRenderer } from "../../utils/index";
-import SelectEmojiModal from "../calendar/SelectEmojiModal"
+import SelectEmojiModal from "../calendar/SelectEmojiModal";
+import CompletModal from "../common/CommonModal";
 import axios from "axios";
 
 const Edit = () => {
   const { diary_id } = useParams();
   const [diaryData, setDiaryData] = useState();
-  const [modalOpen, setModalOpen] = useState(); 
-  const [selectEmoji, setSelectEmoji] = useState();
-  
-  useEffect(() => {
-      axios
-      .get(`/board/getBoard/${diary_id}`)
-      .then((res) => {
-        setDiaryData(res.data[0]);
-      })
-      .catch((err) => console.log(err));
-  }, []);
-
+  const [modalOpen, setModalOpen] = useState(false); 
+  const [emojiId, setEmojiId] = useState();
   const quillRef = useRef();
   const [quillText, setQuillText] = useState();
+  const [emojiImage, setEmojiImage] =useState();
+  const [modalActive, setModalActive] = useState(false);
 
     // 이미지 업로드 핸들러, modules 설정보다 위에 있어야 정상 적용
     const imageHandler = () => {
@@ -68,6 +61,18 @@ const Edit = () => {
 
   const onSubmit =(value)=>{
     value.preventDefault();
+    console.log(quillText);
+    const data = {
+      diary_id : diary_id,
+      diary_title: value.target.title.value,
+      diary_content: quillText,
+      // diary_date: selectDate,
+      emoji_image_id: emojiId
+    }
+    axios.post("/board/updateQuill",data)
+    .then((res)=> console.log(res))
+    .catch((err)=>console.log(err))
+    setModalActive(true);
   }
 
   const modules = useMemo(() => {
@@ -112,18 +117,48 @@ const Edit = () => {
     "clean",
     "code-block",
   ];
-console.log(diaryData);
+// console.log(diaryData);
   const onHandleText = (value) => {
     setQuillText(value);
-    console.log(quillText);
+    // console.log(quillText);
   };
 
   const onChangeEmoji = () =>{
     setModalOpen(true);
 
   }
-  console.log(selectEmoji);
-  // const placeholder = dangerouslySetInnerHTML={{ __html: diaryData.diary_content }};
+  console.log(modalOpen);
+  useEffect(() => {
+    axios
+    .get(`/board/getBoard/${diary_id}`)
+    .then((res) => {
+      setDiaryData(res.data[0]);
+      console.log(res.data[0].diary_content);
+      setQuillText(res.data[0].diary_content);
+      setEmojiId(res.data[0].emojiImageDto.id);
+    })
+    .catch((err) => console.log(err));
+}, []);
+
+useEffect(()=>{
+  if(emojiId !== undefined) {
+  console.log("??");
+  axios 
+  .get(`/emoji/getEmojiId/${emojiId}`)
+  .then((res) => {
+    console.log(res);
+    setEmojiImage(res.data.emoji_image);
+  })
+  .catch((err) => console.log(err));
+}
+},[emojiId])
+
+// useEffect(()=>{
+// setEmojiId(diaryData?.emojiImageDto.id);
+// },[])
+console.log(diaryData?.diary_date);
+console.log(diaryData?.emojiImageDto.id);
+console.log(emojiId);
   return (
     <div className="boardPage">
       <div className="boardScroll">
@@ -132,7 +167,10 @@ console.log(diaryData);
         <div className="dateDiv">
           <span className="date">{localDateRenderer(diaryData?.diary_date)}</span>
           <span>
+            {emojiImage ?
+            <img src={emojiImage} className="emojiImage clickEmoji" alt="" onClick={onChangeEmoji}/> : 
             <img src={diaryData?.emojiImageDto.emoji_image} className="emojiImage clickEmoji" alt="" onClick={onChangeEmoji}/>
+            } 
           </span>
         </div>
         <div className="title">
@@ -140,7 +178,7 @@ console.log(diaryData);
             <Form.Control
               type="text"
               required
-              placeholder={diaryData?.diary_title}
+              defaultValue={diaryData?.diary_title}
             />
           </Form.Group>
         </div>
@@ -167,9 +205,14 @@ console.log(diaryData);
       </div>
       <SelectEmojiModal
       show={modalOpen}
-      clickEmoji = {selectEmoji}
-      setClickEmoji = {setSelectEmoji}
-      onHide={setModalOpen}
+      clickEmoji = {emojiId}
+      setClickEmoji = {setEmojiId}
+      hide={()=>setModalOpen(false)}
+      />
+      <CompletModal 
+      show={modalActive} 
+      hide={()=>setModalActive(false)}
+      contents = "수정이 완료되었습니다."
       />
     </div>
   );
