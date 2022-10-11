@@ -14,13 +14,9 @@ const SelectEmojiModal = (props) => {
   
   const onSelectEmoji = (id)=>{
     setEmojiId(id);
-    console.log(id);
     setClickEmoji(id);
   }
-console.log(show);
-  // console.log(selectDate);
-  // console.log(clickEmoji);
-  // console.log(setClickEmoji);
+
   useEffect(()=>{
     axios.get(`/emoji/${test}`)
     .then(res => {setSelectEmoji(res.data)})

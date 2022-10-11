@@ -9,8 +9,8 @@ import EmojiPurchase from "./components/emoji/EmojiPurchase";
 import MainLayout from "./components/layout/MainLayout";
 import BoardLayout from "./components/layout/BoardLayout";
 import Read from "./components/board/Read";
+import CalendarCom from "./components/calendar/CalendarCom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import './main.scss';
 
 function App(props) {
   const currnetUser = useSelector(state => state.user);
@@ -20,14 +20,14 @@ function App(props) {
     <BrowserRouter>
       <Routes>
       <Route element={<MainLayout />}>
-      <Route path="/" element={<Main />} currentUser={props?.currnetUser}/>
+      <Route path="/" element={<CalendarCom />} currentUser={props?.currnetUser}/>
       <Route path="/auth/login" element={<Login/>}/>
       <Route path="/login/regist" element={<Regist/>}/>  
       <Route path="/board/write" element={<Write/>}/>
       <Route path="/emoji" element={<EmojiPurchase/>}/> 
      </Route>
      <Route element={<BoardLayout />}>
-      <Route path="/board/read" element={<Read/>}/> 
+      <Route path="/board/read/:diary_id" element={<Read/>}/> 
       <Route path="/board/edit/:diary_id" element={<Edit/>}/> 
       </Route>
       </Routes>

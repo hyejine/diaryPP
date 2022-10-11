@@ -143,6 +143,7 @@ const Write = () => {
   };
 
   const [modalActive, setModalActive] = useState(false);
+  const [diary_id, setDiary_id] = useState(false);
   const onSubmit = (value) => {
     value.preventDefault();
     const data = {
@@ -152,9 +153,11 @@ const Write = () => {
       diary_date: selectDate,
       emoji_image_id: emojiId,
     };
-    console.log(data);
     axios.post("/board/saveQuill",data)
-    .then((res)=> console.log(res))
+    .then((res)=> {
+      console.log(res);
+      setDiary_id(res.data);
+    })
     .catch((err)=>console.log(err))
 
     setModalActive(true);
@@ -197,6 +200,7 @@ const Write = () => {
       </Form>
 
       <CompletModal 
+      diary_id = {diary_id}
       show={modalActive} 
       hide={()=>setModalActive(false)}
       contents = "작성하신 글이 등록 되었습니다."

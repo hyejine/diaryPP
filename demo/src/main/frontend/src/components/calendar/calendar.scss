@@ -8,9 +8,18 @@
   .test{
     background-color: #ffc700;
     cursor: pointer;
-    width: 173px;
+    width: 170px;
   }
   // 캘린더 내용 
+  .btn-primary{
+    --bs-btn-bg:none;
+    --bs-btn-border-color:none;
+    --bs-btn-hover-bg: #debb3cad;
+    --bs-btn-active-bg: #debb3cad;
+    --bs-btn-border-radius: 20px;
+    width: 170px;
+    text-align: left;
+  }
 // .fc-daygrid-event-harness{
 //   text-decoration-line: none;
 //   cursor: pointer;

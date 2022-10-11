@@ -1,0 +1,24 @@
+.header{
+    position: relative;
+    // background-color: azure;
+    display: flex;
+    justify-content: space-between;
+    .logo{
+    //    position:absolute;
+    //    left: 50%;
+    text-align: center;
+    align-items: center;
+    }
+    // .login{
+    //     position:absolute;
+    //     right: 0px;
+    // }
+    // .userName{
+    //     color: #555;
+    //     padding: 0px 5px;
+    // }
+    // .emojiButton{
+    //     color: #555;
+    //     background-color: #71BE4C;
+    // }
+}

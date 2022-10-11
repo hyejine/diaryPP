@@ -1,16 +1,16 @@
 import React from "react";
 import { useState, useEffect, useRef } from "react";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
-import { localDateRenderer } from "../../utils/index";
+import { localDateRenderer, diaryDowunloadRenderer } from "../../utils/index";
 import domtoimage from 'dom-to-image';
+import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
 import axios from "axios";
 import "./write.scss";
 
 const Read = () => {
-  const location = useLocation();
-  const calendarId = location.state.calendarId;
+  const { diary_id } = useParams();
   const [board, setBoard] = useState();
   const navigate = useNavigate();
   const refs = useRef([]);
@@ -20,13 +20,12 @@ const Read = () => {
     .get(`/board/getMonthBoard`)
     .then((res) => {
       setBoard(res.data);
-      refs.current[calendarId].scrollIntoView({ block: 'center' });
+      refs.current[diary_id].scrollIntoView({ block: 'center' });
     })
     .catch((err) => console.log(err));
   }, []);
   
   const onDelete =(id)=>{
-    console.log(id);
     axios.delete(`/board/deleteBoard/${id}`)
       .then((res) => {
         console.log(res.data);
@@ -34,17 +33,24 @@ const Read = () => {
       .catch((err) => console.log(err));
   }
 
-  const onDownload = () =>{
-    domtoimage
-    .toBlob(document.querySelector('.boardPage'), 
-    )
-    .then((blob) => {
-      saveAs(blob, 'diary.png');
-    });
-  }
+    // const onCapture = (diary_date) =>{
+    //   html2canvas(document.getElementById('diaryDownload')).then(canvas=>{
+    //     onSave(canvas.toDataURL('image/png'), `${diaryDowunloadRenderer(diary_date)}Diary.png`)
+    //   });
+    // };
+
+    // const onSave = (uri, filename) => {
+    //   console.log("onSave");
+    //   var link = document.createElement('a');
+    //   document.body.appendChild(link);
+    //   link.href = uri;
+    //   link.download = filename;
+    //   link.click();
+    //   document.body.removeChild(link);
+    // };
 
   return (
-    <div className="boardPage">
+    <div className="boardPage" id="diaryDownload">
       <div className="boardScroll autoScroll">
       <div>
       {board?.map((value) => (
@@ -62,7 +68,7 @@ const Read = () => {
           <div className="sendButtonWrap2">
           <Button className="sendButton" onClick={()=> navigate(`/board/edit/${value.diary_id}`)}>수정</Button>
           <Button className="sendButton" onClick={()=>onDelete(value.diary_id)}>삭제</Button>
-          <Button className="sendButton" onClick={onDownload}>캡쳐하기</Button>
+          {/* <Button className="sendButton" onClick={()=>onCapture(value.diary_date)}>캡쳐하기</Button> */}
           </div>
         </div>
       ))}

@@ -61,7 +61,6 @@ const Edit = () => {
 
   const onSubmit =(value)=>{
     value.preventDefault();
-    console.log(quillText);
     const data = {
       diary_id : diary_id,
       diary_title: value.target.title.value,
@@ -156,9 +155,7 @@ useEffect(()=>{
 // useEffect(()=>{
 // setEmojiId(diaryData?.emojiImageDto.id);
 // },[])
-console.log(diaryData?.diary_date);
-console.log(diaryData?.emojiImageDto.id);
-console.log(emojiId);
+
   return (
     <div className="boardPage">
       <div className="boardScroll">
@@ -210,6 +207,7 @@ console.log(emojiId);
       hide={()=>setModalOpen(false)}
       />
       <CompletModal 
+      diary_id= {diary_id}
       show={modalActive} 
       hide={()=>setModalActive(false)}
       contents = "수정이 완료되었습니다."

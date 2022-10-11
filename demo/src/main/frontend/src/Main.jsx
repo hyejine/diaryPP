@@ -1,18 +1,19 @@
 import React, { useState } from 'react';
 import { useEffect } from 'react';
 import CalendarCom from './components/calendar/CalendarCom';
-import Header from "./components/common/Header";
+import Header from "./components/layout/common/Header";
 import Graph from './components/graph/Graph';
 import { useSelector, useDispatch } from "react-redux";
 import { clearUser } from "./reducer/userSlice";
 
 const Main = (props)=> {
-    const {currnetUser} = props;
-    const [tap, setTap] = useState('캘린더');
+    const {tap} = props;
+    console.log(tap);
+    // const [tap, setTap] = useState('캘린더');
 
-    const onChange =(value)=>{
-        setTap(value.target.innerText);
-    }
+    // const onChange =(value)=>{
+    //     setTap(value.target.innerText);
+    // }
 
     const user = useSelector((state) => state.user);
     const dispatch = useDispatch();
@@ -36,8 +37,8 @@ const Main = (props)=> {
             {/* <div onClick={onChange} className="tab">     
               <span key="1" className='calendarTab'>캘린더</span>
               <span key="2" className='graphTab'>기분 그래프</span>
-            </div> */}
-            <div className='test'>{tap === "캘린더" ? <CalendarCom/> : <Graph/>}</div>
+            </div>
+            <div className='test'>{tap === "캘린더" ? <CalendarCom/> : <Graph/>}</div> */}
           </div>
         );
    
