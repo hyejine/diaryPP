@@ -90,7 +90,7 @@ const CalendarCom = () => {
       <SelectEmojiModal
       show={modalOpen}
       selectDate = {selectDate}
-      onHide={() => setModalOpen(false)}
+      hide={() => setModalOpen(false)}
       />
     </div>
   );

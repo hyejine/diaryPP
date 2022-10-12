@@ -155,6 +155,7 @@ useEffect(()=>{
 // useEffect(()=>{
 // setEmojiId(diaryData?.emojiImageDto.id);
 // },[])
+console.log(emojiId);
 
   return (
     <div className="boardPage">

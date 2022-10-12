@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Header from "./common/Header";
 import CalendarCom from "../calendar/CalendarCom";
-import Graph from "../graph/Graph";
+import GraphCom from "../graph/GraphCom";
 import '../layout/mainLayout.scss';
 
 const MainLayout = () => {
@@ -22,7 +22,7 @@ const MainLayout = () => {
       <div className="mainContent">
         <div className="mainInner">
           <div className="test">
-            {tap === "캘린더" ? <CalendarCom /> : <Graph />}
+            {tap === "캘린더" ? <CalendarCom /> : <GraphCom />}
           </div>
         </div>
       </div>

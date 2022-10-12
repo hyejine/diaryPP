@@ -3,16 +3,18 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
 import { Modal, Button } from "react-bootstrap";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const SelectEmojiModal = (props) => {
   const { selectDate, clickEmoji, setClickEmoji, show, hide} = props;
   const [test, setTest] = useState("default");
   const [selectEmoji, setSelectEmoji] = useState();
   const [emojiId, setEmojiId] = useState();
-  const [write, setWrite] = useState(false);
-
+  const navigate = useNavigate();
+  console.log(selectDate);
   
   const onSelectEmoji = (id)=>{
+    console.log(id);
     setEmojiId(id);
     setClickEmoji(id);
   }
@@ -32,9 +34,10 @@ const SelectEmojiModal = (props) => {
           {selectEmoji?.map((value)=>(
             <div>
             {selectDate ? 
-            <Link to='/board/write' state={{data: value.id, date: selectDate}}>
-              <img src={value.emoji_image} onClick={()=>onSelectEmoji(value.id)} alt="" key ={value.id}/>
-            </Link> : 
+            // <Link to='/board/write' state={{data: value.id, date: selectDate}}>
+              <img src={value.emoji_image} onClick={()=>{onSelectEmoji(value.id); navigate(`/board/write/${selectDate}`); }} alt="" key ={value.id}/>
+            // </Link>
+             : 
             <img src={value.emoji_image} onClick={()=>{onSelectEmoji(value.id); hide();}} alt="" key ={value.id}/>
             }
             </div>

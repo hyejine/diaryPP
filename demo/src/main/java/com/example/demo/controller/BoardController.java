@@ -106,7 +106,7 @@ public class BoardController {
 
 	@GetMapping("/getBoard/{diary_id}")
 	public List<DiaryDto> getBoard(@PathVariable("diary_id") Long diaryId) {
-		
+		System.out.println("diaryId" + diaryId);
 		return boardService.getBoard(diaryId);
 	} 
 	// AND diary_id=#{diary_id}
@@ -124,11 +124,16 @@ public class BoardController {
 	}
 
 	/**
-	 * 게시판 수정 페이지(id를 통해 게시판 조회)
+	 * 게시판 월간 조회(선택한 month 통해 게시판 조회)
 	 *
-	 * @param diary_id
-	 * @return diary_table
+	 * @param month
+	 * @return diary_table where month = month
 	 */
+	@GetMapping("/getMonth/{selectMonth}")
+	public List<DiaryDto> getMonth(@PathVariable("selectMonth") String month) {
+		return boardService.getMonth(month);
+	} 
+	
 	// @GetMapping("/getOneDiary/${diary_id}")
 	// public List<DiaryDto> getOneDiary(@PathVariable("id") Long id) {
 	// 	return boardMapper.getOneDiary(id);

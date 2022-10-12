@@ -55,5 +55,7 @@
     DELETE FROM diary_table WHERE diary_id = #{diary_id};
   </delete>
 
-
+  <select id="getMonth" resultType="DiaryDto">
+    select * from diary_table where diary_date LIKE '%${diary_date}%' 
+  </select>
 </mapper>

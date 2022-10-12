@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useEffect } from 'react';
 import CalendarCom from './components/calendar/CalendarCom';
 import Header from "./components/layout/common/Header";
-import Graph from './components/graph/Graph';
+import GraphCom from './components/graph/GraphCom';
 import { useSelector, useDispatch } from "react-redux";
 import { clearUser } from "./reducer/userSlice";
 
