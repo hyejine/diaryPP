@@ -7,6 +7,7 @@ import 'dayjs/locale/ko'; // 한국어 가져오기
 export const DateFormat = 'YYYY년 MM월 DD일 ddd요일';
 export const DiaryDateFormat = 'YYYY-MM-DDT00:00:00+09:00';
 export const DiaryDowunloadFormat = 'YY.MM.DD';
+export const ChartDateFormat = 'YYYY-MM-DD';
 
 export const localDateRenderer = (v) => {
     return dayjs(v).locale('ko').format(DateFormat);
@@ -18,4 +19,8 @@ export const diaryDateRenderer = (v) => {
 
 export const diaryDowunloadRenderer = (v) => {
     return dayjs(v).locale('ko').format(DiaryDowunloadFormat);
+};
+
+export const chartDateRender = (v) => {
+    return dayjs(v).locale('ko').format(ChartDateFormat);
 };

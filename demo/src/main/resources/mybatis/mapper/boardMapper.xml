@@ -52,10 +52,14 @@
   </select> 
 
   <delete id="deleteBoard" parameterType="DiaryDto">
-    DELETE FROM diary_table WHERE diary_id = #{diary_id};
+    DELETE FROM diary_table WHERE diary_id = #{diary_id}
   </delete>
 
   <select id="getMonth" resultType="DiaryDto">
-    select * from diary_table where diary_date LIKE '%${diary_date}%' 
+    select * from diary_table where diary_date LIKE '%${diary_date}%' order by diary_date
+  </select>
+
+  <select id="getMonthProgress" resultType="DiaryDto">
+      SELECT emoji_image_id ,count(*) FROM diary_table where diary_date LIKE '%${diary_date}%' group by emoji_image_id
   </select>
 </mapper>

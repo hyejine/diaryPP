@@ -50,21 +50,25 @@ public class BoardService implements BoardMapper{
 
     @Override
     public List<DiaryDto> getBoard(Long id) {
-        System.out.println("diaryId" + id);
         return  boardMapper.getBoard(id);
     }
 
     @Override
     public List<DiaryDto> getMonth(String month) {
         Date now = new Date();
-        System.out.println("now=========="+now);
         SimpleDateFormat format = new SimpleDateFormat("yyyy"); 
         String formatDate = format.format(now); 
         String sendFormatDate = formatDate + "-" + month;
-        System.out.println("포맷 지정 후 : " + formatDate);
-        System.out.println("sendFormatDate : " + sendFormatDate);
+            return boardMapper.getMonth(sendFormatDate);
+    } 
 
-        return boardMapper.getMonth(sendFormatDate);
+    @Override
+    public List<DiaryDto> getMonthProgress(String month) {
+        Date now = new Date();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy"); 
+        String formatDate = format.format(now); 
+        String sendFormatDate = formatDate + "-" + month;
+            return boardMapper.getMonthProgress(sendFormatDate);
     }
 
     // @Override

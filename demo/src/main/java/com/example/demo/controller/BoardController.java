@@ -132,8 +132,13 @@ public class BoardController {
 	@GetMapping("/getMonth/{selectMonth}")
 	public List<DiaryDto> getMonth(@PathVariable("selectMonth") String month) {
 		return boardService.getMonth(month);
-	} 
+	}  
 	
+	@GetMapping("/getMonthProgress/{selectMonth}")
+	public List<DiaryDto> getMonthProgress(@PathVariable("selectMonth") String month) {
+		return boardService.getMonthProgress(month);
+	} 
+
 	// @GetMapping("/getOneDiary/${diary_id}")
 	// public List<DiaryDto> getOneDiary(@PathVariable("id") Long id) {
 	// 	return boardMapper.getOneDiary(id);

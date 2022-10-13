@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import React from "react";
 import { useState } from "react";
 import MonthLine from "./nivo/MonthLine";
+import MoodProgressBar from "./MoodProgressBar";
 
 const MonthGrap = () => {
     const today = new Date();
@@ -18,13 +19,15 @@ const MonthGrap = () => {
         <div>
         <select onChange={handleChange} defaultValue={thisMonth}>
             {month.map((v) => (
-            <option value={v} key={v}> {v} </option>  //defaultValue 정해줘야함 
+            <option value={v} key={v}> {v} </option> 
             ))}
         </select>
         <MonthLine 
         selectMonth= {selectMonth ? selectMonth : thisMonth}
         />
-
+        <MoodProgressBar
+         selectMonth= {selectMonth ? selectMonth : thisMonth}
+         />
         </div>
     );
 };
