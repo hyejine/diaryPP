@@ -4,6 +4,7 @@ import "./header.scss";
 import { Button, Menu, MenuItem } from "@mui/material";
 import { HelpCenter, AccountCircle, KeyboardArrowDown } from "@mui/icons-material";
 import { useState } from "react";
+import logo from '../../../resource/image/logo.png'
 
 const Header = (props) => {
   const { currnetUser } = props;
@@ -29,7 +30,8 @@ const Header = (props) => {
   return (
     <div className="header">
       <Link to="/">
-        <span className="logo">LOGO</span>
+        <img src={logo} alt="" className="logo"/>
+        {/* <span className="logo">LOGO</span> */}
       </Link>
       {/* {currnetUser.email ?   */}
       <div className="login">

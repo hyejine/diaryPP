@@ -68,6 +68,7 @@ public class BoardService implements BoardMapper{
         SimpleDateFormat format = new SimpleDateFormat("yyyy"); 
         String formatDate = format.format(now); 
         String sendFormatDate = formatDate + "-" + month;
+        
             return boardMapper.getMonthProgress(sendFormatDate);
     }
 

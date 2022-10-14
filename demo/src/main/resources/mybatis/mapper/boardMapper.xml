@@ -59,7 +59,7 @@
     select * from diary_table where diary_date LIKE '%${diary_date}%' order by diary_date
   </select>
 
-  <select id="getMonthProgress" resultType="DiaryDto">
-      SELECT emoji_image_id ,count(*) FROM diary_table where diary_date LIKE '%${diary_date}%' group by emoji_image_id
+  <select id="getMonthProgress" resultType="java.util.Map" >
+      SELECT emoji_image_id ,count(*) AS count FROM diary_table where diary_date LIKE '%${diary_date}%' group by emoji_image_id order by emoji_image_id
   </select>
 </mapper>
