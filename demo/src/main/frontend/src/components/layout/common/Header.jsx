@@ -5,13 +5,15 @@ import { Button, Menu, MenuItem } from "@mui/material";
 import { HelpCenter, AccountCircle, KeyboardArrowDown } from "@mui/icons-material";
 import { useState } from "react";
 import logo from '../../../resource/image/logo.png'
+import BackgroundModal from "../../userCustom/BackgroundModal";
 
 const Header = (props) => {
-  const { currnetUser } = props;
+  const { currnetUser, setBackColor, setBackImage } = props;
   const [setting, setSetting] = useState(null);
   const [help, setHelp] = useState(null);
   const openSeting = Boolean(setting);
   const openHelp = Boolean(help);
+  const [modalActive, setModalActive] = useState(false);
 
   const onUserSetting = (event) => {
     setSetting(event.currentTarget);
@@ -26,6 +28,10 @@ const Header = (props) => {
     setHelp(null);
 
   }; 
+
+  const onBackgroundChg = ()=>{
+    setModalActive(!modalActive);
+  }
 
   return (
     <div className="header">
@@ -47,7 +53,7 @@ const Header = (props) => {
         <Menu anchorEl={setting} open={openSeting} onClose={handleClose}>
           <MenuItem disableRipple>Language</MenuItem>
           <MenuItem>Font</MenuItem>
-          <MenuItem>Background Color</MenuItem>
+          <MenuItem onClick={onBackgroundChg}>Background Color</MenuItem>
           <MenuItem>Logout</MenuItem>
           <Button  variant="contained" color="success" href="/emoji" className="emojiButton">프리미엄 이모지 보러가기</Button>
         </Menu>
@@ -61,6 +67,12 @@ const Header = (props) => {
           <MenuItem>웹 정보</MenuItem>
         </Menu>
       </div>
+      <BackgroundModal
+      show={modalActive}
+      setBackColor = {setBackColor}
+      setBackImage ={setBackImage}
+      hide={()=>setModalActive(false)}
+      />
       {/* : 
             <Link to="/auth/login"><span className="login">login</span></Link>
           } */}

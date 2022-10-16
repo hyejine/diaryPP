@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { useState } from "react";
 import Login from './components/login/Login';
 import Main from "./Main";
 import Regist from "./components/login/regist/Regist";
@@ -14,12 +15,16 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App(props) {
   const currnetUser = useSelector(state => state.user);
+  const [backColor, setBackColor ] = useState();
+  const [backImage, setBackImage ] = useState();
+
+  console.log(backColor);
 
   return (
-    <div className="allPage">
+    <div className="allPage" style={{background: `${backColor}` }}>
     <BrowserRouter>
       <Routes>
-      <Route element={<MainLayout />}>
+      <Route element={<MainLayout setBackColor ={setBackColor} setBackImage={setBackImage}/>}>
       <Route path="/" element={<CalendarCom />} currentUser={props?.currnetUser}/>
       <Route path="/auth/login" element={<Login/>}/>
       <Route path="/login/regist" element={<Regist/>}/>  
