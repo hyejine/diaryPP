@@ -1,7 +1,21 @@
 #grapPage{
-    padding: 0px ;
+    background-color: #fff;
+    padding: 7px 25px;
     border-radius: 20px;
     border: none;
+    height: 700px;
+    position: relative;
+    
+    .selectOp{
+        margin-top: 10px;
+    }
+    .selectMonth{ 
+        position: absolute;
+        left: 150px;
+        top: 17px;
+    }
+
+    
     .moodPercent0{
         background-color: antiquewhite;
         // border-radius: 0px 0px 10px 10px;

@@ -6,18 +6,21 @@
   border: none;
 
   .test{
-    background-color: #ffc700;
+    background-color: #D4C8F2;
+    // box-shadow: 2px 2px #5C596A;
     cursor: pointer;
-    width: 170px;
+    width: 167px;
+    height: 35px;
   }
   // 캘린더 내용 
   .btn-primary{
     --bs-btn-bg:none;
     --bs-btn-border-color:none;
-    --bs-btn-hover-bg: #debb3cad;
-    --bs-btn-active-bg: #debb3cad;
+    --bs-btn-hover-bg: #ada3c7;
+    --bs-btn-active-bg: #D4C8F2;
     --bs-btn-border-radius: 20px;
-    width: 170px;
+    width: 167px;
+    height: 35px;
     text-align: left;
   }
 // .fc-daygrid-event-harness{
@@ -32,6 +35,9 @@
 }
 .calendarTitle{
   text-decoration-line: none;
+}
+.calendarInner{
+  font-size: 13px;
 }
 }
 // 이모지 선택 모달

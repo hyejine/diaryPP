@@ -37,7 +37,7 @@ const Edit = () => {
   
        // file 데이터 담아서 서버에 전달하여 이미지 업로드
        const res = await axios.post('/board/register/imageUpload', formData);
-       console.log(res);
+       console.log(res.data);
   
        if(quillRef.current) {
         // 현재 Editor 커서 위치에 서버로부터 전달받은 이미지 불러오는 url을 이용하여 이미지 태그 추가

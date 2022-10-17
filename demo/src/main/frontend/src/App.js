@@ -12,16 +12,15 @@ import BoardLayout from "./components/layout/BoardLayout";
 import Read from "./components/board/Read";
 import CalendarCom from "./components/calendar/CalendarCom";
 import 'bootstrap/dist/css/bootstrap.min.css';
+import defaultBg from './resource/image/defaultBackground.jpg'
 
 function App(props) {
   const currnetUser = useSelector(state => state.user);
   const [backColor, setBackColor ] = useState();
   const [backImage, setBackImage ] = useState();
-
-  console.log(backColor);
-
+  
   return (
-    <div className="allPage" style={{background: `${backColor}` }}>
+    <div className="allPage" style={ backColor ? { background: `${backColor}` } : backImage ? { background: `url(${backImage})`, backgroundSize: 'contain' } : { background: `url(${defaultBg})`, backgroundSize: 'contain' }}>
     <BrowserRouter>
       <Routes>
       <Route element={<MainLayout setBackColor ={setBackColor} setBackImage={setBackImage}/>}>

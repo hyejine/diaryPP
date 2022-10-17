@@ -11,7 +11,7 @@ const MoodProgressBar = (props) => {
         axios
         .get(`/board/getMonthProgress/${selectMonth}`)
         .then((res) => {
-            console.log(res);
+            // console.log(res);
             setEmojiCount(res.data);
            
         })
@@ -22,7 +22,7 @@ const MoodProgressBar = (props) => {
       axios
       .get(`/emoji/getEmojiList`)
       .then((res) => {
-          console.log(res.data[0]);
+          // console.log(res.data[0]);
           setEmojiImage(res.data[0]);
       })
       .catch((error) => console.log(error));

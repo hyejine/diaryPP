@@ -17,9 +17,9 @@ const MonthGrap = () => {
 
     return (
         <div>
-        <select onChange={handleChange} defaultValue={thisMonth}>
+        <select onChange={handleChange} defaultValue={thisMonth} className="selectMonth">
             {month.map((v) => (
-            <option value={v} key={v}> {v} </option> 
+            <option value={v} key={v}> {v} 월 </option> 
             ))}
         </select>
         <MonthLine 

@@ -11,7 +11,7 @@ const Graph =() => {
     }
         return (
             <div id='grapPage'>
-                <select onChange={handleChange}>
+                <select onChange={handleChange} className="selectOp">
                     <option value ="months">월간 그래프</option>
                     <option value ="year">연간 그래프</option>
                 </select>

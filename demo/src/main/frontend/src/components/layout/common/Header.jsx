@@ -37,9 +37,7 @@ const Header = (props) => {
     <div className="header">
       <Link to="/">
         <img src={logo} alt="" className="logo"/>
-        {/* <span className="logo">LOGO</span> */}
       </Link>
-      {/* {currnetUser.email ?   */}
       <div className="login">
         <Button disableRipple onClick={onUserSetting}>
           {currnetUser?.image ? (

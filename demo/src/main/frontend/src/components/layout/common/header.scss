@@ -1,19 +1,16 @@
 .header{
     position: relative;
-    // background-color: azure;
     display: flex;
-    justify-content: space-between;
+    align-items: center;
+    justify-content: center;
+
     .logo{
         width: 100px;
-    //    position:absolute;
-    //    left: 50%;
-    // text-align: center;
-    // align-items: center;
     }
-    // .login{
-    //     position:absolute;
-    //     right: 0px;
-    // }
+    .login{
+        position:absolute;
+        right: -23px;
+    }
     // .userName{
     //     color: #555;
     //     padding: 0px 5px;
