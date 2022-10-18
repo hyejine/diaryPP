@@ -18,14 +18,7 @@ const MonthLine = (props) => {
     }, [selectMonth]);
 
     // console.log(monthData);
-const test = [
-    { value : "2022-09-01T15:00:00.000Z",
-     value : "2022-09-02T15:00:00.000Z",
-     value : "2022-09-03T15:00:00.000Z",
-     value : "2022-09-04T15:00:00.000Z",
-     value : "2022-09-05T15:00:00.000Z",
-     value : "2022-09-06T15:00:00.000Z"}
-]
+
 const data = [
     {
         id: "diary",
@@ -39,6 +32,9 @@ const data = [
     }
 ]
 console.log(data);
+var date = new Date(2022,selectMonth,0).getDate();
+console.log(date);
+
     return (
         <div style={{ width: "auto", height: "400px", margin: "0 auto" }}>
         <ResponsiveLine
@@ -48,44 +44,50 @@ console.log(data);
                     {
                     id: "diary",
                     data: monthData?.map((value) => ({
-                        // x: test?.map((v)=>(
-                        //     v.value
-                        // )),
                         x: chartDateRender(value.diary_date),
                         y: value.emoji_image_id,
                     })),
                     },
                 ]
-                : []
+                : [
+                    // <div>dfd</div>
+                ]
             }
             margin={{ top: 50, right: 50, bottom: 50, left: 60 }}
             xScale={{ type: 'time',
                      format: '%Y-%m-%d',
                      useUTC: false,
-                     precision: 'day' }}
+                     precision: 'day',
+                     min : `2022-${selectMonth}-01`,
+                     max : `2022-${selectMonth}-${date}`
+                     }}
             xFormat="time:%Y-%m-%d"  
             axisBottom={{
                           format: '%m/%d',
-                          tickValues: 'every 5 days',
+                        //   tickValues: 'every 1 days',
                       }}       
             yScale={{
             type: "linear",
-            min: "auto",
-            max: "auto",
-            stacked: true,
-            reverse: false,
+            min: "0",
+            max: "6",
+            // stacked: true,
+            // reverse: false,
             }}
             axisLeft={{
+            tickValues: [1, 2, 3, 4, 5, 6 ],
             orient: "left",
             tickSize: 5,
             tickPadding: 5,
             tickRotation: 0,
             }}
+            colors={[ '#D4C8F2' ]}
             pointSize={7}
-            pointColor={{ theme: "background" }}
+            pointColor={{ theme: 'background' }}
             pointBorderWidth={2}
-            pointBorderColor={{ from: "serieColor" }}
-            pointLabelYOffset={-12}
+            pointBorderColor={{ from: 'serieColor' }}
+            // pointLabelYOffset={-12}
+            areaBlendMode="multiply"
+            // areaOpacity={0.15}
             useMesh={true}
         />
         </div>

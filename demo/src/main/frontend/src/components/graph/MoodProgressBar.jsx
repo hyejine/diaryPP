@@ -30,7 +30,7 @@ const MoodProgressBar = (props) => {
 
   return (
     <div>
-      <div>기분 분포</div>
+      <div className="moodTitle">기분 분포</div>
       <ProgressBar>
         {emojiCount?.map((value, index)=>(
               //   <OverlayTrigger
