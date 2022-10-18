@@ -33,19 +33,19 @@ const MoodProgressBar = (props) => {
       <div className="moodTitle">기분 분포</div>
       <ProgressBar>
         {emojiCount?.map((value, index)=>(
-              //   <OverlayTrigger
-              //   overlay={
-              //     <Tooltip >
-              //     {value.count*10}
-              //     </Tooltip>
-              //   }
-              // >
-              //   <div style={{width: `${value.count*10}%`}}>
+                <OverlayTrigger
+                overlay={
+                  <Tooltip >
+                  {value.count*10}
+                  </Tooltip>
+                }
+              >
+                <div style={{width: `${value.count*100}%`, height:20}}>
           
-        <ProgressBar className={`moodPercent${index}`} now={value.count*100} key={1} label={`${value.count*10}%`}/>
+        <ProgressBar className={`moodPercent${index} test`} now={value.count*100} key={1} label={`${value.count*10}%`}/>
      
-        // </div>
-        //  </OverlayTrigger>
+        </div>
+         </OverlayTrigger>
         ))}
     </ProgressBar>
     <div className="emojiImage">

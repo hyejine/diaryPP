@@ -6,6 +6,7 @@ import { chartDateRender } from "../../../utils/index";
 const MonthLine = (props) => {
     const { selectMonth } = props;
     const [monthData, setMonthData] = useState();
+    const [ emojiImage, setEmojiImage ] = useState();
     const getMoodGrap = null;
 
     useEffect(() => {
@@ -16,6 +17,16 @@ const MonthLine = (props) => {
         })
         .catch((error) => console.log(error));
     }, [selectMonth]);
+
+    useEffect(()=>{
+        axios
+        .get(`/emoji/getEmojiList`)
+        .then((res) => {
+            console.log(res.data[0].emoji_type);
+            setEmojiImage(res.data[0].emoji_type);
+        })
+        .catch((error) => console.log(error));
+      },[])
 
     // console.log(monthData);
 
@@ -31,10 +42,15 @@ const data = [
                     })), 
     }
 ]
-console.log(data);
+// console.log(data);
 var date = new Date(2022,selectMonth,0).getDate();
-console.log(date);
-
+// console.log(date);
+const test = [1, 2, 3, 4, 5, 6 ];
+const test1 = emojiImage?.map((value)=>(
+        value.emoji_image
+));
+console.log(test);
+console.log(test1);
     return (
         <div style={{ width: "auto", height: "400px", margin: "0 auto" }}>
         <ResponsiveLine
@@ -74,7 +90,7 @@ console.log(date);
             // reverse: false,
             }}
             axisLeft={{
-            tickValues: [1, 2, 3, 4, 5, 6 ],
+            tickValues: ["a","b","c","d"],
             orient: "left",
             tickSize: 5,
             tickPadding: 5,
