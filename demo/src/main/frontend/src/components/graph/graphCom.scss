@@ -7,7 +7,7 @@
     position: relative;
     
     .selectOp{
-        margin-top: 10px;
+        margin: 10px 0 18px 0;
     }
     .selectMonth{ 
         position: absolute;
@@ -17,35 +17,37 @@
 
     // progressBar 
     .moodTitle{
-        margin: 10px 0;
+        margin: 15px 0;
     }
-    .test{
-        // height: 25px;
+    .progress {
+        --bs-progress-height: 24px;
+        --bs-progress-bar-bg: none;
+        --bs-progress-font-size: 15px;
     }
     .moodPercent0{
-        background-color: antiquewhite;
-        // border-radius: 0px 0px 10px 10px;
+        background-color: #f39191;
     }
     .moodPercent1{
-        background-color: rgb(126, 90, 43);
-        // border-radius: 0;
+        background-color: #FFF994;
     }
     .moodPercent2{
-        background-color: rgb(74, 44, 3);
-        // border-radius: 0;
+        background-color: #D0FAAF;
     }
     .moodPercent3{
-        background-color: rgb(174, 119, 41);
-        // border-radius: 0;
+        background-color: #DDCEF1;
     }
     .moodPercent4{
-        background-color: rgb(31, 126, 87);
-        // border-radius: 0;
+        background-color: #8DB0ED;
     }
     .moodPercent5{
-        background-color: rgb(41, 90, 174);
+        background-color: #DC6060;
     }
     .emojiImage{
-        display: flex;
+        display:flex; 
+        justify-content: center;
+    }
+    .emoji_percent{
+        margin-top: 10px;
+        text-align: center;
     }
 }

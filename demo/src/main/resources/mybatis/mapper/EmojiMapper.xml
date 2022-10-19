@@ -11,7 +11,7 @@
 </resultMap>
 
   <select id="getEmojiList" resultMap="EmojiResult">
-	SELECT * FROM emoji_table
+	SELECT * FROM emoji_table 
   </select> 
 
   <select id="getEmojiImage" resultType="EmojiImageDto">

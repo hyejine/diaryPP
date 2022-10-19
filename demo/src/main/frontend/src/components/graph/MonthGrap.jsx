@@ -22,7 +22,7 @@ const MonthGrap = () => {
             <option value={v} key={v}> {v} 월 </option> 
             ))}
         </select>
-        <div >기분 그래프</div>
+        <div >[ 기분 그래프 ]</div>
         <MonthLine 
         selectMonth= {selectMonth ? selectMonth : thisMonth}
         />
