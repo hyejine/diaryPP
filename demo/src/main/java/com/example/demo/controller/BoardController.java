@@ -137,6 +137,17 @@ public class BoardController {
 	@GetMapping("/getMonthProgress/{selectMonth}")
 	public List<DiaryDto> getMonthProgress(@PathVariable("selectMonth") String month) {
 		return boardService.getMonthProgress(month);
+	}  
+
+	/**
+	 * 게시판 연간 조회(선택한 selectYear 통해 게시판 조회)
+	 *
+	 * @param selectYear
+	 * @return diary_table where year = year
+	 */
+	@GetMapping("/getYear/{selectYear}")
+	public List<DiaryDto> getYear(@PathVariable("selectYear") String year) {
+		return boardService.getYear(year);
 	} 
 
 	// @GetMapping("/getOneDiary/${diary_id}")

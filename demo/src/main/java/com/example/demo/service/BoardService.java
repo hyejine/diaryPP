@@ -64,13 +64,22 @@ public class BoardService implements BoardMapper{
 
     @Override
     public List<DiaryDto> getMonthProgress(String month) {
-        Date now = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy"); 
-        String formatDate = format.format(now); 
-        String sendFormatDate = formatDate + "-" + month;
-        
+        if(month.length() > 2){
+            return boardMapper.getYearProgress(month);
+        } else {
+            Date now = new Date();
+            SimpleDateFormat format = new SimpleDateFormat("yyyy"); 
+            String formatDate = format.format(now); 
+            String sendFormatDate = formatDate + "-" + month;
+            
             return boardMapper.getMonthProgress(sendFormatDate);
+        }
     }
+
+    @Override
+    public List<DiaryDto> getYear(String year) {
+            return boardMapper.getYear(year);
+    } 
 
     // @Override
     // public List<DiaryDto> getOneDiary(Long id) {

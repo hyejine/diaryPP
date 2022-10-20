@@ -23,6 +23,11 @@ public interface BoardMapper {
     public List<DiaryDto> getMonth(String sendFormatDate); 
     
     public List<DiaryDto> getMonthProgress(String sendFormatDate); 
+
+    public List<DiaryDto> getYearProgress(String year); 
+
+    public List<DiaryDto> getYear(String year); 
+
     // public List<DiaryDto> getMonthMoodGrap(String sendFormatDate);
 
     // public List<DiaryDto> getOneDiary(Long id);

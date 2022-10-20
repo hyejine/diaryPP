@@ -1,6 +1,6 @@
 import { useState } from 'react';
-import MonthGrap from './MonthGrap';
-import YearGrap from './YearGrap';
+import MonthGrap from './month/MonthGrap';
+import YearGrap from './year/YearGrap';
 import './graphCom.scss'
 
 const Graph =() => {

@@ -3,26 +3,22 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const MoodProgressBar = (props) => {
-    const { selectMonth } = props;
+    const { selectDay } = props;
     const [emojiCount, setEmojiCount] = useState();
 
     useEffect(() => {
       axios
-        .get(`/board/getMonthProgress/${selectMonth}`)
+        .get(`/board/getMonthProgress/${selectDay}`)
         .then((res) => {
-          console.log(res.data);
           setEmojiCount(res.data);
         })
         .catch((error) => console.log(error));
-    }, [selectMonth]);
+    }, [selectDay]);
 
-console.log(emojiCount);
     return (
       <div>
         <div className="moodTitle">[ 기분 분포 ]</div>
         <ProgressBar>
-          {emojiCount ?
-          <>
           {emojiCount?.slice(0).reverse().map((value, index) => (
               <OverlayTrigger overlay={<Tooltip>{value.emoji_mood+" : "+value.count * 10+"%"}</Tooltip>}>
                 <div style={{ width: `${value.count * 100}%`}}>
@@ -34,10 +30,7 @@ console.log(emojiCount);
                   />
                 </div>
               </OverlayTrigger>
-            ))} 
-            </>
-            :     <div>dfdff</div>
-          }
+            ))}          
         </ProgressBar>
         <div className="emojiImage">
         {emojiCount?.slice(0).reverse().map((value, index) => (

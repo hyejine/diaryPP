@@ -63,6 +63,16 @@
     select e.id, e.emoji_type, e.emoji_mood, e.emoji_image,ifnull(d.emojicount,0) as count from emoji_image_table e left outer join (select emoji_image_id, count(emoji_image_id) as emojicount 
     from diary_table where diary_date LIKE '%${diary_date}%'group by emoji_image_id) as d on (e.id = d.emoji_image_id) 
     where e.emoji_type Like "%default%" group by e.id
-      <!-- SELECT emoji_image_id ,count(*) AS count FROM diary_table where diary_date LIKE '%${diary_date}%' group by emoji_image_id order by emoji_image_id -->
+  </select> 
+
+  <select id="getYearProgress" resultType="java.util.Map" >
+    select e.id, e.emoji_type, e.emoji_mood, e.emoji_image,ifnull(d.emojicount,0) as count from emoji_image_table e left outer join (select emoji_image_id, count(emoji_image_id) as emojicount 
+    from diary_table where diary_date LIKE '%${diary_date}%'group by emoji_image_id) as d on (e.id = d.emoji_image_id) 
+    where e.emoji_type Like "%default%" group by e.id
   </select>
+
+  <select id="getYear" resultType="java.util.Map" >
+    select emoji_image_id, date_format(diary_date,'%Y-%m') date, count(emoji_image_id) as emojicount  
+    from diary_table where diary_date Like '%${diary_date}%' group by date, emoji_image_id
+  </select> 
 </mapper>

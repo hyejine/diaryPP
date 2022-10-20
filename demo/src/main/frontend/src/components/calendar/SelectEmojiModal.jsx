@@ -11,7 +11,7 @@ const SelectEmojiModal = (props) => {
   const [selectEmoji, setSelectEmoji] = useState();
   const [emojiId, setEmojiId] = useState();
   const navigate = useNavigate();
-  console.log(selectDate);
+  // console.log(selectDate);
   
   const onSelectEmoji = (id)=>{
     console.log(id);

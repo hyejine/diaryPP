@@ -1,8 +1,8 @@
 import dayjs from "dayjs";
 import React from "react";
 import { useState } from "react";
-import MonthLine from "./nivo/MonthLine";
-import MoodProgressBar from "./MoodProgressBar";
+import MonthLine from "./MonthLine";
+import MoodProgressBar from "../MoodProgressBar";
 
 const MonthGrap = () => {
     const today = new Date();
@@ -27,7 +27,7 @@ const MonthGrap = () => {
         selectMonth= {selectMonth ? selectMonth : thisMonth}
         />
         <MoodProgressBar
-         selectMonth= {selectMonth ? selectMonth : thisMonth}
+         selectDay= {selectMonth ? selectMonth : thisMonth}
          />
         </div>
     );
