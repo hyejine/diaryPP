@@ -84,7 +84,7 @@ console.log(data);
         <div style={{ width: "auto", height: "400px", margin: "0 auto" }}>
        <ResponsiveBar
        data={data}
-       indexBy="date"
+    //    indexBy="month"
        keys={[
            'angry',   // 이모지 기분이 되야함 
            'sad',
@@ -94,7 +94,7 @@ console.log(data);
            'very_happy'
        ]}
        minValue={0}
-    //    maxValue={31}
+       maxValue={31}
     //    valueFormat ={"%"} 
 
        defs={[
@@ -135,6 +135,7 @@ console.log(data);
            tickSize: 5,
            tickPadding: 5,
            tickRotation: 0,
+           tickValues: ["1","2","3","4","5","6","7","8","9","10","11","12"]
        }}
        axisLeft={{
            tickSize: 5,

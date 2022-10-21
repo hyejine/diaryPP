@@ -72,7 +72,15 @@
   </select>
 
   <select id="getYear" resultType="java.util.Map" >
-    select emoji_image_id, date_format(diary_date,'%Y-%m') date, count(emoji_image_id) as emojicount  
-    from diary_table where diary_date Like '%${diary_date}%' group by date, emoji_image_id
+    select date_format(diary_date, '%m')as month, 
+      coalesce(sum(case when emoji_image_id = '1' then 1 ELSE 0 end),0) as angry,
+      coalesce(sum(case when emoji_image_id = '2' then 1 ELSE 0 end),0) as sad,
+      coalesce(sum(case when emoji_image_id = '3' then 1 ELSE 0 end),0) as panic,
+      coalesce(sum(case when emoji_image_id = '4' then 1 ELSE 0 end),0) as surprise,
+      coalesce(sum(case when emoji_image_id = '5' then 1 ELSE 0 end),0) as happy,
+      coalesce(sum(case when emoji_image_id = '6' then 1 ELSE 0 end),0) as very_happy
+    from diary_table
+    where diary_date LIKE '%${diary_date}%'
+    group by month
   </select> 
 </mapper>
