@@ -72,15 +72,27 @@
   </select>
 
   <select id="getYear" resultType="java.util.Map" >
-    select date_format(diary_date, '%m')as month, 
-      coalesce(sum(case when emoji_image_id = '1' then 1 ELSE 0 end),0) as angry,
-      coalesce(sum(case when emoji_image_id = '2' then 1 ELSE 0 end),0) as sad,
-      coalesce(sum(case when emoji_image_id = '3' then 1 ELSE 0 end),0) as panic,
-      coalesce(sum(case when emoji_image_id = '4' then 1 ELSE 0 end),0) as surprise,
-      coalesce(sum(case when emoji_image_id = '5' then 1 ELSE 0 end),0) as happy,
-      coalesce(sum(case when emoji_image_id = '6' then 1 ELSE 0 end),0) as very_happy
-    from diary_table
-    where diary_date LIKE '%${diary_date}%'
-    group by month
+select c.createMonth, ifnull(d.angry,0) as angry, ifnull(d.sad,0) as sad, ifnull(d.panic,0) as panic, ifnull(d.surprise,0) as surprise, ifnull(d.happy,0) as happy, ifnull(d.very_happy,0) as very_happy
+    from (
+      select date_format(diary_date, '%m')as month, 
+          coalesce(sum(case when emoji_image_id = '1' then 1 ELSE 0 end),0) as angry,
+          coalesce(sum(case when emoji_image_id = '2' then 1 ELSE 0 end),0) as sad,
+          coalesce(sum(case when emoji_image_id = '3' then 1 ELSE 0 end),0) as panic,
+          coalesce(sum(case when emoji_image_id = '4' then 1 ELSE 0 end),0) as surprise,
+          coalesce(sum(case when emoji_image_id = '5' then 1 ELSE 0 end),0) as happy,
+          coalesce(sum(case when emoji_image_id = '6' then 1 ELSE 0 end),0) as very_happy
+      from diary_table
+      where diary_date LIKE '%${diary_date}%'
+      group by month
+    ) d 
+    right join (
+        WITH RECURSIVE cte AS (
+           <![CDATA[ 
+          select 1 AS createMonth
+          UNION ALL
+          select createMonth + 1 from cte where createMonth < 12
+          ]]>
+      )select createMonth from cte
+) c on d.month = c.createMonth
   </select> 
 </mapper>
