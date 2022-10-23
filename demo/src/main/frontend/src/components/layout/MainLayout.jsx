@@ -5,7 +5,7 @@ import GraphCom from "../graph/GraphCom";
 import '../layout/mainLayout.scss';
 
 const MainLayout = (props) => {
-  const {setBackColor, setBackImage} = props;
+  const {setBackColor, setBackImage, setFontChange} = props;
   const [tap, setTap] = useState("캘린더");
 
   const onChange = (value) => {
@@ -15,7 +15,7 @@ const MainLayout = (props) => {
   return (
     <div className="main" >
       <div className="mainWrap">
-      <Header setBackColor={setBackColor} setBackImage={setBackImage}/>
+      <Header setBackColor={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange}/>
       <div className="mainContentWarp">
       <div onClick={onChange} className="mainLayoutTab">
         <span key="1" className="calendarTab">캘린더</span>

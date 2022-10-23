@@ -8,7 +8,7 @@ import logo from '../../../resource/image/logo.png'
 import BackgroundModal from "../../userCustom/BackgroundModal";
 
 const Header = (props) => {
-  const { currnetUser, setBackColor, setBackImage } = props;
+  const { currnetUser, setBackColor, setBackImage, setFontChange } = props;
   const [setting, setSetting] = useState(null);
   const [help, setHelp] = useState(null);
   const openSeting = Boolean(setting);
@@ -32,7 +32,25 @@ const Header = (props) => {
   const onBackgroundChg = ()=>{
     setModalActive(!modalActive);
   }
+  
+  const fontStyle = [
+    { value : "Galmuri9" , fontStyle : "갈무리"},
+    { value : "GangwonEdu_OTFBoldA" , fontStyle : "강원교육모두체"},
+    { value : "GowunDodum-Regular" , fontStyle : "고운돋움"},
+    { value : "EF_Diary" , fontStyle : "다이어리체"},
+    { value : "DungGeunMo" , fontStyle : "둥근모꼴"},
+    { value : "SDMiSaeng" , fontStyle : "미생체"},
+    { value : "Cafe24Oneprettynight" , fontStyle : "카페24 고운밤"},
+    { value : "GmarketSansMedium" , fontStyle : "Gmarket Sans"},
+    { value : "IBMPlexSansKR-Regular" , fontStyle : "IBM Plex Sans"},
+    { value : "IM_Hyemin-Bold" , fontStyle : "IM혜민체"},
+    { value : "KoPubWorld_Dotum" , fontStyle : "KoPub돋움"},
+    { value : "KoPubWorld_Batang" , fontStyle : "KoPub바탕"},
+  ];
 
+  const chageFont = (value)=>{
+    setFontChange(value.target.value);
+  }
   return (
     <div className="header">
       <Link to="/">
@@ -48,9 +66,14 @@ const Header = (props) => {
           <span className="userName">{currnetUser?.name}정혜진</span>
           <KeyboardArrowDown color="disabled" />
         </Button>
-        <Menu anchorEl={setting} open={openSeting} onClose={handleClose}>
+        <Menu anchorEl={setting} open={openSeting} onClose={handleClose} className="menuWrap">
           <MenuItem disableRipple>Language</MenuItem>
-          <MenuItem>Font</MenuItem>
+          <select onChange ={(s)=>{chageFont(s)}} defaultValue="글꼴선택" className="menuFont">
+            <option value="fontSelect" className="menuFont"> 글꼴선택 </option> 
+            {fontStyle?.map((v) => (
+            <option value={v.value} key={v.fontStyle} style={{fontFamily: `${v.value}` }}> {v.fontStyle} </option> 
+            ))}
+        </select>
           <MenuItem onClick={onBackgroundChg}>Background Color</MenuItem>
           <MenuItem>Logout</MenuItem>
           <Button  variant="contained" color="success" href="/emoji" className="emojiButton">프리미엄 이모지 보러가기</Button>

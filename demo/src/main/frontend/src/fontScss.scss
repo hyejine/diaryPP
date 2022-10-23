@@ -1,0 +1,86 @@
+//font style
+
+//갈무리 
+@import url('https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css');
+
+//강원교육모두체
+@font-face {
+    font-family: 'GangwonEdu_OTFBoldA';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2201-2@1.0/GangwonEdu_OTFBoldA.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+//고운돋움
+@font-face {
+    font-family: 'GowunDodum-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunDodum-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+//다이어리체
+@font-face {
+	font-family: 'EF_Diary';
+	src: url('./resource/font/EF_Diary.ttf');
+}
+
+//둥군모꼴
+@font-face {
+	font-family: 'DungGeunMo';
+	src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_six@1.2/DungGeunMo.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+//미생체
+@font-face {
+    font-family: 'SDMiSaeng';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_two@1.0/SDMiSaeng.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+//카페24 고운밤
+@font-face {
+    font-family: 'Cafe24Oneprettynight';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_twelve@1.1/Cafe24Oneprettynight.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+//Gmarket Sans
+@font-face {
+    font-family: 'GmarketSansMedium';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2001@1.1/GmarketSansMedium.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+//IBM Plex Sans
+@font-face {
+    font-family: 'IBMPlexSansKR-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_20-07@1.0/IBMPlexSansKR-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+//IM혜민체
+@font-face {
+    font-family: 'IM_Hyemin-Bold';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2106@1.1/IM_Hyemin-Bold.woff2') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+
+//KoPub돋움
+@font-face {
+	font-family: 'KoPubWorld_Dotum';
+	src: url('./resource/font/KoPubWorld\ Dotum\ Medium.ttf');
+}
+
+//KoPub바탕
+@font-face {
+	font-family: 'KoPubWorld_Batang';
+	src: url('./resource/font/KoPubWorld\ Batang\ Medium.ttf');
+}
