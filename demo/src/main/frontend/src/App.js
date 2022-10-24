@@ -20,13 +20,11 @@ function App(props) {
   const [backImage, setBackImage ] = useState();
   const [fontChange, setFontChange ] = useState();
 
-  console.log(fontChange);
-  
   return (
     <div className="allPage " style={ backColor ? { background: `${backColor}`, fontFamily: `${fontChange}` } : backImage ? { background: `url(${backImage})`, fontFamily: `${fontChange}`, backgroundSize: 'contain' } : { background: `url(${defaultBg})`, backgroundSize: 'contain', fontFamily: `${fontChange}` }}>
     <BrowserRouter>
       <Routes>
-      <Route element={<MainLayout setBackColor ={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange}/>}>
+      <Route element={<MainLayout setBackColor ={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange} fontChange={fontChange}/>}>
       <Route path="/" element={<CalendarCom />} currentUser={props?.currnetUser}/>
       <Route path="/auth/login" element={<Login/>}/>
       <Route path="/login/regist" element={<Regist/>}/>  

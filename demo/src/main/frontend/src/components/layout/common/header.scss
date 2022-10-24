@@ -11,12 +11,18 @@
         position:absolute;
         right: -23px;
     }
-    .menuWrap{
-        background-color: aquamarine;
-    }
     .menuFont{
-        margin: 6px 16px;
-        background-color: antiquewhite;
+        margin-top: 8px;
+        padding: 3px 5px;
+    }
+    .fontB{
+        margin-left: 20px;
+        justify-content: center;  
+        align-items: center;
+        height: 35px;
+        margin-top: 10px;
+        background-color: #e2d7e5;
+        box-shadow: 2px 2px #5c596a;
     }
     // .userName{
     //     color: #555;
