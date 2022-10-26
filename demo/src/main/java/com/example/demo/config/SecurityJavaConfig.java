@@ -16,8 +16,8 @@ import com.example.demo.config.jwt.JwtAuthenticationEntryPoint;
 import com.example.demo.config.jwt.JwtProvier;
 import com.example.demo.config.jwt.JwtSecurityConfig;
 
-@Configuration         // Bean °ü¸® 
-@EnableWebSecurity     // Spirng Security º¸¾È ¼³Á¤ È°¼ºÈ­ (»çÀÌÆ® ÀüÃ¼°¡ Àá±è »óÅÂ)
+@Configuration         // Bean ï¿½ï¿½ï¿½ï¿½ 
+@EnableWebSecurity     // Spirng Security ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ È°ï¿½ï¿½È­ (ï¿½ï¿½ï¿½ï¿½Æ® ï¿½ï¿½Ã¼ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½)
 // @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityJavaConfig {
 
@@ -54,58 +54,59 @@ public class SecurityJavaConfig {
             .and()
             .csrf().disable()
             .exceptionHandling()
-            .authenticationEntryPoint(jwtAuthenticationEntryPoint)  // ÀÎÁõ ½ÇÆÐ 
-            .accessDeniedHandler(jwtAccessDeniedHandler)  //ÀÎ°¡ ½ÇÆÐ 
+            .authenticationEntryPoint(jwtAuthenticationEntryPoint)  // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
+            .accessDeniedHandler(jwtAccessDeniedHandler)  //ï¿½Î°ï¿½ ï¿½ï¿½ï¿½ï¿½ 
 
             .and()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // sessionÀ» »ç¿ëÇÏÁö ¾ÊÀ½
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // sessionï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
 
             .and()
-            .authorizeRequests()   // Á¢±Ù Á¦ÇÑ ¼³Á¤ 
+            .authorizeRequests()   // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
             .antMatchers(
             "/auth/login**",
                             "/auth/signUp**",
                             "/emoji/**",
                             "/emoji/getEmojiList**",
-                            "/board/**"
+                            "/board/**", 
+                            "/custom/**"
                             // "/auth/hello**"
-            ).permitAll()  // ÀÎÁõ¾øÀÌ Á¢±Ù Çã¿ë 
-        .anyRequest().authenticated() // ³ª¸ÓÁö´Â ÀÎÁõ ¹Þ¾Æ¾ß ÇÔ
+            ).permitAll()  // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ 
+        .anyRequest().authenticated() // ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Þ¾Æ¾ï¿½ ï¿½ï¿½
 
         .and()
         .apply(new JwtSecurityConfig(jwtProvier));
         return http.build();
 
         // http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
-        // .addFilter(corsFilter)  // ¸ðµç ¿äÃ»Àº ÀÌ ÇÊÅÍ¸¦ °ÅÄ§ => ³» ¼­¹ö´Â corsÁ¤Ã¥¿¡¼­ ¹þ¾î³¯ ¼ö ÀÖÀ½ 
-        // .formLogin().disable()  // security¿¡¼­ Á¦°øÇÏ´Â formLogin»ç¿ë ¾ÈÇÔ
-        // .httpBasic().disable();  // Bearer¹æ½ÄÀÇ ÅäÅ«À¸·Î ID/PW Àü´Þ ÇÏ±â À§ÇØ »ç¿ë ¾ÈÇÔ 
+        // .addFilter(corsFilter)  // ï¿½ï¿½ï¿½ ï¿½ï¿½Ã»ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½Í¸ï¿½ ï¿½ï¿½Ä§ => ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ corsï¿½ï¿½Ã¥ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½î³¯ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
+        // .formLogin().disable()  // securityï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ï´ï¿½ formLoginï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
+        // .httpBasic().disable();  // Bearerï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Å«ï¿½ï¿½ï¿½ï¿½ ID/PW ï¿½ï¿½ï¿½ï¿½ ï¿½Ï±ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ 
     } 
     @Bean
 public CommonsMultipartResolver multipartResolver() {
     CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-    multipartResolver.setDefaultEncoding("UTF-8"); // ÆÄÀÏ ÀÎÄÚµù ¼³Á¤
-    // multipartResolver.setMaxUploadSizePerFile(5 * 1024 * 1024); // ÆÄÀÏ´ç ¾÷·Îµå Å©±â Á¦ÇÑ (5MB)
+    multipartResolver.setDefaultEncoding("UTF-8"); // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½Úµï¿½ ï¿½ï¿½ï¿½ï¿½
+    // multipartResolver.setMaxUploadSizePerFile(5 * 1024 * 1024); // ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½Îµï¿½ Å©ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ (5MB)
     return multipartResolver;
 }
 
-    // »ç¿ëÀÚ ¿äÃ» Á¤º¸·Î UserPasswordAuthenticationToken ¹ß±ÞÇÏ´Â ÇÊÅÍ
+    // ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½Ã» ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ UserPasswordAuthenticationToken ï¿½ß±ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
     // @Bean
     // public JwtAuthenticationFilter authenticationFilter() throws Exception {
     //     JwtAuthenticationFilter customAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager());
-    //     // ÇÊÅÍ URL ¼³Á¤
+    //     // ï¿½ï¿½ï¿½ï¿½ URL ï¿½ï¿½ï¿½ï¿½
     //     customAuthenticationFilter.setFilterProcessesUrl("/login");
-    //     // ÀÎÁõ ¼º°ø ÇÚµé·¯
+    //     // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Úµé·¯
     //     // customAuthenticationFilter.setAuthenticationSuccessHandler(authSuccessHandler);
-    //     // ÀÎÁõ ½ÇÆÐ ÇÚµé·¯
+    //     // ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½Úµé·¯
     //     customAuthenticationFilter.setAuthenticationFailureHandler(authFailureHandler);
-    //     // BeanFactory¿¡ ÀÇÇØ ¸ðµç property°¡ ¼³Á¤µÇ°í ³­ µÚ ½ÇÇà
+    //     // BeanFactoryï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ propertyï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½Ç°ï¿½ ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½
     //     customAuthenticationFilter.afterPropertiesSet();
     //     return customAuthenticationFilter;
     // }
 
 
-    // JWTÀÇ ÀÎÁõ ¹× ±ÇÇÑÀ» È®ÀÎÇÏ´Â ÇÊÅÍ
+    // JWTï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
     // @Override
     // @Bean
     // public AuthenticationManager authenticationManagerBean() throws Exception {
@@ -115,14 +116,14 @@ public CommonsMultipartResolver multipartResolver() {
     // public JwtAuthorizationFilter jwtFilter() {
     //     return new JwtAuthorizationFilter(jwtTokenUtil, null);
     // }
-    // ·Î±×ÀÎ ½Ã ÇÊ¿äÇÑ Á¤º¸ °¡Á®´Ù ÁÜ 
+    // ï¿½Î±ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½Ê¿ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ 
     // @Override
     // public void configure(AuthenticationManagerBuilder auth) throws Exception {
     //     auth.userDetailsService(jwtUserDetailsService)
     //     .passwordEncoder(new BCryptPasswordEncoder());
     // }
 
-        // JWTÀÇ ÀÎÁõ ¹× ±ÇÇÑÀ» È®ÀÎÇÏ´Â ÇÊÅÍ
+        // JWTï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ ï¿½ï¿½ ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ È®ï¿½ï¿½ï¿½Ï´ï¿½ ï¿½ï¿½ï¿½ï¿½
         // @Bean
         // @Override
         // public AuthenticationManager authenticationManagerBean() throws Exception {

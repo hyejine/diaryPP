@@ -3,12 +3,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.example.demo.model.dao.CustomMapper">
 
-    <select id="getUserCustom" resultType="EmojiImageDto">
-        SELECT * FROM custom_table where user_email=#{user_email}
+    <select id="getUserCustom" parameterType="HashMap" resultType="java.lang.Boolean">
+        SELECT IF(COUNT(*) = 1, 1, 0) FROM custom_table where user_email=#{user_email}
     </select> 
 
-    <insert id="saveFont">
-        insert info custom_table (user_email, custom_font) values (#{user_email}, #{custom_font})
+    <insert id="saveFont"  parameterType="CustomDto">
+        INSERT INTO custom_table (custom_font, user_email) values ( #{custom_font}, #{user_email})
     </insert>
 
     <insert id="updateFont">

@@ -37,5 +37,10 @@ public class EmojiController {
     public EmojiImageDto getEmoji(@PathVariable("emojiId") Long emojiId) {
         return emojiMapper.getEmoji(emojiId);
     }
-    
+    @GetMapping("/postFont/{fontChange}")
+	public String postFont(@PathVariable ("fontChange") String data) {
+		System.out.println("======value===="+data);
+		// customService.postFont(data);
+		return "data"+data;
+	}
 }

@@ -3,27 +3,46 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    position: relative;
+    background-color: aqua;
 
     .logo{
         width: 100px;
     }
-    .login{
-        position:absolute;
-        right: -23px;
+    .menuWrap{
+        display: flex;
+        position: absolute;
+        right: 0;
     }
-    .menuFont{
-        margin-top: 8px;
-        padding: 3px 5px;
+    .customMenu{
+        margin-right: 5px;
     }
-    .fontB{
-        margin-left: 20px;
-        justify-content: center;  
-        align-items: center;
-        height: 35px;
-        margin-top: 10px;
-        background-color: #e2d7e5;
-        box-shadow: 2px 2px #5c596a;
+    .btn-primary {
+    
     }
+    // .login{
+    //     position:absolute;
+    //     right: -23px;
+    // }
+    // .menuFont{
+    //     margin-top: 8px;
+    //     padding: 3px 5px;
+    //     border-radius: none !important;
+    //     border: 1px solid 'red' !important;
+    // }
+    // .form-select{
+    //     border-radius: none;
+    //     border: 1px solid 'red';
+    // }
+    // .fontB{
+    //     margin-left: 20px;
+    //     justify-content: center;  
+    //     align-items: center;
+    //     height: 35px;
+    //     margin-top: 10px;
+    //     background-color: #e2d7e5;
+    //     box-shadow: 2px 2px #5c596a;
+    // }
     // .userName{
     //     color: #555;
     //     padding: 0px 5px;

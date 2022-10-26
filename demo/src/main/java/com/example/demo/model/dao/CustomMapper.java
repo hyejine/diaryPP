@@ -1,6 +1,7 @@
 package com.example.demo.model.dao;
 
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
 import com.example.demo.model.dto.CustomDto;
@@ -11,9 +12,9 @@ public interface CustomMapper {
     
     public boolean getUserCustom(String currentUser);
 
-    public CustomDto updateFont(CustomDto value, String currentUser);
+    public void updateFont(CustomDto value);
 
-    public CustomDto saveFont(CustomDto value);
+    public void saveFont(CustomDto value);
 
 
 }

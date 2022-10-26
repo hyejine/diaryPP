@@ -150,6 +150,13 @@ public class BoardController {
 		return boardService.getYear(year);
 	} 
 
+	@GetMapping("/postFont/{fontChange}")
+	public String postFont(@PathVariable ("fontChange") String data) {
+		System.out.println("======value===="+data);
+		// customService.postFont(data);
+		return "data"+data;
+	}
+
 	// @GetMapping("/getOneDiary/${diary_id}")
 	// public List<DiaryDto> getOneDiary(@PathVariable("id") Long id) {
 	// 	return boardMapper.getOneDiary(id);
