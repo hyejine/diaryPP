@@ -33,7 +33,6 @@ const Header = (props) => {
     { value: "KoPubWorld_Batang", fontStyle: "KoPub바탕" },
   ];
 
-  console.log(fontChange);
   const chageFont = (value) => {
     setFontChange(value.target.value);
   };
@@ -42,7 +41,6 @@ const Header = (props) => {
     const data = {
       custom_font: fontChange,
     };
-
     axios
       .post(`/custom/postFont`, data)
       .then((res) => console.log(res))
@@ -57,12 +55,12 @@ const Header = (props) => {
       <div className="menuWrap">
       <div className="customMenu">
         <Dropdown autoClose="outside">
-          <Dropdown.Toggle >
+          <Dropdown.Toggle>
             {currnetUser?.image ? (
               currnetUser?.image
             ) : (
-              <AccountCircle color="disabled" />
-            )}
+              <AccountCircle className="userImg"/>
+            )} 
             <span className="userName">{currnetUser?.name}정혜진</span>
           </Dropdown.Toggle>
           <Dropdown.Menu style={{ width: 263 }}>
@@ -72,20 +70,16 @@ const Header = (props) => {
               <div style={{ display: "flex" }}>
                 <Form.Select className="menuFont">
                   <option value="fontSelect" className="menuFont">
-                    {" "}
-                    언어선택{" "}
+                    언어선택
                   </option>
                   <option value="fontSelect" className="menuFont">
-                    {" "}
-                    Korea{" "}
+                    Korea
                   </option>
                   <option value="fontSelect" className="menuFont">
-                    {" "}
-                    Engilsh{" "}
+                    Engilsh
                   </option>
                   <option value="fontSelect" className="menuFont">
-                    {" "}
-                    Japan{" "}
+                    Japan
                   </option>
                 </Form.Select>
                 <button className="fontB"> 저장 </button>
@@ -110,13 +104,11 @@ const Header = (props) => {
                       key={v.fontStyle}
                       style={{ fontFamily: `${v.value}` }}
                     >
-                      {" "}
                       {v.fontStyle}{" "}
                     </option>
                   ))}
                 </Form.Select>
                 <button className="fontB" onClick={saveFont}>
-                  {" "}
                   저장{" "}
                 </button>
               </div>
@@ -138,20 +130,9 @@ const Header = (props) => {
         </div>
         <div>
         <Dropdown autoClose="outside">
-          <Dropdown.Toggle variant="success" id="dropdown-basic ">
+          <Dropdown.Toggle href="/ContactUs" >
             <span>고객센터</span>
           </Dropdown.Toggle>
-          <Dropdown.Menu style={{ width: 263 }}>
-            <Dropdown.Item>
-              <span> FAQ </span>
-            </Dropdown.Item>
-            <Dropdown.Item href="/ContactUs">
-              <span> 문의하기 </span>
-            </Dropdown.Item>
-            <Dropdown.Item>
-              <span> 웹 정보 </span>
-            </Dropdown.Item>
-          </Dropdown.Menu>
         </Dropdown>
       </div>
       </div>

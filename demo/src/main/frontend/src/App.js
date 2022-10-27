@@ -13,7 +13,7 @@ import Read from "./components/board/Read";
 import CalendarCom from "./components/calendar/CalendarCom";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import defaultBg from './resource/image/defaultBackground.jpg'
-import ContactUs from "./components/serviceCenter/ContactUs";
+import ServiceCenter from "./components/serviceCenter/ServiceCenter";
 
 function App(props) {
   const currnetUser = useSelector(state => state.user);
@@ -35,7 +35,7 @@ function App(props) {
      <Route element={<BoardLayout />}>
       <Route path="/board/read/:diary_id" element={<Read/>}/> 
       <Route path="/board/edit/:diary_id" element={<Edit/>}/> 
-      <Route path="/contactUs" element={<ContactUs/>}/> 
+      <Route path="/contactUs" element={<ServiceCenter/>}/> 
       </Route>
       </Routes>
     </BrowserRouter>

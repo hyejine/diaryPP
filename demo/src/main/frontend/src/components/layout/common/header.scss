@@ -4,7 +4,7 @@
     align-items: center;
     justify-content: center;
     position: relative;
-    background-color: aqua;
+    // background-color: aqua;
 
     .logo{
         width: 100px;
@@ -16,10 +16,18 @@
     }
     .customMenu{
         margin-right: 5px;
+        background-color: 'red';
     }
-    .btn-primary {
-    
+    .userImg{
+        margin-right: 5px;
     }
+    // .btn-primary {
+    //     --bs-btn-bg: none;
+    //     --bs-btn-hover-bg: none;
+    //     --bs-btn-active-bg: none;
+    //     --bs-btn-color: rgb(0, 0, 0);
+    //     border: none;
+    // }
     // .login{
     //     position:absolute;
     //     right: -23px;

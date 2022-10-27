@@ -30,7 +30,6 @@ footer, header, hgroup, menu, nav, section {
 }
 body {
   line-height: 1;
-//   background-color: #FFE99D;
 }
 ol, ul {
 	list-style: none;
@@ -48,10 +47,9 @@ table {
 	border-spacing: 0;
 }
 
+// reset css에서 추가 
 .allPage{
 	background-color: #FFE99D;
-	// font-family: 'DungGeunMo';
-	// font-family: 'Galmuri9';
 }
 .boardScroll::-webkit-scrollbar {
     width: 12px;  /* 스크롤바의 너비 */
@@ -63,4 +61,11 @@ table {
 .boardScroll::-webkit-scrollbar-track {
 	border-radius: 10px;
     background: rgba(131, 95, 3, 0.1); /*스크롤바 뒷 배경 색상*/
+}
+.btn-primary {
+	--bs-btn-bg: none;
+	--bs-btn-hover-bg: none;
+	--bs-btn-active-bg: none;
+	--bs-btn-color: rgb(0, 0, 0);
+	border: none;
 }
