@@ -1,55 +1,128 @@
-.serviceCenterPage{
-    margin: 30px auto 0px auto;
-    width: 95%;
-    height: 631px;
-    border: 1px solid #9f5f88;
-    background-color: #f2c8de;
+.serviceCenterPdfdage {
+    // serviceCenterPage 
+  margin: 30px auto 0px auto;
+  width: 95%;
+  height: 631px;
+  border: 1px solid #9f5f88;
+  background-color: #f2c8de;
 
-    // 지워야 함
-    font-family: 'DungGeunMo';
+  // 공통 css
+  .mt2 {
+    margin-top: 20px;
+  }
+  .pixelBorder {
+    border-left: 1px solid #fdd8ed;
+    border-top: 1px solid #fdd8ed;
+  }
+  .noneB {
+    border-bottom: none;
+  }
+  .setCursor {
+    cursor: pointer;
+  }
+  // 지워야 함
+  font-family: "DungGeunMo";
 
-    .webHeader{
-        padding: 8px 10px;
-        background: linear-gradient( to right, #f49bca, #efbcd7 );
-        display: flex;
-        align-items: center;
-        position: relative;
-    }
-    .headerButton{
-        position: absolute;
-        right: 3px;
-        display: flex;
-    }
-    .downB{
-        background-color: #e9c3d7;
-        box-shadow: 2.5px 2.5px  #986882;
-        margin-right: 7px;
-    }
-    .webContent{
-      padding : 20px;
-    }
-    .tabB{
-        cursor: pointer;
-        text-align: center;
-        padding: 3px;
-        margin-right: 3px;
-        box-shadow: 2.5px 0px  #986882; 
-    }
-    .tabB:active {
-        box-shadow: 2.5px 2.5px  #986882 inset;
-    }
+  .webHeader {
+    padding: 8px 10px;
+    background: linear-gradient(to right, #f49bca, #efbcd7);
+    display: flex;
+    align-items: center;
+    position: relative;
+  }
+  .headerButton {
+    position: absolute;
+    right: 3px;
+    display: flex;
+  }
+  .downB {
+    background-color: #e9c3d7;
+    box-shadow: 2.5px 2.5px #986882;
+    margin-right: 7px;
+  }
+  .webContent {
+    padding: 20px;
+  }
+  .tabB {
+    cursor: pointer;
+    text-align: center;
+    padding: 3px;
+    margin-right: 3px;
+    box-shadow: 2.5px 0px #986882;
+  }
+  .tabB:active {
+    box-shadow: 2.5px 2.5px #986882 inset;
+  }
 
-    // 문의하기 
-    .contactUsTap{
-        height: 500px;
-        padding: 30px 10px;
-        box-shadow: 2.5px 2.5px  #986882;
-    }
-    .writeC{
-        display: flex;
-        align-items: center;
-    }
-    .checkBox{
-        width: 45px;
-    }
+  // 문의하기
+  .contactUsTap {
+    height: 500px;
+    padding: 16px 10px;
+    box-shadow: 2.5px 2.5px #986882;
+    position: relative;
+  }
+  .writeTitle {
+    display: flex;
+    align-items: center;
+  }
+  .checkBox {
+    width: 45px;
+  }
+  .writeAareaWrap {
+    margin: 0 auto;
+    width: 91%;
+  }
+  .inputResize {
+    width: 93%;
+    height: 200px;
+    overflow: scroll;
+    scrollbar-color: rebeccapurple green; 
+    scrollbar-color: inset;
+    // scrollbar-color: #d4aa70 #e4e4e4;
+    // scrollbar-width: thin;
+    // scroll-snap-type: x mandatory;
+    // scroll-snap-destination: 0% 100%;
+    // scroll-snap-points-x: repeat(100%);
+  }
+  .writeAarea {
+    margin-top: 3px;
+    padding: 10px;
+    box-shadow: 1.5px 1.5px #986882 inset;
+    resize: none;
+  }
+  .inputResize::-webkit-scrollbar {
+    width: 12px ; /* 스크롤바의 너비 */
+    // background: #f9eaf4;
+  }
+  .inputResize::-webkit-scrollbar-thumb {
+    background: #ffd2ec; /* 스크롤바의 색상 */
+  }
+  .inputResize::-webkit-scrollbar-track {
+    background: #f9eaf4; /*스크롤바 뒷 배경 색상*/
+  }
+  .inputResize::-webkit-scrollbar-button:start:decrement{
+    width: 12px;
+    height: 5px;
+    background-color: #986882;
+  }
+  .onCheckEvent {
+    position: relative;
+  }
+  .checkPoint {
+    position: absolute;
+    top: 47%;
+    left: 49%;
+    transform: translate(-50%, -50%);
+    width: 50px;
+  }
+  .buttonWrap{
+    text-align: center;
+  }
+  .submitB{
+    padding: 5px 20px;
+    background-color: #f2c8db;
+    box-shadow: 2.5px 2.5px #986882;
+    border-bottom: none;
+    border-right: none;
+  }
 }

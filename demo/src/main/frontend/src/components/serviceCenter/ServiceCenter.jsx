@@ -23,14 +23,14 @@ const ServiceCenter = () => {
             <div className='webHeader'>
                 <span>고객센터</span> 
                 <div className='headerButton'>
-                    <div className='downB'> <Minimize/> </div>
-                    <div className='downB'> <Close/> </div>
+                    <div className='downB pixelBorder'> <Minimize/> </div>
+                    <div className='downB pixelBorder'> <Close/> </div>
                 </div>
             </div>
             <div className='webContent'>
                 <div  onClick={(v)=>{tabChange(v)}}>
                     {tabList.map((vlaue, index)=>(
-                       <span className='tabB' key={index}> {vlaue} </span>
+                       <span className='tabB pixelBorder noneB' key={index}> {vlaue} </span>
                     ))}
                 </div>
                 <div>
