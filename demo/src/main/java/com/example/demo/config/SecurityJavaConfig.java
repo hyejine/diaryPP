@@ -2,6 +2,7 @@ package com.example.demo.config;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.mail.javamail.JavaMailSenderImpl;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -68,7 +69,8 @@ public class SecurityJavaConfig {
                             "/emoji/**",
                             "/emoji/getEmojiList**",
                             "/board/**", 
-                            "/custom/**"
+                            "/custom/**",
+                            "/mail/**"
                             // "/auth/hello**"
             ).permitAll()  // �������� ���� ��� 
         .anyRequest().authenticated() // �������� ���� �޾ƾ� ��
@@ -89,6 +91,18 @@ public CommonsMultipartResolver multipartResolver() {
     // multipartResolver.setMaxUploadSizePerFile(5 * 1024 * 1024); // ���ϴ� ���ε� ũ�� ���� (5MB)
     return multipartResolver;
 }
+
+// @Bean
+// public JavaMailSenderImpl mailSender() {
+//     JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
+
+//     javaMailSender.setProtocol("smtp");
+//     javaMailSender.setHost("127.0.0.1");
+//     javaMailSender.setPort(25);
+
+//     return javaMailSender;
+// }
+
 
     // ����� ��û ������ UserPasswordAuthenticationToken �߱��ϴ� ����
     // @Bean

@@ -1,5 +1,6 @@
 import React from "react";
 import { useState } from "react";
+import axios from "axios";
 import { Form, Button } from "react-bootstrap";
 import CheckBox from "../../resource/image/checkPixel.png";
 import EmptyBox from "../../resource/image/emptyCheckBox.png";
@@ -7,13 +8,16 @@ import Check from "../../resource/image/check.png";
 
 const ContactUs = () => {
     const [check, setCheck] = useState();
-  const onSubmit = (value) => {
+  
+    const onSubmit = (value) => {
     value.preventDefault(value.target);
     const data = {
         useEmail: value.target.userEmail.value,
         contactUs: value.target.opinionText.value
     }
-    console.log(value.target.opinionText.value);
+    axios.post("/mail/postContactUs",data)
+    .then((res)=> console.log(res))
+    .catch((err)=>console.log(err))
   };
 
   const checkEvent = ()=>{
