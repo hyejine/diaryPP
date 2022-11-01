@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.demo.model.dto.EmailDto;
+import com.example.demo.model.dto.EmailContentDto;
 import com.example.demo.service.MailService;
 
 @RestController
@@ -21,7 +21,7 @@ public class MailServiceController {
 	}
 
     @PostMapping("/postContactUs")
-    public void postContactUs(@RequestBody EmailDto data) {
+    public void postContactUs(@RequestBody EmailContentDto data) {
 		System.out.println("======value===="+data);
 		mailService.postContactUs(data);
 		// return "data";
