@@ -22,7 +22,7 @@ public class MailServiceController {
 
     @PostMapping("/postContactUs")
     public void postContactUs(@RequestBody EmailContentDto data) {
-		System.out.println("======value===="+data);
+
 		mailService.postContactUs(data);
 		// return "data";
 		// return customService.postFont(data);

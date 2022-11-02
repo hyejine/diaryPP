@@ -11,7 +11,9 @@ const CommonModal =(props)=> {
       <Modal size="lg" show={show} centered id="selectEmojiModal">
         <Modal.Body >
           <h4 className="title">{contents}</h4>
-          <Button onClick={()=> navigate(`/board/read/${diary_id}`)} className="closeButton">Close</Button>
+          {diary_id ? <Button onClick={()=> navigate(`/board/read/${diary_id}`)} className="closeButton">Close</Button>:
+          <Button onClick={()=> navigate(`/`)} className="closeButton">Close</Button>
+           }
         </Modal.Body>
       </Modal>
             </div>

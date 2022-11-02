@@ -20,11 +20,13 @@ public class MailService implements IMailService{
     private JavaMailSender javaMailSender;
     private static final String FROM_ADDRESS = "diaryMail.jung@gmail.com";
     private final MailTemplateMapper mailTemplateMapper;
+    // private final testImge testImge;
 
     @Autowired
     public MailService(MailTemplateMapper mailTemplateMapper, JavaMailSender javaMailSender){
         this.mailTemplateMapper = mailTemplateMapper;
         this.javaMailSender =javaMailSender;
+        // this.testImge =testImge;
     }
 
     @Override
@@ -32,7 +34,7 @@ public class MailService implements IMailService{
         try{
         MailSender mailSender = new MailSender(javaMailSender);
         // SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
-        System.out.println(mailSender);
+        System.out.println("text===" +text);
         mailSender.setTo(MailService.FROM_ADDRESS);
         mailSender.setSubject(subject);
         // String htmlContent = "<p>" + data.getContactUs() + "<p> <img src='cid:sample-img'>";
@@ -48,7 +50,17 @@ public class MailService implements IMailService{
     private String buildEmailContent(String templateName, String[][] objectMap){
 
         MailTemplateDto emailTemplate = mailTemplateMapper.getEmailContent(templateName);
+        System.out.println("buildEmailContent===objectMap==="+objectMap);
         String emailTemplateContent = emailTemplate.getTemplate_content();
+
+        for (String[] v : objectMap){
+            if(v[1] != null){
+                System.out.println("v[1]===="+v[1]);
+                System.out.println("v[0]===="+v[0]);
+                emailTemplateContent = emailTemplateContent.replace(v[0], v[1]);
+            }
+        }
+        System.out.println("buildEmailContent===emailTemplateContent==="+emailTemplateContent);
 
         return emailTemplateContent;
         
@@ -58,10 +70,13 @@ public class MailService implements IMailService{
     public void postContactUs(EmailContentDto data) {
 
         System.out.println("postContactUs==="+data.getContactUs());
-        this.sendMail(data.getUseEmail(), "diary 문의메일", 
+        // System.out.println(testImge);
+        this.sendMail(data.getUseEmail(), "👀 [Diary 문의메일]이 도착했습니다.", 
             buildEmailContent("contactUs",
             new String[][]{
-                { "{%NAME%}", data.getContactUs() }
+                { "{%ContactUS%}", data.getContactUs() },
+                { "{%CallerUser%}", data.getUseEmail() },
+                // { "{%backgroundImg%}", "../../../../../resources/javaImages/computer.png" }
             }
             )
         );

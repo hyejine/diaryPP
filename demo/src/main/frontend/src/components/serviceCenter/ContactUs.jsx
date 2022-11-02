@@ -5,9 +5,12 @@ import { Form, Button } from "react-bootstrap";
 import CheckBox from "../../resource/image/checkPixel.png";
 import EmptyBox from "../../resource/image/emptyCheckBox.png";
 import Check from "../../resource/image/check.png";
+import CompletModal from "../common/CommonModal";
 
 const ContactUs = () => {
     const [check, setCheck] = useState();
+    const [modalActive, setModalActive] = useState();
+    const Emailpattern = "^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$";
   
     const onSubmit = (value) => {
     value.preventDefault(value.target);
@@ -15,9 +18,25 @@ const ContactUs = () => {
         useEmail: value.target.userEmail.value,
         contactUs: value.target.opinionText.value
     }
-    axios.post("/mail/postContactUs",data)
-    .then((res)=> console.log(res))
-    .catch((err)=>console.log(err))
+
+    if (data.contactUs === ''|| data.useEmail === '' || !check){
+      if(data.contactUs === ''|| data.useEmail === ''){
+        alert("문의사항 또는 답변을 받으실 메일을 입력해주세요.");
+      }
+      if(!check){
+        console.log(check);
+        alert("개인정보 수집 및 이용에 동의해주세요.");
+      }
+    } else {
+          // axios.post("/mail/postContactUs",data)
+    // .then((res)=> console.log(res))
+    // .catch((err)=>console.log(err))
+      setModalActive(!modalActive);
+    }
+    // if(Emailpattern.test(data.userEmail)){
+    //   console.log("df");
+    // }
+
   };
 
   const checkEvent = ()=>{
@@ -51,13 +70,19 @@ const ContactUs = () => {
           <img  src={EmptyBox} alt="" className="checkBox"/>
           {check && <img  src={Check} alt="" className="checkPoint"/>}
           </div>
-          <span>개인정보 방치에 동의합니다.</span>
+          <span>개인정보 수집 및 이용에 동의합니다.</span>
           </sapn>
         </div>
         <div className="buttonWrap">
         <button type="submit" className="submitB pixelBorder">보내기</button>
         </div>
       </form>
+
+      <CompletModal 
+      show={modalActive} 
+      hide={()=>setModalActive(false)}
+      contents = "좋은 의견 감사합니다 ."
+      />
     </div>
   );
 };
