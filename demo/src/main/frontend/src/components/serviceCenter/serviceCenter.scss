@@ -53,6 +53,21 @@
   .tabB:active {
     box-shadow: 2.5px 2.5px #986882 inset;
   }
+  .errorFont{
+    margin-top: 8px;
+    font-size: 13px; color: #c8294b;
+  }
+  .vibration {
+    animation: vibration 0.1s infinite;
+  }
+  // @keyframes vibration {
+  //   from {
+  //     transform: rotate(1deg);
+  //   }
+  //   to {
+  //     transform: rotate(-1deg);
+  //   }
+  // }
 
   // 문의하기
   .contactUsTap {
@@ -89,6 +104,9 @@
     padding: 10px;
     box-shadow: 1.5px 1.5px #986882 inset;
     resize: none;
+  }
+  .-mt2{
+    margin-top: -6px;
   }
   .inputResize::-webkit-scrollbar {
     width: 12px ; /* 스크롤바의 너비 */

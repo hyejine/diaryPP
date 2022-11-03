@@ -1,0 +1,48 @@
+#modalPage{
+    font-family: 'DungGeunMo';
+    width: 500px;
+
+    .pixelBorder {
+        border-left: 1px solid #fdd8ed;
+        border-top: 1px solid #fdd8ed;
+      }
+      
+    .modalWrap{
+        border: 1px solid #bf84ad;
+        background-color: #f5e0ec;
+        padding: 0px;
+    }
+    .title{
+        align-items: center;
+        display: flex; position: relative;
+        margin: 4px 6px; padding: 8px;
+        color: #ed81cc; font-weight: bold;
+        background: linear-gradient( to right, #f2d6e2, #e772cb );
+    }
+    .headerButton {
+        position: absolute;
+        right: 3px;
+        display: flex;
+      }
+      .downB {
+        background-color: #f1e6f2;
+        box-shadow: 2.5px 2.5px #986882;
+        margin-right: 7px;
+      }
+    .content{
+        font-weight: bolder;
+        text-align: center;
+        padding: 25px 0;
+    }
+    .closeButtonW{
+        text-align: center;
+        margin-bottom: 13px;
+    }
+    .closeButton{
+        background-color: #f1e6f2;
+        color: #ed81cc; 
+        padding: 5px 10px;
+        border-radius: 0;
+        box-shadow: 2.5px 2.5px #986882;
+    }
+}
