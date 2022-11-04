@@ -6,10 +6,10 @@ import '../layout/main-boarder-Layout.scss';
 
 const MainLayout = (props) => {
   const {setBackColor, setBackImage, setFontChange, fontChange} = props;
-  const [tap, setTap] = useState("캘린더");
+  const [tab, setTab] = useState("캘린더");
 
   const onChange = (value) => {
-    setTap(value.target.innerText);
+    setTab(value.target.innerText);
   };
 
   return (
@@ -24,7 +24,7 @@ const MainLayout = (props) => {
       <div className="mainContent">
         <div className="mainInner">
           <div >
-            {tap === "캘린더" ? <CalendarCom /> : <GraphCom />}
+            {tab === "캘린더" ? <CalendarCom /> : <GraphCom />}
           </div>
         </div>
       </div>

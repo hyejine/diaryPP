@@ -12,49 +12,33 @@ const ContactUs = () => {
     const [check, setCheck] = useState();
     const [modalActive, setModalActive] = useState();
     const [privateCheck, setPrivateCheck] = useState(false);
-  
-    const onSubmit = (value) => {
-      console.log(value);
-      console.log(check);
+    const [vibration, setVibration] = useState(false);
 
-      if(check===undefined){
-        console.log("들어오나", check);
+    const checkEvent = ()=>{
+      setCheck(!check);
+      if(check){
         setPrivateCheck(true);
+      } else{
+        setPrivateCheck(false);
       }
-      console.log(privateCheck);
-    // value.preventDefault(value.target);
-    // const data = {
-    //     userEmail: value.target.userEmail.value,
-    //     contactUs: value.target.opinionText.value
-    // }
+    }
 
-    // if (data.contactUs === ''|| data.userEmail === '' || !check){
-    //   if(data.contactUs === ''|| data.userEmail === ''){
-    //     // return <div>문의사항 또는 답변을 받으실 메일을 입력해주세요</div>
-    //     alert("문의사항 또는 답변을 받으실 메일을 입력해주세요.");
-    //   }
-    //   if(!check){
-    //     console.log(check);
-    //     // return <div>문의사항 또는 답변을 받으실 메일을 입력해주세요</div>
-    //     alert("개인정보 수집 및 이용에 동의해주세요.");
-    //   }
-    // } else if (data.userEmail !== ''){
-    //   if(!Emailpattern.test(data.userEmail)){
-    //     console.log("ff");
-    //   } else {
-    //     setModalActive(!modalActive);
-    //   }
-    // } 
-    // else {
-    //       // axios.post("/mail/postContactUs",data)
-    // // .then((res)=> console.log(res))
-    // // .catch((err)=>console.log(err))
-    //   setModalActive(!modalActive);
-    // }
+    const onSubmit = (value) => {
+      if(check===undefined){
+        setPrivateCheck(true);
+      } 
+      if(check ===true && value){
+        setModalActive(!modalActive);
+        axios.post("/mail/postContactUs",value)
+       .then((res)=> console.log(res))
+       .catch((err)=>console.log(err))
+        console.log(value, check);
+      }
   };
-  const checkEvent = ()=>{
-    setCheck(!check);
-    setPrivateCheck(false);
+
+  const checkError = ()=>{
+    setVibration(true)
+    setTimeout(()=>{ setVibration(false) }, 2000);
   }
 
   return (
@@ -62,6 +46,7 @@ const ContactUs = () => {
       <div className="writeTitle">
         <img src={CheckBox} alt="" className="checkBox"></img>
         <span>의견보내기</span>
+        <p className= {vibration ? "errorFont vibration" : "errorFont"}> {errors.contactUs && <small role="alert">{errors.contactUs.message}</small>}</p>
       </div>
       <form onSubmit={handleSubmit(onSubmit)}>
         <div className="writeAareaWrap">
@@ -69,24 +54,22 @@ const ContactUs = () => {
             name="opinionText"
             className="writeAarea inputResize"
             placeholder="의견을 적어주세요! (´▽`ʃ💜ƪ)"
-            {...register("contactUs", { required: "* 문의하실 내용을 입력해 주세요." })} 
+            {...register("contactUs", { required: "(* 문의하실 내용을 입력해 주세요.)" })} 
           />
-      <p className="errorFont"> {errors.contactUs && <small role="alert">{errors.contactUs.message}</small>}</p>
         </div>
         <div className="writeTitle mt2">
           <img src={CheckBox} alt="" className="checkBox"></img>
-          <span>답변 받으실 이메일을 입력 해 주세요.</span>
+          <span>답변 받으실 이메일을 입력 해 주세요.</span>  <p className={vibration ? "errorFont vibration" : "errorFont"}> {errors.userEmail && <small role="alert">{errors.userEmail.message}</small>}</p>
         </div>
         <div className="writeAareaWrap">
         <input 
         className="writeAarea" placeholder="example@diyDiary.com"
-        {...register("userEmail", { required: "* 이메일은 필수 입력입니다.",
+        {...register("userEmail", { required: "(* 이메일은 필수 입력입니다.)",
       pattern: {
           value: /\S+@\S+\.\S+/,
-          message: "* 이메일 형식에 맞지 않습니다.",
+          message: "(* 이메일 형식에 맞지 않습니다.)",
         },
       })} />
-      <p className="errorFont"> {errors.userEmail && <small role="alert">{errors.userEmail.message}</small>}</p>
         </div>
         <div className="writeTitle mt2"  >
          <sapn className="setCursor writeTitle" onClick={checkEvent}>
@@ -95,17 +78,15 @@ const ContactUs = () => {
           {check && <img  src={Check} alt="" className="checkPoint"/>}
           </div>
           <span>개인정보 수집 및 이용에 동의합니다.</span>
+          {privateCheck && <p className={vibration ? "errorFont vibration -mt2" : "errorFont -mt2"}>(* 개인정보 수집 및 이용에 동의를 확인해주세요.)</p>}
           </sapn>
         </div>
         <div className="writeAareaWrap">
-        {privateCheck && <p className="errorFont -mt2">* 개인정보 수집 및 이용에 동의를 확인해주세요.</p>}
         </div>
-          
         <div className="buttonWrap">
-        <button type="submit" className="submitB pixelBorder">보내기</button>
+        <button type="submit" className="submitB pixelBorder" onClick={checkError}>보내기</button>
         </div>
       </form>
-
       <CompletModal 
       state={'Success'}
       show={modalActive} 

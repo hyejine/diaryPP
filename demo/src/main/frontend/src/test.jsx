@@ -1,20 +1,28 @@
 import React from "react";
-import { useForm } from "react-hook-form";
+import { useForm, Controller } from "react-hook-form";
+import {Checkbox} from "@mui/material";
 
 const Test = () => {
-  const {register, handleSubmit,
-    formState: { errors }, } = useForm();
-  const onSubmit = (data) => {
-    console.log(data);
-  }; // your form submit function which will invoke after successful validation
-
+    const { handleSubmit, control, reset, register, errors } = useForm({
+        defaultValues: {
+          checkbox: false,
+        }
+      });
+      const onSubmit = data => console.log(data);
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
-      <input defaultValue="test" {...register("example")} />
+        <input defaultValue="test" {...register("example")} />
+      {/* <input defaultValue="test" {...register("example")} />
       <div>
       <input {...register("exampleRequired", { required: true })} />
       {errors.exampleRequired && <p>This field is required</p>}
-      </div>
+      </div> */}
+      <Controller
+        name="checkbox"
+        control={control}
+        rules={{ required: "This field is required<" }}
+        render={({ field }) => <Checkbox {...field} />}
+      />
       <input type="submit" />
     </form>
   );

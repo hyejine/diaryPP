@@ -1,11 +1,11 @@
 import React from 'react';
 
-const FAQ = () => {
+const WebInfo = () => {
     return (
         <div>
-           FAQ
+            WebInfo
         </div>
     );
 };
 
-export default FAQ;
+export default WebInfo;

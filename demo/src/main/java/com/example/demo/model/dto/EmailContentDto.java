@@ -5,7 +5,7 @@ import lombok.Data;
 @Data
 public class EmailContentDto {
     
-    private String useEmail;
+    private String userEmail;
 
     private String contactUs;
 

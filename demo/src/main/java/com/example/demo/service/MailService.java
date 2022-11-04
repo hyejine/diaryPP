@@ -71,11 +71,11 @@ public class MailService implements IMailService{
 
         System.out.println("postContactUs==="+data.getContactUs());
         // System.out.println(testImge);
-        this.sendMail(data.getUseEmail(), "👀 [Diary 문의메일]이 도착했습니다.", 
+        this.sendMail(data.getUserEmail(), "👀 [Diary 문의메일]이 도착했습니다.", 
             buildEmailContent("contactUs",
             new String[][]{
                 { "{%ContactUS%}", data.getContactUs() },
-                { "{%CallerUser%}", data.getUseEmail() },
+                { "{%CallerUser%}", data.getUserEmail() },
                 // { "{%backgroundImg%}", "../../../../../resources/javaImages/computer.png" }
             }
             )

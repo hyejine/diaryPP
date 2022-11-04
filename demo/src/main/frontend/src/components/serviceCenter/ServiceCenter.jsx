@@ -1,51 +1,41 @@
-import { useState } from 'react';
+import { useState } from "react";
 import { Close, Minimize } from "@mui/icons-material";
+import { Tabs, Tab } from "react-bootstrap";
 import Faq from "./FAQ";
 import ContactUs from "./ContactUs";
-
-import './serviceCenter.scss';
-// import tab from './'
-
+import WebInfo from "./WebInfo";
+import "./serviceCenter.scss";
 
 const ServiceCenter = () => {
-    const tabList = ["FAQ", "문의하기", "웹 정보"]; 
-    const [ tap, setTap ] = useState("문의하기");
-
-    const tabChange =(value)=>{
-        setTap(value.target.innerText);
-    }
-    
-    console.log(tap === "FAQ" ? "FAQ" : "b");
-    console.log(tap, "FAQ");
-
-    return (
-        <div className='serviceCenterPage'>
-            <div className='webHeader'>
-                <span>고객센터</span> 
-                <div className='headerButton'>
-                    <div className='downB pixelBorder'> <Minimize/> </div>
-                    <div className='downB pixelBorder'> <Close/> </div>
-                </div>
-            </div>
-            <div className='webContent'>
-                <div  onClick={(v)=>{tabChange(v)}}>
-                    {tabList.map((vlaue, index)=>(
-                       <span className='tabB pixelBorder noneB' key={index}> {vlaue} </span>
-                    ))}
-                </div>
-                <div>
-                    <div>
-                    {tap === "FAQ" && <Faq />}
-                    {tap === "문의하기" && <ContactUs />}
-                        {/* {tap === `${tap}` && <tab />} */}
-                        {/* {tap === "FAQ" && <Faq />}
-                        {tap === "문의하기" && <Faq />}
-                        {tap === "웹 정보" && <Faq />} */}
-                    </div>
-                </div>
-            </div>
+  return (
+    <div className="serviceCenterPage">
+      <div className="webHeader">
+        <span>고객센터</span>
+        <div className="headerButton">
+          <div className="downB pixelBorder">
+            <Minimize />
+          </div>
+          <div className="downB pixelBorder">
+            <Close />
+          </div>
         </div>
-    );
+      </div>
+      <div className="webContent">
+       <span className='tabB pixelBorder noneB'> d </span>
+        <Tabs defaultActiveKey="FAQ" id="tabCustom">
+          <Tab eventKey="FAQ" title="FAQ" >
+            <Faq />
+          </Tab>
+          <Tab eventKey="문의하기" title="문의하기">
+            <ContactUs />
+          </Tab>
+          <Tab eventKey="웹정보" title="웹 정보">
+            <WebInfo />
+          </Tab>
+        </Tabs>
+      </div>
+    </div>
+  );
 };
 
 export default ServiceCenter;
