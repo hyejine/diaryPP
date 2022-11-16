@@ -3,6 +3,7 @@ package com.example.demo.config;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.mail.javamail.JavaMailSenderImpl;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
@@ -17,9 +18,9 @@ import com.example.demo.config.jwt.JwtAuthenticationEntryPoint;
 import com.example.demo.config.jwt.JwtProvier;
 import com.example.demo.config.jwt.JwtSecurityConfig;
 
-@Configuration         // Bean ���� 
-@EnableWebSecurity     // Spirng Security ���� ���� Ȱ��ȭ (����Ʈ ��ü�� ��� ����)
-// @EnableGlobalMethodSecurity(prePostEnabled = true)
+@Configuration         // Bean 
+@EnableWebSecurity     // Spirng Security Web 보안을 활성화해주는 annotation
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityJavaConfig {
 
     private final JwtProvier jwtProvier;
@@ -55,14 +56,14 @@ public class SecurityJavaConfig {
             .and()
             .csrf().disable()
             .exceptionHandling()
-            .authenticationEntryPoint(jwtAuthenticationEntryPoint)  // ���� ���� 
-            .accessDeniedHandler(jwtAccessDeniedHandler)  //�ΰ� ���� 
+            .authenticationEntryPoint(jwtAuthenticationEntryPoint)  
+            .accessDeniedHandler(jwtAccessDeniedHandler)  
 
             .and()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // session�� ������� ����
+            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // session사용 안함
 
             .and()
-            .authorizeRequests()   // ���� ���� ���� 
+            .authorizeRequests()   // HttpServletRequest를 사용하는 요청들에 대한 접근제한을 설정
             .antMatchers(
             "/auth/login**",
                             "/auth/signUp**",
@@ -71,19 +72,14 @@ public class SecurityJavaConfig {
                             "/board/**", 
                             "/custom/**",
                             "/mail/**"
-                            // "/auth/hello**"
-            ).permitAll()  // �������� ���� ��� 
-        .anyRequest().authenticated() // �������� ���� �޾ƾ� ��
+            ).permitAll()  // 여기 요청은 접근 허용
+        .anyRequest().authenticated() // 나머지 요청들은 모두 인증
 
         .and()
         .apply(new JwtSecurityConfig(jwtProvier));
         return http.build();
-
-        // http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues());
-        // .addFilter(corsFilter)  // ��� ��û�� �� ���͸� ��ħ => �� ������ cors��å���� ��� �� ���� 
-        // .formLogin().disable()  // security���� �����ϴ� formLogin��� ����
-        // .httpBasic().disable();  // Bearer����� ��ū���� ID/PW ���� �ϱ� ���� ��� ���� 
     } 
+
     @Bean
 public CommonsMultipartResolver multipartResolver() {
     CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
@@ -91,56 +87,4 @@ public CommonsMultipartResolver multipartResolver() {
     // multipartResolver.setMaxUploadSizePerFile(5 * 1024 * 1024); // ���ϴ� ���ε� ũ�� ���� (5MB)
     return multipartResolver;
 }
-
-// @Bean
-// public JavaMailSenderImpl mailSender() {
-//     JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
-
-//     javaMailSender.setProtocol("smtp");
-//     javaMailSender.setHost("127.0.0.1");
-//     javaMailSender.setPort(25);
-
-//     return javaMailSender;
-// }
-
-
-    // ����� ��û ������ UserPasswordAuthenticationToken �߱��ϴ� ����
-    // @Bean
-    // public JwtAuthenticationFilter authenticationFilter() throws Exception {
-    //     JwtAuthenticationFilter customAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager());
-    //     // ���� URL ����
-    //     customAuthenticationFilter.setFilterProcessesUrl("/login");
-    //     // ���� ���� �ڵ鷯
-    //     // customAuthenticationFilter.setAuthenticationSuccessHandler(authSuccessHandler);
-    //     // ���� ���� �ڵ鷯
-    //     customAuthenticationFilter.setAuthenticationFailureHandler(authFailureHandler);
-    //     // BeanFactory�� ���� ��� property�� �����ǰ� �� �� ����
-    //     customAuthenticationFilter.afterPropertiesSet();
-    //     return customAuthenticationFilter;
-    // }
-
-
-    // JWT�� ���� �� ������ Ȯ���ϴ� ����
-    // @Override
-    // @Bean
-    // public AuthenticationManager authenticationManagerBean() throws Exception {
-    //     return super.authenticationManagerBean();
-    // }
-    // @Bean
-    // public JwtAuthorizationFilter jwtFilter() {
-    //     return new JwtAuthorizationFilter(jwtTokenUtil, null);
-    // }
-    // �α��� �� �ʿ��� ���� ������ �� 
-    // @Override
-    // public void configure(AuthenticationManagerBuilder auth) throws Exception {
-    //     auth.userDetailsService(jwtUserDetailsService)
-    //     .passwordEncoder(new BCryptPasswordEncoder());
-    // }
-
-        // JWT�� ���� �� ������ Ȯ���ϴ� ����
-        // @Bean
-        // @Override
-        // public AuthenticationManager authenticationManagerBean() throws Exception {
-        //     return super.authenticationManagerBean();
-        // }
 }

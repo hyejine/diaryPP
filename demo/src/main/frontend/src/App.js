@@ -28,10 +28,12 @@ function App(props) {
       <Routes>
       <Route element={<MainLayout setBackColor ={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange} fontChange={fontChange}/>}>
       <Route path="/" element={<CalendarCom />} currentUser={props?.currnetUser}/>
-      <Route path="/auth/login" element={<Login/>}/>
-      <Route path="/login/regist" element={<Regist/>}/>  
       <Route path="/board/write" element={<Write/>}/>
       <Route path="/emoji" element={<EmojiPurchase/>}/> 
+     </Route>
+     <Route>
+     <Route path="/auth/login" element={<Login/>}/>
+      <Route path="/login/regist" element={<Regist/>}/>  
      </Route>
      <Route element={<BoardLayout />}>
       <Route path="/board/read/:diary_id" element={<Read/>}/> 

@@ -17,13 +17,18 @@ import com.example.demo.model.dto.UserDto;
 import lombok.RequiredArgsConstructor;
 
 @Service
-@RequiredArgsConstructor
+// @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
     private final AuthMapper authMapper;
 
+    public CustomUserDetailsService(AuthMapper authMapper) {
+        this.authMapper = authMapper;
+    }
+
     @Override
     @Transactional
+    // 로그인시에 DB에서 유저정보와 권한정보 가져오게함
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         System.out.println("3. CustomUserDetailsService의 username"+username);
         return authMapper.findByEmail(username)
