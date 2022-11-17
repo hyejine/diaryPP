@@ -1,18 +1,18 @@
-package com.example.demo.model.dao;
+// package com.example.demo.model.dao;
 
-import java.util.Optional;
+// import java.util.Optional;
 
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
+// import org.apache.ibatis.annotations.Mapper;
+// import org.springframework.stereotype.Repository;
 
-import com.example.demo.model.dto.auth.RefreshToken;
+// import com.example.demo.model.dto.security.RefreshToken;
 
-@Repository
-@Mapper
-public interface RefreshTokenRepository {
+// @Repository
+// @Mapper
+// public interface RefreshTokenRepository {
 
-    public void save(RefreshToken refreshToken);
+//     public void save(RefreshToken refreshToken);
 
-    Optional<RefreshToken> findByKey(String name);
+//     Optional<RefreshToken> findByKey(String name);
     
-}
+// }

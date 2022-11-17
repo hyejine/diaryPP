@@ -15,6 +15,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import defaultBg from './resource/image/defaultBackground.jpg'
 import ServiceCenter from "./components/serviceCenter/ServiceCenter";
 import Test from "./test.jsx";
+import LoginLayout from "./components/layout/LoginLayout";
 
 function App(props) {
   const currnetUser = useSelector(state => state.user);
@@ -31,9 +32,9 @@ function App(props) {
       <Route path="/board/write" element={<Write/>}/>
       <Route path="/emoji" element={<EmojiPurchase/>}/> 
      </Route>
-     <Route>
-     <Route path="/auth/login" element={<Login/>}/>
-      <Route path="/login/regist" element={<Regist/>}/>  
+     <Route element={<LoginLayout/>}>
+     <Route path="/user/login" element={<Login/>}/>
+      <Route path="/user/signUp" element={<Regist/>}/>  
      </Route>
      <Route element={<BoardLayout />}>
       <Route path="/board/read/:diary_id" element={<Read/>}/> 

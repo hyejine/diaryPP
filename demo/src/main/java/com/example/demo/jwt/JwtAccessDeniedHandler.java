@@ -1,4 +1,4 @@
-package com.example.demo.config.jwt;
+package com.example.demo.jwt;
 
 import java.io.IOException;
 

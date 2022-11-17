@@ -8,8 +8,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.demo.model.dao.EmojiMapper;
-import com.example.demo.model.dto.EmojiDto;
-import com.example.demo.model.dto.EmojiImageDto;
+import com.example.demo.model.entity.EmojiDto;
+import com.example.demo.model.entity.EmojiImageDto;
 import com.example.demo.service.EmojiService;
 
 @RestController

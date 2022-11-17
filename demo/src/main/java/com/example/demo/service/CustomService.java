@@ -8,9 +8,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.model.dao.BoardMapper;
 import com.example.demo.model.dao.CustomMapper;
-import com.example.demo.model.dto.CustomDto;
-import com.example.demo.model.dto.DiaryDto;
-import com.example.demo.model.dto.UserDto;
+import com.example.demo.model.entity.CustomDto;
+import com.example.demo.model.entity.DiaryDto;
+import com.example.demo.model.entity.UserEntity;
 import com.example.demo.service.interfaces.ICustomService;
 
 @Service

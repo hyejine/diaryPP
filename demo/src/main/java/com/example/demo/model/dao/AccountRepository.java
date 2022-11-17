@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.model.dto.UserDto;
+import com.example.demo.model.entity.UserEntity;
 
 @Repository
 @Mapper
@@ -13,8 +13,8 @@ public interface AccountRepository {
 
     public boolean existsByEmail(String email);
 
-    public UserDto save(UserDto account);
-    Optional<UserDto> findByEmail(String email);
-    Optional<UserDto> findById(Long currentMemberId);
+    public UserEntity save(UserEntity account);
+    Optional<UserEntity> findByEmail(String email);
+    Optional<UserEntity> findById(Long currentMemberId);
     
 }

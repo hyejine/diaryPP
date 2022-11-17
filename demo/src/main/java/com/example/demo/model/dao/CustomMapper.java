@@ -4,7 +4,7 @@ import org.apache.ibatis.annotations.Mapper;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.model.dto.CustomDto;
+import com.example.demo.model.entity.CustomDto;
 
 @Repository
 @Mapper

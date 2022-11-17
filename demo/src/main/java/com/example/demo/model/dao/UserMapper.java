@@ -6,7 +6,7 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.model.dto.UserDto;
+import com.example.demo.model.entity.UserEntity;
 
 
 @Repository
@@ -14,9 +14,11 @@ import com.example.demo.model.dto.UserDto;
 public interface UserMapper {
     // public void safeUser(Member value);
 
-    public void registUser(UserDto value);
+    public void registUser(UserEntity value);
 
-    Optional<UserDto> getUserEmail(String userEmail);
+    Optional<UserEntity> findByUserEmail(String userEmail);
+
+    Optional<UserEntity> getUserEmail(String userEmail);
     // public List<Member> getUserId(String id);
     // public Member findById(String email);
 

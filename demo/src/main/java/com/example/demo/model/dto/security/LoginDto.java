@@ -1,4 +1,4 @@
-package com.example.demo.model.dto.auth;
+package com.example.demo.model.dto.security;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

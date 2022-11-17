@@ -3,15 +3,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.example.demo.model.dao.AccountRepository">
 
-  <select id="existsByEmail" resultType="UserDto" >
-    SELECT * FROM userinfo WHERE user_email=#{user_email}
+  <select id="existsByEmail" resultType="UserEntity" >
+    SELECT * FROM user_table WHERE user_email=#{user_email}
     </select>
 
-      <select id="findByEmail" resultType="UserDto" >
-    SELECT * FROM userinfo WHERE user_email=#{user_email}
+      <select id="findByEmail" resultType="UserEntity" >
+    SELECT * FROM user_table WHERE user_email=#{user_email}
     </select>
 
-          <select id="findById" resultType="UserDto" >
-    SELECT * FROM userinfo WHERE id=#{id}
+          <select id="findById" resultType="UserEntity" >
+    SELECT * FROM user_table WHERE id=#{id}
     </select>
   </mapper>

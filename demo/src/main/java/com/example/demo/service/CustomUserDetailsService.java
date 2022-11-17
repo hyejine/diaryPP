@@ -12,7 +12,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.model.dao.AuthMapper;
-import com.example.demo.model.dto.UserDto;
+import com.example.demo.model.entity.UserEntity;
 
 import lombok.RequiredArgsConstructor;
 
@@ -37,7 +37,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     }
 
     // DB 에 User 값이 존재한다면 UserDetails 객체로 만들어서 리턴
-    private UserDetails createUserDetails(UserDto user) {
+    private UserDetails createUserDetails(UserEntity user) {
         GrantedAuthority grantedAuthority = new SimpleGrantedAuthority(user.getUser_type().toString());
         System.out.println("3. grantedAuthority"+ grantedAuthority);
         return new User(

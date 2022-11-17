@@ -196,7 +196,7 @@ const dispatch = useDispatch();
          
           {/* <GoogleLogin/>
           <GoogleButton>efe</GoogleButton> */}
-          <Link to="/login/regist">
+          <Link to="/user/signUp">
             <button className="login_b login_diary">Sign Up With Site</button>
           </Link>
           <Link to="/auth/vi/user/check">확인</Link>

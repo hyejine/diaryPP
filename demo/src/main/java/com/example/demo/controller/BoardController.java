@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.model.dao.BoardMapper;
-import com.example.demo.model.dto.DiaryDto;
+import com.example.demo.model.entity.DiaryDto;
 import com.example.demo.service.BoardService;
 
 @RestController

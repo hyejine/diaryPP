@@ -52,7 +52,7 @@ const Header = (props) => {
       <Link to="/">
         <img src={logo} alt="" className="logo" />
       </Link>
-      <Link to="/auth/login"><span className="login">login</span></Link>
+      <Link to="/user/login"><span className="login">login</span></Link>
       <div className="menuWrap">
       <div className="customMenu">
         <Dropdown autoClose="outside">

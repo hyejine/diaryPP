@@ -5,8 +5,8 @@ import java.util.List;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
-import com.example.demo.model.dto.EmojiDto;
-import com.example.demo.model.dto.EmojiImageDto;
+import com.example.demo.model.entity.EmojiDto;
+import com.example.demo.model.entity.EmojiImageDto;
 
 @Repository
 @Mapper

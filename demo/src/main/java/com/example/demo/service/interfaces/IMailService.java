@@ -1,6 +1,6 @@
 package com.example.demo.service.interfaces;
 
-import com.example.demo.model.dto.EmailContentDto;
+import com.example.demo.model.entity.EmailContentDto;
 
 public interface IMailService {
 

@@ -1,3 +1,4 @@
+package com.example.demo.model.dto.security;
 // package com.example.demo.model.dto.auth;
 
 // import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

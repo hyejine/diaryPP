@@ -8,8 +8,8 @@ import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.dao.MailTemplateMapper;
-import com.example.demo.model.dto.EmailContentDto;
-import com.example.demo.model.dto.MailTemplateDto;
+import com.example.demo.model.entity.EmailContentDto;
+import com.example.demo.model.entity.MailTemplateDto;
 import com.example.demo.service.interfaces.IMailService;
 
 import lombok.AllArgsConstructor;

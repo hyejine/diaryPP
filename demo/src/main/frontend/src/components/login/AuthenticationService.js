@@ -3,7 +3,7 @@ import axios from 'axios'
 class AuthenticationService {
     // send username, password to the SERVER
     executeJwtAuthenticationService(email, password) {
-        return axios.post('/auth/login', {
+        return axios.post('/user/login', {
             email,
             password
         })

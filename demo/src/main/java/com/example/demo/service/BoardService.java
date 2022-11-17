@@ -7,8 +7,8 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.dao.BoardMapper;
-import com.example.demo.model.dto.DiaryDto;
-import com.example.demo.model.dto.EmojiImageDto;
+import com.example.demo.model.entity.DiaryDto;
+import com.example.demo.model.entity.EmojiImageDto;
 
 @Service
 public class BoardService implements BoardMapper{

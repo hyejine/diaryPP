@@ -3,8 +3,12 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.example.demo.model.dao.UserMapper">
     <insert id="registUser">
-      INSERT INTO userinfo (user_email, user_name, user_image, user_password ,sns_type, user_create, user_type) VALUES (#{user_email}, #{user_name}, #{user_image}, #{user_password}, #{sns_type}, #{user_create}, #{user_type})
-      </insert>
+      INSERT INTO user_table (user_email, user_name, user_password ,sns_type, user_create, user_type) VALUES (#{user_email}, #{user_name}, #{user_password}, #{sns_type}, #{user_create}, #{user_type})
+    </insert>
+
+    <select id="findByUserEmail" resultType="UserEntity" >
+      SELECT * FROM user_table WHERE user_email=#{user_email}
+    </select> 
 <!-- 
   <insert id="safeUser">
   INSERT INTO userinfo (user_email, user_name, user_image, sns_type) VALUES (#{user_email}, #{user_name}, #{user_image}, #{sns_type})
