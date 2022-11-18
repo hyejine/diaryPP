@@ -181,6 +181,34 @@ const dispatch = useDispatch();
         <div className="writeTitle">
               <span>이메일</span>
             </div>
+            <div className="writeAareaWrap">
+              <input
+                className="writeAarea"
+                placeholder="example@diyDiary.com"
+                {...register("user_email", {
+                  required: "(*이메일은 필수 입력입니다.)",
+                  // validate: idCheck,
+                  pattern: {
+                    value: /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+                    message: "(* 이메일 형식에 맞지 않습니다.)",
+                  },
+                })}
+              />
+              </div>
+              <div className="writeTitle">
+              <span>비밀번호</span>
+            </div>
+            <div className="writeAareaWrap">
+              <input
+                type="password"
+                className="writeAarea"
+                placeholder="*********"
+                {...register("user_password", {
+                  required: "(* 비밀번호는 필수 입력입니다.)",
+                  // validate: password,
+                })}
+              />
+              </div>
         </form>
         </div>
       </div>
