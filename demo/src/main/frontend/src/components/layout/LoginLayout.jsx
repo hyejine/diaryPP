@@ -1,20 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 import { Link, Outlet } from "react-router-dom";
 import logo from "../../resource/image/logo.png";
+import "./main-boarder-Layout.scss";
 
 class LoginLayout extends Component {
-    render() {
-        return (
-            <div>
-                 <Link to="/">
-        <img src={logo} alt="" className="logo" style={{width:100}} />
-      </Link>
-      <div>
-      <Outlet />
+  render() {
+    return (
+      <div className="main">
+        <div className="mainWrap">
+          <div className="mainLogo">
+            <Link to="/">
+              <img src={logo} alt="" className="logo" style={{ width: 100 }} />
+            </Link>
+          </div>
+          <div>
+            <Outlet />
+          </div>
+        </div>
       </div>
-            </div>
-        );
-    }
+    );
+  }
 }
 
 export default LoginLayout;

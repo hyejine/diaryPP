@@ -1,5 +1,7 @@
 package com.example.demo.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -44,8 +46,8 @@ public class UserController {
 		return "data"+data;
 	}
 
-    // @GetMapping("/getId/{userId}")
-    // public List<Member> getUserId (@PathVariable("userId") String id){
-    //     return userService.getUserId(id);
-    // }
+    @GetMapping("/getId/{userId}")
+    public List<UserEntity> getUserId (@PathVariable("userId") String id){
+        return userService.getUserId(id);
+    }
 }

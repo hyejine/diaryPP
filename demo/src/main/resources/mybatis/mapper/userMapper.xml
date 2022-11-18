@@ -6,7 +6,7 @@
       INSERT INTO user_table (user_email, user_name, user_password ,sns_type, user_create, user_type) VALUES (#{user_email}, #{user_name}, #{user_password}, #{sns_type}, #{user_create}, #{user_type})
     </insert>
 
-    <select id="findByUserEmail" resultType="UserEntity" >
+    <select id="getUserId" resultType="UserEntity" >
       SELECT * FROM user_table WHERE user_email=#{user_email}
     </select> 
 <!-- 

@@ -30,10 +30,10 @@ public class UserService implements IUserService{
     @Transactional
     public void registUser(UserEntity value){
 
-        if(userMapper.findByUserEmail(value.getUser_email()).orElse(null) != null){
-            System.out.println("이미 가입된 곳에 들어옴");
-            throw new RuntimeException("이미 가입되어 있는 유저입니다.");
-        }
+        // if(userMapper.findByUserEmail(value.getUser_email()).orElse(null) != null){
+        //     System.out.println("이미 가입된 곳에 들어옴");
+        //     throw new RuntimeException("이미 가입되어 있는 유저입니다.");
+        // }
 
         Date date = new Date();
         UserEntity userEntity = new UserEntity();
@@ -46,16 +46,16 @@ public class UserService implements IUserService{
         userMapper.registUser(userEntity);
     }
 
+    @Override
+    public List<UserEntity> getUserId(String id){
+        return userMapper.getUserId(id);
+    }
     // @Override
     // public Optional<UserEntity> getUserEmail(String userEmail) {
     //     // TODO Auto-generated method stub
     //     return Optional.empty();
     // }
 
-//     // @Override
-//     // public List<Member> getUserId(String id){
-//     //     return userMapper.getUserId(id);
-//     // }
 
 //     // @Override
 //     // public userDto getId(String email) {

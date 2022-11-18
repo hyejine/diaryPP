@@ -59,8 +59,8 @@ public class SecurityJavaConfig {
             .antMatchers(
             "/user/login**",
                             "/user/signUp**",
+                            "/user/getId/**",
                             "/emoji/**",
-                            "/emoji/getEmojiList**",
                             "/board/**", 
                             "/custom/**",
                             "/mail/**"

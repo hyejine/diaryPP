@@ -7,12 +7,14 @@ import  GoogleLogin  from "./GoogleLogin";
 import { Link } from "react-router-dom";
 import GoogleButton from "../GoogleButton";
 import Regist from "./regist/Regist";
-import { Form, Button } from "react-bootstrap";
+import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../reducer/userSlice";
 import AuthenticationService from "./AuthenticationService";
 
 const Login = () => {
+  const { register, handleSubmit,formState: { errors }} = useForm();
+
   const { naver } = window;
   const [userid, setUserId] = useState();
   const [testToken, setTestToken] = useState();
@@ -126,7 +128,7 @@ const hello = ()=>{
 }
 console.log(AuthenticationService.getLoggedInUserName());
 const dispatch = useDispatch();
-  const handleSubmit = (value)=>{
+  const Submit = (value)=>{
     setUserId ({
       email: value.target.email.value,
       password: value.target.password.value,
@@ -158,14 +160,35 @@ const dispatch = useDispatch();
     //     return "이메일 혹은 비밀번호를 확인하세요.";
     //   });
   }
+  const onSubmit = (value) => {
+    console.log(value);
+    // axios
+    //   .post("/user/signUp", value)
+    //   .then((response) => console.log(response))
+    //   .catch((error) => console.log(error));
 
+    // setModalActive(true);
+  };
   return (
-    <div className="login_wrap">
-      <div className="login_inner">
+    <div className="registPage">
+      <div className="regist_inner">
+      <div className="regist_title">
+        <p className="title1">반갑습니다!</p>
+        <p className="title2">이메일과 비밀번호를 입력해주세요!</p>
+        </div>
+        <div className="regist_input">
+        <form onSubmit={handleSubmit(onSubmit)}>
+        <div className="writeTitle">
+              <span>이메일</span>
+            </div>
+        </form>
+        </div>
+      </div>
+        {/* <div className="login_inner">
         <p className="title1 text_center">Welcome!</p>
         <p className="title2 text_center">Please login to continue</p>
         <div className="login_input">
-        <Form onSubmit={handleSubmit} noValidate > 
+        <Form onSubmit={Submit} noValidate > 
         <Form.Group controlId="email">
         <Form.Label>Email</Form.Label>
         <Form.Control type="text" required />
@@ -184,7 +207,7 @@ const dispatch = useDispatch();
         <div className="login_button">
           <div>
             <div className="line">Or Login With</div>
-          </div>
+          </div> */}
           {/* <div id="naverIdLogin" /> */}
           {/* <button onClick={onKaKao}>
             <img
@@ -195,15 +218,15 @@ const dispatch = useDispatch();
           </button> */}
          
           {/* <GoogleLogin/>
-          <GoogleButton>efe</GoogleButton> */}
-          <Link to="/user/signUp">
+          <GoogleButton>efe</GoogleButton> */} 
+         {/*  <Link to="/user/signUp">
             <button className="login_b login_diary">Sign Up With Site</button>
           </Link>
           <Link to="/auth/vi/user/check">확인</Link>
           <Link to="/auth/hello" onClick={hello}>시험확인</Link>
           
         </div>
-      </div>
+      </div>*/}
     </div>
   );
 };

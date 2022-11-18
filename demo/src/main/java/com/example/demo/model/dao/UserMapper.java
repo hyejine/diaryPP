@@ -19,7 +19,7 @@ public interface UserMapper {
     Optional<UserEntity> findByUserEmail(String userEmail);
 
     Optional<UserEntity> getUserEmail(String userEmail);
-    // public List<Member> getUserId(String id);
+    public List<UserEntity> getUserId(String id);
     // public Member findById(String email);
 
 
