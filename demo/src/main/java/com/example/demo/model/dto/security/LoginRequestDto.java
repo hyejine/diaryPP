@@ -8,9 +8,9 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 //사용자에게서 받은 id, pw를 저장
-public class LoginDto {
+public class LoginRequestDto {
 
-    private String username;
-    private String password;
+    private String user_email;
+    private String user_password;
 
 }

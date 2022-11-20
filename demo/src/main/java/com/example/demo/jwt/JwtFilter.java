@@ -66,21 +66,34 @@ public class JwtFilter extends GenericFilterBean  {
    @Override
    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
          throws IOException, ServletException {
-            HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
-            String jwt = resolveToken(httpServletRequest);
-            String requestURI = httpServletRequest.getRequestURI();
-    
-            if (StringUtils.hasText(jwt) && jwtProvier.validateToken(jwt)) {
-                Authentication authentication = jwtProvier.getAuthentication(jwt);
+
+            // Request Header 에서 JWT 토큰 추출 
+            String token = resolveToken((HttpServletRequest) servletRequest);
+
+            // validateToken 으로 토큰 유효성 검사 
+            if (token != null && jwtProvier.validateToken(token)){
+                // 토큰이 유효할 경우 토큰에서 Authentication 객체를 가지고 와서 SecurityContext 에 저장
+                Authentication authentication = jwtProvier.getAuthentication(token);
                 SecurityContextHolder.getContext().setAuthentication(authentication);
-                logger.debug("Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(), requestURI);
-            } else {
-                logger.debug("유효한 JWT 토큰이 없습니다, uri: {}", requestURI);
-            }
-    
+            } 
             filterChain.doFilter(servletRequest, servletResponse);
+        }
+
+            // HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
+            // String jwt = resolveToken(httpServletRequest);
+            // String requestURI = httpServletRequest.getRequestURI();
+    
+            // if (StringUtils.hasText(jwt) && jwtProvier.validateToken(jwt)) {
+            //     Authentication authentication = jwtProvier.getAuthentication(jwt);
+            //     SecurityContextHolder.getContext().setAuthentication(authentication);
+            //     logger.debug("Security Context에 '{}' 인증 정보를 저장했습니다, uri: {}", authentication.getName(), requestURI);
+            // } else {
+            //     logger.debug("유효한 JWT 토큰이 없습니다, uri: {}", requestURI);
+            // }
+    
+            // filterChain.doFilter(servletRequest, servletResponse);
       
-   }
+
    // @Override
    // protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
    //       throws ServletException, IOException {

@@ -1,12 +1,13 @@
 import { configureStore } from "@reduxjs/toolkit";
-import userSlice from "./userSlice";
+import userLogin from "./userLogin";
 
+// redux 스토어 
 export default configureStore({
   reducer: {
-    user: userSlice,
-  },
-  middleware: (getDefaultMiddleware) =>
-    getDefaultMiddleware({
-      serializableCheck: false,
-    }),
+    user: userLogin,
+  }
+  // middleware: (getDefaultMiddleware) =>
+  //   getDefaultMiddleware({
+  //     serializableCheck: false,
+  //   }),
 });

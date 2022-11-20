@@ -9,17 +9,35 @@ import GoogleButton from "../GoogleButton";
 import Regist from "./regist/Regist";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
-import { loginUser } from "../../reducer/userSlice";
+import { loginUser } from "../../reducer/userLogin";
 import AuthenticationService from "./AuthenticationService";
 
 const Login = () => {
   const { register, handleSubmit,formState: { errors }} = useForm();
+  const [vibration, setVibration] = useState(false);
+  const dispatch = useDispatch();
 
   const { naver } = window;
   const [userid, setUserId] = useState();
   const [testToken, setTestToken] = useState();
 
-
+  const checkError = () => {
+    setVibration(true);
+    setTimeout(() => {
+      setVibration(false);
+    }, 300);
+  };
+  const onSubmit = (value) => {
+    axios.post("/user/login", value)
+        .then((response) => {console.log(response)
+          localStorage.setItem('accessToken', response.accessToken);
+          // axios.post()
+          // dispatch(loginUser(response.data));
+        }
+        //  메인 페이지로 이동해야함 
+        )
+        .catch((error) => console.log(error));
+  };
   // const onNaverLogin = () => {
   //   const naverLogin = new naver.LoginWithNaverId({
   //     clientId: "o1yjLGVlc1wfFxCIIGHG",
@@ -126,8 +144,8 @@ const hello = ()=>{
       console.log(error);
     })
 }
-console.log(AuthenticationService.getLoggedInUserName());
-const dispatch = useDispatch();
+// console.log(AuthenticationService.getLoggedInUserName());
+
   const Submit = (value)=>{
     setUserId ({
       email: value.target.email.value,
@@ -160,15 +178,7 @@ const dispatch = useDispatch();
     //     return "이메일 혹은 비밀번호를 확인하세요.";
     //   });
   }
-  const onSubmit = (value) => {
-    console.log(value);
-    // axios
-    //   .post("/user/signUp", value)
-    //   .then((response) => console.log(response))
-    //   .catch((error) => console.log(error));
 
-    // setModalActive(true);
-  };
   return (
     <div className="registPage">
       <div className="regist_inner">
@@ -187,13 +197,17 @@ const dispatch = useDispatch();
                 placeholder="example@diyDiary.com"
                 {...register("user_email", {
                   required: "(*이메일은 필수 입력입니다.)",
-                  // validate: idCheck,
                   pattern: {
                     value: /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
                     message: "(* 이메일 형식에 맞지 않습니다.)",
                   },
                 })}
               />
+                            <p className={vibration ? "errorFont vibration" : "errorFont"}>
+                {errors.user_email && (
+                  <small role="alert">{errors.user_email.message}</small>
+                )}
+              </p>
               </div>
               <div className="writeTitle">
               <span>비밀번호</span>
@@ -205,37 +219,28 @@ const dispatch = useDispatch();
                 placeholder="*********"
                 {...register("user_password", {
                   required: "(* 비밀번호는 필수 입력입니다.)",
-                  // validate: password,
                 })}
               />
+              <p className={vibration ? "errorFont vibration" : "errorFont"}>
+                {errors.user_password && (
+                  <small role="alert">{errors.user_password.message}</small>
+                )}
+              </p>
               </div>
-        </form>
-        </div>
-      </div>
-        {/* <div className="login_inner">
-        <p className="title1 text_center">Welcome!</p>
-        <p className="title2 text_center">Please login to continue</p>
-        <div className="login_input">
-        <Form onSubmit={Submit} noValidate > 
-        <Form.Group controlId="email">
-        <Form.Label>Email</Form.Label>
-        <Form.Control type="text" required />
-      </Form.Group>
-      <Form.Group controlId="password">
-        <Form.Label>Password</Form.Label>
-        <Form.Control type="password" required />
-      </Form.Group>
-       
-        <p className="forget text_center">
+              <p className="forget text_center">
           혹시 아이디 혹은 비밀번호를 잊어버리셨나요?
         </p>
-          <Button className="login_b" type="submit">Login</Button>
-          </Form>
-          </div>
-        <div className="login_button">
-          <div>
+          <button className="login_b" type="submit" onClick={checkError}>Login</button>
+        </form>
+        <div>
             <div className="line">Or Login With</div>
-          </div> */}
+          </div>
+
+          <Link to="/user/signUp">
+            <button className="login_b login_diary">회원가입 하기!</button>
+          </Link>
+        </div>
+      </div>
           {/* <div id="naverIdLogin" /> */}
           {/* <button onClick={onKaKao}>
             <img

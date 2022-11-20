@@ -76,7 +76,6 @@ const Regist = () => {
                 })}
               />
               <p className={vibration ? "errorFont vibration" : "errorFont"}>
-                {" "}
                 {errors.user_name && (
                   <small role="alert">{errors.user_name.message}</small>
                 )}

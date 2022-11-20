@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.model.dto.security.LoginRequestDto;
+import com.example.demo.model.entity.TokenEntity;
 import com.example.demo.model.entity.UserEntity;
 import com.example.demo.service.UserService;
 
@@ -37,6 +39,15 @@ public class UserController {
     @PostMapping("/signUp")
     public void registUser(@RequestBody UserEntity userEntity){
         userService.registUser(userEntity);
+    }
+
+    @PostMapping("/login")
+    public TokenEntity login(@RequestBody LoginRequestDto memberLoginRequestDto) {
+        System.out.println("1. LoginRequestDto " + memberLoginRequestDto);
+        String email = memberLoginRequestDto.getUser_email();
+        String password = memberLoginRequestDto.getUser_password();
+        TokenEntity tokenInfo = userService.login(email, password);
+        return tokenInfo;
     }
 
     @GetMapping("/postFont/{fontChange}")
