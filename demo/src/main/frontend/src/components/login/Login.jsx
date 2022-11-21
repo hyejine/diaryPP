@@ -29,8 +29,12 @@ const Login = () => {
   };
   const onSubmit = (value) => {
     axios.post("/user/login", value)
-        .then((response) => {console.log(response)
-          localStorage.setItem('accessToken', response.accessToken);
+        .then((response) => {console.log(response.data.accessToken)
+          localStorage.setItem('Authorization', `Bearer ${response.data.accessToken}`);
+          const userToekn = localStorage.getItem('Authorization');
+          axios.get("/user/tokenApi")
+          .then(res =>console.log(res))
+          .catch(error=> console.log(error));
           // axios.post()
           // dispatch(loginUser(response.data));
         }

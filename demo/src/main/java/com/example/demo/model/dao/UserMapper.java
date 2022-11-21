@@ -20,7 +20,8 @@ public interface UserMapper {
 
     Optional<UserEntity> getUserEmail(String userEmail);
     public List<UserEntity> getUserId(String id);
-    // public Member findById(String email);
+
+    Optional<UserEntity> findId(Long optional);
 
 
 }

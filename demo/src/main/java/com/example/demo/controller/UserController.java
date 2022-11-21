@@ -50,6 +50,13 @@ public class UserController {
         return tokenInfo;
     }
 
+    @GetMapping("/tokenApi")
+    public ResponseEntity<UserEntity> getAuthorization() {
+        UserEntity myInfoBySecurity = userService.getAuthorization();
+        System.out.println("1. myInfoBySecurity " + myInfoBySecurity.getUser_email());
+        return ResponseEntity.ok((myInfoBySecurity));
+    }
+    
     @GetMapping("/postFont/{fontChange}")
 	public String postFont(@PathVariable ("fontChange") String data) {
 		System.out.println("======value===="+data);

@@ -19,6 +19,7 @@ import com.example.demo.model.dto.UserType;
 import com.example.demo.model.entity.TokenEntity;
 import com.example.demo.model.entity.UserEntity;
 import com.example.demo.service.interfaces.IUserService;
+import com.example.demo.util.SecurityUtil;
 
 @Service
 public class UserService implements IUserService{
@@ -38,11 +39,6 @@ public class UserService implements IUserService{
     @Override
     @Transactional
     public void registUser(UserEntity value){
-
-        // if(userMapper.findByUserEmail(value.getUser_email()).orElse(null) != null){
-        //     System.out.println("이미 가입된 곳에 들어옴");
-        //     throw new RuntimeException("이미 가입되어 있는 유저입니다.");
-        // }
 
         Date date = new Date();
         UserEntity userEntity = new UserEntity();
@@ -80,17 +76,10 @@ public class UserService implements IUserService{
         return tokenInfo;
     }
     
-    // @Override
-    // public Optional<UserEntity> getUserEmail(String userEmail) {
-    //     // TODO Auto-generated method stub
-    //     return Optional.empty();
-    // }
-
-
-//     // @Override
-//     // public userDto getId(String email) {
-//     //     // TODO Auto-generated method stub
-//     //     return null;
-//     // }
-    
+    @Transactional(readOnly = true)
+    public UserEntity getAuthorization() {
+      return userMapper.findId(SecurityUtil.getCurrentUsername())
+              .map(UserEntity::of)
+              .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다"));
+    }
 }
