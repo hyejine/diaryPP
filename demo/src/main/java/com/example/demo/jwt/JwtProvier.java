@@ -22,7 +22,7 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.stream.Collectors;
 
-// 토큰의 생성, 토큰의 유효성 검증 등을 담당
+// 토큰의 생성(암호화), 복호화, 검증 
 @Component
 public class JwtProvier implements InitializingBean {
 
@@ -86,15 +86,10 @@ public class JwtProvier implements InitializingBean {
     public Authentication getAuthentication(String accessToken) {
         Claims claims = parseClaims(accessToken);
 
+        System.out.println("claims===" + claims);
         if(claims.get(AUTHORITIES_KEY) == null){
             throw new RuntimeException("권한 정보가 없는 토큰입니다.");
         }
-        // Claims claims = Jwts
-        //         .parserBuilder()
-        //         .setSigningKey(key)
-        //         .build()
-        //         .parseClaimsJws(accessToken)
-        //         .getBody();
 
         // 클레임에서 권한 정보 가져오기
         Collection<? extends GrantedAuthority> authorities =
@@ -104,11 +99,14 @@ public class JwtProvier implements InitializingBean {
 
         UserDetails principal = new User(claims.getSubject(), "", authorities);
 
+        System.out.println("principal==="+principal);
+        // SecurityContext 를 사용하기 위한 절차
         return new UsernamePasswordAuthenticationToken(principal, "", authorities);
     }
 
     // 토큰의 유효성 검증
     public boolean validateToken(String token) {
+        System.out.println("validateToken===" +token);
         try {
             Jwts.parserBuilder().setSigningKey(key).build().parseClaimsJws(token);
             return true;

@@ -31,7 +31,6 @@ const Login = () => {
     axios.post("/user/login", value)
         .then((response) => {console.log(response.data.accessToken)
           localStorage.setItem('Authorization', `Bearer ${response.data.accessToken}`);
-          const userToekn = localStorage.getItem('Authorization');
           axios.get("/user/tokenApi")
           .then(res =>console.log(res))
           .catch(error=> console.log(error));
@@ -231,10 +230,10 @@ const hello = ()=>{
                 )}
               </p>
               </div>
-              <p className="forget text_center">
-          혹시 아이디 혹은 비밀번호를 잊어버리셨나요?
+              <p className="forgetUser">
+          혹시 이메일 혹은 비밀번호를 잊어버리셨나요?
         </p>
-          <button className="login_b" type="submit" onClick={checkError}>Login</button>
+          <button className="submitB" type="submit" onClick={checkError}>Login</button>
         </form>
         <div>
             <div className="line">Or Login With</div>

@@ -6,6 +6,7 @@ import java.util.Optional;
 import org.apache.ibatis.annotations.Mapper;
 import org.springframework.stereotype.Repository;
 
+import com.example.demo.model.dto.UserResponseDto;
 import com.example.demo.model.entity.UserEntity;
 
 
@@ -14,14 +15,14 @@ import com.example.demo.model.entity.UserEntity;
 public interface UserMapper {
     // public void safeUser(Member value);
 
-    public void registUser(UserEntity value);
+    Optional<UserEntity> registUser(UserEntity value);
 
     Optional<UserEntity> findByUserEmail(String userEmail);
 
     Optional<UserEntity> getUserEmail(String userEmail);
     public List<UserEntity> getUserId(String id);
 
-    Optional<UserEntity> findId(Long optional);
+    Optional<UserEntity> findById(Long id);
 
 
 }

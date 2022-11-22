@@ -16,7 +16,6 @@ import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 import com.example.demo.jwt.JwtAccessDeniedHandler;
 import com.example.demo.jwt.JwtAuthenticationEntryPoint;
 import com.example.demo.jwt.JwtProvier;
-import com.example.demo.jwt.JwtSecurityConfig;
 
 @Configuration         // Bean 
 @EnableWebSecurity     // Spirng Security Web 보안을 활성화해주는 annotation
@@ -46,7 +45,7 @@ public class SecurityJavaConfig {
             
             .and()
             .csrf().disable()
-            .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
+            // .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
             .exceptionHandling()
             .authenticationEntryPoint(jwtAuthenticationEntryPoint)  
             .accessDeniedHandler(jwtAccessDeniedHandler)  
@@ -58,7 +57,8 @@ public class SecurityJavaConfig {
             .authorizeRequests()   // HttpServletRequest를 사용하는 요청들에 대한 접근제한을 설정
             .antMatchers(
             "/user/login**",
-                            "/user/signUp**",
+                            "/user/signUp/**",
+                            "/user/tokenApi/**",
                             "/user/getId/**",
                             "/emoji/**",
                             "/board/**", 

@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-// @Builder
+@Builder
 public class UserEntity{
     
     private Integer id;

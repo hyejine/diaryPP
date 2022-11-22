@@ -11,6 +11,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.model.dto.UserRequestDto;
+import com.example.demo.model.dto.UserResponseDto;
 import com.example.demo.model.dto.security.LoginRequestDto;
 import com.example.demo.model.entity.TokenEntity;
 import com.example.demo.model.entity.UserEntity;
@@ -36,14 +38,14 @@ public class UserController {
     //     userService.safeUser(value);
     // }
 
-    @PostMapping("/signUp")
-    public void registUser(@RequestBody UserEntity userEntity){
-        userService.registUser(userEntity);
+    @PostMapping("/signup")
+    public ResponseEntity<UserRequestDto> signup(@RequestBody UserRequestDto requestDto) {
+        return ResponseEntity.ok(userService.registUser(requestDto));
     }
 
     @PostMapping("/login")
-    public TokenEntity login(@RequestBody LoginRequestDto memberLoginRequestDto) {
-        System.out.println("1. LoginRequestDto " + memberLoginRequestDto);
+    public TokenEntity login(@RequestBody UserRequestDto memberLoginRequestDto) {
+        System.out.println("1. UserRequestDto " + memberLoginRequestDto);
         String email = memberLoginRequestDto.getUser_email();
         String password = memberLoginRequestDto.getUser_password();
         TokenEntity tokenInfo = userService.login(email, password);
@@ -51,9 +53,9 @@ public class UserController {
     }
 
     @GetMapping("/tokenApi")
-    public ResponseEntity<UserEntity> getAuthorization() {
-        UserEntity myInfoBySecurity = userService.getAuthorization();
-        System.out.println("1. myInfoBySecurity " + myInfoBySecurity.getUser_email());
+    public ResponseEntity<UserResponseDto> getAuthorization() {
+        UserResponseDto myInfoBySecurity = userService.getAuthorization();
+        System.out.println("1. myInfoBySecurity ====" + myInfoBySecurity.getEmail());
         return ResponseEntity.ok((myInfoBySecurity));
     }
     

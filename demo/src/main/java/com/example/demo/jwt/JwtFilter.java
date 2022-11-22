@@ -22,11 +22,13 @@ import org.springframework.web.filter.OncePerRequestFilter;
 // JWT 토큰이 유효한지 검증 
 // 권한이나 인증이 필요한 특정 주소 요청 => BasicAuthenticationFilter 필터 거침
 @Component
-public class JwtFilter extends GenericFilterBean  {
+public class JwtFilter extends OncePerRequestFilter  {
 
     private static final Logger logger = LoggerFactory.getLogger(JwtFilter.class);
 
     public static final String AUTHORIZATION_HEADER = "Authorization";
+
+    public static final String BEARER_PREFIX = "Bearer ";
  
     private JwtProvier jwtProvier;
  
@@ -61,23 +63,51 @@ public class JwtFilter extends GenericFilterBean  {
     // 직접 DB 를 조회한 것이 아니라, Access Token 에 있는 Account ID 를 꺼낸 거라서, 탈퇴로 인해 Account ID 가 DB 에 없는 등의
     // 예외 상황은 Service 단에서 고려해야한다. 
     
+    // request header에서 토큰 정보를 꺼내옴 
+    private String resolveToken(HttpServletRequest request) {
+        String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
+        if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
+            return bearerToken.substring(7);
+        }
+        return null;
+    }
+
    // jwt 토큰의 인증정보를 SecurityContext에 저장하는 역할 수행 로직
    // client 요청을 가장 먼저 가로챔 
-   @Override
-   public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
-         throws IOException, ServletException {
+    @Override
+    protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) 
+    throws ServletException, IOException {
 
-            // Request Header 에서 JWT 토큰 추출 
-            String token = resolveToken((HttpServletRequest) servletRequest);
+        String jwt = resolveToken(request);
 
-            // validateToken 으로 토큰 유효성 검사 
-            if (token != null && jwtProvier.validateToken(token)){
-                // 토큰이 유효할 경우 토큰에서 Authentication 객체를 가지고 와서 SecurityContext 에 저장
-                Authentication authentication = jwtProvier.getAuthentication(token);
-                SecurityContextHolder.getContext().setAuthentication(authentication);
-            } 
-            filterChain.doFilter(servletRequest, servletResponse);
+        System.out.println("doFilterInternal==="+jwt);
+        // validateToken 으로 토큰 유효성 검사 
+        if (StringUtils.hasText(jwt) && jwtProvier.validateToken(jwt)) {
+             // 토큰이 유효할 경우 토큰에서 Authentication 객체를 가지고 와서 SecurityContext 에 저장
+            Authentication authentication = jwtProvier.getAuthentication(jwt);
+            System.out.println("authentication==="+authentication);
+            SecurityContextHolder.getContext().setAuthentication(authentication);
         }
+
+        filterChain.doFilter(request, response);
+    }
+   // jwt 토큰의 인증정보를 SecurityContext에 저장하는 역할 수행 로직
+   // client 요청을 가장 먼저 가로챔 
+//    @Override
+//    public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse, FilterChain filterChain)
+//          throws IOException, ServletException {
+
+//             // Request Header 에서 JWT 토큰 추출 
+//             String token = resolveToken((HttpServletRequest) servletRequest);
+
+//             // validateToken 으로 토큰 유효성 검사 
+//             if (token != null && jwtProvier.validateToken(token)){
+//                 // 토큰이 유효할 경우 토큰에서 Authentication 객체를 가지고 와서 SecurityContext 에 저장
+//                 Authentication authentication = jwtProvier.getAuthentication(token);
+//                 SecurityContextHolder.getContext().setAuthentication(authentication);
+//             } 
+//             filterChain.doFilter(servletRequest, servletResponse);
+//         }
 
             // HttpServletRequest httpServletRequest = (HttpServletRequest) servletRequest;
             // String jwt = resolveToken(httpServletRequest);
@@ -110,14 +140,6 @@ public class JwtFilter extends GenericFilterBean  {
    //          filterChain.doFilter(request, response);
       
    // }
-    // request header에서 토큰 정보를 꺼내옴 
-    private String resolveToken(HttpServletRequest request) {
-      String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
-      if (StringUtils.hasText(bearerToken) && bearerToken.startsWith("Bearer ")) {
-         return bearerToken.substring(7);
-      }
-      return null;
-   }
     // private final JwtTokenUtil jwtTokenUtil;
     // private final PrincipalDetailsService principalDetailsService;
 

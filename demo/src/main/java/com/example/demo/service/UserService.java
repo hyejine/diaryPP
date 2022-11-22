@@ -15,6 +15,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.jwt.JwtProvier;
 import com.example.demo.model.dao.UserMapper;
+import com.example.demo.model.dto.UserRequestDto;
+import com.example.demo.model.dto.UserResponseDto;
 import com.example.demo.model.dto.UserType;
 import com.example.demo.model.entity.TokenEntity;
 import com.example.demo.model.entity.UserEntity;
@@ -36,19 +38,21 @@ public class UserService implements IUserService{
         this.authenticationManagerBuilder = authenticationManagerBuilder;
     }
 
-    @Override
+    // @Override
     @Transactional
-    public void registUser(UserEntity value){
+    public UserRequestDto registUser(UserRequestDto requestDto){
 
-        Date date = new Date();
-        UserEntity userEntity = new UserEntity();
-        userEntity.setUser_name(value.getUser_name());
-        userEntity.setUser_email(value.getUser_email());
-        userEntity.setUser_password(passwordEncoder.encode(value.getUser_password()));
-        userEntity.setUser_create(date);
-        userEntity.setUser_type("ROLE_USER");
-        userEntity.setSns_type(value.getSns_type());
-        userMapper.registUser(userEntity);
+        UserEntity user = requestDto.toMember(passwordEncoder);
+        return UserRequestDto.of(userMapper.registUser(user));
+        // Date date = new Date();
+        // UserEntity userEntity = new UserEntity();
+        // userEntity.setUser_name(value.getUser_name());
+        // userEntity.setUser_email(value.getUser_email());
+        // userEntity.setUser_password(passwordEncoder.encode(value.getUser_password()));
+        // userEntity.setUser_create(date);
+        // userEntity.setUser_type("ROLE_USER");
+        // userEntity.setSns_type(value.getSns_type());
+        // userMapper.registUser(userEntity);
     }
 
     @Override
@@ -77,9 +81,10 @@ public class UserService implements IUserService{
     }
     
     @Transactional(readOnly = true)
-    public UserEntity getAuthorization() {
-      return userMapper.findId(SecurityUtil.getCurrentUsername())
-              .map(UserEntity::of)
+    public UserResponseDto getAuthorization() {
+        System.out.println("1.getAuthorization===");
+      return userMapper.findById(SecurityUtil.getCurrentUserId())
+              .map(UserResponseDto::of)
               .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다"));
     }
 }

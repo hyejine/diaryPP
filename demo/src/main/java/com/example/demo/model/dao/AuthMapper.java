@@ -11,9 +11,4 @@ import com.example.demo.model.entity.UserEntity;
 @Mapper
 public interface AuthMapper {
     Optional<UserEntity> findByEmail(String username);
-    // boolean existsByEmail(String email);
-    // User save(User memberuserDto);
-    // Optional<User> findById(Long currentMemberId);
-
-
 }
