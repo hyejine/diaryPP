@@ -17,8 +17,8 @@ import com.example.demo.jwt.JwtAccessDeniedHandler;
 import com.example.demo.jwt.JwtAuthenticationEntryPoint;
 import com.example.demo.jwt.JwtProvier;
 
-@Configuration         // Bean 
-@EnableWebSecurity     // Spirng Security Web 보안을 활성화해주는 annotation
+@Configuration // Bean
+@EnableWebSecurity // Spirng Security Web 보안을 활성화해주는 annotation
 @EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityJavaConfig {
 
@@ -27,7 +27,8 @@ public class SecurityJavaConfig {
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
-    public SecurityJavaConfig( JwtProvier jwtProvier, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint, JwtAccessDeniedHandler jwtAccessDeniedHandler, CorsFilter corsFilter) {
+    public SecurityJavaConfig(JwtProvier jwtProvier, JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint,
+            JwtAccessDeniedHandler jwtAccessDeniedHandler, CorsFilter corsFilter) {
         this.jwtProvier = jwtProvier;
         this.corsFilter = corsFilter;
         this.jwtAuthenticationEntryPoint = jwtAuthenticationEntryPoint;
@@ -42,41 +43,42 @@ public class SecurityJavaConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.cors().configurationSource(request -> new CorsConfiguration().applyPermitDefaultValues())
-            
-            .and()
-            .csrf().disable()
-            // .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
-            .exceptionHandling()
-            .authenticationEntryPoint(jwtAuthenticationEntryPoint)  
-            .accessDeniedHandler(jwtAccessDeniedHandler)  
 
-            .and()
-            .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // session사용 안함
+                .and()
+                .csrf().disable()
+                // .addFilterBefore(corsFilter, UsernamePasswordAuthenticationFilter.class)
+                .exceptionHandling()
+                .authenticationEntryPoint(jwtAuthenticationEntryPoint)
+                .accessDeniedHandler(jwtAccessDeniedHandler)
 
-            .and()
-            .authorizeRequests()   // HttpServletRequest를 사용하는 요청들에 대한 접근제한을 설정
-            .antMatchers(
-            "/user/login**",
-                            "/user/signUp/**",
-                            "/user/tokenApi/**",
-                            "/user/getId/**",
-                            "/emoji/**",
-                            "/board/**", 
-                            "/custom/**",
-                            "/mail/**"
-            ).permitAll()  // 여기 요청은 접근 허용
-        .anyRequest().authenticated() // 나머지 요청들은 모두 인증
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS) // session사용 안함
 
-        .and()
-        .apply(new JwtSecurityConfig(jwtProvier));
+                .and()
+                .authorizeRequests() // HttpServletRequest를 사용하는 요청들에 대한 접근제한을 설정
+                .antMatchers(
+                        "/user/login**",
+                        "/auth/signUp**",
+                        "/user/tokenApi/**",
+                        "/user/getId/**",
+                        "/emoji/**",
+                        "/board/**",
+                        "/custom/**",
+                        "/mail/**")
+                .permitAll() // 여기 요청은 접근 허용
+                .anyRequest().authenticated() // 나머지 요청들은 모두 인증
+
+                .and()
+                .apply(new JwtSecurityConfig(jwtProvier));
         return http.build();
-    } 
+    }
 
     @Bean
     public CommonsMultipartResolver multipartResolver() {
-    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
-    multipartResolver.setDefaultEncoding("UTF-8"); // ���� ���ڵ� ����
-    // multipartResolver.setMaxUploadSizePerFile(5 * 1024 * 1024); // ���ϴ� ���ε� ũ�� ���� (5MB)
-    return multipartResolver;
-}
+        CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+        multipartResolver.setDefaultEncoding("UTF-8"); // ���� ���ڵ� ����
+        // multipartResolver.setMaxUploadSizePerFile(5 * 1024 * 1024); // ���ϴ� ���ε�
+        // ũ�� ���� (5MB)
+        return multipartResolver;
+    }
 }

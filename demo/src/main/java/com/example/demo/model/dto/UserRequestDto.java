@@ -31,6 +31,4 @@ public class UserRequestDto {
     public UsernamePasswordAuthenticationToken toAuthentication() {
         return new UsernamePasswordAuthenticationToken(user_email, user_password);
     }
-
-
 }

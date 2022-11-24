@@ -14,7 +14,7 @@ const Regist = () => {
   const onSubmit = (value) => {
     console.log(value);
     axios
-      .post("/user/signUp", value)
+      .post("/auth/signUp", value)
       .then((response) => console.log(response))
       .catch((error) => console.log(error));
 

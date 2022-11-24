@@ -18,7 +18,6 @@ import com.example.demo.model.entity.TokenEntity;
 import com.example.demo.model.entity.UserEntity;
 import com.example.demo.service.UserService;
 
-
 @RestController
 @RequestMapping("/user")
 
@@ -32,13 +31,12 @@ public class UserController {
     // @Autowired
     // public UserService userService;
 
-
     // @PostMapping("/safeUser")
     // public void safeUser(@RequestBody Member value){
-    //     userService.safeUser(value);
+    // userService.safeUser(value);
     // }
 
-    @PostMapping("/signup")
+    @PostMapping("/signUp")
     public ResponseEntity<UserRequestDto> signup(@RequestBody UserRequestDto requestDto) {
         return ResponseEntity.ok(userService.registUser(requestDto));
     }
@@ -58,16 +56,16 @@ public class UserController {
         System.out.println("1. myInfoBySecurity ====" + myInfoBySecurity.getEmail());
         return ResponseEntity.ok((myInfoBySecurity));
     }
-    
+
     @GetMapping("/postFont/{fontChange}")
-	public String postFont(@PathVariable ("fontChange") String data) {
-		System.out.println("======value===="+data);
-		// customService.postFont(data);
-		return "data"+data;
-	}
+    public String postFont(@PathVariable("fontChange") String data) {
+        System.out.println("======value====" + data);
+        // customService.postFont(data);
+        return "data" + data;
+    }
 
     @GetMapping("/getId/{userId}")
-    public List<UserEntity> getUserId (@PathVariable("userId") String id){
+    public List<UserEntity> getUserId(@PathVariable("userId") String id) {
         return userService.getUserId(id);
     }
 }

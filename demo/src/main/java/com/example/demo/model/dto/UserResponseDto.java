@@ -16,10 +16,10 @@ public class UserResponseDto {
     private String email;
     private String userName;
 
-    public static UserResponseDto of (UserEntity userEntity){
+    public static UserResponseDto of(UserEntity userEntity) {
         return UserResponseDto.builder()
-        .email(userEntity.getUser_email())
-        .userName(userEntity.getUser_name())
-        .build();
+                .email(userEntity.getUser_email())
+                .userName(userEntity.getUser_name())
+                .build();
     }
 }
