@@ -37,10 +37,12 @@ public class UserEntity {
     private String user_type;
 
     @Builder
-    public UserEntity(String user_email, String user_password, String user_phone, String user_image, Date user_create,
+    public UserEntity(String user_email, String user_password, String user_name, String user_phone, String user_image,
+            Date user_create,
             String sns_id, String sns_type, String user_type) {
         this.user_email = user_email;
         this.user_password = user_password;
+        this.user_name = user_name;
         this.user_phone = user_phone;
         this.user_image = user_image;
         this.user_create = user_create;

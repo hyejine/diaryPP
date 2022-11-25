@@ -239,7 +239,7 @@ const hello = ()=>{
             <div className="line">Or Login With</div>
           </div>
 
-          <Link to="/user/signUp">
+          <Link to="/auth/signUp">
             <button className="login_b login_diary">회원가입 하기!</button>
           </Link>
         </div>

@@ -34,7 +34,7 @@ function App(props) {
      </Route>
      <Route element={<LoginLayout/>}>
      <Route path="/user/login" element={<Login/>}/>
-      <Route path="/user/signUp" element={<Regist/>}/>  
+      <Route path="/auth/signUp" element={<Regist/>}/>  
      </Route>
      <Route element={<BoardLayout />}>
       <Route path="/board/read/:diary_id" element={<Read/>}/> 

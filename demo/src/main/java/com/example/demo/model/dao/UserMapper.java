@@ -17,7 +17,7 @@ public interface UserMapper {
 
     boolean existsByEmail(String email);
 
-    public UserEntity signUp(UserEntity user);
+    public void signUp(UserEntity user);
 
     public UserRequestDto registUser(UserEntity value);
 

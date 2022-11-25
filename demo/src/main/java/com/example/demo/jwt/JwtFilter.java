@@ -77,10 +77,10 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-
+        System.out.println("doFilterInternal===" + request);
         String jwt = resolveToken(request);
 
-        System.out.println("doFilterInternal===" + jwt);
+        System.out.println("doFilterInternal===" + request);
         // validateToken 으로 토큰 유효성 검사
         if (StringUtils.hasText(jwt) && jwtProvier.validateToken(jwt)) {
             // 토큰이 유효할 경우 토큰에서 Authentication 객체를 가지고 와서 SecurityContext 에 저장

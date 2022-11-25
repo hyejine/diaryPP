@@ -6,12 +6,12 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.example.demo.model.dto.UserRequestDto;
 import com.example.demo.model.dto.UserResponseDto;
 import com.example.demo.service.AuthService;
 
 @RestController
 @RequestMapping("/auth")
-
 public class AuthController {
 
     private final AuthService authService;
@@ -20,9 +20,9 @@ public class AuthController {
         this.authService = authService;
     }
 
-    @PostMapping("/singUp")
-    public ResponseEntity<UserResponseDto> singUp(@RequestBody UserResponseDto requestDto) {
-        return ResponseEntity.ok(authService.singUp(requestDto));
+    @PostMapping("/signUp")
+    public void singUp(@RequestBody UserRequestDto requestDto) {
+        authService.signUp(requestDto);
     }
 
 }

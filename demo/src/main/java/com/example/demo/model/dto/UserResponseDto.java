@@ -13,13 +13,13 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserResponseDto {
 
-    private String email;
-    private String userName;
+    private String user_email;
+    private String user_name;
 
     public static UserResponseDto of(UserEntity userEntity) {
         return UserResponseDto.builder()
-                .email(userEntity.getUser_email())
-                .userName(userEntity.getUser_name())
+                .user_email(userEntity.getUser_email())
+                .user_name(userEntity.getUser_name())
                 .build();
     }
 }

@@ -2,9 +2,17 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.example.demo.model.dao.UserMapper">
-    <insert id="registUser">
-      INSERT INTO user_table (user_email, user_name, user_password ,sns_type, user_create, user_type) VALUES (#{user_email}, #{user_name}, #{user_password}, #{sns_type}, #{user_create}, #{user_type})
+  
+    <insert id="signUp" parameterType="UserEntity">
+      <!-- <selectKey keyColumn="user_email" keyProperty= "user_email" resultType="java.lang.String" order="AFTER">
+        select * FROM user_table WHERE user_email=#{user_email}
+      </selectKey> -->
+      INSERT INTO user_table (user_email, user_name, user_password, user_create, user_type) VALUES (#{user_email}, #{user_name}, #{user_password}, #{user_create}, #{user_type})
     </insert>
+
+    <select id="existsByEmail" parameterType="UserEntity" resultType="java.lang.Boolean">
+     SELECT IF(COUNT(*) = 1, 1, 0) FROM user_table WHERE user_email=#{user_email}
+    </select>
 
     <select id="getUserId" resultType="UserEntity" >
       SELECT * FROM user_table WHERE user_email=#{user_email}

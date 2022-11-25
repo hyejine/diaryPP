@@ -53,7 +53,7 @@ public class UserController {
     @GetMapping("/tokenApi")
     public ResponseEntity<UserResponseDto> getAuthorization() {
         UserResponseDto myInfoBySecurity = userService.getAuthorization();
-        System.out.println("1. myInfoBySecurity ====" + myInfoBySecurity.getEmail());
+        System.out.println("1. myInfoBySecurity ====" + myInfoBySecurity.getUser_email());
         return ResponseEntity.ok((myInfoBySecurity));
     }
 
