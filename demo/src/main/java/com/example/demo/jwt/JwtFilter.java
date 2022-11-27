@@ -65,7 +65,11 @@ public class JwtFilter extends OncePerRequestFilter {
 
     // request header에서 토큰 정보를 꺼내옴
     private String resolveToken(HttpServletRequest request) {
+        // System.out.println(localStorage.getitem());
+        System.out.println("1.request==="+request);
+        System.out.println("1.request==="+request.getHeader("Authorization"));
         String bearerToken = request.getHeader(AUTHORIZATION_HEADER);
+        System.out.println("2.bearerToken==="+bearerToken);
         if (StringUtils.hasText(bearerToken) && bearerToken.startsWith(BEARER_PREFIX)) {
             return bearerToken.substring(7);
         }
@@ -77,15 +81,15 @@ public class JwtFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain)
             throws ServletException, IOException {
-        System.out.println("doFilterInternal===" + request);
+        System.out.println("1.doFilterInternal===" + request);
         String jwt = resolveToken(request);
 
-        System.out.println("doFilterInternal===" + request);
+        System.out.println("2.jwt===" + jwt);
         // validateToken 으로 토큰 유효성 검사
         if (StringUtils.hasText(jwt) && jwtProvier.validateToken(jwt)) {
             // 토큰이 유효할 경우 토큰에서 Authentication 객체를 가지고 와서 SecurityContext 에 저장
             Authentication authentication = jwtProvier.getAuthentication(jwt);
-            System.out.println("authentication===" + authentication);
+            System.out.println("3.authentication===" + authentication);
             SecurityContextHolder.getContext().setAuthentication(authentication);
         }
 

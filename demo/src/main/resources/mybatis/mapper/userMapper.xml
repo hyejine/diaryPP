@@ -19,6 +19,6 @@
     </select> 
 
     <select id="findById" resultType="UserEntity" >
-      SELECT * FROM user_table WHERE user_id=#{user_id}
+      SELECT * FROM user_table WHERE user_email=#{user_email}
     </select> 
   </mapper>

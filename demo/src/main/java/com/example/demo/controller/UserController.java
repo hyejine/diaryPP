@@ -42,11 +42,11 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public TokenEntity login(@RequestBody UserRequestDto memberLoginRequestDto) {
-        System.out.println("1. UserRequestDto " + memberLoginRequestDto);
-        String email = memberLoginRequestDto.getUser_email();
-        String password = memberLoginRequestDto.getUser_password();
-        TokenEntity tokenInfo = userService.login(email, password);
+    public TokenEntity login(@RequestBody UserRequestDto userRequestDto) {
+        // System.out.println("1. UserRequestDto " + memberLoginRequestDto);
+        // String email = memberLoginRequestDto.getUser_email();
+        // String password = memberLoginRequestDto.getUser_password();
+        TokenEntity tokenInfo = userService.login(userRequestDto);
         return tokenInfo;
     }
 

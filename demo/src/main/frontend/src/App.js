@@ -22,13 +22,13 @@ function App(props) {
   const [backColor, setBackColor ] = useState();
   const [backImage, setBackImage ] = useState();
   const [fontChange, setFontChange ] = useState();
-
+console.log("currnetUser", currnetUser);
   return (
     <div className="allPage " style={ backColor ? { background: `${backColor}`, fontFamily: `${fontChange}` } : backImage ? { background: `url(${backImage})`, fontFamily: `${fontChange}`, backgroundSize: 'contain' } : { background: `url(${defaultBg})`, backgroundSize: 'contain', fontFamily: `${fontChange}` }}>
     <BrowserRouter>
       <Routes>
       <Route element={<MainLayout setBackColor ={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange} fontChange={fontChange}/>}>
-      <Route path="/" element={<CalendarCom />} currentUser={props?.currnetUser}/>
+      <Route path="/" element={<CalendarCom />} currentUser={currnetUser}/>
       <Route path="/board/write" element={<Write/>}/>
       <Route path="/emoji" element={<EmojiPurchase/>}/> 
      </Route>
@@ -39,7 +39,7 @@ function App(props) {
      <Route element={<BoardLayout />}>
       <Route path="/board/read/:diary_id" element={<Read/>}/> 
       <Route path="/board/edit/:diary_id" element={<Edit/>}/> 
-      <Route path="/contactUs" element={<ServiceCenter/>}/> 
+      <Route path="/contactUs" element={<ServiceCenter/>}currentUser={currnetUser}/> 
       <Route path="/test" element={<Test/>}/> 
       </Route>
       </Routes>

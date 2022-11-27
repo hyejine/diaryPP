@@ -6,7 +6,9 @@ import ContactUs from "./ContactUs";
 import WebInfo from "./WebInfo";
 import "./serviceCenter.scss";
 
-const ServiceCenter = () => {
+const ServiceCenter = (props) => {
+  const {currnetUser} = props;
+  console.log(currnetUser);
   return (
     <div className="serviceCenterPage">
       <div className="webHeader">

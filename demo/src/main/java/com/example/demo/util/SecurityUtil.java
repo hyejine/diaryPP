@@ -21,7 +21,7 @@ public class SecurityUtil {
     private SecurityUtil() {
     }
 
-    public static Long getCurrentUserId() {
+    public static String getCurrentUserId() {
         final Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         
         System.out.println("2.authentication=== "+authentication.getName());
@@ -32,7 +32,8 @@ public class SecurityUtil {
         }
 
         // 인증이 안되면 anonymousUser 리턴함
-        return Long.parseLong(authentication.getName());
+        return authentication.getName();
+        // return Long.parseLong(authentication.getName());
     }
         // if (authentication == null) {
         //     logger.debug("Security Context에 인증 정보가 없습니다.");

@@ -27,6 +27,5 @@ public interface UserMapper {
 
     public List<UserEntity> getUserId(String id);
 
-    Optional<UserEntity> findById(Long id);
-
+    Optional<UserEntity> findById(String optional);
 }

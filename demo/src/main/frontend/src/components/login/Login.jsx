@@ -31,11 +31,15 @@ const Login = () => {
     axios.post("/user/login", value)
         .then((response) => {console.log(response.data.accessToken)
           localStorage.setItem('Authorization', `Bearer ${response.data.accessToken}`);
-          axios.get("/user/tokenApi")
-          .then(res =>console.log(res))
+          axios({
+            method: "get",
+            url: "/user/tokenApi",
+            headers: { Authorization: `Bearer ${response.data.accessToken}` },
+          })
+          .then(res =>{console.log(res);
+            dispatch(loginUser(res.data));
+          })
           .catch(error=> console.log(error));
-          // axios.post()
-          // dispatch(loginUser(response.data));
         }
         //  메인 페이지로 이동해야함 
         )

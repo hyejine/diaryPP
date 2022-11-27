@@ -62,11 +62,11 @@ public class UserService implements IUserService {
     }
 
     @Transactional
-    public TokenEntity login(String email, String password) {
+    public TokenEntity login(UserRequestDto userRequestDto) {
         // 1. Login ID/PW 를 기반으로 Authentication 객체 생성
         // 이때 authentication 는 인증 여부를 확인하는 authenticated 값이 false
-        UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(email,
-                password);
+        UsernamePasswordAuthenticationToken authenticationToken = userRequestDto.toAuthentication();
+
         System.out.println("2. authenticationToken" + authenticationToken);
 
         // 2. 실제 검증 (사용자 비밀번호 체크)이 이루어지는 부분
@@ -84,7 +84,6 @@ public class UserService implements IUserService {
 
     @Transactional(readOnly = true)
     public UserResponseDto getAuthorization() {
-        System.out.println("1.getAuthorization===");
         return userMapper.findById(SecurityUtil.getCurrentUserId())
                 .map(UserResponseDto::of)
                 .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다"));
