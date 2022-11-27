@@ -63,8 +63,9 @@ public class SecurityJavaConfig {
                         "/user/getId/**",
                         "/emoji/**",
                         "/board/**",
-                        "/custom/**",
-                        "/mail/**")
+                        "/custom/**"
+                        // "/mail/**"
+                        )
                 .permitAll() // 여기 요청은 접근 허용
                 .anyRequest().authenticated() // 나머지 요청들은 모두 인증
 

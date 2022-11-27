@@ -18,17 +18,19 @@ import Test from "./test.jsx";
 import LoginLayout from "./components/layout/LoginLayout";
 
 function App(props) {
-  const currnetUser = useSelector(state => state.user);
+  // const [currnetUser, setCurrentUser]= useState(useSelector(state => state.user))
+  const currentUser = useSelector(state => state.currentUser);
   const [backColor, setBackColor ] = useState();
   const [backImage, setBackImage ] = useState();
   const [fontChange, setFontChange ] = useState();
-console.log("currnetUser", currnetUser);
+console.log("currnetUser", currentUser);
+console.log(props);
   return (
     <div className="allPage " style={ backColor ? { background: `${backColor}`, fontFamily: `${fontChange}` } : backImage ? { background: `url(${backImage})`, fontFamily: `${fontChange}`, backgroundSize: 'contain' } : { background: `url(${defaultBg})`, backgroundSize: 'contain', fontFamily: `${fontChange}` }}>
     <BrowserRouter>
       <Routes>
       <Route element={<MainLayout setBackColor ={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange} fontChange={fontChange}/>}>
-      <Route path="/" element={<CalendarCom />} currentUser={currnetUser}/>
+      <Route path="/" element={<CalendarCom currentUser={currentUser}/>} />
       <Route path="/board/write" element={<Write/>}/>
       <Route path="/emoji" element={<EmojiPurchase/>}/> 
      </Route>
@@ -39,8 +41,8 @@ console.log("currnetUser", currnetUser);
      <Route element={<BoardLayout />}>
       <Route path="/board/read/:diary_id" element={<Read/>}/> 
       <Route path="/board/edit/:diary_id" element={<Edit/>}/> 
-      <Route path="/contactUs" element={<ServiceCenter/>}currentUser={currnetUser}/> 
-      <Route path="/test" element={<Test/>}/> 
+      <Route path="/contactUs" element={<ServiceCenter currentUser={currentUser}/>}/> 
+      <Route path="/test" element={<Test currentUser={currentUser}/>}/> 
       </Route>
       </Routes>
     </BrowserRouter>

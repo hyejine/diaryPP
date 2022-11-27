@@ -10,16 +10,19 @@ import { diaryDateRenderer } from "../../utils/index";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import { useSelector } from "react-redux";
 
 
-
-const CalendarCom = () => {
+const CalendarCom = (props) => {
+  const {currentUser} = props; 
+  const test = useSelector(state => state.currentUser);
   const [modalOpen, setModalOpen] = useState(false);
   const [selectDate, setSelectDate] = useState();
   const [calerdarData, setCalerdarData] = useState();
   const [isDate, setIsDate] = useState([]);
   const navigate = useNavigate();
-
+console.log(currentUser);
+console.log(test);
   const renderEventContent = (eventInfo) =>{
     isDate.push(eventInfo.event.startStr);
     const result = eventInfo.event.title.length < 8 ? eventInfo.event.title : eventInfo.event.title.substr(0,8)+'...';
