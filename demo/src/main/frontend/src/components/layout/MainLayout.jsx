@@ -5,7 +5,7 @@ import GraphCom from "../graph/GraphCom";
 import '../layout/main-boarder-Layout.scss';
 
 const MainLayout = (props) => {
-  const {setBackColor, setBackImage, setFontChange, fontChange} = props;
+  const {setBackColor, setBackImage, setFontChange, fontChange, currentUser} = props;
   const [tab, setTab] = useState("캘린더");
 
   const onChange = (value) => {
@@ -15,7 +15,7 @@ const MainLayout = (props) => {
   return (
     <div className="main" >
       <div className="mainWrap">
-      <Header setBackColor={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange} fontChange= {fontChange}/>
+      <Header setBackColor={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange} fontChange= {fontChange} currentUser={currentUser}/>
       <div className="mainContentWarp">
       <div onClick={onChange} className="mainLayoutTab">
         <span key="1" className="calendarTab">캘린더</span>
@@ -24,7 +24,7 @@ const MainLayout = (props) => {
       <div className="mainContent">
         <div className="mainInner">
           <div >
-            {tab === "캘린더" ? <CalendarCom /> : <GraphCom />}
+            {tab === "캘린더" ? <CalendarCom currentUser={currentUser}/> : <GraphCom />}
           </div>
         </div>
       </div>

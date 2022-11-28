@@ -7,11 +7,11 @@
         SELECT IF(COUNT(*) = 1, 1, 0) FROM custom_table where user_email=#{user_email}
     </select> 
 
-    <insert id="saveFont"  parameterType="CustomDto">
+    <insert id="saveFont"  parameterType="CustomEntity">
         INSERT INTO custom_table (custom_font, user_email) values ( #{custom_font}, #{user_email})
     </insert>
 
-    <insert id="updateFont">
+    <insert id="updateFont" parameterType="CustomEntity">
         update custom_table set custom_font = #{custom_font} where user_email = #{user_email}
     </insert>
 </mapper>

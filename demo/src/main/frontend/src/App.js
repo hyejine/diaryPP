@@ -12,7 +12,7 @@ import BoardLayout from "./components/layout/BoardLayout";
 import Read from "./components/board/Read";
 import CalendarCom from "./components/calendar/CalendarCom";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import defaultBg from './resource/image/defaultBackground.jpg'
+import defaultBg from './resource/image/skyBg.jpg'
 import ServiceCenter from "./components/serviceCenter/ServiceCenter";
 import Test from "./test.jsx";
 import LoginLayout from "./components/layout/LoginLayout";
@@ -26,11 +26,11 @@ function App(props) {
 console.log("currnetUser", currentUser);
 console.log(props);
   return (
-    <div className="allPage " style={ backColor ? { background: `${backColor}`, fontFamily: `${fontChange}` } : backImage ? { background: `url(${backImage})`, fontFamily: `${fontChange}`, backgroundSize: 'contain' } : { background: `url(${defaultBg})`, backgroundSize: 'contain', fontFamily: `${fontChange}` }}>
+    <div className="allPage " style={ backColor ? { background: `${backColor}`, fontFamily: `${fontChange}` } : backImage ? { background: `url(${backImage})`, fontFamily: `${fontChange}`, backgroundSize: '30%' } : { background: `url(${defaultBg})`, backgroundSize: '30%', fontFamily: `${fontChange}` }}>
     <BrowserRouter>
       <Routes>
-      <Route element={<MainLayout setBackColor ={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange} fontChange={fontChange}/>}>
-      <Route path="/" element={<CalendarCom currentUser={currentUser}/>} />
+      <Route element={<MainLayout setBackColor ={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange} fontChange={fontChange} currentUser={currentUser}/>}>
+      <Route path="/" element={<CalendarCom />} />
       <Route path="/board/write" element={<Write/>}/>
       <Route path="/emoji" element={<EmojiPurchase/>}/> 
      </Route>

@@ -4,20 +4,21 @@ import "./header.scss";
 import { Button } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 import { useState } from "react";
-import logo from "../../../resource/image/logo.png";
 import BackgroundModal from "../../userCustom/BackgroundModal";
 import { Dropdown, Form } from "react-bootstrap";
+import { useDispatch } from "react-redux";
+import { clearUser } from "../../../reducer/userLogin";
 import axios from "axios";
 
 const Header = (props) => {
-  const { currnetUser, setBackColor, setBackImage, setFontChange, fontChange } =
-    props;
+  const { currentUser, setBackColor, setBackImage, setFontChange, fontChange } = props;
   const [modalActive, setModalActive] = useState(false);
+  const dispatch = useDispatch();
 
   const onBackgroundChg = () => {
     setModalActive(!modalActive);
   };
-
+console.log(currentUser);
   const fontStyle = [
     { value: "Galmuri9", fontStyle: "갈무리" },
     { value: "GangwonEdu_OTFBoldA", fontStyle: "강원교육모두체" },
@@ -39,6 +40,7 @@ const Header = (props) => {
 
   const saveFont = () => {
     const data = {
+      user_email: currentUser.email,
       custom_font: fontChange,
     };
     axios
@@ -47,22 +49,25 @@ const Header = (props) => {
       .catch((err) => console.log(err));
   };
 
+  const onLogout = {
+    clearUser
+    // dispatch(clearUser(currentUser));
+  }
+
   return (
     <div className="header">
       <Link to="/">
-        <img src={logo} alt="" className="logo" />
+        <span className="logo">D,I,Y Diary</span>
       </Link>
-      <Link to="/user/login"><span className="login">login</span></Link>
       <div className="menuWrap">
       <div className="customMenu">
         <Dropdown autoClose="outside">
           <Dropdown.Toggle>
-            {currnetUser?.image ? (
-              currnetUser?.image
-            ) : (
-              <AccountCircle className="userImg"/>
-            )} 
-            <span className="userName">{currnetUser?.name}정혜진</span>
+            {currentUser ? 
+            <span>
+              {currentUser?.image ? currentUser?.image : <AccountCircle/>} <span className="userName">{currentUser?.name}</span>
+            </span>
+          : <Link to="/user/login"><span className="login">login</span></Link>} 
           </Dropdown.Toggle>
           <Dropdown.Menu style={{ width: 263 }}>
             <Dropdown.Item>
@@ -117,15 +122,15 @@ const Header = (props) => {
             <Dropdown.Item onClick={onBackgroundChg}>
               Background Color
             </Dropdown.Item>
-            <Dropdown.Item> Logout </Dropdown.Item>
-            <Button
+            <Dropdown.Item onClick={onLogout}> Logout </Dropdown.Item>
+            {/* <Button
               variant="contained"
               color="success"
               href="/emoji"
               className="emojiButton"
             >
               프리미엄 이모지 보러가기
-            </Button>
+            </Button> */}
           </Dropdown.Menu>
         </Dropdown>
         </div>
@@ -143,9 +148,6 @@ const Header = (props) => {
         setBackImage={setBackImage}
         hide={() => setModalActive(false)}
       />
-      {/* : 
-            <Link to="/auth/login"><span className="login">login</span></Link>
-          } */}
     </div>
   );
 };
