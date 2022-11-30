@@ -1,3 +1,4 @@
+import { SatelliteAlt } from "@mui/icons-material";
 import { createSlice } from "@reduxjs/toolkit";
 
 
@@ -16,11 +17,13 @@ export const userLogin = createSlice({
         // login 성공 시
         loginUser: (state, action) => {
             // name, id에 API 값 받아오기
-            state.id = action.payload.id;
+            console.log(action);
+            state.id = action.payload.user_id;
             state.email = action.payload.user_email;
             state.name = action.payload.user_name;
             state.phone = action.payload.phone;
             state.image = action.payload.image;
+            state.font = action.payload.custom_font;
             // state 변화를 알림
             return state;
         },

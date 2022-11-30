@@ -28,7 +28,7 @@ public class CustomService implements ICustomService {
     @Override
     public void postFont(CustomEntity value) {
         System.out.println("===ServiceVAlue====" + value);
-        if (customMapper.getUserCustom(value.getUser_email())) {
+        if (customMapper.findUser(value.getUser_email())) {
             System.out.println("이미 아이디가 있는 경우 ");
             value.setCustom_font(value.getCustom_font());
             customMapper.updateFont(value);
@@ -39,5 +39,12 @@ public class CustomService implements ICustomService {
             value.setCustom_font(value.getCustom_font());
             customMapper.saveFont(value);
         }
+    }
+
+    @Override
+    public CustomEntity getUserCustom(String email) {
+        System.out.println("===ServiceVAlue====" + email);
+        return customMapper.getUserCustom(email);
+
     }
 }

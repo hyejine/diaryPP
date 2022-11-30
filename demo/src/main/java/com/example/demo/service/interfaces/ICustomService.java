@@ -8,4 +8,6 @@ public interface ICustomService {
 
     public void postFont(CustomEntity value);
 
+    public CustomEntity getUserCustom(String email);
+
 }

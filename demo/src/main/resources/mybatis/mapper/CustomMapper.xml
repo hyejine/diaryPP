@@ -3,7 +3,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   <mapper namespace="com.example.demo.model.dao.CustomMapper">
 
-    <select id="getUserCustom" parameterType="HashMap" resultType="java.lang.Boolean">
+    <select id="findUser" parameterType="HashMap" resultType="java.lang.Boolean">
         SELECT IF(COUNT(*) = 1, 1, 0) FROM custom_table where user_email=#{user_email}
     </select> 
 
@@ -14,4 +14,8 @@
     <insert id="updateFont" parameterType="CustomEntity">
         update custom_table set custom_font = #{custom_font} where user_email = #{user_email}
     </insert>
+
+    <select id ="getUserCustom" resultType ="CustomEntity">
+        SELECT * FROM custom_table where user_email= #{user_email}
+    </select>
 </mapper>

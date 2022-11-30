@@ -36,10 +36,12 @@ public class UserEntity {
 
     private String user_type;
 
+    private CustomEntity custom_user;
+
     @Builder
     public UserEntity(String user_email, String user_password, String user_name, String user_phone, String user_image,
             Date user_create,
-            String sns_id, String sns_type, String user_type) {
+            String sns_id, String sns_type, String user_type, CustomEntity custom_user) {
         this.user_email = user_email;
         this.user_password = user_password;
         this.user_name = user_name;
@@ -49,5 +51,7 @@ public class UserEntity {
         this.sns_id = sns_id;
         this.sns_type = sns_type;
         this.user_type = user_type;
+        this.custom_user = custom_user;
+
     }
 }

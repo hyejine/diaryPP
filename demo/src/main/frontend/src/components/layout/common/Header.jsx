@@ -8,11 +8,15 @@ import BackgroundModal from "../../userCustom/BackgroundModal";
 import { Dropdown, Form } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 import { clearUser } from "../../../reducer/userLogin";
+import FontModal from "../../common/CommonModal";
+import { loginUser } from "../../../reducer/userLogin";
+
 import axios from "axios";
 
 const Header = (props) => {
   const { currentUser, setBackColor, setBackImage, setFontChange, fontChange } = props;
   const [modalActive, setModalActive] = useState(false);
+  const [fontModal, setFontModal] = useState(false);
   const dispatch = useDispatch();
 
   const onBackgroundChg = () => {
@@ -42,11 +46,19 @@ console.log(currentUser);
     const data = {
       user_email: currentUser.email,
       custom_font: fontChange,
+      custom_id : currentUser.id,
+      custom_name : currentUser.name
     };
     axios
       .post(`/custom/postFont`, data)
-      .then((res) => console.log(res))
-      .catch((err) => console.log(err));
+      .then((res) => {
+        console.log(res);
+        setFontModal(true);
+        dispatch(loginUser(data));
+      })
+      .catch((err) => {console.log(err);
+        setFontModal(false);
+      });
   };
 
   const onLogout = {
@@ -61,6 +73,7 @@ console.log(currentUser);
       </Link>
       <div className="menuWrap">
       <div className="customMenu">
+      {/* <Link to="/user/login"><span className="login">login</span></Link> */}
         <Dropdown autoClose="outside">
           <Dropdown.Toggle>
             {currentUser ? 
@@ -142,6 +155,11 @@ console.log(currentUser);
         </Dropdown>
       </div>
       </div>
+      <FontModal
+       show={fontModal}
+       contents ={""}
+       hide={() => setFontModal(false)}
+       />
       <BackgroundModal
         show={modalActive}
         setBackColor={setBackColor}

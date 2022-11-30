@@ -14,10 +14,12 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.example.demo.jwt.JwtProvier;
+import com.example.demo.model.dao.CustomMapper;
 import com.example.demo.model.dao.UserMapper;
 import com.example.demo.model.dto.UserRequestDto;
 import com.example.demo.model.dto.UserResponseDto;
 import com.example.demo.model.dto.UserType;
+import com.example.demo.model.entity.CustomEntity;
 import com.example.demo.model.entity.TokenEntity;
 import com.example.demo.model.entity.UserEntity;
 import com.example.demo.service.interfaces.IUserService;
@@ -29,14 +31,17 @@ public class UserService implements IUserService {
     private UserMapper userMapper;
     private JwtProvier jwtProvier;
     private AuthenticationManagerBuilder authenticationManagerBuilder;
+    private CustomMapper customMapper;
 
     @Autowired
     public UserService(UserMapper userMapper, PasswordEncoder passwordEncoder, JwtProvier jwtProvier,
-            AuthenticationManagerBuilder authenticationManagerBuilder) {
+            AuthenticationManagerBuilder authenticationManagerBuilder, CustomMapper customMapper) {
         this.passwordEncoder = passwordEncoder;
         this.userMapper = userMapper;
         this.jwtProvier = jwtProvier;
         this.authenticationManagerBuilder = authenticationManagerBuilder;
+        this.customMapper = customMapper;
+
     }
 
     // @Override
@@ -84,9 +89,10 @@ public class UserService implements IUserService {
 
     @Transactional(readOnly = true)
     public UserResponseDto getAuthorization() {
-        return userMapper.findById(SecurityUtil.getCurrentUserId())
+        UserResponseDto user = userMapper.findById(SecurityUtil.getCurrentUserId())
                 .map(UserResponseDto::of)
                 .orElseThrow(() -> new RuntimeException("로그인 유저 정보가 없습니다"));
+        return user;
     }
 
     @Override

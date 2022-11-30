@@ -27,6 +27,7 @@ const Login = () => {
       setVibration(false);
     }, 300);
   };
+  
   const onSubmit = (value) => {
     axios.post("/user/login", value)
         .then((response) => {console.log(response.data.accessToken)
@@ -36,8 +37,18 @@ const Login = () => {
             url: "/user/tokenApi",
             headers: { Authorization: `Bearer ${response.data.accessToken}` },
           })
-          .then(res =>{console.log(res);
-            dispatch(loginUser(res.data));
+          .then(userInfo =>{
+            axios.get(`/custom/getUserCustom/${userInfo.data.user_email}`)
+            .then((res)=> {
+              const value = {
+                user_id : userInfo.data.user_id,
+                user_email : userInfo.data.user_email,
+                user_name: userInfo.data.user_name,
+                custom_font: res.data.custom_font
+              }
+              dispatch(loginUser(value));
+            })
+            .catch((err)=>console.log(err));
           })
           .catch(error=> console.log(error));
         }

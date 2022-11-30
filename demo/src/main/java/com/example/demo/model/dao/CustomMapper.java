@@ -10,10 +10,12 @@ import com.example.demo.model.entity.CustomEntity;
 @Mapper
 public interface CustomMapper {
 
-    public boolean getUserCustom(String currentUser);
+    public boolean findUser(String currentUser);
 
     public void updateFont(CustomEntity value);
 
     public void saveFont(CustomEntity value);
+
+    public CustomEntity getUserCustom(String email);
 
 }
