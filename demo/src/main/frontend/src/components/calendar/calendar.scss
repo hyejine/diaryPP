@@ -66,4 +66,12 @@
     border-radius: 20px;
     background-color: #ffc700;
   }
+
+  #calendar{
+    background-color: #ada3c7;
+    .fc .fc-toolbar.fc-header-toolbar {
+      margin-bottom: 0.5em;
+  }
+  }
+
 }
