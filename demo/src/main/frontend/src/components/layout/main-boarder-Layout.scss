@@ -9,26 +9,38 @@
   .mainContentWarp {
     margin-top: 40px;
   }
+  .mainLayoutTab{
+    display: flex;
+    text-align: center;
+  }
   .calendarTab, .graphTab {
     cursor: pointer;
     color: #fff;
-    padding: 6px 13px;
+    width: 112px;
+    height: 34px;
     background-color: #f2c8de;
     border-left: 1px solid #fdd8ed;
     border-top: 1px solid #fdd8ed;
     box-shadow: 2.5px 0px #986882;
     margin-right: 6px;
+    align-items: center;
+    // padding: 8px 6px;
   }
   .tabActive {
     cursor: pointer;
-    box-shadow: 1.5px 1.5px 1.5px #986882 inset;
-    // background-color: 'red';
+    box-shadow:  0  2px 2px #986882 inset;
+    // background-color: #d63384;
+    // - 1.5px 0 1.5px #986882 inset,
+    // 1.5px -1.5px 0 #986882 inset;
+  }
+  .activeBorder{
+    // width: ;
+    background-color: #d63384;
   }
   .calendarTab {
     border-right: none;
   }
   .mainContent {
-    margin-top: 6px;
     border-left: 1px solid #fdd8ed;
     border-top: 1px solid #fdd8ed;
     box-shadow: 2.5px 2.5px #986882;

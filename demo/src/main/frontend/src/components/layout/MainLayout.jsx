@@ -23,8 +23,8 @@ console.log(tabClass);
       <Header setBackColor={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange} fontChange= {fontChange} currentUser={currentUser}/>
       <div className="mainContentWarp">
       <div onClick={onChange} className="mainLayoutTab">
-        <span key="1" className={tabClass ===0 ? "calendarTab tabActive":"calendarTab"} onClick={()=>onTabChange(0)}>캘린더</span>
-        <span key="2" className={tabClass ===1 ? "graphTab tabActive":"graphTab"} onClick={()=>onTabChange(1)}>기분 그래프</span>
+        <div key="1" className={tabClass ===0 ? "calendarTab tabActive":"calendarTab"} onClick={()=>onTabChange(0)}><div className={tabClass ===0 ? "activeBorder":""}>캘린더</div></div>
+        <div key="2" className={tabClass ===1 ? "graphTab tabActive":"graphTab"} onClick={()=>onTabChange(1)}>기분 그래프</div>
       </div>
       <div className="mainContent">
         <div className="mainInner">
