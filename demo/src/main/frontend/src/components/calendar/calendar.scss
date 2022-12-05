@@ -5,13 +5,32 @@
   border-radius: 20px;
   border: none;
 
+  a{
+    color: #d63384;
+    // color: #fff;
+  }
   .test{
     background-color: #D4C8F2;
-    // box-shadow: 2px 2px #5C596A;
     cursor: pointer;
     width: 167px;
     height: 35px;
   }
+ .fc-direction-ltr .fc-button-group > .fc-button:not(:last-child) {
+    color: #fff;
+    background: none;
+    border-left: 1px solid #fdd8ed;
+    border-top: 1px solid #fdd8ed;
+    box-shadow: 2.5px 2.5px #986882;
+    border-right: none; border-bottom: none;
+    margin-right: 7px;
+}
+.fc-direction-ltr .fc-button-group > .fc-button:not(:first-child) {
+  margin-left: -1px;
+  background: none;
+  box-shadow: 2.5px 2.5px #986882;
+  border-left: 1px solid #fdd8ed; border-top: 1px solid #fdd8ed;
+  border-right: none; border-bottom: none;
+}
   // 캘린더 내용 
   .btn-primary{
     --bs-btn-bg:none;
@@ -23,11 +42,6 @@
     height: 35px;
     text-align: left;
   }
-// .fc-daygrid-event-harness{
-//   text-decoration-line: none;
-//   cursor: pointer;
-//   background-color: #ffc700;
-// }
 .calendarEmoji{
   vertical-align:middle;
   width: 30px;

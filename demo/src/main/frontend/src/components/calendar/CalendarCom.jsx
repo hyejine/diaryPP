@@ -18,6 +18,8 @@ const CalendarCom = (props) => {
   const [isDate, setIsDate] = useState([]);
   const navigate = useNavigate();
 
+  console.log(currentUser.font);
+  
   const renderEventContent = (eventInfo) =>{
     isDate.push(eventInfo.event.startStr);
     const result = eventInfo.event.title.length < 8 ? eventInfo.event.title : eventInfo.event.title.substr(0,8)+'...';
@@ -60,7 +62,7 @@ const CalendarCom = (props) => {
 },[])
 
   return (
-    <div id="calendarPage">
+    <div id="calendarPage" style={currentUser? {fontFamily : `${currentUser.font}`} : "" }>
       <FullCalendar
         id="calendar"
         plugins={[dayGridPlugin, interactionPlugin]}

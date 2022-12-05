@@ -22,7 +22,7 @@ const Header = (props) => {
   const onBackgroundChg = () => {
     setModalActive(!modalActive);
   };
-console.log(currentUser);
+console.log(currentUser.font);
   const fontStyle = [
     { value: "Galmuri9", fontStyle: "갈무리" },
     { value: "GangwonEdu_OTFBoldA", fontStyle: "강원교육모두체" },
@@ -67,7 +67,7 @@ console.log(currentUser);
   }
 
   return (
-    <div className="header">
+    <div className="header" style={currentUser? {fontFamily : `${currentUser.font}`} : "" }>
       <Link to="/">
         <span className="logo">D,I,Y Diary</span>
       </Link>
