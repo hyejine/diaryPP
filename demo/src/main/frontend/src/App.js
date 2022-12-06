@@ -1,5 +1,6 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import { useState } from "react";
+import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/login/Login';
 import Main from "./Main";
 import Regist from "./components/login/regist/Regist";
@@ -11,7 +12,6 @@ import MainLayout from "./components/layout/MainLayout";
 import BoardLayout from "./components/layout/BoardLayout";
 import Read from "./components/board/Read";
 import CalendarCom from "./components/calendar/CalendarCom";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import defaultBg from './resource/image/skyBg.jpg'
 import ServiceCenter from "./components/serviceCenter/ServiceCenter";
 import Test from "./test.jsx";
@@ -23,8 +23,9 @@ function App(props) {
   const [backColor, setBackColor ] = useState();
   const [backImage, setBackImage ] = useState();
   const [fontChange, setFontChange ] = useState();
-console.log("currnetUser", currentUser);
-console.log(props);
+  console.log(currentUser);
+console.log("currnetUser:", fontChange, currentUser.font);
+
   return (
     <div className="allPage " style={ backColor ? { background: `${backColor}`, fontFamily: `${fontChange}` } : backImage ? { background: `url(${backImage})`, fontFamily: `${fontChange}`, backgroundSize: '30%' } : { background: `url(${defaultBg})`, backgroundSize: '30%', fontFamily: `${fontChange}` }}>
     <BrowserRouter>
@@ -41,7 +42,7 @@ console.log(props);
      <Route element={<BoardLayout />}>
       <Route path="/board/read/:diary_id" element={<Read/>}/> 
       <Route path="/board/edit/:diary_id" element={<Edit/>}/> 
-      <Route path="/contactUs" element={<ServiceCenter currentUser={currentUser}/>}/> 
+      <Route path="/contactUs" element={<ServiceCenter currentUser={currentUser} fontChange={fontChange}/>}/> 
       <Route path="/test" element={<Test currentUser={currentUser}/>}/> 
       </Route>
       </Routes>

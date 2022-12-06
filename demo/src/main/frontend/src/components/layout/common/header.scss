@@ -22,4 +22,39 @@
     .userName{
         margin: 0px 3px;
     }
+    // dropdown메뉴 커스텀 
+    .dropdownTitle{
+        color: #d63384;
+    }
+    .activeDropdownTitle{
+        background-color: #d63384;
+    }
+    .dropdownMenu{
+        background-color: #f7b3d6;
+        border: 3px solid #f7b3d6;
+        border-left: 1px solid #fdd8ed;
+        border-top: 1px solid #fdd8ed;
+        box-shadow: 2.5px 2.5px #986882;
+        border-radius: 0px;
+    }
+    .dropdown-menu{
+        --bs-dropdown-link-hover-bg: #f7b3d6;
+        --bs-dropdown-link-active-bg: #f7b3d6;
+    }
+    .dropdownMenu a {
+        color: #d63384;
+    }
+    .dropdownSelect{
+        margin-top: 8px;
+    }
+    .form-select {
+        border-radius: 0px;
+        padding: 2px 3px;
+        width: 71%;
+        border-color: #d63384;
+    }
+    .fontB{
+        margin-left: 5px;
+    }
+    // input:focus {outline: none;}
 }

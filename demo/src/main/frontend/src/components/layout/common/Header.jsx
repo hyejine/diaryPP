@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import "./header.scss";
 import { Button } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 import { useState } from "react";
@@ -11,6 +10,7 @@ import { clearUser } from "../../../reducer/userLogin";
 import FontModal from "../../common/CommonModal";
 import { loginUser } from "../../../reducer/userLogin";
 
+import "./header.scss";
 import axios from "axios";
 
 const Header = (props) => {
@@ -22,7 +22,8 @@ const Header = (props) => {
   const onBackgroundChg = () => {
     setModalActive(!modalActive);
   };
-console.log(currentUser.font);
+  console.log("Header: ", fontChange, currentUser);
+
   const fontStyle = [
     { value: "Galmuri9", fontStyle: "갈무리" },
     { value: "GangwonEdu_OTFBoldA", fontStyle: "강원교육모두체" },
@@ -65,9 +66,14 @@ console.log(currentUser.font);
     clearUser
     // dispatch(clearUser(currentUser));
   }
+  const [test, setTest] = useState(false);
 
+  const clickDropdown = ()=>{
+    setTest(!test);
+  }
+  console.log(test);
   return (
-    <div className="header" style={currentUser? {fontFamily : `${currentUser.font}`} : "" }>
+    <div className="header" >
       <Link to="/">
         <span className="logo">D,I,Y Diary</span>
       </Link>
@@ -75,18 +81,18 @@ console.log(currentUser.font);
       <div className="customMenu">
       {/* <Link to="/user/login"><span className="login">login</span></Link> */}
         <Dropdown autoClose="outside">
-          <Dropdown.Toggle>
+          <Dropdown.Toggle className="dropdownTitle">
             {currentUser ? 
             <span>
               {currentUser?.image ? currentUser?.image : <AccountCircle/>} <span className="userName">{currentUser?.name}</span>
             </span>
           : <Link to="/user/login"><span className="login">login</span></Link>} 
           </Dropdown.Toggle>
-          <Dropdown.Menu style={{ width: 263 }}>
+          <Dropdown.Menu style={{ width: 263 }} className="dropdownMenu">
             <Dropdown.Item>
               <span> Language </span>
 
-              <div style={{ display: "flex" }}>
+              <div style={{ display: "flex" }} className="dropdownSelect">
                 <Form.Select className="menuFont">
                   <option value="fontSelect" className="menuFont">
                     언어선택
@@ -106,7 +112,7 @@ console.log(currentUser.font);
             </Dropdown.Item>
             <Dropdown.Item>
               <span> Font </span>
-              <div style={{ display: "flex" }}>
+              <div style={{ display: "flex" }} className="dropdownSelect">
                 <Form.Select
                   onChange={(s) => {
                     chageFont(s);
@@ -132,10 +138,10 @@ console.log(currentUser.font);
                 </button>
               </div>
             </Dropdown.Item>
-            <Dropdown.Item onClick={onBackgroundChg}>
+            <Dropdown.Item onClick={onBackgroundChg} className="dropdownSelect">
               Background Color
             </Dropdown.Item>
-            <Dropdown.Item onClick={onLogout}> Logout </Dropdown.Item>
+            <Dropdown.Item onClick={onLogout} className="dropdownSelect"> Logout </Dropdown.Item>
             {/* <Button
               variant="contained"
               color="success"

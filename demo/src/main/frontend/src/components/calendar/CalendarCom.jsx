@@ -11,14 +11,15 @@ import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 
 const CalendarCom = (props) => {
-  const {currentUser} = props; 
+  const {currentUser, fontChange} = props; 
   const [modalOpen, setModalOpen] = useState(false);
   const [selectDate, setSelectDate] = useState();
   const [calerdarData, setCalerdarData] = useState();
   const [isDate, setIsDate] = useState([]);
   const navigate = useNavigate();
 
-  console.log(currentUser.font);
+  console.log("CalendarCom: ", fontChange,  currentUser.font);
+
   
   const renderEventContent = (eventInfo) =>{
     isDate.push(eventInfo.event.startStr);
@@ -62,7 +63,7 @@ const CalendarCom = (props) => {
 },[])
 
   return (
-    <div id="calendarPage" style={currentUser? {fontFamily : `${currentUser.font}`} : "" }>
+    <div id="calendarPage" style={fontChange? {fontFamily : `${fontChange}`} : {fontFamily : `${currentUser.font}`} }>
       <FullCalendar
         id="calendar"
         plugins={[dayGridPlugin, interactionPlugin]}
