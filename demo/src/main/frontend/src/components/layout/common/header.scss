@@ -49,12 +49,24 @@
     }
     .form-select {
         border-radius: 0px;
-        padding: 2px 3px;
+        padding: 2px 5px;
         width: 71%;
         border-color: #d63384;
+        box-shadow: 2.5px 2.5px #986882 inset;
+        background-color: #fde5f3;
     }
     .fontB{
         margin-left: 5px;
+        background-color: #fdd8ed;
+        border: none;
+        border-left: 1px solid #fdd8ed;
+        border-top: 1px solid #fdd8ed;
+        box-shadow: 2.5px 2.5px #986882;
+        color: #d63384;
     }
-    // input:focus {outline: none;}
+    .fontB:active{
+        border:none;
+        box-shadow: 2.5px 2.5px #986882 inset;
+        background-color: #fde5f3;
+    }
 }

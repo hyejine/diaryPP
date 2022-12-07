@@ -26,20 +26,23 @@
   }
   .tabActive {
     cursor: pointer;
-    box-shadow: 1.5px 1.5px #986882 inset;
+    box-shadow: 2.5px 2.5px #986882 inset;
+    width: 112px;
+    color: #d63384;
+    padding-top: 10px;
   }
   .tabB{
-    background-color: #f2c8de;
+    background-color: #fde5f3;
     margin-right: 6px;
   }
   .activeBorder{
     width: 112px;
     height: 78%;
     margin: 4px 3px 2px;
-    background-color: #f2c8de;
+    background-color: #fde5f3;
     color: #d63384;
     padding: 5px;
-    border: 1px dotted #fff;
+    // border: 1px dashed #fff;
   }
   .calendarTab {
     border-right: none;
