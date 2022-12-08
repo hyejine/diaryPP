@@ -11,6 +11,7 @@ import store from "./reducer/store.js";
 import { PersistGate } from 'redux-persist/integration/react';
 import { persistStore } from 'redux-persist';
 
+import './i18n/locales';
 const root = ReactDOM.createRoot(document.getElementById('root'));
 let persistor = persistStore(store);
 
