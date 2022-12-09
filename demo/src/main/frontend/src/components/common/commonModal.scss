@@ -1,56 +1,135 @@
-#modalPage{
+#modalPage {
     font-family: 'DungGeunMo';
     width: 500px;
 
     .pixelBorder {
         border-left: 1px solid #fdd8ed;
         border-top: 1px solid #fdd8ed;
-      }
-      
-    .modalWrap{
+    }
+
+    .modalWrap {
         border: 1px solid #bf84ad;
         background-color: #f5e0ec;
         padding: 0px;
     }
-    .title{
+
+    .title {
         align-items: center;
-        display: flex; position: relative;
-        margin: 4px 6px; padding: 8px;
-        color: #ed81cc; font-weight: bold;
-        background: linear-gradient( to right, #f2d6e2, #e772cb );
+        display: flex;
+        position: relative;
+        margin: 4px 6px;
+        padding: 8px;
+        color: #ed81cc;
+        font-weight: bold;
+        background: linear-gradient(to right, #f2d6e2, #e772cb);
     }
+
     .headerButton {
         position: absolute;
         right: 3px;
         display: flex;
-      }
-      .downB {
+    }
+
+    .downB {
         background-color: #f1e6f2;
         box-shadow: 2.5px 2.5px #986882;
         margin-right: 7px;
-      }
-    .content{
+    }
+
+    .closeClick {
+        cursor: pointer;
+    }
+
+    .closeClick:active,
+    .closeButton:active {
+        cursor: pointer;
+        box-shadow: 2.5px 2.5px #986882 inset;
+        background-color: #fde5f3;
+        color: #d63384;
+    }
+
+    .content {
         font-weight: bolder;
         text-align: center;
         padding: 25px 0;
     }
-    .closeButtonW{
+
+    .closeButtonW {
         text-align: center;
         margin-bottom: 13px;
     }
-    .closeButton{
+
+    .closeButton {
         background-color: #f1e6f2;
-        color: #ed81cc; 
+        color: #ed81cc;
         padding: 5px 10px;
         border-radius: 0;
-        box-shadow: 2.5px 2.5px #986882;
+        box-shadow: 2.5px 2.5px #e2a4d3;
+    }
+
+    .closeButton:first-child {
+        margin-right: 16px;
     }
 
     // bg custom 모달 
-    .bgcontent{
+    .bgcontent {
         margin: 25px 0;
     }
-    .contentSub{
-        margin-bottom: 5px;
+
+    .controlTitle {
+        padding: 0 18px;
+    }
+
+    .controlContent {
+        margin: 5px 0 14px 18px;
+        border-radius: 0;
+        border-left: 1px solid #fdd8ed;
+        border-top: 1px solid #fdd8ed;
+        box-shadow: 1.5px 1.5px #e2a4d3;
+    }
+
+    .bgPic {
+        width: 85%;
+    }
+
+    .closeBDiv {
+        text-align: center;
+    }
+
+    // pw 찾기 모달
+    .pwContent {
+        padding: 22px 15px 10px 15px;
+    }
+
+    .pwCTitle {
+        margin-bottom: 12px;
+    }
+
+    .pwInput {
+        padding: 6px;
+        box-shadow: 1.5px 1.5px #986882 inset;
+    }
+
+    .errorFont {
+        margin: 6px 3px;
+        font-size: 13px;
+        color: #c8294b;
+    }
+
+    .vibration {
+        animation: vibration2 0.2s infinite;
+    }
+
+    @keyframes vibration2 {
+        from {
+            transform: translateX(5px);
+        }
+
+        to {
+            transform: translateX(-5px);
+        }
+    }
+    .mt1{
+        margin-top: 10px;
     }
 }

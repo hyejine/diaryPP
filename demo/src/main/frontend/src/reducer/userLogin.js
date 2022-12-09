@@ -30,11 +30,13 @@ export const userLogin = createSlice({
         // login 실패 시
         clearUser: (state) => {
             // name, id 값을 비워줌.
+            console.log(state);
             state.id = "";
             state.email = "";
             state.name = "";
             state.phone = "";
             state.image = "";
+            state.font= "";
             // state 변화를 알림
             return state;
         },

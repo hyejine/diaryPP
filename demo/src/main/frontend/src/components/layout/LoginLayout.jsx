@@ -9,8 +9,8 @@ class LoginLayout extends Component {
       <div className="main">
         <div className="mainWrap">
           <div className="mainLogo">
-            <Link to="/">
-              <img src={logo} alt="" className="logo" style={{ width: 100 }} />
+            <Link to="/" className="logo">
+              D,I,Y Diary
             </Link>
           </div>
           <div>

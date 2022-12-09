@@ -20,8 +20,8 @@
     margin-bottom: 10px;
     font-size: 29px;
   }
-  .regist_input{
-    padding: 17px 30px 20px;
+  .regist_input{ 
+    padding: 17px 178px 20px;
     border-left: 1px solid #fef2f9;
     border-top: 1px solid #fef2f9;
     box-shadow: 2.5px 2.5px #986882;
@@ -29,12 +29,14 @@
     background-color: #f8e8ef;
     height: 550px;
     position: relative;
+    // width: ;
   }
   .writeTitle{
     padding: 32px 0 5px;
   }
   .writeAarea{
     padding: 6px;
+    width: 296px;
     box-shadow: 1.5px 1.5px #986882 inset;
   }
   .buttonWrap{
@@ -73,8 +75,42 @@
   }
 
   // 로그인 페이지
+  .inputInner{
+    height: 214px;
+  }
+  .mt2{
+    margin-top: 20px;
+  }
   .forgetUser{
     font-size: 14px; color: #986882;
     padding: 30px 0px 20px;
+    text-decoration: underline dotted;
+    cursor: pointer;
+    text-align: center;
+  }
+  .buttonX{
+    text-align: center;
+  }
+  .regB{
+    margin-left: 15px;
+  }
+  .line {
+    display: flex;
+    flex-basis: 100%;
+    align-items: center;
+    color: #986882;
+    font-size: 13px;
+    margin: 30px 0px;
+    // font-weight: 500;
+  }
+  .line::before,
+  .line::after {
+    content: "";
+    flex-grow: 1;
+    background: #986882;
+    height: 1px;
+    font-size: 0px;
+    line-height: 0px;
+    margin: 0px 16px;
   }
 }

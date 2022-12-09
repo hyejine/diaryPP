@@ -8,21 +8,24 @@ const CommonModal =(props)=> {
     const {show, hide, contents, diary_id, state } =props;
     const navigate = useNavigate();
 
+    const onClose =()=>{
+      navigate(`/`);
+    }
+
         return (
       <Modal size="lg" show={show} centered id="modalPage">
         <Modal.Body className='modalWrap'>
-     
           <div className='title'>
           <span>{state}</span>
           <div className='headerButton'>
                     <div className='downB pixelBorder'> <Minimize/> </div>
-                    <div className='downB pixelBorder'> <Close/> </div>
-                    </div>
+                    <div className='downB pixelBorder' onClick={hide}> <Close/> </div>
+          </div>
           </div>
           <div className='content'>{contents}</div>
           <div className='closeButtonW'>
           {diary_id ? <Button onClick={()=> navigate(`/board/read/${diary_id}`)} className="closeButton">Close</Button>:
-          <Button onClick={()=> navigate(`/`)} className="closeButton pixelBorder">THANK YOU!</Button>
+          <Button onClick={()=>navigate('/')} className="closeButton pixelBorder">THANK YOU!</Button>
            }
            </div>
         </Modal.Body>

@@ -1,19 +1,23 @@
 .main {
 
-.mainWrap{
-	width: 1280px;
-	height: 100vh;
-	margin: 0 auto;
-	padding: 50px 0;
-}
+  .mainWrap {
+    width: 1280px;
+    height: 100vh;
+    margin: 0 auto;
+    padding: 50px 0;
+  }
+
   .mainContentWarp {
     margin-top: 40px;
   }
-  .mainLayoutTab{
+
+  .mainLayoutTab {
     display: flex;
     text-align: center;
   }
-  .calendarTab, .graphTab {
+
+  .calendarTab,
+  .graphTab {
     cursor: pointer;
     color: #fff;
     width: 112px;
@@ -22,8 +26,10 @@
     border-left: 1px solid #fdd8ed;
     border-top: 1px solid #fdd8ed;
     box-shadow: 2.5px 0px #986882;
-    margin-right: 6px; padding: 9px;
+    margin-right: 6px;
+    padding: 9px;
   }
+
   .tabActive {
     cursor: pointer;
     box-shadow: 2.5px 2.5px #986882 inset;
@@ -31,32 +37,33 @@
     color: #d63384;
     padding-top: 10px;
   }
-  .tabB{
+
+  .tabB {
     background-color: #fde5f3;
     margin-right: 6px;
   }
-  .activeBorder{
+
+  .activeBorder {
     width: 112px;
     height: 78%;
     margin: 4px 3px 2px;
     background-color: #fde5f3;
     color: #d63384;
     padding: 5px;
-    // border: 1px dashed #fff;
   }
+
   .calendarTab {
     border-right: none;
     align-items: center;
   }
+
   .mainContent {
     border-left: 1px solid #fdd8ed;
     border-top: 1px solid #fdd8ed;
     box-shadow: 2.5px 2.5px #986882;
     height: 716px;
   }
-  a{
-    // color: #fff;
-  }
+
   .mainInner {
     padding: 7px 25px;
     background-color: #f2c8de;
@@ -64,8 +71,17 @@
   }
 
   // 로그인/ 회원가입 페이지 
-  .mainLogo{
+  .mainLogo {
     text-align: center;
     padding: 3px 0 30px 0;
+  }
+
+  .logo {
+    color: #f39ecb;
+    font-size: 21px;
+  }
+
+  .mainLogo a {
+    text-decoration: none;
   }
 }

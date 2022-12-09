@@ -1,5 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Login from './components/login/Login';
 import Main from "./Main";
@@ -23,8 +23,6 @@ function App(props) {
   const [backColor, setBackColor ] = useState();
   const [backImage, setBackImage ] = useState();
   const [fontChange, setFontChange ] = useState();
-  console.log(currentUser);
-console.log("currnetUser:", fontChange, currentUser.font);
 
   return (
     <div className="allPage " style={ backColor ? { background: `${backColor}`, fontFamily: `${fontChange}` } : backImage ? { background: `url(${backImage})`, fontFamily: `${fontChange}`, backgroundSize: '30%' } : { background: `url(${defaultBg})`, backgroundSize: '30%', fontFamily: `${fontChange}` }}>

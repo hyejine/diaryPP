@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Button } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
@@ -71,37 +71,35 @@ const Header = (props) => {
       });
   };
 
-  const onLogout = {
-    clearUser
-    // dispatch(clearUser(currentUser));
+  const onLogout =()=> {
+    console.log(currentUser);
+    dispatch(clearUser(currentUser));
   }
   const [test, setTest] = useState(false);
 
   const clickDropdown = ()=>{
     setTest(!test);
   }
-  console.log(test);
+  // window.close(dispatch(clearUser(currentUser)));
+  console.log(currentUser);
+
   return (
     <div className="header" >
       <Link to="/">
         <span className="logo">D,I,Y Diary</span>
-        {/* <span>test: {t('common:text')}</span> */}
       </Link>
       <div className="menuWrap">
       <div className="customMenu">
-      {/* <Link to="/user/login"><span className="login">login</span></Link> */}
+      {currentUser?.email ? 
         <Dropdown autoClose="outside">
           <Dropdown.Toggle className="dropdownTitle">
-            {currentUser ? 
             <span>
               {currentUser?.image ? currentUser?.image : <AccountCircle/>} <span className="userName">{currentUser?.name}</span>
             </span>
-          : <Link to="/user/login"><span className="login">login</span></Link>} 
           </Dropdown.Toggle>
           <Dropdown.Menu style={{ width: 263 }} className="dropdownMenu">
             <Dropdown.Item>
               <span> Language </span>
-
               <div style={{ display: "flex" }} className="dropdownSelect">
                 <Form.Select className="menuFont" onChange={(v)=>onLanguageC(v)}>
                   <option value="fontSelect" className="menuFont">
@@ -158,6 +156,7 @@ const Header = (props) => {
             </Button> */}
           </Dropdown.Menu>
         </Dropdown>
+        : <div className="login"><Link to="/user/login">Login</Link></div>}  
         </div>
         <div>
         <Dropdown autoClose="outside">

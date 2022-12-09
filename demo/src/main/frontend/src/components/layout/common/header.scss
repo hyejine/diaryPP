@@ -10,6 +10,9 @@
         color: #f39ecb;
         font-size: 21px;
     }
+    .logo a{
+        text-decoration: none;
+    }
     .menuWrap{
         display: flex;
         position: absolute;
@@ -17,10 +20,17 @@
     }
     .customMenu{
         margin-right: 5px;
-        background-color: 'red';
     }
     .userName{
         margin: 0px 3px;
+    }
+    .customMenu a{
+        text-decoration: none;
+        color: #d63384;
+    }
+    .login{
+        margin-top: 9px;
+        color: #d63384;
     }
     // dropdown메뉴 커스텀 
     .dropdownTitle{
