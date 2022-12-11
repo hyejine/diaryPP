@@ -12,7 +12,7 @@ import { useDispatch } from "react-redux";
 import { loginUser } from "../../reducer/userLogin";
 import AuthenticationService from "./AuthenticationService";
 import { useNavigate } from "react-router-dom";
-import FindUserModal from "./FindUserModal";
+import FindUserModal from "./findUser/FindUserModal";
 
 const Login = () => {
   const { register, handleSubmit, formState: { errors } } = useForm();
@@ -308,7 +308,7 @@ const Login = () => {
       <FindUserModal
       state={"비밀번호 찾기"}
       show ={modalActive}
-      hide ={()=>setModalActive(false)}
+      hide ={setModalActive}
       />
     </div>
   );
