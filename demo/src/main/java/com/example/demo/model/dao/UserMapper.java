@@ -28,4 +28,6 @@ public interface UserMapper {
     public List<UserEntity> getUserId(String id);
 
     Optional<UserEntity> findById(String optional);
+
+    public int resetPw(UserEntity data);
 }

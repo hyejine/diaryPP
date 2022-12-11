@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom";
 import './commonModal.scss';
 
 const CommonModal =(props)=> {
-    const {show, hide, contents, diary_id, state } =props;
+    const {show, hide, contents, diary_id, state, url } =props;
     const navigate = useNavigate();
 
     const onClose =()=>{
@@ -25,8 +25,9 @@ const CommonModal =(props)=> {
           <div className='content'>{contents}</div>
           <div className='closeButtonW'>
           {diary_id ? <Button onClick={()=> navigate(`/board/read/${diary_id}`)} className="closeButton">Close</Button>:
-          <Button onClick={()=>navigate('/')} className="closeButton pixelBorder">THANK YOU!</Button>
-           }
+          url === "login" ? <Button onClick={hide} className="closeButton pixelBorder">THANK YOU!</Button>
+          : <Button onClick={()=>navigate('/')} className="closeButton pixelBorder">THANK YOU!</Button>
+          }
            </div>
         </Modal.Body>
       </Modal>

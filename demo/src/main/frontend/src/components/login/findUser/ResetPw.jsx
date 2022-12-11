@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
-import { Modal, Button } from "react-bootstrap";
+import { Button } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import axios from "axios";
+import SuccessModal from "../../common/CommonModal";
 
-const ResetPw = () => {
+const ResetPw = (props) => {
+  const { hide, userId } =props;
   const { register, handleSubmit, formState: { errors }} = useForm();
   const [vibration, setVibration] = useState(false);
   const [checkPassword, setCheckPassword] = useState();
+  const [ modalActive, setModalActive ] =useState();
 
   const checkError = () => {
     setVibration(true);
@@ -26,8 +29,17 @@ const ResetPw = () => {
     return "비밀번호가 일치하지 않습니다.";
   };
 
-
-  const onSubmit = () => {};
+  const onSubmit = (value) => {
+    const data ={
+      user_email : userId,
+      user_password : value.user_password
+    }
+    axios.post("/user/resetPw", data)
+    .then(res =>  { 
+        setModalActive(true);
+      })
+    .catch(err => console.log(err));
+  };
 
   return (
     <div>
@@ -54,7 +66,7 @@ const ResetPw = () => {
                   <small role="alert">{errors.user_password.message}</small>
                 )}
         </p>
-        <p className="pwCTitle">비밀번호 확인</p>
+        <p className="pwCTitle mt2">비밀번호를 재입력해주세요. </p>
               <input
                 type="password"
                 className="pwInput"
@@ -72,13 +84,20 @@ const ResetPw = () => {
             </div>
         <div className="closeButtonW mt1">
           <Button onClick={checkError} className="closeButton" type="onSubmit">
-            보내기{" "}
+            보내기
           </Button>
-          <Button  className="closeButton">
-            닫기{" "}
+          <Button  className="closeButton" onClick={hide}>
+            닫기
           </Button>
         </div>
       </form>
+      <SuccessModal  
+       state ={"Success"}
+       contents ="🍀 비밀번호가 변경되었습니다."
+       show ={modalActive}
+       hide={()=>setModalActive(false)}
+       url = "login"
+      />
     </div>
   );
 };

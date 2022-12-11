@@ -11,6 +11,7 @@ const FindUserModal = (props) => {
     const [vibration, setVibration] = useState(false);
     const [ noId, setNoId ] = useState(false);
     const [ resetPw, setResetPw ] =useState();
+    const [ userId, setUserId ] = useState();
     
     const checkError = () => {
         setVibration(true);
@@ -20,13 +21,12 @@ const FindUserModal = (props) => {
     };
 
     const onSubmit = (value) => {
-        console.log(value.user_email);
         axios.get(`/user/getId/${value.user_email}`)
         .then(res=> {
-            console.log(res.data.length);
             if(res.data.length === 0){
                 setNoId(true);
             } else{
+                setUserId(value.user_email);
                 setResetPw(true);
             }
         })
@@ -51,7 +51,7 @@ const FindUserModal = (props) => {
                     </div>
                 </div>
                 <div className='pwContent'>
-                {resetPw ? <ResetPw/> : 
+                {resetPw ? <ResetPw hide={onResetV} userId={userId}/> : 
                     <form onSubmit={handleSubmit(onSubmit)}>
                         <p className='pwCTitle'>회원가입 때 입력하신 이메일을 입력해주세요.</p>
                         <input className='pwInput' placeholder='example@diyDiary.com'

@@ -21,4 +21,8 @@
     <select id="findById" resultType="UserEntity" >
       SELECT * FROM user_table WHERE user_email=#{user_email}
     </select> 
+
+    <update id ="resetPw" parameterType="UserEntity">
+    update user_table set user_password =#{user_password} where user_email =#{user_email}
+    </update>
   </mapper>

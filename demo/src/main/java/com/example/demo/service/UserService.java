@@ -45,21 +45,12 @@ public class UserService implements IUserService {
     }
 
     // @Override
-    @Transactional
-    public UserRequestDto registUser(UserRequestDto requestDto) {
+    // @Transactional
+    // public UserRequestDto registUser(UserRequestDto requestDto) {
 
-        UserEntity user = requestDto.toMember(passwordEncoder);
-        return UserRequestDto.of(userMapper.registUser(user));
-        // Date date = new Date();
-        // UserEntity userEntity = new UserEntity();
-        // userEntity.setUser_name(value.getUser_name());
-        // userEntity.setUser_email(value.getUser_email());
-        // userEntity.setUser_password(passwordEncoder.encode(value.getUser_password()));
-        // userEntity.setUser_create(date);
-        // userEntity.setUser_type("ROLE_USER");
-        // userEntity.setSns_type(value.getSns_type());
-        // userMapper.registUser(userEntity);
-    }
+    // UserEntity user = requestDto.toMember(passwordEncoder);
+    // return UserRequestDto.of(userMapper.registUser(user));
+    // }
 
     @Override
     public List<UserEntity> getUserId(String id) {
@@ -95,9 +86,18 @@ public class UserService implements IUserService {
         return user;
     }
 
+    @Transactional
+    public int resetPw(UserEntity data) {
+        System.out.println(data);
+        data.setUser_password(passwordEncoder.encode(data.getUser_password()));
+        int success = userMapper.resetPw(data);
+        return success;
+    }
+
     @Override
     public void registUser(UserEntity value) {
         // TODO Auto-generated method stub
 
     }
+
 }

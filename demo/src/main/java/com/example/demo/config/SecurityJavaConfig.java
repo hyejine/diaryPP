@@ -61,11 +61,12 @@ public class SecurityJavaConfig {
                         "/auth/signUp**",
                         "/user/tokenApi/**",
                         "/user/getId/**",
+                        "/user/resetPw/**",
                         "/emoji/**",
                         "/board/**",
                         "/custom/**"
-                        // "/mail/**"
-                        )
+                // "/mail/**"
+                )
                 .permitAll() // 여기 요청은 접근 허용
                 .anyRequest().authenticated() // 나머지 요청들은 모두 인증
 

@@ -36,16 +36,14 @@ public class UserController {
     // userService.safeUser(value);
     // }
 
-    @PostMapping("/signUp")
-    public ResponseEntity<UserRequestDto> signup(@RequestBody UserRequestDto requestDto) {
-        return ResponseEntity.ok(userService.registUser(requestDto));
-    }
+    // @PostMapping("/signUp")
+    // public ResponseEntity<UserRequestDto> signup(@RequestBody UserRequestDto
+    // requestDto) {
+    // return ResponseEntity.ok(userService.registUser(requestDto));
+    // }
 
     @PostMapping("/login")
     public TokenEntity login(@RequestBody UserRequestDto userRequestDto) {
-        // System.out.println("1. UserRequestDto " + memberLoginRequestDto);
-        // String email = memberLoginRequestDto.getUser_email();
-        // String password = memberLoginRequestDto.getUser_password();
         TokenEntity tokenInfo = userService.login(userRequestDto);
         return tokenInfo;
     }
@@ -67,5 +65,12 @@ public class UserController {
     @GetMapping("/getId/{userId}")
     public List<UserEntity> getUserId(@PathVariable("userId") String id) {
         return userService.getUserId(id);
+    }
+
+    @PostMapping("/resetPw")
+    public Integer resetPw(@RequestBody UserEntity data) {
+        System.out.println(data);
+        int success = userService.resetPw(data);
+        return success;
     }
 }
