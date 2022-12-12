@@ -95,6 +95,7 @@ const ResetPw = (props) => {
        state ={"Success"}
        contents ="🍀 비밀번호가 변경되었습니다."
        show ={modalActive}
+       parentModal ={hide}
        hide={()=>setModalActive(false)}
        url = "login"
       />
