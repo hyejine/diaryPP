@@ -7,8 +7,7 @@ import WebInfo from "./WebInfo";
 import "./serviceCenter.scss";
 
 const ServiceCenter = (props) => {
-  const {currnetUser} = props;
-  console.log(currnetUser);
+
   return (
     <div className="serviceCenterPage">
       <div className="webHeader">
@@ -23,7 +22,6 @@ const ServiceCenter = (props) => {
         </div>
       </div>
       <div className="webContent">
-       <span className='tabB pixelBorder noneB'> d </span>
         <Tabs defaultActiveKey="FAQ" id="tabCustom">
           <Tab eventKey="FAQ" title="FAQ" >
             <Faq />

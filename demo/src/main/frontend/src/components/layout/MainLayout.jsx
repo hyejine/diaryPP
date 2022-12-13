@@ -22,7 +22,7 @@ const MainLayout = (props) => {
         <div key="2" className={tabClass ===1 ? "tabActive tabB":"graphTab"} onClick={()=>onTabChange(1)}>기분 그래프</div>
       </div>
       <div className="mainContent">
-        <div className="mainInner">
+        <div className="mainInner innerpdding">
           <div >
             {tabClass ===0 ? <CalendarCom currentUser={currentUser} fontChange={fontChange}/> : <GraphCom />}
           </div>

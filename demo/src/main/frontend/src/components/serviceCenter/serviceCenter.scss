@@ -1,8 +1,5 @@
 .serviceCenterPage {
-    // serviceCenterPage 
-  margin: 30px auto 0px auto;
-  width: 95%;
-  height: 631px;
+  height: 716px;
   border: 1px solid #9f5f88;
   background-color: #f2c8de;
 
@@ -24,7 +21,7 @@
   font-family: "DungGeunMo";
 
   .webHeader {
-    padding: 8px 10px;
+    padding: 11px 23px;
     background: linear-gradient(to right, #f49bca, #efbcd7);
     display: flex;
     align-items: center;
@@ -32,7 +29,7 @@
   }
   .headerButton {
     position: absolute;
-    right: 3px;
+    right: 9px;
     display: flex;
   }
   .downB {
@@ -41,7 +38,7 @@
     margin-right: 7px;
   }
   .webContent {
-    padding: 20px;
+    padding: 27px;
   }
   #tabCustom-tab-FAQ, #tabCustom-tab-문의하기, #tabCustom-tab-웹정보{
     padding: 6px 13px;
@@ -53,6 +50,15 @@
   }
   #tabCustom-tab-FAQ:active, #tabCustom-tab-문의하기:active, #tabCustom-tab-웹정보:active {
     box-shadow: 2.5px 2.5px #986882 inset;
+  }
+  .nav-tabs{
+    --bs-nav-tabs-link-active-color: #d63384;
+    --bs-nav-tabs-link-active-border-color: #dee2e6 #dee2e6;
+    --bs-nav-tabs-link-active-background-color:#fde5f3;
+    --bs-nav-tabs-link-active-box-shadow: 2.5px 2.5px #986882 inset;
+
+    // background-color: #fde5f3;
+    // box-shadow: 2.5px 2.5px #986882 inset;
   }
   .errorFont{
     margin-left: 7px;
@@ -71,9 +77,11 @@
     }
   }
 
+  // Faq 
+  
   // 문의하기
   .contactUsTap {
-    height: 500px;
+    height: 593px;
     padding: 16px 10px;
     box-shadow: 2.5px 2.5px #986882;
     position: relative;

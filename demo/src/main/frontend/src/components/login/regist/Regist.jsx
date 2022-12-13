@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useForm } from "react-hook-form";
 import axios from "axios";
 import CompletModal from "../../common/CommonModal";
@@ -11,15 +11,7 @@ const Regist = () => {
   const [modalActive, setModalActive] = useState();
   const [checkPassword, setCheckPassword] = useState();
 
-  const onSubmit = (value) => {
-    console.log(value);
-    axios
-      .post("/auth/signUp", value)
-      .then((response) => console.log(response))
-      .catch((error) => console.log(error));
-
-    setModalActive(true);
-  };
+  const [errorMessage, setErrorMessage] = useState();
 
   const checkError = () => {
     setVibration(true);
@@ -29,47 +21,16 @@ const Regist = () => {
   };
 
   const idCheck = (value) => {
-    axios
-      .get(`/user/getId/${value}`)
+    if(value !== null){
+      axios.get(`/user/getId/${value}`)
       .then((res) => {
         if (res.data.length === 0) {
-          console.log(res);
           setVaild(true);
-          console.log(vaild);
-          onIdError();
-        } else {
-          setVaild(false);
-          console.log(vaild);
-          onIdError();
-          // if (vaild !== true) {
-          //   return "이미 가입된 아이디 입니다.";
-          // }
-        }
-
-        console.log(vaild)
-      })
-      .catch((err) => {setVaild(false); onIdError(); console.log(err);});
-
-    console.log(vaild);
-    // if (vaild !== true) {
-    //   return "이미 가입된 아이디 입니다.";
-    // } 
-    // if (vaild !== true) {
-    //   return "이미 가입된 아이디 입니다.";
-    // } 
-    // else if (vaild === "undefind"){
-    //   return false;
-    // }
-    // return true;
+          setErrorMessage(null);
+        }})
+      .catch((err) => { setVaild(false); console.log(err); });
+    }
   };
-const onIdError =()=>{
-  if(vaild){
-    console.log("ㅇㄻㄹㄹㄴㅇ");
-  }else {
-    return "이미 가입된 아이디 입니다.";
-  }
-  console.log(vaild);
-}
 
   const password = (value) => {
     setCheckPassword(value);
@@ -80,6 +41,13 @@ const onIdError =()=>{
       return true;
     }
     return "비밀번호가 일치하지 않습니다.";
+  };
+
+  const onSubmit = (value) => {
+    axios
+      .post("/auth/signUp", value)
+      .then((response) => { setVaild(true); setErrorMessage(null); setModalActive(true); console.log(response);})
+      .catch((error) => { setErrorMessage(error.response.data.message); });
   };
 
   return (
@@ -113,6 +81,7 @@ const onIdError =()=>{
             </div>
             <div className="writeAareaWrap">
               <input
+                onChange={()=>setErrorMessage(null)}
                 className="writeAarea"
                 placeholder="example@diyDiary.com"
                 {...register("user_email", {
@@ -124,7 +93,8 @@ const onIdError =()=>{
                   },
                 })}
               />
-              {vaild && <p className="validFont"> 가입이 가능한 아이디 입니다. </p>}
+              {errorMessage ? <p className={vibration ? "errorFont vibration" : "errorFont"}> 이미 가입된 아이디 입니다. </p> : 
+              <div> {vaild && <p className="validFont"> 가입이 가능한 아이디 입니다. </p>} </div> }
               <p className={vibration ? "errorFont vibration" : "errorFont"}>
                 {errors.user_email && (
                   <small role="alert">{errors.user_email.message}</small>
