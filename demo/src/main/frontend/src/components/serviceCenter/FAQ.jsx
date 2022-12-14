@@ -1,59 +1,80 @@
-import React from 'react';
-import {Accordion, Pagination} from 'react-bootstrap';
+import React, { useState, useEffect } from 'react';
+import { Accordion, Pagination } from 'react-bootstrap';
+import { useForm } from "react-hook-form";
+import axios from 'axios';
 
 const FAQ = () => {
-    let active = 2;
-let items = [];
-for (let number = 1; number <= 5; number++) {
-  items.push(
-    <Pagination.Item key={number} active={number === active}>
-      {number}
-    </Pagination.Item>,
-  );
-}
-    return (
-        <div className="contactUsTap pixelBorder">
-            <div>
-                <select>
-                <option>캘린더 문의</option>
-                    <option>로그인 문의</option>
-                    <option>커스텀 문의</option>
-                </select>
-                <input></input>
-                <button>검색</button>
-            </div>
-               <Accordion defaultActiveKey="0">
-      <Accordion.Item eventKey="0">
-        <Accordion.Header>Accordion Item #1</Accordion.Header>
-        <Accordion.Body>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </Accordion.Body>
-      </Accordion.Item>
-      <Accordion.Item eventKey="1">
-        <Accordion.Header>Accordion Item #2</Accordion.Header>
-        <Accordion.Body>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad
-          minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-          aliquip ex ea commodo consequat. Duis aute irure dolor in
-          reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla
-          pariatur. Excepteur sint occaecat cupidatat non proident, sunt in
-          culpa qui officia deserunt mollit anim id est laborum.
-        </Accordion.Body>
-      </Accordion.Item>
-    </Accordion> 
-    <div>
-    <Pagination>{items}</Pagination>
-    <br />
-  </div>
-        </div>
+  const { register, handleSubmit } = useForm();
+  const [ allList, setAllList ] = useState();
+
+  let active = 2;
+  let items = [];
+  for (let number = 1; number <= 5; number++) {
+    items.push(
+      <Pagination.Item key={number} active={number === active}>
+        {number}
+      </Pagination.Item>,
     );
+  }
+  const onSubmit = (value) => {
+    console.log(value);
+
+    axios.post('/faq/searchData',value)
+    .then(res=>console.log(res))
+    .catch(err=>console.log(err));
+  }
+
+  useEffect(()=>{
+    axios.get('/faq/getAllFaq')
+    .then(res=>{
+      setAllList(res.data);
+    })
+    .catch(err=>console.log(err))
+  },[])
+  
+  return (
+    <div className="contactUsTap pixelBorder">
+      <div className='faqSearchD'>
+        <form onSubmit={handleSubmit(onSubmit)}>
+          <select className='faqSelectB' {...register("selectContent")}>
+          <option value ="all">전체</option>
+            <option value ="title">제목</option>
+            <option value ="content">내용</option>
+          </select>
+          <select className='faqSelectB' {...register("selectCategory")}>
+          <option value="category">카테고리</option>
+            <option value ="login">로그인 문의</option>
+            <option value ="calendar">캘린더 문의</option>
+            <option value ="custom">커스텀 문의</option>
+            <option value ="diary">다이어리 문의</option>
+          </select>
+          <input
+            className="faqSearchI" placeholder="궁금하신 내용을 입력해주세요."
+            {...register("searchKeyWord")} />
+          <button type="submit" className="faqSubmit" >검색</button>
+        </form>
+      </div>
+      <div className='faqAccordionD'>
+        <Accordion >
+          { allList ? allList.map((value, index)=>(
+            <div key={index}>
+              <Accordion.Item eventKey={index}>
+              <Accordion.Header><span>[{value.faq_category}]</span><sapn>{value.faq_category}</sapn></Accordion.Header>
+              <Accordion.Body><span>{value.faq_content}</span></Accordion.Body>
+              </Accordion.Item>
+            </div>
+          ))  : 
+          <div>
+          
+          </div>
+          }
+        </Accordion>
+      </div>
+      <div className='faqPaginationD'>
+        <Pagination>{items}</Pagination>
+      </div>
+    </div>
+  );
 };
 
 export default FAQ;

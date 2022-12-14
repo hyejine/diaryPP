@@ -78,7 +78,90 @@
   }
 
   // Faq 
-  
+  .faqSearchD{
+    text-align: center;
+    padding: 12px 0px 26px;
+  }
+  .faqSelectB{
+    color: #d63384;
+    padding: 2px 3px;
+    // border-color: #fd81bf #f8ecf3 #f8ecf3 #fd81bf;
+    border-color: #d63384;
+    margin-right: 5px;
+    text-align: center;
+    box-shadow: 2.5px 2.5px #f3bddd;
+    position: relative;
+  }
+  .faqSelectB:focus, .faqSearchI:focus{
+    outline-color: #d63384;
+  }
+  .faqSelectB:after{
+    content: "e";
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin-top: -1px;
+    border-left: 5px solid transparent;
+    border-right: 5px solid transparent;
+    border-top: 5px solid #333;
+  }
+  .faqSearchI{
+    color: #d63384;
+    padding: 3px 5px 2.5px 5px;
+    border: 1px solid #d63384;
+    margin-right: 5px;
+  }
+  .faqSubmit{
+    background-color: #d63384;
+    color: #fff;
+    padding: 3px 5px 2.5px 5px;
+    border-color: #fdd8ed #fd81bf #fd81bf #fdd8ed;
+  }
+  .faqAccordionD{
+    height: 442px;
+    margin: 0 auto;
+    width: 90%;
+  }
+  .accordion-item{
+    border: 1px solid #fd81bf;
+  }
+  .accordion-button{
+    padding:10px;
+    position: relative;
+  }
+  .accordion-button::before {
+    // position: absolute;
+    // right: 17px;
+    // top: 7px;
+    // content: '';
+    // width: 12px;
+    // height: 12px;
+    // background-color: #9f5f88;
+  }
+  .accordion-button::after {
+    position: absolute;
+    right: 17px;
+    top: 7px;
+    content: '';
+    width: 12px;
+    height: 12px;
+    border-top: 1px solid #000;
+    border-right: 1px solid #000;
+    transform: rotate(135deg);
+    background-image: none;
+}
+.accordion-body{
+  max-width: 100%;
+}
+.accordion-body span{
+  // max-width: 100px;
+  background-color: #9f5f88;
+}
+  .faqPaginationD{
+    display: flex;
+    justify-content: center;
+    padding: 15px;
+  }
   // 문의하기
   .contactUsTap {
     height: 593px;

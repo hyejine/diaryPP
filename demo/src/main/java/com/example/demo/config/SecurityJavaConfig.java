@@ -64,7 +64,8 @@ public class SecurityJavaConfig {
                         "/user/resetPw/**",
                         "/emoji/**",
                         "/board/**",
-                        "/custom/**"
+                        "/custom/**",
+                        "/faq/**"
                 // "/mail/**"
                 )
                 .permitAll() // 여기 요청은 접근 허용
