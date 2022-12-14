@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -29,7 +30,7 @@ public class FaqController {
     }
 
     @PostMapping("/searchData")
-    public List<FaqEntity> searchData(SearchDto value) {
+    public List<FaqEntity> searchData(@RequestBody SearchDto value) {
         return faqService.searchData(value);
     }
 }

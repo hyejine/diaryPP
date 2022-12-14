@@ -21,8 +21,9 @@ public class FaqService implements IFaqService {
 
     @Override
     public List<FaqEntity> searchData(SearchDto value) {
-        System.out.println(value);
 
+        System.out.println("value==" + value.getSearchKeyWord());
+        System.out.println(value.getSelectContent() + value.getSelectCategory());
         return faqMapper.searchData(value);
     }
 }

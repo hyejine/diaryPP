@@ -1,21 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { Accordion, Pagination } from 'react-bootstrap';
+import { Accordion } from 'react-bootstrap';
 import { useForm } from "react-hook-form";
 import axios from 'axios';
-
+import  Pagination  from '../common/CommonPagination';
 const FAQ = () => {
   const { register, handleSubmit } = useForm();
   const [ allList, setAllList ] = useState();
 
-  let active = 2;
-  let items = [];
-  for (let number = 1; number <= 5; number++) {
-    items.push(
-      <Pagination.Item key={number} active={number === active}>
-        {number}
-      </Pagination.Item>,
-    );
-  }
   const onSubmit = (value) => {
     console.log(value);
 
@@ -71,7 +62,7 @@ const FAQ = () => {
         </Accordion>
       </div>
       <div className='faqPaginationD'>
-        <Pagination>{items}</Pagination>
+        <Pagination/>
       </div>
     </div>
   );
