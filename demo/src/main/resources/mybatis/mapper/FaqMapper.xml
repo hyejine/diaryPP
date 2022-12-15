@@ -4,11 +4,20 @@
   <mapper namespace="com.example.demo.model.dao.FaqMapper">
 
   <select id="getAllList" resultType="FaqEntity">
-  select * from faq_table;
+  select * from faq_table
   </select>
 
   <select id="searchData" resultType="FaqEntity">
-  select * from faq_table;
+  select * from faq_table
+  <if test="selectCategory !=null and selectCategory != 'category' ">
+  where faq_category = #{selectCategory}
+  </if>
+  <if test="selectContent =='all'">
+  <if test="searchKeyWord !=null and searchKeyWord != '' ">
+  where faq_content like concat('%',#{searchKeyWord},'%') 
+  or faq_title like concat('%',#{searchKeyWord},'%') 
+  </if>
+  </if>
   </select>
 
   </mapper>

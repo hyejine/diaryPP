@@ -11,7 +11,9 @@ const FAQ = () => {
     console.log(value);
 
     axios.post('/faq/searchData',value)
-    .then(res=>console.log(res))
+    .then(res=>{
+      setAllList(res.data);
+    })
     .catch(err=>console.log(err));
   }
 
@@ -19,6 +21,7 @@ const FAQ = () => {
     axios.get('/faq/getAllFaq')
     .then(res=>{
       setAllList(res.data);
+      console.log(res);
     })
     .catch(err=>console.log(err))
   },[])
@@ -34,10 +37,10 @@ const FAQ = () => {
           </select>
           <select className='faqSelectB' {...register("selectCategory")}>
           <option value="category">카테고리</option>
-            <option value ="login">로그인 문의</option>
-            <option value ="calendar">캘린더 문의</option>
-            <option value ="custom">커스텀 문의</option>
-            <option value ="diary">다이어리 문의</option>
+            <option value ="로그인 문의">로그인 문의</option>
+            <option value ="캘린더 문의">캘린더 문의</option>
+            <option value ="커스텀 문의">커스텀 문의</option>
+            <option value ="다이어리 문의">다이어리 문의</option>
           </select>
           <input
             className="faqSearchI" placeholder="궁금하신 내용을 입력해주세요."
@@ -46,11 +49,11 @@ const FAQ = () => {
         </form>
       </div>
       <div className='faqAccordionD'>
-        <Accordion >
+        <Accordion>
           { allList ? allList.map((value, index)=>(
             <div key={index}>
               <Accordion.Item eventKey={index}>
-              <Accordion.Header><span>[{value.faq_category}]</span><sapn>{value.faq_category}</sapn></Accordion.Header>
+              <Accordion.Header><span>[{value.faq_category}]</span><sapn>{value.faq_title}</sapn></Accordion.Header>
               <Accordion.Body><span>{value.faq_content}</span></Accordion.Body>
               </Accordion.Item>
             </div>

@@ -11,7 +11,7 @@ public class FaqEntity {
 
     private String faq_category;
 
-    private String faq_tilte;
+    private String faq_title;
 
     private String faq_content;
 
