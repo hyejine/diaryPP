@@ -2,11 +2,13 @@ import React from "react";
 import { Outlet } from "react-router-dom";
 import Header from "./common/Header";
 
-const BoardLayout = () => {
+const BoardLayout = (props) => {
+  const {currentUser, fontChange, setBackColor, setBackImage, setFontChange} = props;
+
   return (
     <div className="main">
       <div className="mainWrap">
-        <Header />
+        <Header setBackColor={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange} fontChange= {fontChange} currentUser={currentUser}/>
         <div className="mainContentWarp">
           <div className="mainContent">
             <div className="mainInner">

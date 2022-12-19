@@ -37,10 +37,10 @@ function App(props) {
      <Route path="/user/login" element={<Login/>}/>
       <Route path="/auth/signUp" element={<Regist/>}/>  
      </Route>
-     <Route element={<BoardLayout />}>
+     <Route element={<BoardLayout setBackColor ={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange} fontChange={fontChange} currentUser={currentUser}/>}>
       <Route path="/board/read/:diary_id" element={<Read/>}/> 
       <Route path="/board/edit/:diary_id" element={<Edit/>}/> 
-      <Route path="/contactUs" element={<ServiceCenter currentUser={currentUser} fontChange={fontChange}/>}/> 
+      <Route path="/contactUs" element={<ServiceCenter/>}/> 
       <Route path="/test" element={<Test currentUser={currentUser}/>}/> 
       </Route>
       </Routes>
