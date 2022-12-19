@@ -72,7 +72,6 @@ const Header = (props) => {
   };
 
   const onLogout =()=> {
-    console.log(currentUser);
     dispatch(clearUser(currentUser));
   }
   const [test, setTest] = useState(false);

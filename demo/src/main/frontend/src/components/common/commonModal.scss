@@ -1,5 +1,5 @@
 #modalPage {
-    font-family: 'DungGeunMo';
+    // font-family: 'DungGeunMo';
     width: 500px;
 
     .pixelBorder {
@@ -134,4 +134,19 @@
     .mt1{
         margin-top: 10px;
     }
+
+// 이모지 선택 모달 
+ .emojiWrap{
+    display:flex;
+    justify-content: center;
+    align-items: center;
+    padding: 25px 0;
+  }
+  .emojiWrap img{
+    cursor: pointer;
+    width: 100px;
+  }
+  .imageM{
+    width: 650px;
+  }
 }

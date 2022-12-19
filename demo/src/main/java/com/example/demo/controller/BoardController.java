@@ -106,9 +106,8 @@ public class BoardController {
 
 	@GetMapping("/getBoard/{diary_id}")
 	public List<DiaryDto> getBoard(@PathVariable("diary_id") Long diaryId) {
-		System.out.println("diaryId" + diaryId);
 		return boardService.getBoard(diaryId);
-	} 
+	}
 	// AND diary_id=#{diary_id}
 
 	@GetMapping("/getMonthBoard")
@@ -132,12 +131,12 @@ public class BoardController {
 	@GetMapping("/getMonth/{selectMonth}")
 	public List<DiaryDto> getMonth(@PathVariable("selectMonth") String month) {
 		return boardService.getMonth(month);
-	}  
-	
+	}
+
 	@GetMapping("/getMonthProgress/{selectMonth}")
 	public List<DiaryDto> getMonthProgress(@PathVariable("selectMonth") String month) {
 		return boardService.getMonthProgress(month);
-	}  
+	}
 
 	/**
 	 * 게시판 연간 조회(선택한 selectYear 통해 게시판 조회)
@@ -148,18 +147,18 @@ public class BoardController {
 	@GetMapping("/getYear/{selectYear}")
 	public List<DiaryDto> getYear(@PathVariable("selectYear") String year) {
 		return boardService.getYear(year);
-	} 
+	}
 
 	@GetMapping("/postFont/{fontChange}")
-	public String postFont(@PathVariable ("fontChange") String data) {
-		System.out.println("======value===="+data);
+	public String postFont(@PathVariable("fontChange") String data) {
+		System.out.println("======value====" + data);
 		// customService.postFont(data);
-		return "data"+data;
+		return "data" + data;
 	}
 
 	// @GetMapping("/getOneDiary/${diary_id}")
 	// public List<DiaryDto> getOneDiary(@PathVariable("id") Long id) {
-	// 	return boardMapper.getOneDiary(id);
+	// return boardMapper.getOneDiary(id);
 	// }
 
 }

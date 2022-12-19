@@ -65,7 +65,7 @@ const MonthLine = (props) => {
             // custom
             enableArea={true}
             theme={{
-                fontFamily : 'DungGeunMo',
+                // fontFamily : 'DungGeunMo',
                 textColor : "#333333",
                 fontSize: 14,
             }}

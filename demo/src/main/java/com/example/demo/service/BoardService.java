@@ -9,12 +9,13 @@ import org.springframework.stereotype.Service;
 import com.example.demo.model.dao.BoardMapper;
 import com.example.demo.model.entity.DiaryDto;
 import com.example.demo.model.entity.EmojiImageDto;
+import com.example.demo.service.interfaces.IBoardService;
 
 @Service
-public class BoardService implements BoardMapper{
+public class BoardService implements IBoardService {
     private final BoardMapper boardMapper;
 
-	public BoardService(BoardMapper boardMapper){
+    public BoardService(BoardMapper boardMapper) {
         this.boardMapper = boardMapper;
     }
 
@@ -30,15 +31,9 @@ public class BoardService implements BoardMapper{
         return data.getDiary_id();
     }
 
-    // @Override
-    // public List<DiaryDto> getBoard() {
-        
-    //     return boardMapper.getBoard();
-    // } 
-
     @Override
     public List<DiaryDto> getMonthBoard() {
-        
+
         return boardMapper.getMonthBoard();
     }
 
@@ -50,40 +45,34 @@ public class BoardService implements BoardMapper{
 
     @Override
     public List<DiaryDto> getBoard(Long id) {
-        return  boardMapper.getBoard(id);
+        return boardMapper.getBoard(id);
     }
 
     @Override
     public List<DiaryDto> getMonth(String month) {
         Date now = new Date();
-        SimpleDateFormat format = new SimpleDateFormat("yyyy"); 
-        String formatDate = format.format(now); 
+        SimpleDateFormat format = new SimpleDateFormat("yyyy");
+        String formatDate = format.format(now);
         String sendFormatDate = formatDate + "-" + month;
-            return boardMapper.getMonth(sendFormatDate);
-    } 
+        return boardMapper.getMonth(sendFormatDate);
+    }
 
     @Override
     public List<DiaryDto> getMonthProgress(String month) {
-        if(month.length() > 2){
+        if (month.length() > 2) {
             return boardMapper.getYearProgress(month);
         } else {
             Date now = new Date();
-            SimpleDateFormat format = new SimpleDateFormat("yyyy"); 
-            String formatDate = format.format(now); 
+            SimpleDateFormat format = new SimpleDateFormat("yyyy");
+            String formatDate = format.format(now);
             String sendFormatDate = formatDate + "-" + month;
-            
+
             return boardMapper.getMonthProgress(sendFormatDate);
         }
     }
 
     @Override
     public List<DiaryDto> getYear(String year) {
-            return boardMapper.getYear(year);
-    } 
-
-    // @Override
-    // public List<DiaryDto> getOneDiary(Long id) {
-    //     // TODO Auto-generated method stub
-    //     return null;
-    // }
+        return boardMapper.getYear(year);
+    }
 }

@@ -19,7 +19,7 @@
   .calendarTab,
   .graphTab {
     cursor: pointer;
-    color: #fff;
+    color: #d63384;
     width: 112px;
     height: 34px;
     background-color: #f2c8de;
@@ -28,18 +28,22 @@
     box-shadow: 2.5px 0px #986882;
     margin-right: 6px;
     padding: 9px;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
   }
 
   .tabActive {
     cursor: pointer;
-    box-shadow: 2.5px 2.5px #986882 inset;
+    color: #fff;
+    box-shadow: 2.5px 2.5px #db7dae inset;
     width: 112px;
-    color: #d63384;
     padding-top: 10px;
+    border-top-left-radius: 9px;
+    border-top-right-radius: 9px;
   }
 
   .tabB {
-    background-color: #fde5f3;
+    background-color: #d63384;
     margin-right: 6px;
   }
 

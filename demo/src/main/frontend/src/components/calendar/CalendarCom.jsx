@@ -18,9 +18,6 @@ const CalendarCom = (props) => {
   const [isDate, setIsDate] = useState([]);
   const navigate = useNavigate();
 
-  console.log("CalendarCom: ", fontChange,  currentUser.font);
-
-  
   const renderEventContent = (eventInfo) =>{
     isDate.push(eventInfo.event.startStr);
     const result = eventInfo.event.title.length < 8 ? eventInfo.event.title : eventInfo.event.title.substr(0,8)+'...';
@@ -91,6 +88,7 @@ const CalendarCom = (props) => {
       />
       <SelectEmojiModal
       show={modalOpen}
+      state="기분을 선택하세요"
       selectDate = {selectDate}
       hide={() => setModalOpen(false)}
       />
