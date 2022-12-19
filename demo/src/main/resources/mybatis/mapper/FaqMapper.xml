@@ -9,17 +9,20 @@
 
   <select id="searchData" resultType="FaqEntity">
   select * from faq_table
-  <if test="selectContent == 'all' and searchKeyWord !=null or searchKeyWord !=''" >
-    <if test ="selectCategory != 'category'">
-        where faq_category = #{selectCategory} or faq_title like concat('%',#{searchKeyWord},'%') or faq_content like concat('%',#{searchKeyWord},'%')
-    </if>  
-    <if test ="selectCategory == 'category'">
-        where faq_title like concat('%',#{searchKeyWord},'%') or faq_content like concat('%',#{searchKeyWord},'%')
-    </if>
+  <choose>
+  <when test="selectContent == 'all'">
+   where (faq_title like concat('%',#{searchKeyWord},'%') or faq_content like concat('%',#{searchKeyWord},'%'))
+  </when>
+  <when test="selectContent == 'title'">
+   where faq_title like concat('%',#{searchKeyWord},'%') 
+  </when>
+  <when test="selectContent == 'content'">
+   where faq_content like concat('%',#{searchKeyWord},'%') 
+  </when>
+  </choose>
+      <if test ="selectCategory != 'category'">
+    and faq_category = #{selectCategory}
   </if>
-  <!-- <if test="selectContent == 'title' and searchKeyWord !=null or searchKeyWord !='' or selectCategory != 'category'">
-  where faq_category = #{selectCategory} and faq_title like concat('%',#{searchKeyWord},'%') 
-  </if> -->
   </select>
 
   </mapper>
