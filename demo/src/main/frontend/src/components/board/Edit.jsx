@@ -8,7 +8,8 @@ import SelectEmojiModal from "../calendar/SelectEmojiModal";
 import CompletModal from "../common/CommonModal";
 import axios from "axios";
 
-const Edit = () => {
+const Edit = (props) => {
+  const [currentUser] = props;
   const { diary_id } = useParams();
   const [diaryData, setDiaryData] = useState();
   const [modalOpen, setModalOpen] = useState(false); 
@@ -202,12 +203,14 @@ console.log(emojiId);
       </div>
       </div>
       <SelectEmojiModal
+      currentUser = {currentUser}
       show={modalOpen}
       clickEmoji = {emojiId}
       setClickEmoji = {setEmojiId}
       hide={()=>setModalOpen(false)}
       />
       <CompletModal 
+      currentUser = {currentUser}
       diary_id= {diary_id}
       show={modalActive} 
       hide={()=>setModalActive(false)}

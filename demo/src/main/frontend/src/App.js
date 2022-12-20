@@ -14,6 +14,7 @@ import CalendarCom from "./components/calendar/CalendarCom";
 import defaultBg from './resource/image/skyBg.jpg'
 import ServiceCenter from "./components/serviceCenter/ServiceCenter";
 import LoginLayout from "./components/layout/LoginLayout";
+import Main from "./Main";
 
 function App() {
   const currentUser = useSelector(state => state.currentUser);
@@ -29,7 +30,7 @@ function App() {
       <Routes>
       <Route element={<MainLayout setBackColor ={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange} fontChange={fontChange} currentUser={currentUser}/>}>
       <Route path="/" element={<CalendarCom />} />
-      <Route path="/board/write" element={<Write/>}/>
+      <Route path="/board/write" element={<Write currentUser={currentUser}/>}/>
       <Route path="/emoji" element={<EmojiPurchase/>}/> 
      </Route>
      <Route element={<LoginLayout/>}>
@@ -37,9 +38,9 @@ function App() {
       <Route path="/auth/signUp" element={<Regist/>}/>  
      </Route>
      <Route element={<BoardLayout setBackColor ={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange} fontChange={fontChange} currentUser={currentUser}/>}>
-      <Route path="/board/read/:diary_id" element={<Read/>}/> 
-      <Route path="/board/edit/:diary_id" element={<Edit/>}/> 
-      <Route path="/contactUs" element={<ServiceCenter/>}/> 
+      <Route path="/board/read/:diary_id" element={<Read currentUser={currentUser}/>}/> 
+      <Route path="/board/edit/:diary_id" element={<Edit currentUser={currentUser}/>}/> 
+      <Route path="/contactUs" element={<ServiceCenter currentUser={currentUser}/>}/> 
       </Route>
       </Routes>
     </BrowserRouter>

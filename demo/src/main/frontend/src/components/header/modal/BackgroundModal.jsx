@@ -8,7 +8,7 @@ import axios from "axios";
 import '../../common/commonModal.scss'
 
 const BackgroundModal = (props) => {
-  const { show, hide, setBackColor, setBackImage, state } = props;
+  const { show, hide, setBackColor, setBackImage, state, currentUser } = props;
   const [modalActive, setModalActive] =useState();
 
   const onSubmit = (value) => {
@@ -47,7 +47,7 @@ const BackgroundModal = (props) => {
   return (
     // <div style={{ background : `url("http://localhost:8080/board/getImage/16659625281776251/jpg")`  }}>
     <Modal show={show} size="lg" centered id="modalPage" onHide={hide}>
-      <Modal.Body className='modalWrap'>
+      <Modal.Body className='modalWrap' style={currentUser?.font ? {fontFamily: `${currentUser.font}`} : {fontFamily:'DungGeunMo'}}>
         <div className='title'>
           <span>{state}</span>
           <div className='headerButton'>

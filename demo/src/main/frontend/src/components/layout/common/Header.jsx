@@ -56,13 +56,14 @@ const Header = (props) => {
     const data = {
       user_email: currentUser.email,
       custom_font: fontChange,
-      custom_id : currentUser.id,
-      custom_name : currentUser.name
+      user_id : currentUser.id,
+      user_name : currentUser.name
     };
     axios
       .post(`/custom/postFont`, data)
       .then((res) => {
         console.log(res);
+        console.log(data);
         setFontModal(true);
         dispatch(loginUser(data));
       })
@@ -166,12 +167,14 @@ const Header = (props) => {
       </div>
       </div>
       <FontModal
+      currentUser ={currentUser}
        show={fontModal}
        state={'Success'}
        contents ={"🍀 저장되었습니다."}
        hide={() => setFontModal(false)}
        />
       <BackgroundModal
+      currentUser ={currentUser}
         show={modalActive}
         state={'Change BackGround'}
         setBackColor={setBackColor}

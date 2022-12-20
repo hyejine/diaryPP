@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect, useMemo, useRef } from "react";
 import axios from "axios";
 import ReactQuill from "react-quill";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import "react-quill/dist/quill.snow.css";
 import { localDateRenderer } from "../../utils/index";
 import "./write.scss";
@@ -10,20 +10,21 @@ import { Form, Button } from "react-bootstrap";
 import CompletModal from "../common/CommonModal";
 
 const Write = () => {
-  const location = useLocation();
-  const emojiId = location.state.data;
-  const selectDate = location.state.date;
+  const { selectDate } = useParams();
+  // const location = useLocation();
+  // const emojiId = location.state.data;
+  // const selectDate = location.state.date;
 
   const [emojiImage, setEmojiImage] = useState();
   const [url, setUrl] = useState();
   useEffect(() => {
-    axios
-      .get(`/emoji/getEmojiId/${emojiId}`)
-      .then((res) => {
-        console.log(res);
-        setEmojiImage(res.data.emoji_image);
-      })
-      .catch((err) => console.log(err));
+    // axios
+    //   .get(`/emoji/getEmojiId/${emojiId}`)
+    //   .then((res) => {
+    //     console.log(res);
+    //     setEmojiImage(res.data.emoji_image);
+    //   })
+    //   .catch((err) => console.log(err));
   }, []);
 
   const quillRef = useRef();
@@ -151,7 +152,7 @@ const Write = () => {
       diary_title: value.target.title.value,
       diary_content: quillText,
       diary_date: selectDate,
-      emoji_image_id: emojiId,
+      // emoji_image_id: emojiId,
     };
     axios.post("/board/saveQuill",data)
     .then((res)=> {
@@ -165,7 +166,7 @@ const Write = () => {
 
   return (
     <div className="boardPage">
-      <Form onSubmit={onSubmit}>
+      {/* <Form onSubmit={onSubmit}>
         <div className="dateDiv">
           <span className="date">{localDateRenderer(selectDate)}</span>
           <span>
@@ -200,11 +201,12 @@ const Write = () => {
       </Form>
 
       <CompletModal 
+      currentUser= {currentUser}
       diary_id = {diary_id}
       show={modalActive} 
       hide={()=>setModalActive(false)}
       contents = "작성하신 글이 등록 되었습니다."
-      />
+      /> */}
       
     </div>
   );

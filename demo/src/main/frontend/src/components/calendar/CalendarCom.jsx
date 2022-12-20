@@ -88,6 +88,7 @@ const CalendarCom = (props) => {
       />
       <SelectEmojiModal
       show={modalOpen}
+      currentUser={currentUser}
       state="기분을 선택하세요"
       selectDate = {selectDate}
       hide={() => setModalOpen(false)}

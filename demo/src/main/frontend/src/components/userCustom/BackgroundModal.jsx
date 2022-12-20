@@ -4,7 +4,7 @@ import { Modal, Button, Form } from "react-bootstrap";
 import axios from "axios";
 
 const BackgroundModal = (props) => {
-    const {show, hide, setBackColor, setBackImage} = props;
+    const {show, hide, setBackColor, setBackImage, currentUser} = props;
 
     const onSubmit =(value)=>{
         value.preventDefault();
@@ -41,7 +41,7 @@ const BackgroundModal = (props) => {
     return (
         <div style={{ background : `url("http://localhost:8080/board/getImage/16659625281776251/jpg")`  }}>
             {/* <img src='http://localhost:8080/board/getImage/16659625281776251/jpg' alt=''></img> */}
-    <Modal show = {show} size="lg" centered>
+    <Modal show = {show} size="lg" centered style={currentUser?.font ? {fontFamily: `${currentUser.font}`} : {fontFamily:'DungGeunMo'}}>
         <Modal.Body >
           <h4 className="">사이트를 꾸며보세요!</h4>
           <Form onSubmit={onSubmit}>
