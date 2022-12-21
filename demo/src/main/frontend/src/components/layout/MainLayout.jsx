@@ -24,7 +24,7 @@ const MainLayout = (props) => {
       <div className="mainContent">
         <div className="mainInner innerpdding">
           <div >
-            {tabClass ===0 ? <CalendarCom currentUser={currentUser} fontChange={fontChange}/> : <GraphCom />}
+            {tabClass ===0 ? <CalendarCom currentUser={currentUser} fontChange={fontChange}/> : <GraphCom currentUser={currentUser}/>}
           </div>
         </div>
       </div>

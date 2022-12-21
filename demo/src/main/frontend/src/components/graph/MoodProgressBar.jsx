@@ -3,18 +3,24 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 const MoodProgressBar = (props) => {
-    const { selectDay } = props;
+    const { selectDay, currentUser } = props;
     const [emojiCount, setEmojiCount] = useState();
 
     useEffect(() => {
+      const data ={
+        diary_date: selectDay,
+        user_email : currentUser.email
+      }
+      console.log(data.diary_date, currentUser.email);
       axios
-        .get(`/board/getMonthProgress/${selectDay}`)
+        .post(`/board/getMonthProgress`, data)
         .then((res) => {
           setEmojiCount(res.data);
         })
         .catch((error) => console.log(error));
     }, [selectDay]);
 
+    console.log(emojiCount)
     return (
       <div>
         <div className="moodTitle">[ 기분 분포 ]</div>

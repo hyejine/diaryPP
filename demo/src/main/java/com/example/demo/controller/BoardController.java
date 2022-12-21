@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.example.demo.model.dao.BoardMapper;
+import com.example.demo.model.dto.SearchDto;
 import com.example.demo.model.entity.DiaryDto;
 import com.example.demo.service.BoardService;
 
@@ -133,9 +134,9 @@ public class BoardController {
 		return boardService.getMonth(month);
 	}
 
-	@GetMapping("/getMonthProgress/{selectMonth}")
-	public List<DiaryDto> getMonthProgress(@PathVariable("selectMonth") String month) {
-		return boardService.getMonthProgress(month);
+	@PostMapping("/getMonthProgress")
+	public List<DiaryDto> getMonthProgress(@RequestBody DiaryDto data) {
+		return boardService.getMonthProgress(data);
 	}
 
 	/**

@@ -2,6 +2,7 @@ package com.example.demo.service.interfaces;
 
 import java.util.List;
 
+import com.example.demo.model.dto.SearchDto;
 import com.example.demo.model.entity.DiaryDto;
 
 public interface IBoardService {
@@ -18,7 +19,7 @@ public interface IBoardService {
 
     public List<DiaryDto> getMonth(String month);
 
-    public List<DiaryDto> getMonthProgress(String month);
+    public List<DiaryDto> getMonthProgress(DiaryDto data);
 
     public List<DiaryDto> getYear(String year);
 }

@@ -4,7 +4,8 @@ import { useState } from "react";
 import MonthLine from "./MonthLine";
 import MoodProgressBar from "../MoodProgressBar";
 
-const MonthGrap = () => {
+const MonthGrap = (props) => {
+    const {currentUser} =props;
     const today = new Date();
     const thisMonth = today.getMonth()+1;
     
@@ -28,6 +29,7 @@ const MonthGrap = () => {
         />
         <MoodProgressBar
          selectDay= {selectMonth ? selectMonth : thisMonth}
+         currentUser={currentUser}
          />
         </div>
     );

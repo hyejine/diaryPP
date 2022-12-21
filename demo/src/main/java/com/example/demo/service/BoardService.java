@@ -7,6 +7,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.model.dao.BoardMapper;
+import com.example.demo.model.dto.SearchDto;
 import com.example.demo.model.entity.DiaryDto;
 import com.example.demo.model.entity.EmojiImageDto;
 import com.example.demo.service.interfaces.IBoardService;
@@ -58,16 +59,16 @@ public class BoardService implements IBoardService {
     }
 
     @Override
-    public List<DiaryDto> getMonthProgress(String month) {
-        if (month.length() > 2) {
-            return boardMapper.getYearProgress(month);
+    public List<DiaryDto> getMonthProgress(DiaryDto data) {
+        if (data.getDiary_date().length() > 2) {
+            System.out.println("data===" + data.getDiary_date() + data.getUser_email());
+            return boardMapper.getYearProgress(data);
         } else {
             Date now = new Date();
             SimpleDateFormat format = new SimpleDateFormat("yyyy");
             String formatDate = format.format(now);
-            String sendFormatDate = formatDate + "-" + month;
-
-            return boardMapper.getMonthProgress(sendFormatDate);
+            String sendFormatDate = formatDate + "-" + data.getDiary_date();
+            return boardMapper.getMonthProgress(sendFormatDate, data.getUser_email());
         }
     }
 

@@ -2,8 +2,9 @@ import { useEffect, useState } from 'react';
 import YearLine from './YearLine';
 import MoodProgressBar from "../MoodProgressBar";
 
-const YearGrap = () => {
+const YearGrap = (props) => {
     const date = new Date();
+    const {currentUser} =props;
     const thisYear = date.getFullYear();
     const [yearList] = useState([]);
     const [setYearList] = useState([]);
@@ -65,9 +66,11 @@ const YearGrap = () => {
         <div >[ 기분 그래프 ]</div>
         <YearLine 
         selectYear= {selectYear ? selectYear : thisYear}
+        currentUser= {currentUser}
         />
         <MoodProgressBar
          selectDay= {selectYear ? selectYear : thisYear}
+         currentUser= {currentUser}
          />
         </div>
     );

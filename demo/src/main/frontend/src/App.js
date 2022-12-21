@@ -30,14 +30,14 @@ function App() {
       <Routes>
       <Route element={<MainLayout setBackColor ={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange} fontChange={fontChange} currentUser={currentUser}/>}>
       <Route path="/" element={<CalendarCom />} />
-      <Route path="/board/write" element={<Write currentUser={currentUser}/>}/>
-      <Route path="/emoji" element={<EmojiPurchase/>}/> 
+      {/* <Route path="/emoji" element={<EmojiPurchase/>}/>  */}
      </Route>
      <Route element={<LoginLayout/>}>
      <Route path="/user/login" element={<Login/>}/>
       <Route path="/auth/signUp" element={<Regist/>}/>  
      </Route>
      <Route element={<BoardLayout setBackColor ={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange} fontChange={fontChange} currentUser={currentUser}/>}>
+      <Route path="/board/write" element={<Write currentUser={currentUser}/>}/>
       <Route path="/board/read/:diary_id" element={<Read currentUser={currentUser}/>}/> 
       <Route path="/board/edit/:diary_id" element={<Edit currentUser={currentUser}/>}/> 
       <Route path="/contactUs" element={<ServiceCenter currentUser={currentUser}/>}/> 

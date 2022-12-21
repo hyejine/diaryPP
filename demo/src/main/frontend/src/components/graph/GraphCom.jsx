@@ -3,7 +3,8 @@ import MonthGrap from './month/MonthGrap';
 import YearGrap from './year/YearGrap';
 import './graphCom.scss'
 
-const Graph =() => {
+const Graph =(props) => {
+    const {currentUser} = props;
     const [grapType, setGrapType] = useState();
 
     const handleChange = (value)=>{
@@ -15,7 +16,7 @@ const Graph =() => {
                     <option value ="months">월간 그래프</option>
                     <option value ="year">연간 그래프</option>
                 </select>
-                {grapType === "year" ? <YearGrap/> : <MonthGrap/>}
+                {grapType === "year" ? <YearGrap currentUser={currentUser}/> : <MonthGrap currentUser={currentUser}/>}
             </div>
         );
   

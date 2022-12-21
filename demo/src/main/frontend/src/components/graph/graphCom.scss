@@ -1,9 +1,8 @@
 #grapPage{
     background-color: #fff;
-    padding: 7px 25px;
-    border-radius: 20px;
+    margin: 20px 0;
+    padding: 14px 25px;
     border: none;
-    height: 700px;
     position: relative;
     
     .selectOp{
@@ -12,7 +11,7 @@
     .selectMonth{ 
         position: absolute;
         left: 150px;
-        top: 17px;
+        top: 24px;
     }
 
     // yearChart 
