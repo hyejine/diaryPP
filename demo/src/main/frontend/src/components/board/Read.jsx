@@ -3,6 +3,7 @@ import { useState, useEffect, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { localDateRenderer, diaryDowunloadRenderer } from "../../utils/index";
+import DeleteModal from '../common/CommonModal';
 import domtoimage from 'dom-to-image';
 import html2canvas from 'html2canvas';
 import { saveAs } from 'file-saver';
@@ -12,6 +13,7 @@ import "./write.scss";
 const Read = () => {
   const { diary_id } = useParams();
   const [board, setBoard] = useState();
+  const [ modalActive, setModalActive] = useState();
   const navigate = useNavigate();
   const refs = useRef([]);
 
@@ -28,6 +30,7 @@ const Read = () => {
   const onDelete =(id)=>{
     axios.delete(`/board/deleteBoard/${id}`)
       .then((res) => {
+        setModalActive(true);
         console.log(res.data);
       })
       .catch((err) => console.log(err));
@@ -74,6 +77,12 @@ const Read = () => {
       ))}
       </div>
       </div>
+      <DeleteModal
+      state={"Success"}
+      show ={modalActive}
+      hide={()=>setModalActive(false)}
+      contents={"삭제되었습니다."}
+      />
     </div>
   );
 };

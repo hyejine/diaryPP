@@ -9,7 +9,7 @@ import CompletModal from "../common/CommonModal";
 import axios from "axios";
 
 const Edit = (props) => {
-  const [currentUser] = props;
+  const {currentUser} = props;
   const { diary_id } = useParams();
   const [diaryData, setDiaryData] = useState();
   const [modalOpen, setModalOpen] = useState(false); 

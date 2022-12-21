@@ -119,8 +119,9 @@ public class BoardController {
 	}
 
 	@DeleteMapping("/deleteBoard/{id}")
-	public DiaryDto deleteBoard(@PathVariable("id") Long id) {
-		return boardMapper.deleteBoard(id);
+	public Integer deleteBoard(@PathVariable("id") Integer id) {
+		int success = boardMapper.deleteBoard(id);
+		return success;
 	}
 
 	/**

@@ -19,7 +19,7 @@ public interface BoardMapper {
 
     public List<DiaryDto> getMonthBoard();
 
-    public DiaryDto deleteBoard(Long id);
+    public int deleteBoard(Integer id);
 
     public List<DiaryDto> getMonth(String sendFormatDate);
 
