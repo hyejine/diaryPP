@@ -1,4 +1,7 @@
 .boardPage {
+  padding: 55px 40px 29px;
+
+  // write 페이지 
   .dateDiv {
     position: relative;
   }
@@ -16,9 +19,28 @@
   }
 
   .title {
-    padding: 32px 0;
+    padding: 24px 0 15px;
     font-weight: 500;
-    font-size: 17px;
+    font-size: 15px;
+  }
+  .titleInput{
+    border-radius: 0;
+    border: 1px solid #d63384;
+    box-shadow: 2.5px 2.5px #986882 inset;
+    font-size: 15px;
+    // background-color: #fde5f3;
+  }
+  .ql-toolbar{
+    background-color: #fff;
+    border: 1px solid #d63384;
+    box-shadow: 2.5px 2.5px #986882 inset;
+  }
+  .ql-container{
+    background-color: #fff;
+    border: 1px solid #d63384;
+    box-shadow: 2.5px 0 #986882 inset;
+    color: #000000;
+    font-family: 'DungGeunMo';
   }
 
   .sendButtonWrap {
@@ -29,32 +51,35 @@
   .sendButton {
     cursor: pointer;
     border: none;
-    padding: 7px 70px;
-    color: white;
-    border-radius: 20px;
-    background-color: #ffc700;
+    border-radius: 0;
+    padding: 7px 57px;
+    background-color: #d63384;
+    border-left: 1px solid #fdd8ed;
+    border-top: 1px solid #fdd8ed;
+    box-shadow: 2.5px 2.5px #986882;
+    color: #fff;
   }
 
   .btn-primary {
-    --bs-btn-hover-bg: rgba(240, 188, 0, 0.939);
+    --bs-btn-active-color: #fff;
+    --bs-btn-active-bg: #f574b4;
+    --bs-btn-active-border-color: #db5397; 
+    --bs-btn-active-shadow: 2.5px 2.5px #986882 inset;
   }
 
   // edit 페이지 
   .boardScroll {
-    margin: 100px 0;
-    height: 700px;
-    border-radius: 20px;
-    padding-right: 10px;
+    height: 652px;
+    margin-top: -23px;
   }
 .autoScroll{
   overflow: auto;
 }
   .editPage {
     background-color: white;
-    border-radius: 20px;
     height: 700px;
     margin-bottom: 20px;
-    padding: 30px 30px;
+    padding: 22px 30px 30px;
   }
 
   .editContent {
@@ -62,22 +87,22 @@
     overflow: auto;
   }
 
-  .editContent::-webkit-scrollbar {
-    width: 12px;
-    /* 스크롤바의 너비 */
-  }
+//   .editContent::-webkit-scrollbar {
+//     width: 12px;
+//     /* 스크롤바의 너비 */
+//   }
 
-  .editContent::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    background: #f8c20f;
-    /* 스크롤바의 색상 */
-  }
+//   .editContent::-webkit-scrollbar-thumb {
+//     border-radius: 10px;
+//     background: #f8c20f;
+//     /* 스크롤바의 색상 */
+//   }
 
-  .editContent::-webkit-scrollbar-track {
-    border-radius: 10px;
-    background: rgba(131, 95, 3, 0.1);
-    /*스크롤바 뒷 배경 색상*/
-  }
+//   .editContent::-webkit-scrollbar-track {
+//     border-radius: 10px;
+//     background: rgba(131, 95, 3, 0.1);
+//     /*스크롤바 뒷 배경 색상*/
+//   }
 
   .editContent img {
     width: auto;
@@ -93,8 +118,8 @@
     margin-right: 20px;
   }
 
-  // edit페이지 
-  .clickEmoji{
-    cursor: pointer;
-  }
+//   // edit페이지 
+//   .clickEmoji{
+//     cursor: pointer;
+//   }
 }

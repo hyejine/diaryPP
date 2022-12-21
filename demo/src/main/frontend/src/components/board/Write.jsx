@@ -141,12 +141,13 @@ const Write = (props) => {
               type="text"
               required
               placeholder='"제목을 입력해주세요."'
+              className="titleInput"
             />
           </Form.Group>
         </div>
         <div className="text-editor">
           <ReactQuill
-            style={{ height: "441px" }}
+            style={{ height: "441px"}}
             theme="snow"
             ref={quillRef}
             formats={formats}

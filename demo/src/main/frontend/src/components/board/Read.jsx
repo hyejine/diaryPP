@@ -55,7 +55,6 @@ const Read = () => {
   return (
     <div className="boardPage" id="diaryDownload">
       <div className="boardScroll autoScroll">
-      <div>
       {board?.map((value) => (
         <div className="editPage"  key ={value.diary_id} ref={(el) => (refs.current[value.diary_id] = el) }>
           <div className="dateDiv">
@@ -65,7 +64,7 @@ const Read = () => {
             </span>
           </div>
           <div className="title">
-          {value.diary_title}
+          <span>제목 : {value.diary_title}</span>
           </div>
           <div className="editContent" dangerouslySetInnerHTML={{ __html: value.diary_content }} />
           <div className="sendButtonWrap2">
@@ -75,7 +74,6 @@ const Read = () => {
           </div>
         </div>
       ))}
-      </div>
       </div>
       <DeleteModal
       state={"Success"}
