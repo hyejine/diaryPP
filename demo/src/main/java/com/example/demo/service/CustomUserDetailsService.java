@@ -55,4 +55,11 @@ public class CustomUserDetailsService implements UserDetailsService {
                 Collections.singleton(grantedAuthority)
         );
     }
+
+    // wemate
+    // public AuthenticationUser(User user) {
+    //     super(user.getEmail(), user.getPasswordHash(),
+    //             Collections.singleton(new SimpleGrantedAuthority(String.format("ROLE_%s", user.getUserType()))));
+    //     this.user = user;
+    // }
 }

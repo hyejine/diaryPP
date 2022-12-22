@@ -22,7 +22,10 @@ import org.springframework.web.multipart.MultipartFile;
 import com.example.demo.model.dao.BoardMapper;
 import com.example.demo.model.dto.SearchDto;
 import com.example.demo.model.entity.DiaryDto;
+import com.example.demo.model.entity.UserEntity;
 import com.example.demo.service.BoardService;
+import com.example.demo.service.UserService;
+import com.example.demo.util.SecurityUtil;
 
 @RestController
 @RequestMapping("/board")
@@ -30,10 +33,13 @@ public class BoardController {
 
 	private final BoardMapper boardMapper;
 	private final BoardService boardService;
+	private final UserService userService;
 
-	public BoardController(BoardMapper boardMapper, BoardService boardService) {
+	public BoardController(BoardMapper boardMapper, BoardService boardService, UserService userService	) {
 		this.boardMapper = boardMapper;
 		this.boardService = boardService;
+		this.userService = userService;
+
 
 	}
 
@@ -107,6 +113,8 @@ public class BoardController {
 
 	@GetMapping("/getBoard/{diary_id}")
 	public List<DiaryDto> getBoard(@PathVariable("diary_id") Long diaryId) {
+		String user = SecurityUtil.getCurrentUserId();
+System.out.println("getBoard=============================="+user);
 		return boardService.getBoard(diaryId);
 	}
 	// AND diary_id=#{diary_id}

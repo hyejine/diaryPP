@@ -9,12 +9,14 @@ import { diaryDateRenderer } from "../../utils/index";
 import axios from "axios";
 import { useLocation, useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import LoginModal from '../common/CommonModal';
 
 const CalendarCom = (props) => {
   const {currentUser, fontChange} = props; 
   const [modalOpen, setModalOpen] = useState(false);
   const [selectDate, setSelectDate] = useState();
   const [calerdarData, setCalerdarData] = useState();
+  const [modalActive, setModalActive ] =useState();
   const [isDate, setIsDate] = useState([]);
   const navigate = useNavigate();
 
@@ -44,8 +46,12 @@ const CalendarCom = (props) => {
     if (uniqueArr.includes(test)){
       setModalOpen(false);
     }else {
-      setSelectDate(info.date);
-      setModalOpen(true); 
+      if(currentUser?.email !== ""){
+        setSelectDate(info.date);
+        setModalOpen(true);
+      } else{
+        setModalActive(true);
+      }
     }
   };
 
@@ -85,6 +91,13 @@ const CalendarCom = (props) => {
         ))}
         // eventClick={handleEventClick}
         // events={sch_list}
+      />
+      <LoginModal
+      state="Login"
+      show={modalActive}
+      contents="로그인 후 서비스 이용 가능합니다."
+      hide={()=>setModalActive(false)}
+      url ="login"
       />
       <SelectEmojiModal
       show={modalOpen}

@@ -8,7 +8,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -32,6 +35,7 @@ public class UserService implements IUserService {
     private JwtProvier jwtProvier;
     private AuthenticationManagerBuilder authenticationManagerBuilder;
     private CustomMapper customMapper;
+    private UserDetails userdetails;
 
     @Autowired
     public UserService(UserMapper userMapper, PasswordEncoder passwordEncoder, JwtProvier jwtProvier,
@@ -99,5 +103,20 @@ public class UserService implements IUserService {
         // TODO Auto-generated method stub
 
     }
+
+    @Override
+    public String getCurrentUser() {
+        Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+        String userName = auth.getName();
+        return userName;
+    }
+
+    // @Override
+    // public User getCurrentUser() {
+    //     SecurityContext securityContext = SecurityContextHolder.getContext();
+    //     AuthenticationUser user = (AuthenticationUser) securityContext.getAuthentication().getPrincipal();
+    //     return user.getUser();
+    // }
+    // User user = userService.getCurrentUser();i
 
 }

@@ -16,4 +16,6 @@ public interface IUserService {
 
     public int resetPw(UserEntity data);
 
+    public String getCurrentUser();
+
 }
