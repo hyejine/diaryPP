@@ -28,9 +28,11 @@ const ContactUs = () => {
         setPrivateCheck(true);
       } 
       if(check ===true && value){
-        setModalActive(!modalActive);
         axios.post("/mail/postContactUs",value)
-       .then((res)=> console.log(res))
+       .then((res)=> {
+        setModalActive(true);
+        console.log(res);
+      })
        .catch((err)=>console.log(err))
         console.log(value, check);
       }
