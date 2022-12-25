@@ -183,13 +183,6 @@
     width: 93%;
     height: 200px;
     overflow: scroll;
-    scrollbar-color: rebeccapurple green; 
-    scrollbar-color: inset;
-    // scrollbar-color: #d4aa70 #e4e4e4;
-    // scrollbar-width: thin;
-    // scroll-snap-type: x mandatory;
-    // scroll-snap-destination: 0% 100%;
-    // scroll-snap-points-x: repeat(100%);
   }
   .writeAarea {
     margin-top: 3px;
@@ -204,21 +197,44 @@
   .-mt2{
     margin-top: -6px;
   }
-  .inputResize::-webkit-scrollbar {
-    width: 12px ; /* 스크롤바의 너비 */
-    // background: #f9eaf4;
-  }
-  .inputResize::-webkit-scrollbar-thumb {
-    background: #ffd2ec; /* 스크롤바의 색상 */
-  }
-  .inputResize::-webkit-scrollbar-track {
-    background: #f9eaf4; /*스크롤바 뒷 배경 색상*/
-  }
-  .inputResize::-webkit-scrollbar-button:start:decrement{
-    width: 12px;
-    height: 5px;
-    background-color: #986882;
-  }
+/* 스크롤바의 너비 */
+.inputResize::-webkit-scrollbar {
+  width: 14px;
+}
+/*스크롤바 위 아래 버튼 색상*/
+.inputResize::-webkit-scrollbar-button {
+  background: #fdcee8;
+border: 1px solid #f8a7ce;  
+}
+.inputResize::-webkit-scrollbar-button:start:decrement{
+background: url(../../resource/image/topArrow.png) no-repeat center 50%;
+}
+.inputResize::-webkit-scrollbar-button:end:increment {
+  background: url(../../resource/image/downArrow.png) no-repeat center 50%;
+}
+.inputResize::-webkit-scrollbar-button:horizontal:increment  {
+  background: url(../../resource/image/rightArrow.png) no-repeat center 50%;
+}
+.inputResize::-webkit-scrollbar-button:horizontal:decrement {
+  background: url(../../resource/image/leftArrow.png) no-repeat center 50%;
+}
+/*스크롤바 버튼 사이 색상*/
+.inputResize::-webkit-scrollbar-corner {
+  background: #ffe9f7;
+}
+/* 스크롤바의 색상 */
+.inputResize::-webkit-scrollbar-thumb {
+  background: #fdcee8;
+border: 1px solid #f8a7ce;
+}
+/*스크롤바 뒷 배경 색상*/
+.inputResize::-webkit-scrollbar-track-piece {
+  border-radius: 0px;
+  background: #ffe9f7;
+}
+.inputResize::-webkit-scrollbar-arrow-color{
+background-color: #f8a7ce;
+}
   .onCheckEvent {
     position: relative;
   }

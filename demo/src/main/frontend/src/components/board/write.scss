@@ -88,22 +88,44 @@
     overflow: auto;
   }
 
-//   .editContent::-webkit-scrollbar {
-//     width: 12px;
-//     /* 스크롤바의 너비 */
-//   }
-
-//   .editContent::-webkit-scrollbar-thumb {
-//     border-radius: 10px;
-//     background: #f8c20f;
-//     /* 스크롤바의 색상 */
-//   }
-
-//   .editContent::-webkit-scrollbar-track {
-//     border-radius: 10px;
-//     background: rgba(131, 95, 3, 0.1);
-//     /*스크롤바 뒷 배경 색상*/
-//   }
+/* 스크롤바의 너비 */
+.editContent::-webkit-scrollbar {
+  width: 14px;
+}
+/*스크롤바 위 아래 버튼 색상*/
+.editContent::-webkit-scrollbar-button {
+  background: #fdcee8;
+border: 1px solid #f8a7ce;  
+}
+.editContent::-webkit-scrollbar-button:start:decrement {
+background: url(../../resource/image/topArrow.png) no-repeat center 50%;
+}
+.editContent::-webkit-scrollbar-button:end:increment {
+background: url(../../resource/image/downArrow.png) no-repeat center 50%;
+}
+.inputResize::-webkit-scrollbar-button:horizontal:increment  {
+  background: url(../../resource/image/rightArrow.png) no-repeat center 50%;
+}
+.inputResize::-webkit-scrollbar-button:horizontal:decrement {
+  background: url(../../resource/image/leftArrow.png) no-repeat center 50%;
+}
+/*스크롤바 버튼 사이 색상*/
+.editContent::-webkit-scrollbar-corner {
+  background: #ffe9f7;
+}
+/* 스크롤바의 색상 */
+.editContent::-webkit-scrollbar-thumb {
+  background: #fdcee8;
+border: 1px solid #f8a7ce;
+}
+/*스크롤바 뒷 배경 색상*/
+.editContent::-webkit-scrollbar-track-piece {
+  border-radius: 0px;
+  background: #ffe9f7;
+}
+.editContent::-webkit-scrollbar-arrow-color{
+background-color: #f8a7ce;
+}
 
   .editContent img {
     width: auto;
