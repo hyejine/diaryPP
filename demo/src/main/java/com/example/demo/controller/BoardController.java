@@ -110,11 +110,11 @@ public class BoardController {
 		return success;
 	}
 
-	@GetMapping("/getBoard/{diary_id}")
-	public List<DiaryDto> getBoard(@PathVariable("diary_id") Long diaryId, @PathVariable("email") String email) {
-		String user = SecurityUtil.getCurrentUserId();
-		System.out.println("getBoard===========" + user + "diaryId==" + diaryId + "email==" + email);
-		return boardService.getBoard(diaryId, email);
+	@PostMapping("/getBoard")
+	public List<DiaryDto> getBoard(@RequestBody DiaryDto data) {
+		// String user = SecurityUtil.getCurrentUserId();
+		// System.out.println("getBoard===========" + "diaryId==" + diaryId + "email==" + email);
+		return boardService.getBoard(data);
 	}
 	// AND diary_id=#{diary_id}
 

@@ -55,9 +55,11 @@ const CalendarCom = (props) => {
   };
 console.log(currentUser);
   useEffect(()=>{
-    const diary_id = -1;
-    console.log(currentUser?.email);
-    axios.get(`board/getBoard/${diary_id}/${currentUser.email}`)
+    const data ={
+      diary_id: -1,
+      user_email: currentUser?.email
+    }
+    axios.post(`/board/getBoard`,data)
     .then((res) => {
       setCalerdarData(res.data);
     })

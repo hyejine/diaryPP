@@ -48,9 +48,9 @@ public class BoardService implements IBoardService {
     }
 
     @Override
-    public List<DiaryDto> getBoard(Long id, String email) {
+    public List<DiaryDto> getBoard(DiaryDto data) {
         // String currentUser = userService.getCurrentUser(null);
-        return boardMapper.getBoard(id, email);
+        return boardMapper.getBoard(data);
     }
 
     @Override

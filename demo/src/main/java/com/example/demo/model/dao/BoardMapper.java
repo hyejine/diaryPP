@@ -15,7 +15,7 @@ public interface BoardMapper {
 
     public int updateQuill(DiaryDto data);
 
-    public List<DiaryDto> getBoard(Long id, String email);
+    public List<DiaryDto> getBoard(DiaryDto data);
 
     public List<DiaryDto> getMonthBoard();
 

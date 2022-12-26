@@ -22,7 +22,7 @@ const CommonModal = (props) => {
         <div className='closeButtonW'>
           {diary_id ? <Button onClick={() => navigate(`/board/read/${diary_id}`)} className="closeButton">Close</Button> :
             url === "login" ? <Button onClick={() => { hide(); parentModal(); }} className="closeButton pixelBorder">THANK YOU!</Button>
-              : <Button onClick={() => navigate('/')} className="closeButton pixelBorder">THANK YOU!</Button>
+              : <Button onClick={() => {navigate('/'); hide();}} className="closeButton pixelBorder">THANK YOU!</Button>
           }
         </div>
       </Modal.Body>

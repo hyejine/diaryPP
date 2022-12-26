@@ -30,11 +30,11 @@ const ContactUs = () => {
       if(check ===true && value){
         axios.post("/mail/postContactUs",value)
        .then((res)=> {
-        setModalActive(true);
         console.log(res);
       })
        .catch((err)=>console.log(err))
         console.log(value, check);
+        setModalActive(true);
       }
   };
 
