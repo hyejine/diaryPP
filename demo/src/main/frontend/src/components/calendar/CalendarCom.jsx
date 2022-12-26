@@ -7,7 +7,7 @@ import SelectEmojiModal from "./SelectEmojiModal";
 import { useEffect } from "react";
 import { diaryDateRenderer } from "../../utils/index";
 import axios from "axios";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import LoginModal from '../common/CommonModal';
 
@@ -37,10 +37,9 @@ const CalendarCom = (props) => {
     )
   }
 
-  const set = new Set(isDate);
-  const uniqueArr = [...set];
-
   const onDateClick = (info) => {
+    const set = new Set(isDate);
+    const uniqueArr = [...set];
     const test = diaryDateRenderer(info.date);
 
     if (uniqueArr.includes(test)){
@@ -54,11 +53,11 @@ const CalendarCom = (props) => {
       }
     }
   };
-
-  const diary_id = -1;
-
+console.log(currentUser);
   useEffect(()=>{
-    axios.get(`board/getBoard/${diary_id}`)
+    const diary_id = -1;
+    console.log(currentUser?.email);
+    axios.get(`board/getBoard/${diary_id}/${currentUser.email}`)
     .then((res) => {
       setCalerdarData(res.data);
     })
@@ -89,8 +88,6 @@ const CalendarCom = (props) => {
             publicId : value.diary_id
           }
         ))}
-        // eventClick={handleEventClick}
-        // events={sch_list}
       />
       <LoginModal
       state="Login"

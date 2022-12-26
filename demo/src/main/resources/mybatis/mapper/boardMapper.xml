@@ -37,7 +37,7 @@
   <select id="getBoard" resultMap="diaryJoin" parameterType="DiaryDto">
 	  SELECT e.id, e.emoji_type, e.emoji_image, 
     d.diary_id, d.diary_create_write, d.diary_date, d.user_email, d.diary_title, d.diary_content, d.emoji_image_id 
-    FROM diary_table d, emoji_image_table e WHERE d.emoji_image_id = e.id 
+    FROM diary_table d, emoji_image_table e WHERE d.emoji_image_id = e.id and d.user_email =#{user_email}
     <if test="diary_id != -1">
       AND diary_id=#{diary_id}
     </if>

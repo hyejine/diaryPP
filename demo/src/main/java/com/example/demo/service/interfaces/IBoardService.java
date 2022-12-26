@@ -15,7 +15,7 @@ public interface IBoardService {
 
     public DiaryDto deleteBoard(Long id);
 
-    public List<DiaryDto> getBoard(Long id);
+    public List<DiaryDto> getBoard(Long id, String email);
 
     public List<DiaryDto> getMonth(String month);
 

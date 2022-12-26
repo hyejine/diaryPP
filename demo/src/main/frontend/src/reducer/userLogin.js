@@ -5,11 +5,11 @@ import { createSlice } from "@reduxjs/toolkit";
 export const userLogin = createSlice({
     name: "userInfo",
     initialState: {
-        id: "",
-        email: "",
-        name:"",
-        phone:"",
-        image:"",
+        id: undefined,
+        email: undefined,
+        name:undefined,
+        phone:undefined,
+        image:undefined,
         isLoading: false, // optional
         isLogin: null,
     },
@@ -31,12 +31,12 @@ export const userLogin = createSlice({
         clearUser: (state) => {
             // name, id 값을 비워줌.
             console.log(state);
-            state.id = "";
-            state.email = "";
-            state.name = "";
-            state.phone = "";
-            state.image = "";
-            state.font= "";
+            state.id = undefined;
+            state.email = undefined;
+            state.name = undefined;
+            state.phone = undefined;
+            state.image = undefined;
+            state.font= undefined;
             // state 변화를 알림
             return state;
         },

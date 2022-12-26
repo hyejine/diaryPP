@@ -15,9 +15,12 @@ import com.example.demo.service.interfaces.IBoardService;
 @Service
 public class BoardService implements IBoardService {
     private final BoardMapper boardMapper;
+    private final UserService userService;
 
-    public BoardService(BoardMapper boardMapper) {
+    public BoardService(BoardMapper boardMapper, UserService userService) {
         this.boardMapper = boardMapper;
+        this.userService = userService;
+
     }
 
     @Override
@@ -45,8 +48,9 @@ public class BoardService implements IBoardService {
     }
 
     @Override
-    public List<DiaryDto> getBoard(Long id) {
-        return boardMapper.getBoard(id);
+    public List<DiaryDto> getBoard(Long id, String email) {
+        // String currentUser = userService.getCurrentUser(null);
+        return boardMapper.getBoard(id, email);
     }
 
     @Override

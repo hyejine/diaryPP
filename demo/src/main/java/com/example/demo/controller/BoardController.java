@@ -35,11 +35,10 @@ public class BoardController {
 	private final BoardService boardService;
 	private final UserService userService;
 
-	public BoardController(BoardMapper boardMapper, BoardService boardService, UserService userService	) {
+	public BoardController(BoardMapper boardMapper, BoardService boardService, UserService userService) {
 		this.boardMapper = boardMapper;
 		this.boardService = boardService;
 		this.userService = userService;
-
 
 	}
 
@@ -112,10 +111,10 @@ public class BoardController {
 	}
 
 	@GetMapping("/getBoard/{diary_id}")
-	public List<DiaryDto> getBoard(@PathVariable("diary_id") Long diaryId) {
+	public List<DiaryDto> getBoard(@PathVariable("diary_id") Long diaryId, @PathVariable("email") String email) {
 		String user = SecurityUtil.getCurrentUserId();
-System.out.println("getBoard=============================="+user);
-		return boardService.getBoard(diaryId);
+		System.out.println("getBoard===========" + user + "diaryId==" + diaryId + "email==" + email);
+		return boardService.getBoard(diaryId, email);
 	}
 	// AND diary_id=#{diary_id}
 
