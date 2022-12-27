@@ -27,7 +27,7 @@ console.log(currentUser.font);
   return (
     <div>
       <Modal show={show} size="lg" centered id="modalPage">
-        <Modal.Body className="modalWrap imageM" style={currentUser?.font ? {fontFamily: `${currentUser.font}`} : {fontFamily:'DungGeunMo'}}>
+        <Modal.Body className="modalWrap imageM" style={currentUser?.font ? {fontFamily: `${currentUser.font}`} : {fontFamily:''}}>
           <div className='title'>
             <span>{state}</span>
             <div className='headerButton'>

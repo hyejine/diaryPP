@@ -10,8 +10,8 @@ export const userLogin = createSlice({
         name:undefined,
         phone:undefined,
         image:undefined,
-        isLoading: false, // optional
-        isLogin: null,
+        // isLoading: false, // optional
+        // isLogin: null,
     },
     reducers: {
         // login 성공 시

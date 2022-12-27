@@ -47,7 +47,7 @@ const BackgroundModal = (props) => {
   return (
     // <div style={{ background : `url("http://localhost:8080/board/getImage/16659625281776251/jpg")`  }}>
     <Modal show={show} size="lg" centered id="modalPage" onHide={hide}>
-      <Modal.Body className='modalWrap' style={currentUser?.font ? {fontFamily: `${currentUser.font}`} : {fontFamily:'DungGeunMo'}}>
+      <Modal.Body className='modalWrap' style={currentUser?.font ? {fontFamily: `${currentUser.font}`} : {fontFamily:''}}>
         <div className='title'>
           <span>{state}</span>
           <div className='headerButton'>
