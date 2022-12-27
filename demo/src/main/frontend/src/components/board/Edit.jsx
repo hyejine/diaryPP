@@ -66,7 +66,6 @@ const Edit = (props) => {
       diary_id: diary_id,
       diary_title: value.target.title.value,
       diary_content: quillText,
-      // diary_date: selectDate,
       emoji_image_id: emojiId
     }
     axios.post("/board/updateQuill", data)
@@ -127,11 +126,16 @@ const Edit = (props) => {
     setModalOpen(true);
 
   }
-  console.log(modalOpen);
   useEffect(() => {
+    const data ={
+      diary_id : diary_id, 
+      user_email: currentUser.email
+    }
+    
     axios
-      .get(`/board/getBoard/${diary_id}`)
+      .post(`/board/getBoard`, data)
       .then((res) => {
+        console.log(res.data);
         setDiaryData(res.data[0]);
         console.log(res.data[0].diary_content);
         setQuillText(res.data[0].diary_content);

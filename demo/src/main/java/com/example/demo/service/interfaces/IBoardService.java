@@ -11,13 +11,13 @@ public interface IBoardService {
 
     public int updateQuill(DiaryDto data);
 
-    public List<DiaryDto> getMonthBoard();
+    public List<DiaryDto> getMonthBoard(String email);
 
     public DiaryDto deleteBoard(Long id);
 
     public List<DiaryDto> getBoard(DiaryDto data);
 
-    public List<DiaryDto> getMonth(String month);
+    public List<DiaryDto> getMonth(String month, String email);
 
     public List<DiaryDto> getMonthProgress(DiaryDto data);
 

@@ -64,7 +64,7 @@ console.log(currentUser);
       setCalerdarData(res.data);
     })
     .catch((err) => console.log(err));
-},[])
+},[currentUser])
 
   return (
     <div id="calendarPage" style={fontChange? {fontFamily : `${fontChange}`} : {fontFamily : `${currentUser.font}`} }>

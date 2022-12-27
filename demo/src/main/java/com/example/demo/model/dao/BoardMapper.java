@@ -17,11 +17,11 @@ public interface BoardMapper {
 
     public List<DiaryDto> getBoard(DiaryDto data);
 
-    public List<DiaryDto> getMonthBoard();
+    public List<DiaryDto> getMonthBoard(String email);
 
     public int deleteBoard(Integer id);
 
-    public List<DiaryDto> getMonth(String sendFormatDate);
+    public List<DiaryDto> getMonth(@Param("diary_date") String sendFormatDate, @Param("user_email") String email);
 
     public List<DiaryDto> getMonthProgress(@Param("diary_date") String sendFormatDate,
             @Param("user_email") String email);

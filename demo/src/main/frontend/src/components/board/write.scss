@@ -87,6 +87,9 @@
     height: 480px;
     overflow: auto;
   }
+  .clickEmoji{
+    cursor: pointer;
+  }
 
 /* 스크롤바의 너비 */
 .editContent::-webkit-scrollbar {
@@ -140,9 +143,4 @@ background-color: #f8a7ce;
   .sendButtonWrap2 Button {
     margin-right: 20px;
   }
-
-//   // edit페이지 
-//   .clickEmoji{
-//     cursor: pointer;
-//   }
 }

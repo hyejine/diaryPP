@@ -26,6 +26,7 @@ const MonthGrap = (props) => {
         <div >[ 기분 그래프 ]</div>
         <MonthLine 
         selectMonth= {selectMonth ? selectMonth : thisMonth}
+        currentUser={currentUser}
         />
         <MoodProgressBar
          selectDay= {selectMonth ? selectMonth : thisMonth}

@@ -15,7 +15,7 @@ const SelectEmojiModal = (props) => {
   const onSelectEmoji = (id) => {
     console.log(id);
     setEmojiId(id);
-    // setClickEmoji(id);
+    setClickEmoji(id);
   }
 console.log(currentUser.font);
   useEffect(() => {

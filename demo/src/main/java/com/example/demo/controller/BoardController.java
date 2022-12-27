@@ -112,17 +112,19 @@ public class BoardController {
 
 	@PostMapping("/getBoard")
 	public List<DiaryDto> getBoard(@RequestBody DiaryDto data) {
+		System.out.println("data=====================" + data);
 		// String user = SecurityUtil.getCurrentUserId();
-		// System.out.println("getBoard===========" + "diaryId==" + diaryId + "email==" + email);
+		// System.out.println("getBoard===========" + "diaryId==" + diaryId + "email=="
+		// + email);
 		return boardService.getBoard(data);
 	}
 	// AND diary_id=#{diary_id}
 
-	@GetMapping("/getMonthBoard")
-	public List<DiaryDto> getMonthBoard() {
+	@GetMapping("/getMonthBoard/{email}")
+	public List<DiaryDto> getMonthBoard(@PathVariable("email") String email) {
 		// System.out.println(boardMapper.getBoard().toString());
 
-		return boardService.getMonthBoard();
+		return boardService.getMonthBoard(email);
 	}
 
 	@DeleteMapping("/deleteBoard/{id}")
@@ -137,9 +139,9 @@ public class BoardController {
 	 * @param month
 	 * @return diary_table where month = month
 	 */
-	@GetMapping("/getMonth/{selectMonth}")
-	public List<DiaryDto> getMonth(@PathVariable("selectMonth") String month) {
-		return boardService.getMonth(month);
+	@GetMapping("/getMonth/{selectMonth}/{email}")
+	public List<DiaryDto> getMonth(@PathVariable("selectMonth") String month, @PathVariable("email") String email) {
+		return boardService.getMonth(month, email);
 	}
 
 	@PostMapping("/getMonthProgress")

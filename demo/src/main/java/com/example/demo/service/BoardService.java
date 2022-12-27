@@ -36,9 +36,9 @@ public class BoardService implements IBoardService {
     }
 
     @Override
-    public List<DiaryDto> getMonthBoard() {
+    public List<DiaryDto> getMonthBoard(String email) {
 
-        return boardMapper.getMonthBoard();
+        return boardMapper.getMonthBoard(email);
     }
 
     @Override
@@ -54,12 +54,12 @@ public class BoardService implements IBoardService {
     }
 
     @Override
-    public List<DiaryDto> getMonth(String month) {
+    public List<DiaryDto> getMonth(String month, String email) {
         Date now = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy");
         String formatDate = format.format(now);
         String sendFormatDate = formatDate + "-" + month;
-        return boardMapper.getMonth(sendFormatDate);
+        return boardMapper.getMonth(sendFormatDate, email);
     }
 
     @Override

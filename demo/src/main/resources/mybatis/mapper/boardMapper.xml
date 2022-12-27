@@ -37,9 +37,9 @@
   <select id="getBoard" resultMap="diaryJoin" parameterType="DiaryDto">
 	  SELECT e.id, e.emoji_type, e.emoji_image, 
     d.diary_id, d.diary_create_write, d.diary_date, d.user_email, d.diary_title, d.diary_content, d.emoji_image_id 
-    FROM diary_table d, emoji_image_table e WHERE d.emoji_image_id = e.id and d.user_email =#{user_email}
+    FROM diary_table d, emoji_image_table e WHERE d.emoji_image_id = e.id and user_email =#{user_email}
     <if test="diary_id != -1">
-      AND diary_id=#{diary_id}
+      AND diary_id=#{diary_id} 
     </if>
   </select> 
 
@@ -47,7 +47,7 @@
   <select id="getMonthBoard" resultMap="diaryJoin" parameterType="DiaryDto">
 	  SELECT e.id, e.emoji_type, e.emoji_image, 
     d.diary_id, d.diary_create_write, d.diary_date, d.user_email, d.diary_title, d.diary_content, d.emoji_image_id 
-    FROM diary_table d, emoji_image_table e WHERE d.emoji_image_id = e.id order by diary_date
+    FROM diary_table d, emoji_image_table e WHERE d.emoji_image_id = e.id  and d.user_email = #{user_email} order by diary_date 
     <!-- AND  DATE_FORMAT(diary_date,'%Y-%m') = DATE_FORMAT(now(),'2022-09') -->
   </select> 
 
@@ -56,7 +56,7 @@
   </delete>
 
   <select id="getMonth" resultType="DiaryDto">
-    select * from diary_table where diary_date LIKE '%${diary_date}%' order by diary_date
+    select * from diary_table where diary_date LIKE '%${diary_date}%' and user_email=#{user_email} order by diary_date
   </select>
 
   <select id="getMonthProgress" resultType="java.util.Map" >

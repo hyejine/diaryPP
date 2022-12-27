@@ -10,7 +10,8 @@ import { saveAs } from 'file-saver';
 import axios from "axios";
 import "./write.scss";
 
-const Read = () => {
+const Read = (props) => {
+  const {currentUser} = props;
   const { diary_id } = useParams();
   const [board, setBoard] = useState();
   const [ modalActive, setModalActive] = useState();
@@ -19,14 +20,14 @@ const Read = () => {
 
   useEffect(() => {
     axios
-    .get(`/board/getMonthBoard`)
+    .get(`/board/getMonthBoard/${currentUser.email}`)
     .then((res) => {
       setBoard(res.data);
       refs.current[diary_id].scrollIntoView({ block: 'center' });
     })
     .catch((err) => console.log(err));
   }, []);
-  
+  console.log(currentUser); 
   const onDelete =(id)=>{
     axios.delete(`/board/deleteBoard/${id}`)
       .then((res) => {

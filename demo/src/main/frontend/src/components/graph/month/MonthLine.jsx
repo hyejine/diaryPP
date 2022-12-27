@@ -5,20 +5,19 @@ import { chartDateRender } from "../../../utils/index";
 import noneData from "../../../utils/nivoChart";
 
 const MonthLine = (props) => {
-    const { selectMonth } = props;
+    const { currentUser, selectMonth } = props;
     const date = new Date(2022,selectMonth,0).getDate();
     const [monthData, setMonthData] = useState();
 
+    console.log(currentUser);
+
     useEffect(() => {
-        axios
-        .get(`/board/getMonth/${selectMonth}`)
+        axios.get(`/board/getMonth/${selectMonth}/${currentUser?.email}`)
         .then((res) => {
             setMonthData(res.data);
         })
         .catch((error) => console.log(error));
     }, [selectMonth]);
-
-    
 
     return (
         <div style={{ width: "auto", height: "400px", margin: "0 auto" }}>
