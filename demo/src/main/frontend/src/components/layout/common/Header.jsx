@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { clearUser } from "../../../reducer/userLogin";
 import FontModal from "../../common/CommonModal";
 import { loginUser } from "../../../reducer/userLogin";
-
+import { setCustom } from "../../../reducer/userSlice";
 import { useTranslation } from 'react-i18next'
 import i18n from "i18next";
 
@@ -31,7 +31,6 @@ const Header = (props) => {
   const onBackgroundChg = () => {
     setModalActive(!modalActive);
   };
-  console.log("Header: ", fontChange, currentUser);
 
   const fontStyle = [
     { value: "Galmuri9", fontStyle: "갈무리" },
@@ -49,6 +48,10 @@ const Header = (props) => {
   ];
 
   const chageFont = (value) => {
+    const data ={
+      font : value.target.value
+    } 
+    dispatch(setCustom(data));
     setFontChange(value.target.value);
   };
 
@@ -74,6 +77,7 @@ const Header = (props) => {
 
   const onLogout =()=> {
     dispatch(clearUser(currentUser));
+    // setFontChange('DungGeunMo');
   }
   const [test, setTest] = useState(false);
 
@@ -81,7 +85,6 @@ const Header = (props) => {
     setTest(!test);
   }
   // window.close(dispatch(clearUser(currentUser)));
-  console.log(currentUser);
 
   return (
     <div className="header" >

@@ -17,7 +17,6 @@ const SelectEmojiModal = (props) => {
     setEmojiId(id);
     setClickEmoji(id);
   }
-console.log(currentUser.font);
   useEffect(() => {
     axios.get(`/emoji/default`)
       .then(res => { setSelectEmoji(res.data)})

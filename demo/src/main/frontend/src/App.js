@@ -13,28 +13,46 @@ import CalendarCom from "./components/calendar/CalendarCom";
 import defaultBg from './resource/image/skyBg.jpg'
 import ServiceCenter from "./components/serviceCenter/ServiceCenter";
 import LoginLayout from "./components/layout/LoginLayout";
-
+import { useDispatch } from "react-redux";
+import { setCustom } from "./reducer/userSlice";
 function App() {
   const currentUser = useSelector(state => state.currentUser);
+  const userCustom = useSelector(state => state.userCustom);
+  const dispatch = useDispatch();
   const [backColor, setBackColor ] = useState();
   const [backImage, setBackImage ] = useState();
+  const defaultFonrt = 'DungGeunMo';
   const [fontChange, setFontChange ] = useState();
-
-  console.log(currentUser);
+  // if(currentUser){
+  //   if(fontChange){
+  //     setFontChange(fontChange);
+  //   }else{
+  //     if(currentUser.font){
+  //     setFontChange(currentUser.font);
+  //     } setFontChange('DungGeunMo');
+  //   }
+  // }else{
+  //   setFontChange('DungGeunMo');
+  // }
+  console.log("currentUser", currentUser);
+  console.log("currentUser:",currentUser?.font, "fontChange: ",fontChange);
+  console.log(userCustom);
   useEffect(()=>{
-    if(currentUser){
-      if(fontChange){
-        setFontChange(fontChange);
-      }else{
-        if(currentUser.font){
-        setFontChange(currentUser.font);
-        } setFontChange('DungGeunMo');
-      }
-    }else{
-      setFontChange('DungGeunMo');
-    }
+
+    
+  if(currentUser){
+    if(userCustom?.font){
+      setFontChange(fontChange);
+    }else if(currentUser.font){
+      setFontChange(currentUser.font);
+      } setFontChange('DungGeunMo');
+    
+  }else{
+    setFontChange('DungGeunMo');
+  }
   },[currentUser, fontChange])
 
+console.log(fontChange);
   return (
     <div className="allPage " style={{fontFamily: `${fontChange}`}}>
       {/* currentUser ? fontChange ? `${fontChange}` : currentUser.font ? `${currentUser.font}`:'DungGeunMo' :'DungGeunMo'}}> */}

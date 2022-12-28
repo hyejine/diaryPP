@@ -1,41 +1,27 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const userSlice = createSlice({
-    name: "user",
+export const userCustom = createSlice({
+    name: "userCustom",
     initialState: {
-        id: "",
-        email: "",
-        name:"",
-        phone:"",
-        image:"",
-        isLoading: false, // optional
-        isLogin: null,
+        font: undefined,
+        background: undefined
     },
     reducers: {
-        // login 성공 시
-        loginUser: (state, action) => {
+        // login 후 사용자 설정 
+        setCustom: (state, action) => {
             // name, id에 API 값 받아오기
-            state.id = action.payload.id;
-            state.email = action.payload.email;
-            state.name = action.payload.name;
-            state.phone = action.payload.phone;
-            state.image = action.payload.image;
-            // state 변화를 알림
+            state.font = action.payload.font;
+            state.background = action.payload.background;
             return state;
         },
-        // login 실패 시
-        clearUser: (state) => {
-            // name, id 값을 비워줌.
-            state.id = "";
-            state.email = "";
-            state.name = "";
-            state.phone = "";
-            state.image = "";
-            // state 변화를 알림
+        // logout 시 
+        clearCutosm : (state) => {
+            state.font = undefined;
+            state.background = undefined;
             return state;
         },
     },
 });
 
-export const { loginUser, clearUser } = userSlice.actions;
-export default userSlice.reducer;
+export const { setCustom, clearCutosm } = userCustom.actions;
+export default userCustom.reducer;

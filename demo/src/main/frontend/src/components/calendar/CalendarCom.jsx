@@ -36,7 +36,6 @@ const CalendarCom = (props) => {
       </div>
     )
   }
-
   const onDateClick = (info) => {
     const set = new Set(isDate);
     const uniqueArr = [...set];
@@ -44,16 +43,15 @@ const CalendarCom = (props) => {
 
     if (uniqueArr.includes(test)){
       setModalOpen(false);
-    }else {
-      if(currentUser?.email !== ""){
+    }else if (currentUser?.email !== ""|| currentUser?.email !== undefined){
         setSelectDate(info.date);
         setModalOpen(true);
-      } else{
-        setModalActive(true);
-      }
+    } 
+    if (currentUser?.email === undefined){
+      setModalActive(true);
     }
   };
-console.log(currentUser);
+
   useEffect(()=>{
     const data ={
       diary_id: -1,
@@ -67,7 +65,8 @@ console.log(currentUser);
 },[currentUser])
 
   return (
-    <div id="calendarPage" style={fontChange? {fontFamily : `${fontChange}`} : {fontFamily : `${currentUser.font}`} }>
+    <div id="calendarPage"  >
+      {/*  */}
       <FullCalendar
         id="calendar"
         plugins={[dayGridPlugin, interactionPlugin]}

@@ -4,12 +4,10 @@ import CalendarCom from './components/calendar/CalendarCom';
 import Header from "./components/layout/common/Header";
 import GraphCom from './components/graph/GraphCom';
 import { useSelector, useDispatch } from "react-redux";
-import { clearUser } from "./reducer/userSlice";
 import { useNavigate, useLocation } from "react-router-dom";
 
 const Main = (props)=> {
     const {tap} = props;
-    console.log(tap);
     const { state } = useLocation();
     // const [tap, setTap] = useState('캘린더');
 
@@ -21,7 +19,7 @@ const Main = (props)=> {
     const dispatch = useDispatch();
 
     const LogoutFunc = () => {
-        dispatch(clearUser(user));
+
     }
     useEffect(() => {
       // LogoutFunc()

@@ -5,10 +5,12 @@ import thunk from 'redux-thunk';
 
 import { configureStore } from "@reduxjs/toolkit";
 import userLogin from "./userLogin";
+import userCustom from './userSlice';
 
 // redux 스토어 
 const reducers = combineReducers({
   currentUser: userLogin,
+  userCustom : userCustom
 });
 
 const persistConfig = {

@@ -11,9 +11,9 @@ const MainLayout = (props) => {
   const onTabChange = (value)=>{
     setTabClass(value)
   }
-  console.log("mainLayout: ", fontChange, currentUser.font);
   return (
-    <div className="main" style={fontChange? {fontFamily : `${fontChange}`} : {fontFamily : `${currentUser.font}`} }>
+    <div className="main" style={{}}>
+      {/* fontChange? {fontFamily : `${fontChange}`} : {fontFamily : `${currentUser.font}`}  */}
       <div className="mainWrap">
       <Header setBackColor={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange} fontChange= {fontChange} currentUser={currentUser}/>
       <div className="mainContentWarp">
