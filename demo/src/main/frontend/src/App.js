@@ -36,21 +36,37 @@ function App() {
   // }
   console.log("currentUser", currentUser);
   console.log("currentUser:",currentUser?.font, "fontChange: ",fontChange);
-  console.log(userCustom);
+  console.log("userCustom", userCustom, "userCustom.font", userCustom.font);
   useEffect(()=>{
 
+    if(currentUser?.email){
+      console.log("로그인 됨", currentUser.email);
+      if(userCustom.font){
+        console.log("폰트변경함", userCustom.font);
+        setFontChange(userCustom.font);
+      } 
+      else if(currentUser.font !== undefined){
+        console.log("사용자 폰트 존재", currentUser.font, typeof currentUser.font);
+      } else {
+        console.log("사용자 폰트, 폰트 변경 안함");
+        setFontChange('DungGeunMo');
+      }
+    } else {
+      console.log("로그인 안됨");
+      setFontChange('DungGeunMo');
+    }
     
-  if(currentUser){
-    if(userCustom?.font){
-      setFontChange(fontChange);
-    }else if(currentUser.font){
-      setFontChange(currentUser.font);
-      } setFontChange('DungGeunMo');
+  // if(currentUser){
+  //   if(userCustom?.font){
+  //     setFontChange(fontChange);
+  //   }else if(currentUser.font){
+  //     setFontChange(currentUser.font);
+  //     } setFontChange('DungGeunMo');
     
-  }else{
-    setFontChange('DungGeunMo');
-  }
-  },[currentUser, fontChange])
+  // }else{
+  //   setFontChange('DungGeunMo');
+  // }
+  },[currentUser, userCustom])
 
 console.log(fontChange);
   return (

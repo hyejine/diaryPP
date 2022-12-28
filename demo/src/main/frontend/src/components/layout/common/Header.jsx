@@ -52,7 +52,7 @@ const Header = (props) => {
       font : value.target.value
     } 
     dispatch(setCustom(data));
-    setFontChange(value.target.value);
+    // setFontChange(value.target.value);
   };
 
   const saveFont = () => {
