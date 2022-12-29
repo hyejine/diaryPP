@@ -7,7 +7,7 @@ import WebInfo from "./WebInfo";
 import "./serviceCenter.scss";
 
 const ServiceCenter = (props) => {
-  const {currentUser, fontChange} = props;
+  const {currentUser} = props;
 
 
   return (

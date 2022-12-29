@@ -9,7 +9,7 @@ import { useDispatch } from "react-redux";
 import { clearUser } from "../../../reducer/userLogin";
 import FontModal from "../../common/CommonModal";
 import { loginUser } from "../../../reducer/userLogin";
-import { setCustom } from "../../../reducer/userSlice";
+import { clearCutosm, setCustom } from "../../../reducer/userSlice";
 import { useTranslation } from 'react-i18next'
 import i18n from "i18next";
 
@@ -17,7 +17,7 @@ import "./header.scss";
 import axios from "axios";
 
 const Header = (props) => {
-  const { currentUser, setBackColor, setBackImage, setFontChange, fontChange } = props;
+  const {userCustom, currentUser, setBackColor, setBackImage } = props;
   const [modalActive, setModalActive] = useState(false);
   const [fontModal, setFontModal] = useState(false);
   const dispatch = useDispatch();
@@ -52,13 +52,12 @@ const Header = (props) => {
       font : value.target.value
     } 
     dispatch(setCustom(data));
-    // setFontChange(value.target.value);
   };
 
   const saveFont = () => {
     const data = {
       user_email: currentUser.email,
-      custom_font: fontChange,
+      custom_font: userCustom.font,
       user_id : currentUser.id,
       user_name : currentUser.name
     };
@@ -69,6 +68,7 @@ const Header = (props) => {
         console.log(data);
         setFontModal(true);
         dispatch(loginUser(data));
+        dispatch(clearCutosm(userCustom));
       })
       .catch((err) => {console.log(err);
         setFontModal(false);
@@ -77,7 +77,7 @@ const Header = (props) => {
 
   const onLogout =()=> {
     dispatch(clearUser(currentUser));
-    // setFontChange('DungGeunMo');
+    dispatch(clearCutosm(userCustom));
   }
   const [test, setTest] = useState(false);
 

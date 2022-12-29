@@ -21,24 +21,12 @@ function App() {
   const dispatch = useDispatch();
   const [backColor, setBackColor ] = useState();
   const [backImage, setBackImage ] = useState();
-  const defaultFonrt = 'DungGeunMo';
   const [fontChange, setFontChange ] = useState();
-  // if(currentUser){
-  //   if(fontChange){
-  //     setFontChange(fontChange);
-  //   }else{
-  //     if(currentUser.font){
-  //     setFontChange(currentUser.font);
-  //     } setFontChange('DungGeunMo');
-  //   }
-  // }else{
-  //   setFontChange('DungGeunMo');
-  // }
+  
   console.log("currentUser", currentUser);
   console.log("currentUser:",currentUser?.font, "fontChange: ",fontChange);
   console.log("userCustom", userCustom, "userCustom.font", userCustom.font);
   useEffect(()=>{
-
     if(currentUser?.email){
       console.log("로그인 됨", currentUser.email);
       if(userCustom.font){
@@ -46,7 +34,8 @@ function App() {
         setFontChange(userCustom.font);
       } 
       else if(currentUser.font !== undefined){
-        console.log("사용자 폰트 존재", currentUser.font, typeof currentUser.font);
+        console.log("사용자 폰트 존재", currentUser.font);
+        setFontChange(currentUser.font);
       } else {
         console.log("사용자 폰트, 폰트 변경 안함");
         setFontChange('DungGeunMo');
@@ -55,17 +44,6 @@ function App() {
       console.log("로그인 안됨");
       setFontChange('DungGeunMo');
     }
-    
-  // if(currentUser){
-  //   if(userCustom?.font){
-  //     setFontChange(fontChange);
-  //   }else if(currentUser.font){
-  //     setFontChange(currentUser.font);
-  //     } setFontChange('DungGeunMo');
-    
-  // }else{
-  //   setFontChange('DungGeunMo');
-  // }
   },[currentUser, userCustom])
 
 console.log(fontChange);
@@ -75,7 +53,7 @@ console.log(fontChange);
       {/* style={ backColor ? { background: `${backColor}`, fontFamily: `${fontChange}` } : backImage ? { background: `url(${backImage})`, fontFamily: `${fontChange}`, backgroundSize: '30%' } : { background: '#fdd8ed', backgroundSize: '30%', fontFamily: `${fontChange}` }} */}
     <BrowserRouter>
       <Routes>
-      <Route element={<MainLayout setBackColor ={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange} fontChange={fontChange} currentUser={currentUser}/>}>
+      <Route element={<MainLayout setBackColor ={setBackColor} setBackImage={setBackImage} fontChange={fontChange} currentUser={currentUser} userCustom ={userCustom} />}>
       <Route path="/" element={<CalendarCom />} />
      </Route>
      <Route element={<LoginLayout/>}>

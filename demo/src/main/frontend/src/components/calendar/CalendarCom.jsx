@@ -12,7 +12,7 @@ import { Button } from "react-bootstrap";
 import LoginModal from '../common/CommonModal';
 
 const CalendarCom = (props) => {
-  const {currentUser, fontChange} = props; 
+  const {currentUser} = props; 
   const [modalOpen, setModalOpen] = useState(false);
   const [selectDate, setSelectDate] = useState();
   const [calerdarData, setCalerdarData] = useState();

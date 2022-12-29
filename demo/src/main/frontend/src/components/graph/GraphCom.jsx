@@ -4,7 +4,7 @@ import YearGrap from './year/YearGrap';
 import './graphCom.scss'
 
 const Graph =(props) => {
-    const {currentUser} = props;
+    const {currentUser, userCustom} = props;
     const [grapType, setGrapType] = useState();
 
     const handleChange = (value)=>{
