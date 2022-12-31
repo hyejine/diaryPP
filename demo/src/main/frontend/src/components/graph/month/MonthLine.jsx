@@ -5,11 +5,9 @@ import { chartDateRender } from "../../../utils/index";
 import noneData from "../../../utils/nivoChart";
 
 const MonthLine = (props) => {
-    const { currentUser, selectMonth } = props;
+    const { currentUser, selectMonth, fontChange } = props;
     const date = new Date(2022,selectMonth,0).getDate();
     const [monthData, setMonthData] = useState();
-
-    console.log(currentUser);
 
     useEffect(() => {
         axios.get(`/board/getMonth/${selectMonth}/${currentUser?.email}`)
@@ -64,7 +62,7 @@ const MonthLine = (props) => {
             // custom
             enableArea={true}
             theme={{
-                // fontFamily : 'DungGeunMo',
+                fontFamily : `${fontChange}`,
                 textColor : "#333333",
                 fontSize: 14,
             }}

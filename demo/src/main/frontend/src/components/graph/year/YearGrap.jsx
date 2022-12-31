@@ -4,7 +4,7 @@ import MoodProgressBar from "../MoodProgressBar";
 
 const YearGrap = (props) => {
     const date = new Date();
-    const {currentUser} =props;
+    const {currentUser, fontChange} =props;
     const thisYear = date.getFullYear();
     const [yearList] = useState([]);
     const [setYearList] = useState([]);
@@ -67,6 +67,7 @@ const YearGrap = (props) => {
         <YearLine 
         selectYear= {selectYear ? selectYear : thisYear}
         currentUser= {currentUser}
+        fontChange={fontChange}
         />
         <MoodProgressBar
          selectDay= {selectYear ? selectYear : thisYear}

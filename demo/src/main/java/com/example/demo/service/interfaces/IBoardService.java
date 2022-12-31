@@ -21,5 +21,5 @@ public interface IBoardService {
 
     public List<DiaryDto> getMonthProgress(DiaryDto data);
 
-    public List<DiaryDto> getYear(String year);
+    public List<DiaryDto> getYear(String year, String email);
 }

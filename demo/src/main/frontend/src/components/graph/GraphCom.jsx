@@ -4,7 +4,7 @@ import YearGrap from './year/YearGrap';
 import './graphCom.scss'
 
 const Graph =(props) => {
-    const {currentUser, userCustom} = props;
+    const {currentUser, fontChange} = props;
     const [grapType, setGrapType] = useState();
 
     const handleChange = (value)=>{
@@ -16,7 +16,7 @@ const Graph =(props) => {
                     <option value ="months">월간 그래프</option>
                     <option value ="year">연간 그래프</option>
                 </select>
-                {grapType === "year" ? <YearGrap currentUser={currentUser}/> : <MonthGrap currentUser={currentUser}/>}
+                {grapType === "year" ? <YearGrap currentUser={currentUser} fontChange={fontChange}/> : <MonthGrap currentUser={currentUser} fontChange={fontChange}/>}
             </div>
         );
   

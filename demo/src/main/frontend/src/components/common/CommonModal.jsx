@@ -5,12 +5,12 @@ import { useNavigate } from "react-router-dom";
 import './commonModal.scss';
 
 const CommonModal = (props) => {
-  const { show, hide, contents, diary_id, state, url, parentModal, currentUser } = props;
+  const { show, hide, contents, diary_id, state, url, parentModal, currentUser, fontChange } = props;
   const navigate = useNavigate();
 
   return (
     <Modal size="lg" show={show} centered id="modalPage">
-      <Modal.Body className='modalWrap' style={currentUser?.font ? {fontFamily: `${currentUser.font}`} : {fontFamily:'DungGeunMo'}}>
+      <Modal.Body className='modalWrap' style={{fontFamily: `${fontChange}`}}>
         <div className='title'>
           <span>{state}</span>
           <div className='headerButton'>

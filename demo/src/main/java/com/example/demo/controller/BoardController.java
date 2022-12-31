@@ -155,9 +155,9 @@ public class BoardController {
 	 * @param selectYear
 	 * @return diary_table where year = year
 	 */
-	@GetMapping("/getYear/{selectYear}")
-	public List<DiaryDto> getYear(@PathVariable("selectYear") String year) {
-		return boardService.getYear(year);
+	@GetMapping("/getYear/{selectYear}/{email}")
+	public List<DiaryDto> getYear(@PathVariable("selectYear") String year, @PathVariable("email") String email) {
+		return boardService.getYear(year, email);
 	}
 
 	@GetMapping("/postFont/{fontChange}")

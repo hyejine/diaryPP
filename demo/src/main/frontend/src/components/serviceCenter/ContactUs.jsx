@@ -7,7 +7,8 @@ import EmptyBox from "../../resource/image/emptyCheckBox.png";
 import Check from "../../resource/image/check.png";
 import CompletModal from "../common/CommonModal";
 
-const ContactUs = () => {
+const ContactUs = (props) => {
+  const {fontChange} = props;
   const { register, handleSubmit, formState: { errors } } = useForm();
     const [check, setCheck] = useState();
     const [modalActive, setModalActive] = useState();
@@ -90,6 +91,7 @@ const ContactUs = () => {
         </div>
       </form>
       <CompletModal 
+      fontChange={fontChange}
       state={'Success'}
       show={modalActive} 
       hide={()=>setModalActive(false)}

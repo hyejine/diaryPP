@@ -59,6 +59,7 @@ public class BoardService implements IBoardService {
         SimpleDateFormat format = new SimpleDateFormat("yyyy");
         String formatDate = format.format(now);
         String sendFormatDate = formatDate + "-" + month;
+        System.out.println("sendFormatDate type: === "+ sendFormatDate.getClass().getName()+"==email type: ==="+email.getClass().getName());
         return boardMapper.getMonth(sendFormatDate, email);
     }
 
@@ -77,7 +78,7 @@ public class BoardService implements IBoardService {
     }
 
     @Override
-    public List<DiaryDto> getYear(String year) {
-        return boardMapper.getYear(year);
+    public List<DiaryDto> getYear(String year, String email) {
+        return boardMapper.getYear(year, email);
     }
 }

@@ -3,12 +3,12 @@ import { ResponsiveBar } from "@nivo/bar";
 import axios from "axios";
 
 const YearLine = (props) => {
-  const { selectYear } = props;
+  const { selectYear, fontChange, currentUser } = props;
   const [yearData, setYearData] = useState();
 
   useEffect(() => {
     axios
-      .get(`board/getYear/${selectYear}`)
+      .get(`board/getYear/${selectYear}/${currentUser?.email}`)
       .then((res) => {
         setYearData(res.data);
       })
@@ -62,6 +62,11 @@ const YearLine = (props) => {
         // custom
         margin={{ top: 50, right: 130, bottom: 50, left: 60 }}
         padding={0.3}
+        theme={{
+          fontFamily : `${fontChange}`,
+          textColor : "#333333",
+          fontSize: 14,
+      }}
         colors={color.map((c) => c.color)}
         labelTextColor={{
           from: "color",

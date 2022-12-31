@@ -10,7 +10,7 @@ import { Form, Button } from "react-bootstrap";
 import CompletModal from "../common/CommonModal";
 
 const Write = (props) => {
-  const { currentUser } = props;
+  const { currentUser, fontChange } = props;
   const location = useLocation();
   const emojiId = location.state.data;
   const selectDate = location.state.date;
@@ -163,6 +163,7 @@ const Write = (props) => {
         </div>
       </Form>
       <CompletModal
+        fontChange={fontChange}
         currentUser={currentUser}
         diary_id={diary_id}
         show={modalActive}

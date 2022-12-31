@@ -11,7 +11,7 @@ import axios from "axios";
 import "./write.scss";
 
 const Read = (props) => {
-  const {currentUser} = props;
+  const {currentUser, fontChange} = props;
   const { diary_id } = useParams();
   const [board, setBoard] = useState();
   const [ modalActive, setModalActive] = useState();
@@ -80,6 +80,7 @@ const Read = (props) => {
       state={"Success"}
       show ={modalActive}
       hide={()=>setModalActive(false)}
+      fontChange={fontChange}
       contents={"삭제되었습니다."}
       />
     </div>

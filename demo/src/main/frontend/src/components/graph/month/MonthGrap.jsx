@@ -5,7 +5,7 @@ import MonthLine from "./MonthLine";
 import MoodProgressBar from "../MoodProgressBar";
 
 const MonthGrap = (props) => {
-    const {currentUser} =props;
+    const {currentUser, fontChange} =props;
     const today = new Date();
     const thisMonth = today.getMonth()+1;
     
@@ -27,6 +27,7 @@ const MonthGrap = (props) => {
         <MonthLine 
         selectMonth= {selectMonth ? selectMonth : thisMonth}
         currentUser={currentUser}
+        fontChange= {fontChange}
         />
         <MoodProgressBar
          selectDay= {selectMonth ? selectMonth : thisMonth}

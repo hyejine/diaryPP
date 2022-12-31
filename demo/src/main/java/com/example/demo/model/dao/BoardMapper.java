@@ -28,7 +28,7 @@ public interface BoardMapper {
 
     public List<DiaryDto> getYearProgress(DiaryDto data);
 
-    public List<DiaryDto> getYear(String year);
+    public List<DiaryDto> getYear(@Param("diary_date") String year, @Param("user_email") String email);
 
     // public List<DiaryDto> getMonthMoodGrap(String sendFormatDate);
 

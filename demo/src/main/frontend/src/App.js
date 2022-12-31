@@ -49,7 +49,6 @@ function App() {
 console.log(fontChange);
   return (
     <div className="allPage " style={{fontFamily: `${fontChange}`}}>
-      {/* currentUser ? fontChange ? `${fontChange}` : currentUser.font ? `${currentUser.font}`:'DungGeunMo' :'DungGeunMo'}}> */}
       {/* style={ backColor ? { background: `${backColor}`, fontFamily: `${fontChange}` } : backImage ? { background: `url(${backImage})`, fontFamily: `${fontChange}`, backgroundSize: '30%' } : { background: '#fdd8ed', backgroundSize: '30%', fontFamily: `${fontChange}` }} */}
     <BrowserRouter>
       <Routes>
@@ -57,14 +56,14 @@ console.log(fontChange);
       <Route path="/" element={<CalendarCom />} />
      </Route>
      <Route element={<LoginLayout/>}>
-     <Route path="/user/login" element={<Login/>}/>
-      <Route path="/auth/signUp" element={<Regist/>}/>  
+     <Route path="/user/login" element={<Login fontChange ={fontChange}/>}/>
+      <Route path="/auth/signUp" element={<Regist fontChange={fontChange}/>}/>  
      </Route>
-     <Route element={<BoardLayout setBackColor ={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange} fontChange={fontChange} currentUser={currentUser}/>}>
-      <Route path="/board/write" element={<Write currentUser={currentUser}/>}/>
-      <Route path="/board/read/:diary_id" element={<Read currentUser={currentUser}/>}/> 
-      <Route path="/board/edit/:diary_id" element={<Edit currentUser={currentUser}/>}/> 
-      <Route path="/contactUs" element={<ServiceCenter currentUser={currentUser}/>}/> 
+     <Route element={<BoardLayout setBackColor ={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange} fontChange={fontChange} />}>
+      <Route path="/board/write" element={<Write currentUser={currentUser} fontChange={fontChange}/>}/>
+      <Route path="/board/read/:diary_id" element={<Read currentUser={currentUser} fontChange={fontChange}/>}/> 
+      <Route path="/board/edit/:diary_id" element={<Edit currentUser={currentUser} fontChange={fontChange}/>}/> 
+      <Route path="/contactUs" element={<ServiceCenter currentUser={currentUser} fontChange={fontChange}/>}/> 
       </Route>
       </Routes>
     </BrowserRouter>

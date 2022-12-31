@@ -7,7 +7,7 @@ import WebInfo from "./WebInfo";
 import "./serviceCenter.scss";
 
 const ServiceCenter = (props) => {
-  const {currentUser} = props;
+  const {currentUser, fontChange} = props;
 
 
   return (
@@ -29,7 +29,7 @@ const ServiceCenter = (props) => {
             <Faq />
           </Tab>
           <Tab eventKey="문의하기" title="문의하기">
-            <ContactUs />
+            <ContactUs fontChange={fontChange}/>
           </Tab>
           <Tab eventKey="웹정보" title="웹 정보">
             <WebInfo />

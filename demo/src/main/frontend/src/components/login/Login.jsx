@@ -14,7 +14,8 @@ import AuthenticationService from "./AuthenticationService";
 import { useNavigate } from "react-router-dom";
 import FindUserModal from "./findUser/FindUserModal";
 
-const Login = () => {
+const Login = (props) => {
+  const {fontChange} =props;
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [vibration, setVibration] = useState(false);
   const dispatch = useDispatch();
@@ -306,6 +307,7 @@ const Login = () => {
         </div>
       </div>*/}
       <FindUserModal
+      fontChange={fontChange}
       state={"비밀번호 찾기"}
       show ={modalActive}
       hide ={setModalActive}

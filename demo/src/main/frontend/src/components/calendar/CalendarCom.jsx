@@ -12,7 +12,7 @@ import { Button } from "react-bootstrap";
 import LoginModal from '../common/CommonModal';
 
 const CalendarCom = (props) => {
-  const {currentUser} = props; 
+  const {currentUser, fontChange} = props; 
   const [modalOpen, setModalOpen] = useState(false);
   const [selectDate, setSelectDate] = useState();
   const [calerdarData, setCalerdarData] = useState();
@@ -98,6 +98,7 @@ const CalendarCom = (props) => {
       url ="login"
       />
       <SelectEmojiModal
+      fontChange={fontChange}
       show={modalOpen}
       currentUser={currentUser}
       state="기분을 선택하세요"

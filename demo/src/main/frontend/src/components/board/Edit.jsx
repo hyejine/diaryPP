@@ -9,7 +9,7 @@ import CompletModal from "../common/CommonModal";
 import axios from "axios";
 
 const Edit = (props) => {
-  const { currentUser } = props;
+  const { currentUser, fontChange } = props;
   const { diary_id } = useParams();
   const [diaryData, setDiaryData] = useState();
   const [modalOpen, setModalOpen] = useState(false);
@@ -209,6 +209,7 @@ const Edit = (props) => {
         show={modalOpen}
         clickEmoji={emojiId}
         setClickEmoji={setEmojiId}
+        fontChange={fontChange}
         hide={() => setModalOpen(false)}
       />
       <CompletModal
@@ -217,6 +218,7 @@ const Edit = (props) => {
         diary_id={diary_id}
         show={modalActive}
         hide={() => setModalActive(false)}
+        fontChange={fontChange}
         contents="수정이 완료되었습니다."
       />
     </div>

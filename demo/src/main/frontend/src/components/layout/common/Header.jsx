@@ -17,7 +17,7 @@ import "./header.scss";
 import axios from "axios";
 
 const Header = (props) => {
-  const {userCustom, currentUser, setBackColor, setBackImage } = props;
+  const {userCustom, currentUser, setBackColor, setBackImage, fontChange } = props;
   const [modalActive, setModalActive] = useState(false);
   const [fontModal, setFontModal] = useState(false);
   const dispatch = useDispatch();
@@ -170,6 +170,7 @@ const Header = (props) => {
       </div>
       </div>
       <FontModal
+      fontChange={fontChange}
       currentUser ={currentUser}
        show={fontModal}
        state={'Success'}
@@ -177,6 +178,7 @@ const Header = (props) => {
        hide={() => setFontModal(false)}
        />
       <BackgroundModal
+      fontChange={fontChange}
       currentUser ={currentUser}
         show={modalActive}
         state={'Change BackGround'}

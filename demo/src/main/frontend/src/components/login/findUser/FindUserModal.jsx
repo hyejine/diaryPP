@@ -6,7 +6,7 @@ import ResetPw from "./ResetPw";
 import axios from "axios";
 
 const FindUserModal = (props) => {
-    const { show, hide, state } = props;
+    const { show, hide, state, fontChange } = props;
     const { resetField, register, handleSubmit, formState: { errors } } = useForm({ mode: "onChange", defaultValues:{user_email : ""}});
     const [vibration, setVibration] = useState(false);
     const [ noId, setNoId ] = useState(false);
@@ -42,7 +42,7 @@ const FindUserModal = (props) => {
 
     return (
         <Modal size="lg" show={show} centered id="modalPage" onHide={hide}>
-            <Modal.Body className='modalWrap'>
+            <Modal.Body className='modalWrap' style={{fontFamily : `${fontChange}` }}>
             <div className='title'>
                     <span>{ resetPw ? "비밀번호 변경" : state }</span>
                     <div className='headerButton'>

@@ -4,7 +4,8 @@ import axios from "axios";
 import CompletModal from "../../common/CommonModal";
 import './regist.scss';
 
-const Regist = () => {
+const Regist = (props) => {
+  const {fontChange}={fontChange}
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [vaild, setVaild] = useState();
   const [vibration, setVibration] = useState(false);
@@ -161,6 +162,7 @@ const Regist = () => {
         </div>
       </div>
       <CompletModal
+      fontChange={fontChange}
         state={"Success"}
         show={modalActive}
         hide={() => setModalActive(false)}

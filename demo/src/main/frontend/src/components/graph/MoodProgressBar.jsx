@@ -11,7 +11,6 @@ const MoodProgressBar = (props) => {
         diary_date: selectDay,
         user_email : currentUser.email
       }
-      console.log(data.diary_date, currentUser.email);
       axios
         .post(`/board/getMonthProgress`, data)
         .then((res) => {
@@ -20,7 +19,6 @@ const MoodProgressBar = (props) => {
         .catch((error) => console.log(error));
     }, [selectDay]);
 
-    console.log(emojiCount)
     return (
       <div>
         <div className="moodTitle">[ 기분 분포 ]</div>
