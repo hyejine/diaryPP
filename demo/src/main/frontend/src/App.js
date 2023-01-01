@@ -19,18 +19,15 @@ function App() {
   const currentUser = useSelector(state => state.currentUser);
   const userCustom = useSelector(state => state.userCustom);
   const dispatch = useDispatch();
-  const [backColor, setBackColor ] = useState();
+  const [backColor, setBackColor ] = useState('#FFE99D');
   const [backImage, setBackImage ] = useState();
   const [fontChange, setFontChange ] = useState();
   
-  console.log("currentUser", currentUser);
-  console.log("currentUser:",currentUser?.font, "fontChange: ",fontChange);
-  console.log("userCustom", userCustom, "userCustom.font", userCustom.font);
   useEffect(()=>{
     if(currentUser?.email){
       console.log("로그인 됨", currentUser.email);
       if(userCustom.font){
-        console.log("폰트변경함", userCustom.font);
+        console.log("폰트변경", userCustom.font );
         setFontChange(userCustom.font);
       } 
       else if(currentUser.font !== undefined){
@@ -44,15 +41,34 @@ function App() {
       console.log("로그인 안됨");
       setFontChange('DungGeunMo');
     }
-  },[currentUser, userCustom])
+  },[currentUser, userCustom, backColor, backImage]); 
+console.log(backColor, backImage);
+  // useEffect(()=>{
+  //   if(currentUser?.email){
+  //     console.log("로그인 됨", currentUser.email);
+  //   if (userCustom.backColor !== undefined || userCustom.backImage !== undefined){
+  //     console.log(" 배경변경", userCustom.background);
+  //     setBackColor(userCustom.backColor);
+  //     setBackImage(userCustom.backImage);
+  //   }       else if(currentUser.background !== undefined ){
+  //     console.log("사용자 배경 존재", currentUser.background);
+  //     // setFontChange(currentUser.font);
+  //   } else {
+  //     console.log("사용자 배경, 배경 변경 안함");
+  //     setBackColor('#FFE99D');
+  //   }
+  //  } else {
+  //     console.log("로그인 안됨");
+  //     setBackColor('#FFE99D');
+  //   }
+  // },[currentUser, userCustom])
 
-console.log(fontChange);
   return (
-    <div className="allPage " style={{fontFamily: `${fontChange}`}}>
+    <div className="allPage " style={ backImage ? {background: `url(${backImage})`, fontFamily: `${fontChange}`} : { background: `${backColor}`, fontFamily: `${fontChange}` } }>
       {/* style={ backColor ? { background: `${backColor}`, fontFamily: `${fontChange}` } : backImage ? { background: `url(${backImage})`, fontFamily: `${fontChange}`, backgroundSize: '30%' } : { background: '#fdd8ed', backgroundSize: '30%', fontFamily: `${fontChange}` }} */}
     <BrowserRouter>
       <Routes>
-      <Route element={<MainLayout setBackColor ={setBackColor} setBackImage={setBackImage} fontChange={fontChange} currentUser={currentUser} userCustom ={userCustom} />}>
+      <Route element={<MainLayout fontChange={fontChange} currentUser={currentUser} userCustom ={userCustom} />}>
       <Route path="/" element={<CalendarCom />} />
      </Route>
      <Route element={<LoginLayout/>}>
