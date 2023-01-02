@@ -68,14 +68,14 @@ console.log(backColor, backImage);
       {/* style={ backColor ? { background: `${backColor}`, fontFamily: `${fontChange}` } : backImage ? { background: `url(${backImage})`, fontFamily: `${fontChange}`, backgroundSize: '30%' } : { background: '#fdd8ed', backgroundSize: '30%', fontFamily: `${fontChange}` }} */}
     <BrowserRouter>
       <Routes>
-      <Route element={<MainLayout fontChange={fontChange} currentUser={currentUser} userCustom ={userCustom} />}>
+      <Route element={<MainLayout setBackColor={setBackColor} setBackImage={setBackImage} fontChange={fontChange} currentUser={currentUser} userCustom ={userCustom} />}>
       <Route path="/" element={<CalendarCom />} />
      </Route>
      <Route element={<LoginLayout/>}>
      <Route path="/user/login" element={<Login fontChange ={fontChange}/>}/>
       <Route path="/auth/signUp" element={<Regist fontChange={fontChange}/>}/>  
      </Route>
-     <Route element={<BoardLayout setBackColor ={setBackColor} setBackImage={setBackImage} setFontChange={setFontChange} fontChange={fontChange} />}>
+     <Route element={<BoardLayout setBackColor ={setBackColor} setBackImage={setBackImage} currentUser={currentUser}/>}>
       <Route path="/board/write" element={<Write currentUser={currentUser} fontChange={fontChange}/>}/>
       <Route path="/board/read/:diary_id" element={<Read currentUser={currentUser} fontChange={fontChange}/>}/> 
       <Route path="/board/edit/:diary_id" element={<Edit currentUser={currentUser} fontChange={fontChange}/>}/> 

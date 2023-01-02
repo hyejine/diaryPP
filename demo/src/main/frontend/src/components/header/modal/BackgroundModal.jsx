@@ -26,26 +26,31 @@ const BackgroundModal = (props) => {
     const input = document.createElement("input");
     input.setAttribute("type", "file");   // input type을 file로 바꾼다. 
     input.setAttribute("accept", "image/*");   // input에 허용되는 파일 
-    input.click();
+    // input.click();
 
-    input.onchange = async () => {
-      const file = input.files;
-      const formData = new FormData();
+    console.log(input);
+    console.log(input.click());
 
-      if (file) { // 파일이 있다면 폼 데이터에 추가 
-        formData.append("multipartFiles", file[0]);
-      }
+    // input.onchange = async () => {
+    //   const file = input.files;
+    //   const formData = new FormData();
 
-      // file 데이터 담아서 서버에 전달하여 이미지 업로드
-      const res = await axios.post('/board/register/imageUpload', formData);
-      console.log(res.data);
-      setBackImage(res.data);
-      setBackColor(undefined);
-    }
+    //   if (file) { // 파일이 있다면 폼 데이터에 추가 
+    //     formData.append("multipartFiles", file[0]);
+    //   }
+
+    //   // file 데이터 담아서 서버에 전달하여 이미지 업로드
+    //   const res = await axios.post('/board/register/imageUpload', formData);
+    //   console.log(res.data);
+    //   setBackImage(res.data);
+    //   setBackColor(undefined);
+
+    //   console.log(file);
+    //   console.log(formData.append("multipartFiles", file[0]));
+    // }
   }
 
   return (
-    // <div style={{ background : `url("http://localhost:8080/board/getImage/16659625281776251/jpg")`  }}>
     <Modal show={show} size="lg" centered id="modalPage" onHide={hide}>
       <Modal.Body className='modalWrap' style={{fontFamily: `${fontChange}`}}>
         <div className='title'>

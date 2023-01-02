@@ -1,6 +1,5 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-import { Button } from "@mui/material";
 import { AccountCircle } from "@mui/icons-material";
 import { useState } from "react";
 import BackgroundModal from "../../header/modal/BackgroundModal";
@@ -17,13 +16,13 @@ import "./header.scss";
 import axios from "axios";
 
 const Header = (props) => {
-  const {userCustom, currentUser, setBackColor, setBackImage, fontChange } = props;
+  const { userCustom, currentUser, setBackColor, setBackImage, fontChange } = props;
   const [modalActive, setModalActive] = useState(false);
   const [fontModal, setFontModal] = useState(false);
   const dispatch = useDispatch();
 
-  const { t }  = useTranslation(['common'])
-    
+  const { t } = useTranslation(['common'])
+
   const onLanguageC = (v) => {
     i18n.changeLanguage(v.target.value)
   }
@@ -48,9 +47,9 @@ const Header = (props) => {
   ];
 
   const chageFont = (value) => {
-    const data ={
-      font : value.target.value
-    } 
+    const data = {
+      font: value.target.value
+    }
     dispatch(setCustom(data));
   };
 
@@ -58,8 +57,8 @@ const Header = (props) => {
     const data = {
       user_email: currentUser.email,
       custom_font: userCustom.font,
-      user_id : currentUser.id,
-      user_name : currentUser.name
+      user_id: currentUser.id,
+      user_name: currentUser.name
     };
     axios
       .post(`/custom/postFont`, data)
@@ -70,21 +69,16 @@ const Header = (props) => {
         dispatch(loginUser(data));
         dispatch(clearCutosm(userCustom));
       })
-      .catch((err) => {console.log(err);
+      .catch((err) => {
+        console.log(err);
         setFontModal(false);
       });
   };
 
-  const onLogout =()=> {
+  const onLogout = () => {
     dispatch(clearUser(currentUser));
     dispatch(clearCutosm(userCustom));
   }
-  const [test, setTest] = useState(false);
-
-  const clickDropdown = ()=>{
-    setTest(!test);
-  }
-  // window.close(dispatch(clearUser(currentUser)));
 
   return (
     <div className="header" >
@@ -92,94 +86,86 @@ const Header = (props) => {
         <span className="logo">D,I,Y Diary</span>
       </Link>
       <div className="menuWrap">
-      <div className="customMenu">
-      {currentUser?.email ? 
-        <Dropdown autoClose="outside">
-          <Dropdown.Toggle className="dropdownTitle">
-            <span>
-              {currentUser?.image ? currentUser?.image : <AccountCircle/>} <span className="userName">{currentUser?.name}</span>
-            </span>
-          </Dropdown.Toggle>
-          <Dropdown.Menu style={{ width: 263 }} className="dropdownMenu">
-            <Dropdown.Item>
-              <span> Language </span>
-              <div style={{ display: "flex" }} className="dropdownSelect">
-                <Form.Select className="menuFont" onChange={(v)=>onLanguageC(v)}>
-                  <option value="fontSelect" className="menuFont">
-                    언어선택
-                  </option>
-                  <option value="ko" className="menuFont">
-                    Korea
-                  </option>
-                  <option value="en" className="menuFont">
-                    Engilsh
-                  </option>
-                  <option value="jp" className="menuFont">
-                    Japan
-                  </option>
-                </Form.Select>
-              </div>
-            </Dropdown.Item>
-            <Dropdown.Item>
-              <span> Font </span>
-              <div style={{ display: "flex" }} className="dropdownSelect">
-                <Form.Select
-                  onChange={(s) => {
-                    chageFont(s);
-                  }}
-                  className="menuFont"
-                >
-                  <option value="fontSelect" className="menuFont">
-                    글꼴선택                  </option>
-                  {fontStyle?.map((v) => (
-                    <option
-                      value={v.value}
-                      key={v.fontStyle}
-                      style={{ fontFamily: `${v.value}` }}
+        <div className="customMenu">
+          {currentUser?.email ?
+            <Dropdown autoClose="outside">
+              <Dropdown.Toggle className="dropdownTitle">
+                <span>
+                  {currentUser?.image ? currentUser?.image : <AccountCircle />} <span className="userName">{currentUser?.name}</span>
+                </span>
+              </Dropdown.Toggle>
+              <Dropdown.Menu style={{ width: 263 }} className="dropdownMenu">
+                <Dropdown.Item>
+                  <span> Language </span>
+                  <div style={{ display: "flex" }} className="dropdownSelect">
+                    <Form.Select className="menuFont" onChange={(v) => onLanguageC(v)}>
+                      <option value="fontSelect" className="menuFont">
+                        언어선택
+                      </option>
+                      <option value="ko" className="menuFont">
+                        Korea
+                      </option>
+                      <option value="en" className="menuFont">
+                        Engilsh
+                      </option>
+                      <option value="jp" className="menuFont">
+                        Japan
+                      </option>
+                    </Form.Select>
+                  </div>
+                </Dropdown.Item>
+                <Dropdown.Item>
+                  <span> Font </span>
+                  <div style={{ display: "flex" }} className="dropdownSelect">
+                    <Form.Select
+                      onChange={(s) => {
+                        chageFont(s);
+                      }}
+                      className="menuFont"
                     >
-                      {v.fontStyle}                    </option>
-                  ))}
-                </Form.Select>
-                <button className="fontB" onClick={saveFont}>
-                  저장{" "}
-                </button>
-              </div>
-            </Dropdown.Item>
-            <Dropdown.Item onClick={onBackgroundChg} className="dropdownSelect">
-              Background Color
-            </Dropdown.Item>
-            <Dropdown.Item onClick={onLogout} className="dropdownSelect"> Logout </Dropdown.Item>
-            {/* <Button
-              variant="contained"
-              color="success"
-              href="/emoji"
-              className="emojiButton"
-            >
-              프리미엄 이모지 보러가기
-            </Button> */}
-          </Dropdown.Menu>
-        </Dropdown>
-        : <div className="login"><Link to="/user/login">Login</Link></div>}  
+                      <option value="fontSelect" className="menuFont">
+                        글꼴선택                  </option>
+                      {fontStyle?.map((v) => (
+                        <option
+                          value={v.value}
+                          key={v.fontStyle}
+                          style={{ fontFamily: `${v.value}` }}
+                        >
+                          {v.fontStyle}                    </option>
+                      ))}
+                    </Form.Select>
+                    <button className="fontB" onClick={saveFont}>
+                      저장
+                    </button>
+                  </div>
+                </Dropdown.Item>
+                <Dropdown.Item onClick={onBackgroundChg} className="dropdownSelect">
+                  Background Color
+                </Dropdown.Item>
+                <Dropdown.Item onClick={onLogout} className="dropdownSelect"> Logout </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            : <div className="login"><Link to="/user/login">Login</Link></div>}
         </div>
         <div>
-        <Dropdown autoClose="outside">
-          <Dropdown.Toggle href="/ContactUs" >
-            <span>고객센터</span>
-          </Dropdown.Toggle>
-        </Dropdown>
-      </div>
+          <Dropdown autoClose="outside">
+            <Dropdown.Toggle href="/ContactUs" >
+              <span>고객센터</span>
+            </Dropdown.Toggle>
+          </Dropdown>
+        </div>
       </div>
       <FontModal
-      fontChange={fontChange}
-      currentUser ={currentUser}
-       show={fontModal}
-       state={'Success'}
-       contents ={"🍀 저장되었습니다."}
-       hide={() => setFontModal(false)}
-       />
+        fontChange={fontChange}
+        currentUser={currentUser}
+        show={fontModal}
+        state={'Success'}
+        contents={"🍀 저장되었습니다."}
+        hide={() => setFontModal(false)}
+      />
       <BackgroundModal
-      fontChange={fontChange}
-      currentUser ={currentUser}
+        fontChange={fontChange}
+        currentUser={currentUser}
         show={modalActive}
         state={'Change BackGround'}
         setBackColor={setBackColor}
