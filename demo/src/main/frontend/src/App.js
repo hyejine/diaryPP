@@ -43,7 +43,7 @@ function App() {
     if(currentUser?.email){
       console.log("로그인 됨", currentUser.email);
     if (userCustom.backColor !== undefined || userCustom.backImage !== undefined){
-      console.log(" 배경변경", userCustom.background);
+      console.log(" 배경변경", userCustom);
       setBackColor(userCustom.backColor);
       setBackImage(userCustom.backImage);
     }       else if(currentUser.background !== undefined ){
