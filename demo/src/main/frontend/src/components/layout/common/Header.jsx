@@ -45,10 +45,12 @@ const Header = (props) => {
     { value: "KoPubWorld_Dotum", fontStyle: "KoPub돋움" },
     { value: "KoPubWorld_Batang", fontStyle: "KoPub바탕" },
   ];
-
+  console.log("header48:",userCustom);
   const chageFont = (value) => {
     const data = {
-      font: value.target.value
+      font: value.target.value,
+      backColor: userCustom.backColor,
+      backImage: userCustom.backImage
     }
     dispatch(setCustom(data));
   };
@@ -63,8 +65,6 @@ const Header = (props) => {
     axios
       .post(`/custom/postFont`, data)
       .then((res) => {
-        console.log(res);
-        console.log(data);
         setFontModal(true);
         dispatch(loginUser(data));
         dispatch(clearCutosm(userCustom));
@@ -78,6 +78,7 @@ const Header = (props) => {
   const onLogout = () => {
     dispatch(clearUser(currentUser));
     dispatch(clearCutosm(userCustom));
+    // setBackColor('#FFE99D');
   }
 
   return (
@@ -164,6 +165,7 @@ const Header = (props) => {
         hide={() => setFontModal(false)}
       />
       <BackgroundModal
+      userCustom={userCustom}
         fontChange={fontChange}
         currentUser={currentUser}
         show={modalActive}

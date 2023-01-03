@@ -4,20 +4,23 @@ export const userCustom = createSlice({
     name: "userCustom",
     initialState: {
         font: undefined,
-        background: undefined
+        backColor: undefined,
+        backImage: undefined
     },
     reducers: {
         // login 후 사용자 설정 
         setCustom: (state, action) => {
             // name, id에 API 값 받아오기
             state.font = action.payload.font;
-            state.background = action.payload.background;
+            state.backColor = action.payload.backColor;
+            state.backImage = action.payload.backImage;
             return state;
         },
         // logout 시 
         clearCutosm : (state) => {
             state.font = undefined;
-            state.background = undefined;
+            state.backColor = undefined;
+            state.backImage = undefined;
             return state;
         },
     },

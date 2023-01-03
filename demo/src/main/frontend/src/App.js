@@ -10,15 +10,12 @@ import MainLayout from "./components/layout/MainLayout";
 import BoardLayout from "./components/layout/BoardLayout";
 import Read from "./components/board/Read";
 import CalendarCom from "./components/calendar/CalendarCom";
-import defaultBg from './resource/image/skyBg.jpg'
 import ServiceCenter from "./components/serviceCenter/ServiceCenter";
 import LoginLayout from "./components/layout/LoginLayout";
-import { useDispatch } from "react-redux";
-import { setCustom } from "./reducer/userSlice";
+
 function App() {
   const currentUser = useSelector(state => state.currentUser);
   const userCustom = useSelector(state => state.userCustom);
-  const dispatch = useDispatch();
   const [backColor, setBackColor ] = useState('#FFE99D');
   const [backImage, setBackImage ] = useState();
   const [fontChange, setFontChange ] = useState();
@@ -41,28 +38,28 @@ function App() {
       console.log("로그인 안됨");
       setFontChange('DungGeunMo');
     }
-  },[currentUser, userCustom, backColor, backImage]); 
-console.log(backColor, backImage);
-  // useEffect(()=>{
-  //   if(currentUser?.email){
-  //     console.log("로그인 됨", currentUser.email);
-  //   if (userCustom.backColor !== undefined || userCustom.backImage !== undefined){
-  //     console.log(" 배경변경", userCustom.background);
-  //     setBackColor(userCustom.backColor);
-  //     setBackImage(userCustom.backImage);
-  //   }       else if(currentUser.background !== undefined ){
-  //     console.log("사용자 배경 존재", currentUser.background);
-  //     // setFontChange(currentUser.font);
-  //   } else {
-  //     console.log("사용자 배경, 배경 변경 안함");
-  //     setBackColor('#FFE99D');
-  //   }
-  //  } else {
-  //     console.log("로그인 안됨");
-  //     setBackColor('#FFE99D');
-  //   }
-  // },[currentUser, userCustom])
+  },[currentUser, userCustom]); 
 
+  useEffect(()=>{
+    if(currentUser?.email){
+      console.log("로그인 됨", currentUser.email);
+    if (userCustom.backColor !== undefined || userCustom.backImage !== undefined){
+      console.log(" 배경변경", userCustom.background);
+      setBackColor(userCustom.backColor);
+      setBackImage(userCustom.backImage);
+    }       else if(currentUser.background !== undefined ){
+      console.log("사용자 배경 존재", currentUser.background);
+      // setFontChange(currentUser.font);
+    } else {
+      console.log("사용자 배경, 배경 변경 안함");
+      setBackColor('#FFE99D');
+    }
+   } else {
+      console.log("로그인 안됨");
+      setBackColor('#FFE99D');
+    }
+  },[currentUser, userCustom, backColor, backImage])
+console.log(backColor);
   return (
     <div className="allPage " style={ backImage ? {background: `url(${backImage})`, fontFamily: `${fontChange}`} : { background: `${backColor}`, fontFamily: `${fontChange}` } }>
       {/* style={ backColor ? { background: `${backColor}`, fontFamily: `${fontChange}` } : backImage ? { background: `url(${backImage})`, fontFamily: `${fontChange}`, backgroundSize: '30%' } : { background: '#fdd8ed', backgroundSize: '30%', fontFamily: `${fontChange}` }} */}
