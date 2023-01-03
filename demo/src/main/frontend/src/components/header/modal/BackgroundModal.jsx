@@ -12,13 +12,16 @@ const BackgroundModal = (props) => {
   const { show, hide, setBackColor, setBackImage, state, currentUser, fontChange, userCustom } = props;
   const [modalActive, setModalActive] = useState();
   const dispatch = useDispatch();
+  const [color, setColor] = useState();
+  const [image, setImage] = useState();
   const onSubmit = (value) => {
+    value.preventDefault();
     // console.log(value.target.backColor.value);
-    // hide();
-    console.log("dff");
-    setModalActive(true);
+    // console.log(value.target.backImage.value);
+console.log(color, image);
+    // setModalActive(true);
   }
-  console.log(userCustom)
+
   const onChangeColor = (value) => {
     const data = {
       font: userCustom.font,
@@ -26,6 +29,9 @@ const BackgroundModal = (props) => {
       backImage: undefined
     }
     dispatch(setCustom(data));
+    setImage(undefined);
+    setColor(value.target.value);
+
     // setBackColor(value.target.value);
     // setBackImage(undefined);
   }
@@ -50,8 +56,8 @@ const BackgroundModal = (props) => {
           backImage: res.data
         }
         dispatch(setCustom(data));
-        // setBackImage(res.data);
-        // setBackColor(undefined);
+        setColor(undefined);
+        setImage(res.data);
       })
       .catch(err => console.log(err));
   }
@@ -67,15 +73,15 @@ const BackgroundModal = (props) => {
           </div>
         </div>
         <div className="bgcontent">
-          <Form>
+          <Form onSubmit={onSubmit}>
             <Form.Group controlId="formFileMultiple">
               <span className='controlTitle'>사진 업로드</span>
-              <Form.Control type="file" multiple onChange={onChangePic} className="controlContent bgPic" accept='image/*' />
+              <Form.Control id="backImage" type="file" multiple onChange={onChangePic} className="controlContent bgPic" accept='image/*' />
             </Form.Group>
             <span className='controlTitle'>색상 선택</span>
             <Form.Control type="color" id="backColor" defaultValue="#fde5f3" title="Choose your color" onChange={onChangeColor} className="controlContent" />
             <div className='closeBDiv'>
-              <Button className="closeButton" onClick={onSubmit}>저장</Button>
+              <Button className="closeButton" type="submit" >저장</Button>
               <Button onClick={hide} className="closeButton">닫기</Button>
             </div>
           </Form>

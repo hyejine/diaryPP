@@ -10,6 +10,9 @@ export const userLogin = createSlice({
         name:undefined,
         phone:undefined,
         image:undefined,
+        font:undefined,
+        backColor:undefined,
+        backImage:undefined
         // isLoading: false, // optional
         // isLogin: null,
     },
@@ -24,6 +27,8 @@ export const userLogin = createSlice({
             state.phone = action.payload.phone;
             state.image = action.payload.image;
             state.font = action.payload.custom_font;
+            state.backColor = action.payload.backColor;
+            state.backImage = action.payload.backImage;
             // state 변화를 알림
             return state;
         },
@@ -37,6 +42,8 @@ export const userLogin = createSlice({
             state.phone = undefined;
             state.image = undefined;
             state.font= undefined;
+            state.backColor= undefined;
+            state.backImage= undefined;
             // state 변화를 알림
             return state;
         },

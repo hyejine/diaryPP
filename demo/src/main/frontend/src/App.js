@@ -22,23 +22,22 @@ function App() {
   
   useEffect(()=>{
     if(currentUser?.email){
-      console.log("로그인 됨", currentUser.email);
       if(userCustom.font){
-        console.log("폰트변경", userCustom.font );
         setFontChange(userCustom.font);
       } 
       else if(currentUser.font !== undefined){
-        console.log("사용자 폰트 존재", currentUser.font);
         setFontChange(currentUser.font);
       } else {
-        console.log("사용자 폰트, 폰트 변경 안함");
         setFontChange('DungGeunMo');
       }
     } else {
-      console.log("로그인 안됨");
       setFontChange('DungGeunMo');
     }
   },[currentUser, userCustom]); 
+
+  console.log(userCustom);
+  console.log(currentUser);
+
 
   useEffect(()=>{
     if(currentUser?.email){
@@ -53,16 +52,18 @@ function App() {
     } else {
       console.log("사용자 배경, 배경 변경 안함");
       setBackColor('#FFE99D');
+      setBackImage(userCustom.backImage);
     }
    } else {
       console.log("로그인 안됨");
       setBackColor('#FFE99D');
+      setBackImage(userCustom.backImage);
     }
   },[currentUser, userCustom, backColor, backImage])
-console.log(backColor);
+
   return (
     <div className="allPage " style={ backImage ? {background: `url(${backImage})`, fontFamily: `${fontChange}`} : { background: `${backColor}`, fontFamily: `${fontChange}` } }>
-      {/* style={ backColor ? { background: `${backColor}`, fontFamily: `${fontChange}` } : backImage ? { background: `url(${backImage})`, fontFamily: `${fontChange}`, backgroundSize: '30%' } : { background: '#fdd8ed', backgroundSize: '30%', fontFamily: `${fontChange}` }} */}
+    {/* backgroundSize: '30%'  */}
     <BrowserRouter>
       <Routes>
       <Route element={<MainLayout setBackColor={setBackColor} setBackImage={setBackImage} fontChange={fontChange} currentUser={currentUser} userCustom ={userCustom} />}>

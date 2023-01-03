@@ -45,7 +45,7 @@ const Header = (props) => {
     { value: "KoPubWorld_Dotum", fontStyle: "KoPub돋움" },
     { value: "KoPubWorld_Batang", fontStyle: "KoPub바탕" },
   ];
-  console.log("header48:",userCustom);
+
   const chageFont = (value) => {
     const data = {
       font: value.target.value,
@@ -125,14 +125,16 @@ const Header = (props) => {
                       className="menuFont"
                     >
                       <option value="fontSelect" className="menuFont">
-                        글꼴선택                  </option>
+                        글꼴선택                  
+                      </option>
                       {fontStyle?.map((v) => (
                         <option
                           value={v.value}
                           key={v.fontStyle}
                           style={{ fontFamily: `${v.value}` }}
                         >
-                          {v.fontStyle}                    </option>
+                          {v.fontStyle}                    
+                        </option>
                       ))}
                     </Form.Select>
                     <button className="fontB" onClick={saveFont}>
