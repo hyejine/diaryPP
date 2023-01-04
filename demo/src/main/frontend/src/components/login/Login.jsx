@@ -37,7 +37,6 @@ const Login = (props) => {
   const onSubmit = (value) => {
     axios.post("/user/login", value)
       .then((response) => {
-        console.log(response.data.accessToken)
         localStorage.setItem('Authorization', `Bearer ${response.data.accessToken}`);
         axios({
           method: "get",
@@ -55,8 +54,6 @@ const Login = (props) => {
                   custom_background: res.data.custom_background
                 }
                 dispatch(loginUser(value));
-                console.log(userInfo);
-                console.log(res);
               })
               .catch((err) => console.log(err));
           })

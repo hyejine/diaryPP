@@ -22,45 +22,40 @@ function App() {
   
   useEffect(()=>{
     if(currentUser?.email){
-      console.log("로그인 됨", currentUser.email);
+      // console.log("로그인 됨", currentUser.email);
       if(userCustom.font){
-        console.log(" 사용자가 폰트 바꿈", userCustom);
+        // console.log(" 사용자가 폰트 바꿈", userCustom);
         setFontChange(userCustom.font);
       } 
       else if(currentUser.font !== undefined && currentUser.font !== null){
-        console.log("사용자 폰트 존재", currentUser.font);
+        // console.log("사용자 폰트 존재", currentUser.font);
         setFontChange(currentUser.font);
       } else {
-        console.log("사용자 폰트, 폰트 변경 안함");
+        // console.log("사용자 폰트, 폰트 변경 안함");
         setFontChange('DungGeunMo');
       }
     } else {
-      console.log("로그인 안됨");
+      // console.log("로그인 안됨");
       setFontChange('DungGeunMo');
     }
   },[currentUser, userCustom]); 
 
-  console.log(userCustom);
-  console.log(currentUser);
-
-
   useEffect(()=>{
     if(currentUser?.email){
-      console.log("로그인 됨", currentUser.email);
     if (userCustom.backColor !== undefined || userCustom.backImage !== undefined){
-      console.log(" 배경변경", userCustom);
       setBackColor(userCustom.backColor);
       setBackImage(userCustom.backImage);
-    }       else if(currentUser.background !== undefined && currentUser.background !== null){
-      console.log("사용자 배경 존재", currentUser.background);
-      // setFontChange(currentUser.font);
+    } else if(currentUser.background !== undefined && currentUser.background !== null){
+      if(currentUser.background.includes('#')){
+        setBackColor(currentUser.background);
+      }else{
+        setBackImage(currentUser.background);
+      }
     } else {
-      console.log("사용자 배경, 배경 변경 안함");
       setBackColor('#FFE99D');
       setBackImage(userCustom.backImage);
     }
    } else {
-      console.log("로그인 안됨");
       setBackColor('#FFE99D');
       setBackImage(userCustom.backImage);
     }
@@ -78,7 +73,7 @@ function App() {
      <Route path="/user/login" element={<Login fontChange ={fontChange}/>}/>
       <Route path="/auth/signUp" element={<Regist fontChange={fontChange}/>}/>  
      </Route>
-     <Route element={<BoardLayout setBackColor ={setBackColor} setBackImage={setBackImage} currentUser={currentUser}/>}>
+     <Route element={<BoardLayout setBackColor ={setBackColor} setBackImage={setBackImage} currentUser={currentUser} userCustom={userCustom}/>}>
       <Route path="/board/write" element={<Write currentUser={currentUser} fontChange={fontChange}/>}/>
       <Route path="/board/read/:diary_id" element={<Read currentUser={currentUser} fontChange={fontChange}/>}/> 
       <Route path="/board/edit/:diary_id" element={<Edit currentUser={currentUser} fontChange={fontChange}/>}/> 

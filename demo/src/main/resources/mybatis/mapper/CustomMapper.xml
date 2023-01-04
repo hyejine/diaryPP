@@ -20,7 +20,7 @@
     </select>
 
     <update id ="saveBackground" parameterType="CustomEntity">
-        insert into connectdb.custom_table ( 
+        insert into custom_table ( 
             user_email, custom_background 
         ) 
         values (

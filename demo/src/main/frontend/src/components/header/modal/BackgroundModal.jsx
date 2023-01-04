@@ -4,12 +4,12 @@ import { Modal, Button, Form } from "react-bootstrap";
 import { Close, Minimize } from "@mui/icons-material";
 import BackgroundSave from "../../common/CommonModal";
 import { useDispatch } from "react-redux";
-import { setCustom, userCustom } from "../../../reducer/userSlice";
+import { setCustom } from "../../../reducer/userSlice";
 import axios from "axios";
 import '../../common/commonModal.scss'
 
 const BackgroundModal = (props) => {
-  const { show, hide, setBackColor, setBackImage, state, currentUser, fontChange, userCustom } = props;
+  const { show, hide, state, currentUser, fontChange, userCustom } = props;
   const [modalActive, setModalActive] = useState();
   const dispatch = useDispatch();
   const [ saveData, setSaveData ] = useState();
@@ -22,37 +22,43 @@ const BackgroundModal = (props) => {
     }
     dispatch(setCustom(data));
   }
-
+const [test, setTest] = useState();
   const onChangePic = (value) => {
     const file = value.target.files;
     const formData = new FormData();
 
     if (file) { // 파일이 있다면 폼 데이터에 추가 
       formData.append("multipartFiles", file[0]);
-      console.log(file);
-      console.log(value.files);
     }
     // file 데이터 담아서 서버에 전달하여 이미지 업로드
     axios.post('/board/register/imageUpload', formData)
       .then(res => {
-        console.log(res.data);
         const data = {
           font: userCustom.font,
           backColor: undefined,
           backImage: res.data
         }
         dispatch(setCustom(data));
+        setTest(true);
       })
-      .catch(err => console.log(err));
+      .catch(err => console.log(err));  
   }
-
+  // setTest(false);
+console.log(test);
   const onSubmit = (value) => {
     value.preventDefault();
     axios.post("/custom/saveBackground", saveData)
-    .then(res=>console.log(res))
+    .then(res=>{
+      setModalActive(true);
+    })
     .catch(err=>console.log(err))
-    // setModalActive(true);
   }
+
+  useEffect(()=>{
+    // if(onChangePic()){
+    //   console.log("이미지 로딩중");
+    // }
+  },[])
 
   useEffect(()=>{
     if(userCustom.backColor){
@@ -101,6 +107,7 @@ const BackgroundModal = (props) => {
         contents={"🍀 저장되었습니다."}
         hide={hide}
       />
+      {test ? <div>dfdfd</div>: <div>rr</div>}
     </Modal>
   );
 };
