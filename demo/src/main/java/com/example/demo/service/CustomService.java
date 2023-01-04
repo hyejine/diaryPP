@@ -42,6 +42,22 @@ public class CustomService implements ICustomService {
     }
 
     @Override
+    public void saveBackground(CustomEntity data) {
+        // System.out.println("===ServiceVAlue====" + data);
+        // if (customMapper.findUser(data.getUser_email())) {
+        // System.out.println("이미 아이디가 있는 경우 ");
+        // data.setCustom_font(data.getCustom_font());
+        // customMapper.updateBg(data);
+
+        // } else {
+        // System.out.println("아이디가 없는 경우 ");
+        // data.setUser_email(data.getUser_email());
+        // data.setCustom_font(data.getCustom_font());
+        customMapper.saveBackground(data);
+        // }
+    }
+
+    @Override
     public CustomEntity getUserCustom(String email) {
         System.out.println("===ServiceVAlue====" + email);
         return customMapper.getUserCustom(email);

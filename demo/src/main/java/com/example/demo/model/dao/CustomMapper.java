@@ -16,6 +16,8 @@ public interface CustomMapper {
 
     public void saveFont(CustomEntity value);
 
+    public void saveBackground(CustomEntity data);
+
     public CustomEntity getUserCustom(String email);
 
 }

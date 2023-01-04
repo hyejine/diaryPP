@@ -18,4 +18,17 @@
     <select id ="getUserCustom" resultType ="CustomEntity">
         SELECT * FROM custom_table where user_email= #{user_email}
     </select>
+
+    <update id ="saveBackground" parameterType="CustomEntity">
+        insert into connectdb.custom_table ( 
+            user_email, custom_background 
+        ) 
+        values (
+            #{user_email}, #{custom_background}
+        )
+        on duplicate key 
+        update 
+            user_email = #{user_email}, 
+            custom_background = #{custom_background}
+    </update>
 </mapper>

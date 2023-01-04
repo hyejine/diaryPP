@@ -22,15 +22,20 @@ function App() {
   
   useEffect(()=>{
     if(currentUser?.email){
+      console.log("로그인 됨", currentUser.email);
       if(userCustom.font){
+        console.log(" 사용자가 폰트 바꿈", userCustom);
         setFontChange(userCustom.font);
       } 
-      else if(currentUser.font !== undefined){
+      else if(currentUser.font !== undefined && currentUser.font !== null){
+        console.log("사용자 폰트 존재", currentUser.font);
         setFontChange(currentUser.font);
       } else {
+        console.log("사용자 폰트, 폰트 변경 안함");
         setFontChange('DungGeunMo');
       }
     } else {
+      console.log("로그인 안됨");
       setFontChange('DungGeunMo');
     }
   },[currentUser, userCustom]); 
@@ -46,7 +51,7 @@ function App() {
       console.log(" 배경변경", userCustom);
       setBackColor(userCustom.backColor);
       setBackImage(userCustom.backImage);
-    }       else if(currentUser.background !== undefined ){
+    }       else if(currentUser.background !== undefined && currentUser.background !== null){
       console.log("사용자 배경 존재", currentUser.background);
       // setFontChange(currentUser.font);
     } else {

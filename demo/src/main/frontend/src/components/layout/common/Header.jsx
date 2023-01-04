@@ -73,6 +73,7 @@ const Header = (props) => {
         console.log(err);
         setFontModal(false);
       });
+      console.log(data);
   };
 
   const onLogout = () => {

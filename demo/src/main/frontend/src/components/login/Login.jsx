@@ -51,9 +51,12 @@ const Login = (props) => {
                   user_id: userInfo.data.user_id,
                   user_email: userInfo.data.user_email,
                   user_name: userInfo.data.user_name,
-                  custom_font: res.data.custom_font
+                  custom_font: res.data.custom_font,
+                  custom_background: res.data.custom_background
                 }
                 dispatch(loginUser(value));
+                console.log(userInfo);
+                console.log(res);
               })
               .catch((err) => console.log(err));
           })

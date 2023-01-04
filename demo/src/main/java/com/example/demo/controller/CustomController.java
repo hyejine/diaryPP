@@ -28,13 +28,22 @@ public class CustomController {
 	 * @param custom_font
 	 * @return insert or update custom_font
 	 */
-
 	@PostMapping("/postFont")
 	public void postFont(@RequestBody CustomEntity data) {
 		System.out.println("======value====" + data);
 		customService.postFont(data);
-		// return "data";
-		// return customService.postFont(data);
+	}
+
+	/**
+	 * 배경 저장
+	 *
+	 * @param custom_background
+	 * @return insert or update custom_background
+	 */
+	@PostMapping("/saveBackground")
+	public void saveBackground(@RequestBody CustomEntity data) {
+		System.out.println(data);
+		customService.saveBackground(data);
 	}
 
 	@GetMapping("/getUserCustom/{email}")

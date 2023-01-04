@@ -12,15 +12,7 @@ const BackgroundModal = (props) => {
   const { show, hide, setBackColor, setBackImage, state, currentUser, fontChange, userCustom } = props;
   const [modalActive, setModalActive] = useState();
   const dispatch = useDispatch();
-  const [color, setColor] = useState();
-  const [image, setImage] = useState();
-  const onSubmit = (value) => {
-    value.preventDefault();
-    // console.log(value.target.backColor.value);
-    // console.log(value.target.backImage.value);
-console.log(color, image);
-    // setModalActive(true);
-  }
+  const [ saveData, setSaveData ] = useState();
 
   const onChangeColor = (value) => {
     const data = {
@@ -29,14 +21,9 @@ console.log(color, image);
       backImage: undefined
     }
     dispatch(setCustom(data));
-    setImage(undefined);
-    setColor(value.target.value);
-
-    // setBackColor(value.target.value);
-    // setBackImage(undefined);
   }
-  const onChangePic = (value) => {
 
+  const onChangePic = (value) => {
     const file = value.target.files;
     const formData = new FormData();
 
@@ -45,7 +32,6 @@ console.log(color, image);
       console.log(file);
       console.log(value.files);
     }
-
     // file 데이터 담아서 서버에 전달하여 이미지 업로드
     axios.post('/board/register/imageUpload', formData)
       .then(res => {
@@ -56,12 +42,33 @@ console.log(color, image);
           backImage: res.data
         }
         dispatch(setCustom(data));
-        setColor(undefined);
-        setImage(res.data);
       })
       .catch(err => console.log(err));
   }
 
+  const onSubmit = (value) => {
+    value.preventDefault();
+    axios.post("/custom/saveBackground", saveData)
+    .then(res=>console.log(res))
+    .catch(err=>console.log(err))
+    // setModalActive(true);
+  }
+
+  useEffect(()=>{
+    if(userCustom.backColor){
+      setSaveData({
+        user_email: currentUser.email,
+        custom_background: userCustom.backColor
+      })
+    } else if(userCustom.backImage){
+      setSaveData({
+        user_email: currentUser.email,
+        custom_background: userCustom.backImage
+      })
+    }
+  },[userCustom])
+  
+  
   return (
     <Modal show={show} size="lg" centered id="modalPage" onHide={hide}>
       <Modal.Body className='modalWrap' style={{ fontFamily: `${fontChange}` }}>
