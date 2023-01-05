@@ -59,9 +59,6 @@ public class BoardController {
 				baos.write(buffer, 0, length);
 			}
 
-			System.out.println("fis: " + fis);
-			System.out.println("fis: " + baos);
-
 			return new ResponseEntity<byte[]>(baos.toByteArray(), HttpStatus.OK);
 
 		} catch (IOException e) {

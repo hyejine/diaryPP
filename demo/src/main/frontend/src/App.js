@@ -62,7 +62,7 @@ function App() {
   },[currentUser, userCustom, backColor, backImage])
 
   return (
-    <div className="allPage " style={ backImage ? {background: `url(${backImage})`, fontFamily: `${fontChange}`} : { background: `${backColor}`, fontFamily: `${fontChange}` } }>
+    <div className="allPage " style={ backImage ? {background: `url(${backImage})`, fontFamily: `${fontChange}`} : { background: `${backColor}`, fontFamily: `${fontChange}` } }> 
     {/* backgroundSize: '30%'  */}
     <BrowserRouter>
       <Routes>

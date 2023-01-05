@@ -22,7 +22,7 @@ const BackgroundModal = (props) => {
     }
     dispatch(setCustom(data));
   }
-const [test, setTest] = useState();
+
   const onChangePic = (value) => {
     const file = value.target.files;
     const formData = new FormData();
@@ -39,12 +39,10 @@ const [test, setTest] = useState();
           backImage: res.data
         }
         dispatch(setCustom(data));
-        setTest(true);
       })
       .catch(err => console.log(err));  
   }
-  // setTest(false);
-console.log(test);
+
   const onSubmit = (value) => {
     value.preventDefault();
     axios.post("/custom/saveBackground", saveData)
@@ -53,12 +51,6 @@ console.log(test);
     })
     .catch(err=>console.log(err))
   }
-
-  useEffect(()=>{
-    // if(onChangePic()){
-    //   console.log("이미지 로딩중");
-    // }
-  },[])
 
   useEffect(()=>{
     if(userCustom.backColor){
@@ -73,7 +65,6 @@ console.log(test);
       })
     }
   },[userCustom])
-  
   
   return (
     <Modal show={show} size="lg" centered id="modalPage" onHide={hide}>
@@ -107,7 +98,6 @@ console.log(test);
         contents={"🍀 저장되었습니다."}
         hide={hide}
       />
-      {test ? <div>dfdfd</div>: <div>rr</div>}
     </Modal>
   );
 };

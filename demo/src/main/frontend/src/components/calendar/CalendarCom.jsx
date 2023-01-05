@@ -10,6 +10,7 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import LoginModal from '../common/CommonModal';
+import { current } from "@reduxjs/toolkit";
 
 const CalendarCom = (props) => {
   const {currentUser, fontChange} = props; 
@@ -43,11 +44,10 @@ const CalendarCom = (props) => {
 
     if (uniqueArr.includes(test)){
       setModalOpen(false);
-    }else if (currentUser?.email !== ""|| currentUser?.email !== undefined){
+    }else if (currentUser?.email !== "" && currentUser?.email !== undefined && currentUser?.email !== null){
         setSelectDate(info.date);
         setModalOpen(true);
-    } 
-    if (currentUser?.email === undefined){
+    } else{
       setModalActive(true);
     }
   };
@@ -66,7 +66,6 @@ const CalendarCom = (props) => {
 
   return (
     <div id="calendarPage"  >
-      {/*  */}
       <FullCalendar
         id="calendar"
         plugins={[dayGridPlugin, interactionPlugin]}

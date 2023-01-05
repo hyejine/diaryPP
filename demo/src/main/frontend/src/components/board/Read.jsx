@@ -27,6 +27,7 @@ const Read = (props) => {
     })
     .catch((err) => console.log(err));
   }, []);
+  
   console.log(currentUser); 
   const onDelete =(id)=>{
     axios.delete(`/board/deleteBoard/${id}`)

@@ -7,7 +7,6 @@ const YearGrap = (props) => {
     const {currentUser, fontChange} =props;
     const thisYear = date.getFullYear();
     const [yearList] = useState([]);
-    const [setYearList] = useState([]);
     const [selectYear, setSelectYear] = useState();
 
     // const defaultYear = (value)=>{
@@ -35,7 +34,7 @@ const YearGrap = (props) => {
     const uniqueArr = [...set];
 
     const changeYear = (value)=>{
-        setSelectYear(value.target.value)
+        setSelectYear(value.target.value);
     }
 
     useEffect(()=>{
