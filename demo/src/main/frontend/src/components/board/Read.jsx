@@ -68,7 +68,7 @@ const Read = (props) => {
           <div className="title">
           <span>제목 : {value.diary_title}</span>
           </div>
-          <div className="editContent" dangerouslySetInnerHTML={{ __html: value.diary_content }} />
+          <div className="editContent ql-editor" dangerouslySetInnerHTML={{ __html: value.diary_content }} />
           <div className="sendButtonWrap2">
           <Button className="sendButton" onClick={()=> navigate(`/board/edit/${value.diary_id}`)}>수정</Button>
           <Button className="sendButton" onClick={()=>onDelete(value.diary_id)}>삭제</Button>
