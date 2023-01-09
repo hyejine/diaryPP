@@ -15,7 +15,6 @@ const YearLine = (props) => {
       .catch((error) => console.log(error));
   }, [selectYear]);
 
-  console.log(selectYear);
   const color = [
     {
         color: "#c2a1da"

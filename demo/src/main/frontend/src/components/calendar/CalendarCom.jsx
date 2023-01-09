@@ -91,6 +91,7 @@ const CalendarCom = (props) => {
       />
       <LoginModal
       state="Login"
+      fontChange = {fontChange}
       show={modalActive}
       contents="로그인 후 서비스 이용 가능합니다."
       hide={()=>setModalActive(false)}

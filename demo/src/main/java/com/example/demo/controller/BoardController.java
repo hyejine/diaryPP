@@ -138,6 +138,7 @@ public class BoardController {
 	 */
 	@GetMapping("/getMonth/{selectMonth}/{email}")
 	public List<DiaryDto> getMonth(@PathVariable("selectMonth") String month, @PathVariable("email") String email) {
+		System.out.println("month==" + month + "email===" + email);
 		return boardService.getMonth(month, email);
 	}
 
