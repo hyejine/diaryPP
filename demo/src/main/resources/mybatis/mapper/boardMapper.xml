@@ -56,7 +56,7 @@
   </delete>
 
   <select id="getMonth" resultType="DiaryDto">
-    select * from diary_table where diary_date LIKE '%${diary_date}%' and user_email=#{user_email} order by diary_date
+    select * from diary_table where diary_date LIKE '%${diary_date}%' and user_email= #{user_email} order by diary_date
   </select>
 
   <select id="getMonthProgress" resultType="java.util.Map" >

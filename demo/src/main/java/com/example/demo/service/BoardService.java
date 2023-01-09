@@ -58,21 +58,27 @@ public class BoardService implements IBoardService {
         Date now = new Date();
         SimpleDateFormat format = new SimpleDateFormat("yyyy");
         String formatDate = format.format(now);
+        if (month.length() == 1) {
+            month = "0" + month;
+        }
         String sendFormatDate = formatDate + "-" + month;
-        System.out.println("sendFormatDate type: === "+ sendFormatDate.getClass().getName()+"==email type: ==="+email.getClass().getName());
         return boardMapper.getMonth(sendFormatDate, email);
     }
 
     @Override
     public List<DiaryDto> getMonthProgress(DiaryDto data) {
         if (data.getDiary_date().length() > 2) {
-            System.out.println("data===" + data.getDiary_date() + data.getUser_email());
             return boardMapper.getYearProgress(data);
         } else {
             Date now = new Date();
             SimpleDateFormat format = new SimpleDateFormat("yyyy");
             String formatDate = format.format(now);
-            String sendFormatDate = formatDate + "-" + data.getDiary_date();
+            String month = data.getDiary_date();
+            if (month.length() == 1) {
+                month = "0" + month;
+            }
+            String sendFormatDate = formatDate + "-" + month;
+            System.out.println("sendFormatDate===" + sendFormatDate + "===" + data.getUser_email());
             return boardMapper.getMonthProgress(sendFormatDate, data.getUser_email());
         }
     }

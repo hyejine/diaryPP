@@ -275,10 +275,12 @@ const Login = (props) => {
         <div>
             <div className="line">Or Login With</div>
         </div>
+        <div>
+      <div id="naverIdLogin" />
+        </div>
         </div>
       </div>
-      <div id="naverIdLogin" />
-      <button onClick={onKaKao}>
+      {/* <button onClick={onKaKao}>
             <img
               width={222}
               alt="카카오 로그인 버튼"
@@ -286,8 +288,7 @@ const Login = (props) => {
             ></img>
           </button>
           <GoogleLogin/>
-          <GoogleButton>efe</GoogleButton> 
-      {/* <div id="naverIdLogin" /> */}
+          <GoogleButton>efe</GoogleButton>  */}
       {/* <button onClick={onKaKao}>
             <img
               width={222}

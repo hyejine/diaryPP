@@ -6,13 +6,16 @@ import noneData from "../../../utils/nivoChart";
 
 const MonthLine = (props) => {
     const { currentUser, selectMonth, fontChange } = props;
-    const date = new Date(2022,selectMonth,0).getDate();
     const [monthData, setMonthData] = useState();
+    const now = new Date();
+    const endDate = new Date(2022,selectMonth,0).getDate();
+    const nowYear = now.getFullYear();
 
     useEffect(() => {
         axios.get(`/board/getMonth/${selectMonth}/${currentUser?.email}`)
         .then((res) => {
             setMonthData(res.data);
+            console.log(res);
         })
         .catch((error) => console.log(error));
     }, [selectMonth]);
@@ -39,8 +42,8 @@ const MonthLine = (props) => {
                      format: '%Y-%m-%d',
                      useUTC: false,
                      precision: 'day',
-                     min : `2022-${selectMonth}-01`,
-                     max : `2022-${selectMonth}-${date}`
+                     min : `${nowYear}-${selectMonth}-01`,
+                     max : `${nowYear}-${selectMonth}-${endDate}`
                      }}
             xFormat="time:%Y-%m-%d"  
             axisBottom={{
