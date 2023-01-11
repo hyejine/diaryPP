@@ -1,27 +1,25 @@
 import React, { useEffect, useState } from "react";
 // import "./login.scss";
-import Naver from "./Naver";
 import axios from "axios";
 import { useCallback } from "react";
 import GoogleLogin from "./GoogleLogin";
 import { Link } from "react-router-dom";
 import GoogleButton from "../GoogleButton";
-import Regist from "./regist/Regist";
 import { useForm } from "react-hook-form";
 import { useDispatch } from "react-redux";
 import { loginUser } from "../../reducer/userLogin";
 import AuthenticationService from "./AuthenticationService";
 import { useNavigate } from "react-router-dom";
 import FindUserModal from "./findUser/FindUserModal";
+import NaverLogin from "./NaverLogin";
 
 const Login = (props) => {
-  const {fontChange} =props;
+  const { fontChange } = props;
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [vibration, setVibration] = useState(false);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const { naver } = window;
   const [userid, setUserId] = useState();
   const [testToken, setTestToken] = useState();
   const [loginErr, setLoginErr] = useState();
@@ -68,53 +66,7 @@ const Login = (props) => {
         setLoginErr(true);
       });
   };
-  const onNaverLogin = () => {
-    const naverLogin = new naver.LoginWithNaverId({
-      clientId: "o1yjLGVlc1wfFxCIIGHG",
-      callbackUrl: "http://localhost:3000/user/login",
-      isPopup: false, // popup 형식으로 띄울것인지 설정
-      loginButton: { color: "green", type: 1, height: "47" }, //버튼의 스타일, 타입, 크기를 지정
-      callbackHandle: true,
-    });
-    naverLogin.init();
 
-    // window.addEventListener('load', function(){
-    naverLogin.getLoginStatus(async function (status) {
-      console.log(status);
-      if (status) {
-        setUserId(naverLogin.user);
-      }
-    });
-    // })
-  };
-  console.log(userid);
-
-  const userAccessToken = () => {
-    window.location.href.includes("access_token") && getNaverToken();
-  };
-
-  const getNaverToken = () => {
-    const token = window.location.href.split("=")[1].split("&")[0];
-  //   axios.post(`https://openapi.naver.com/v1/nid/me`, {
-  //     token
-  // }, {
-  //     withCredentials: true
-  // })
-  // .then((res)=> {
-  //     window.location.replace('/')
-  //   //서버측에서 로직이 완료되면 홈으로 보내준다
-  // })
-
-    console.log(token);
-    // 이후 로컬 스토리지 또는 state에 저장하여 사용하자!
-    localStorage.setItem("access_token", token);
-    // setGetToken(token)
-  };
-
-  useEffect(() => {
-    onNaverLogin();
-    userAccessToken();
-  }, []);
   const grant_type = "authorization_code";
   const REST_API_KEY = "380089a4f363b679b2dbe89f5bed98ae";
   const REDIRECT_URI = "http://localhost:3000/login";
@@ -209,7 +161,7 @@ const Login = (props) => {
     //     return "이메일 혹은 비밀번호를 확인하세요.";
     //   });
   }
-  const onFinduser = ()=>{
+  const onFinduser = () => {
     setModalActive(true);
   }
 
@@ -223,61 +175,61 @@ const Login = (props) => {
         <div className="regist_input">
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="inputInner">
-            <div className="writeTitle">
-              <span>이메일</span>
-            </div>
-            <div className="writeAareaWrap">
-              <input
-                className="writeAarea"
-                placeholder="example@diyDiary.com"
-                {...register("user_email", {
-                  required: "(*이메일은 필수 입력입니다.)",
-                  pattern: {
-                    value: /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
-                    message: "(* 이메일 형식에 맞지 않습니다.)",
-                  },
-                })}
-              />
-              <p className={vibration ? "errorFont vibration" : "errorFont"}>
-                {errors.user_email && ( <small role="alert">{errors.user_email.message}</small>)}
-              </p>
-            </div>
-            <div className="writeTitle">
-              <span>비밀번호</span>
-            </div>
-            <div className="writeAareaWrap">
-              <input
-                type="password"
-                className="writeAarea"
-                placeholder="*********"
-                {...register("user_password", {
-                  required: "(* 비밀번호는 필수 입력입니다.)",
-                })}
-              />
-              <p className={vibration ? "errorFont vibration" : "errorFont"}>
-                {errors.user_password && (
-                  <small role="alert">{errors.user_password.message}</small>
-                )}
-              </p>
-            </div>
-            <p className={vibration ? "errorFont vibration mt2" : "errorFont mt2"}> {loginErr && "이메일 혹은 비밀번호를 잘못 입력하셨습니다."}</p>
+              <div className="writeTitle">
+                <span>이메일</span>
+              </div>
+              <div className="writeAareaWrap">
+                <input
+                  className="writeAarea"
+                  placeholder="example@diyDiary.com"
+                  {...register("user_email", {
+                    required: "(*이메일은 필수 입력입니다.)",
+                    pattern: {
+                      value: /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/,
+                      message: "(* 이메일 형식에 맞지 않습니다.)",
+                    },
+                  })}
+                />
+                <p className={vibration ? "errorFont vibration" : "errorFont"}>
+                  {errors.user_email && (<small role="alert">{errors.user_email.message}</small>)}
+                </p>
+              </div>
+              <div className="writeTitle">
+                <span>비밀번호</span>
+              </div>
+              <div className="writeAareaWrap">
+                <input
+                  type="password"
+                  className="writeAarea"
+                  placeholder="*********"
+                  {...register("user_password", {
+                    required: "(* 비밀번호는 필수 입력입니다.)",
+                  })}
+                />
+                <p className={vibration ? "errorFont vibration" : "errorFont"}>
+                  {errors.user_password && (
+                    <small role="alert">{errors.user_password.message}</small>
+                  )}
+                </p>
+              </div>
+              <p className={vibration ? "errorFont vibration mt2" : "errorFont mt2"}> {loginErr && "이메일 혹은 비밀번호를 잘못 입력하셨습니다."}</p>
             </div>
             <p className="forgetUser" onClick={onFinduser}>
               비밀번호를 잊어버리셨나요?
             </p>
-              <div className="buttonX">
-            <button className="submitB" type="submit" onClick={checkError}>Login</button>
-            <Link to="/auth/signUp">
-            <button className="submitB regB">회원가입 하기!</button>
-          </Link>
+            <div className="buttonX">
+              <button className="submitB" type="submit" onClick={checkError}>Login</button>
+              <Link to="/auth/signUp">
+                <button className="submitB regB">회원가입 하기!</button>
+              </Link>
             </div>
           </form>
-        <div>
+          <div>
             <div className="line">Or Login With</div>
-        </div>
-        <div>
-      <div id="naverIdLogin" />
-        </div>
+          </div>
+          <div>
+            <NaverLogin />
+          </div>
         </div>
       </div>
       {/* <button onClick={onKaKao}>
@@ -308,10 +260,10 @@ const Login = (props) => {
         </div>
       </div>*/}
       <FindUserModal
-      fontChange={fontChange}
-      state={"비밀번호 찾기"}
-      show ={modalActive}
-      hide ={setModalActive}
+        fontChange={fontChange}
+        state={"비밀번호 찾기"}
+        show={modalActive}
+        hide={setModalActive}
       />
     </div>
   );

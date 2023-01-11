@@ -5,7 +5,7 @@ import CompletModal from "../../common/CommonModal";
 import './regist.scss';
 
 const Regist = (props) => {
-  const {fontChange}={fontChange}
+  const {fontChange} = props;
   const { register, handleSubmit, formState: { errors } } = useForm();
   const [vaild, setVaild] = useState();
   const [vibration, setVibration] = useState(false);
